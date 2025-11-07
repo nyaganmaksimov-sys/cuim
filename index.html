@@ -15,6 +15,8 @@
       background: white;
       color: #222;
     }
+
+    /* Шапка — на всю ширину */
     .header {
       display: flex;
       align-items: center;
@@ -31,19 +33,19 @@
       white-space: nowrap;
     }
     .catalog-btn {
-  background: #0D47A1;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  white-space: nowrap;
-  font-size: 14px;
-}
-.catalog-btn:hover {
-  background: #0a3a8a;
-}
+      background: #0D47A1;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    .catalog-btn:hover {
+      background: #0a3a8a;
+    }
     .search-box {
       flex: 1;
       display: flex;
@@ -72,9 +74,19 @@
       color: inherit;
     }
 
-    /* Контент на всю ширину */
+    /* === ВСЁ ЭТО — НА ВСЮ ШИРИНУ === */
+    .main-content,
+    .info-banner,
+    .min-warning,
+    .section {
+      padding-left: 32px;
+      padding-right: 32px;
+      /* Нет max-width — растягивается на всю ширину */
+    }
+
+    /* Баннер + категории */
     .main-content {
-      padding: 30px 32px;
+      margin: 30px 0;
       display: flex;
       gap: 20px;
     }
@@ -114,9 +126,26 @@
       line-height: 1.2;
     }
 
+    /* Инфо-баннеры */
+    .info-banner {
+      background: #fff8e1;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 14px;
+      color: #5d4037;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .min-warning {
+      background: #ffebee;
+      color: #c62828;
+      text-align: center;
+      padding: 12px;
+      margin: 20px 0;
+    }
+
     /* Блоки товаров */
     .section {
-      margin: 40px 32px 0;
+      margin: 40px 0 0;
     }
     .section h2 {
       font-size: 20px;
@@ -170,24 +199,6 @@
       margin-top: 6px;
     }
 
-    /* Инфо-баннеры */
-    .info-banner {
-      background: #fff8e1;
-      padding: 10px 0;
-      text-align: center;
-      font-size: 14px;
-      color: #5d4037;
-      border-bottom: 1px solid #e0e0e0;
-      margin: 0 32px;
-    }
-    .min-warning {
-      background: #ffebee;
-      color: #c62828;
-      text-align: center;
-      padding: 12px;
-      margin: 20px 32px;
-    }
-
     /* Мобильная адаптация */
     @media (max-width: 768px) {
       .header {
@@ -210,19 +221,19 @@
 </head>
 <body>
 
-<!-- Шапка -->
-<header class="header">
-  <div class="logo">ЦУИМ</div>
-  <button class="catalog-btn">Каталог</button>
-  <div class="search-box">
-    <input type="text" placeholder="Искать на ЦУИМ">
-  </div>
-  <div class="header-icons">
-    <a href="#" class="icon-item">👤<br>Кабинет</a>
-    <a href="#" class="icon-item">❤️<br>Избранное</a>
-    <a href="#" class="icon-item">🛒<br>Корзина</a>
-  </div>
-</header>
+  <!-- Шапка -->
+  <header class="header">
+    <div class="logo">ЦУИМ</div>
+    <button class="catalog-btn">Каталог</button>
+    <div class="search-box">
+      <input type="text" placeholder="Искать на ЦУИМ">
+    </div>
+    <div class="header-icons">
+      <a href="#" class="icon-item">👤<br>Кабинет</a>
+      <a href="#" class="icon-item">❤️<br>Избранное</a>
+      <a href="#" class="icon-item">🛒<br>Корзина</a>
+    </div>
+  </header>
 
   <!-- Баннер + категории -->
   <section class="main-content">
