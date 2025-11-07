@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ЦУИМ — Местный маркетплейс</title>
+  <title>ЦУИМ — Местный маркетплейс Барнаула</title>
   <style>
     * {
       margin: 0;
@@ -58,7 +58,7 @@
       color: inherit;
     }
 
-    /* Баннер + категории */
+    /* Контент на всю ширину */
     .main-content {
       padding: 30px 32px;
       display: flex;
@@ -100,6 +100,62 @@
       line-height: 1.2;
     }
 
+    /* Блоки товаров */
+    .section {
+      margin: 40px 32px 0;
+    }
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #FF6F00;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .product-image {
+      width: 100%;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      background: #f9f9f9;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .product-name {
+      font-size: 14px;
+      margin: 6px 0;
+      min-height: 36px;
+    }
+    .price {
+      font-weight: bold;
+      color: #0D47A1;
+      font-size: 16px;
+      margin: 6px 0;
+    }
+    .add-to-cart {
+      width: 100%;
+      padding: 6px;
+      background: #FF6F00;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
     /* Инфо-баннеры */
     .info-banner {
       background: #fff8e1;
@@ -131,6 +187,9 @@
       .category-grid {
         width: 100%;
         grid-template-columns: repeat(2, 1fr);
+      }
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       }
     }
   </style>
@@ -202,6 +261,61 @@
   <div class="min-warning">
     ⚠️ Минимальная сумма заказа — 1500 ₽. Добавьте ещё на 1500 ₽.
   </div>
+
+  <!-- Блоки товаров -->
+  <section class="section">
+    <h2>Новинки</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-image">🥛</div>
+        <div class="product-name">Молоко фермерское, 1л</div>
+        <div class="price">95 ₽</div>
+        <button class="add-to-cart">В КОРЗИНУ</button>
+      </div>
+      <div class="product-card">
+        <div class="product-image">💐</div>
+        <div class="product-name">Букет 'Солнце'</div>
+        <div class="price">850 ₽</div>
+        <button class="add-to-cart">В КОРЗИНУ</button>
+      </div>
+      <div class="product-card">
+        <div class="product-image">🕯</div>
+        <div class="product-name">Аромасвеча 'Лес'</div>
+        <div class="price">450 ₽</div>
+        <button class="add-to-cart">В КОРЗИНУ</button>
+      </div>
+      <div class="product-card">
+        <div class="product-image">🎨</div>
+        <div class="product-name">Мыло ручной работы</div>
+        <div class="price">220 ₽</div>
+        <button class="add-to-cart">В КОРЗИНУ</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Детская одежда</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-image">👶</div>
+        <div class="product-name">Комплект на выпускной</div>
+        <div class="price">3 799 ₽</div>
+        <button class="add-to-cart">В КОРЗИНУ</button>
+      </div>
+      <div class="product-card">
+        <div class="product-image">👶</div>
+        <div class="product-name">Куртка Crockid</div>
+        <div class="price">3 359 ₽</div>
+        <button class="add-to-cart">В КОРЗИНУ</button>
+      </div>
+      <div class="product-card">
+        <div class="product-image">👶</div>
+        <div class="product-name">Комбинезон демисезонный</div>
+        <div class="price">3 679 ₽</div>
+        <button class="add-to-cart">В КОРЗИНУ</button>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>
