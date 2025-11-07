@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ЦУИМ — Местный маркетплейс Барнаула</title>
+  <title>ЦУИМ — Местный маркетплейс</title>
   <style>
     * {
       margin: 0;
@@ -28,7 +28,6 @@
       font-size: 24px;
       font-weight: bold;
       color: #FF6F00;
-      white-space: nowrap;
     }
     .search-box {
       flex: 1;
@@ -48,7 +47,6 @@
       display: flex;
       gap: 24px;
       font-size: 14px;
-      white-space: nowrap;
     }
     .icon-item {
       display: flex;
@@ -59,17 +57,17 @@
     }
 
     /* Баннер + категории */
-    .banner-section {
-      margin: 30px 32px;
-    }
-    .banner-content {
+    .main-content {
+      padding: 30px 32px;
       display: flex;
       gap: 20px;
-      align-items: flex-start;
+    }
+    .banner-image {
+      flex: 1;
+      max-width: 800px;
     }
     .banner-image img {
       width: 100%;
-      max-width: 800px;
       height: auto;
       border-radius: 8px;
       display: block;
@@ -123,12 +121,9 @@
 
     /* Мобильная адаптация */
     @media (max-width: 768px) {
-      .header {
+      .main-content {
         flex-direction: column;
-        gap: 12px;
-      }
-      .banner-content {
-        flex-direction: column;
+        align-items: center;
       }
       .category-grid {
         width: 100%;
@@ -153,53 +148,51 @@
   </header>
 
   <!-- Баннер + категории -->
-  <section class="banner-section">
-    <div class="banner-content">
-      <div class="banner-image">
-        <img src="images/banner-main.jpg" alt="Баннер">
+  <div class="main-content">
+    <div class="banner-image">
+      <img src="images/banner-main.jpg" alt="Баннер">
+    </div>
+    <div class="category-grid">
+      <div class="category-item">
+        <img src="images/category-food.png" alt="Продукты Питания">
+        <span>Продукты Питания</span>
       </div>
-      <div class="category-grid">
-        <div class="category-item">
-          <img src="images/category-food.png" alt="Продукты Питания">
-          <span>Продукты Питания</span>
-        </div>
-        <div class="category-item">
-          <img src="images/category-meal.png" alt="Готовая еда">
-          <span>Готовая еда</span>
-        </div>
-        <div class="category-item">
-          <img src="images/category-clothes.png" alt="Одежда">
-          <span>Одежда</span>
-        </div>
-        <div class="category-item">
-          <img src="images/category-beauty.png" alt="Красота и здоровье">
-          <span>Красота и здоровье</span>
-        </div>
-        <div class="category-item">
-          <img src="images/category-toys.png" alt="Детские товары">
-          <span>Детские товары</span>
-        </div>
-        <div class="category-item">
-          <img src="images/category-home.png" alt="Дом и сад">
-          <span>Дом и сад</span>
-        </div>
-        <div class="category-item">
-          <img src="images/category-furniture.png" alt="Мебель">
-          <span>Мебель</span>
-        </div>
-        <div class="category-item">
-          <img src="images/category-fishing.png" alt="Рыбалка Охота">
-          <span>Рыбалка Охота</span>
-        </div>
-        <div class="category-item">
-          <img src="images/category-office.png" alt="Канцелярские товары">
-          <span>Канцелярские товары</span>
-        </div>
+      <div class="category-item">
+        <img src="images/category-meal.png" alt="Готовая еда">
+        <span>Готовая еда</span>
+      </div>
+      <div class="category-item">
+        <img src="images/category-clothes.png" alt="Одежда">
+        <span>Одежда</span>
+      </div>
+      <div class="category-item">
+        <img src="images/category-beauty.png" alt="Красота и здоровье">
+        <span>Красота и здоровье</span>
+      </div>
+      <div class="category-item">
+        <img src="images/category-toys.png" alt="Детские товары">
+        <span>Детские товары</span>
+      </div>
+      <div class="category-item">
+        <img src="images/category-home.png" alt="Дом и сад">
+        <span>Дом и сад</span>
+      </div>
+      <div class="category-item">
+        <img src="images/category-furniture.png" alt="Мебель">
+        <span>Мебель</span>
+      </div>
+      <div class="category-item">
+        <img src="images/category-fishing.png" alt="Рыбалка Охота">
+        <span>Рыбалка Охота</span>
+      </div>
+      <div class="category-item">
+        <img src="images/category-office.png" alt="Канцелярские товары">
+        <span>Канцелярские товары</span>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Баннеры -->
+  <!-- Инфо-баннеры -->
   <div class="info-banner">
     🚚 Продукты — только с доставкой. Минимальный заказ: 1500 ₽.
   </div>
