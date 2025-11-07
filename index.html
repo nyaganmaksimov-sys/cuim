@@ -30,6 +30,20 @@
       color: #FF6F00;
       white-space: nowrap;
     }
+    .catalog-btn {
+  background: #0D47A1;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+}
+.catalog-btn:hover {
+  background: #0a3a8a;
+}
     .search-box {
       flex: 1;
       display: flex;
@@ -196,18 +210,19 @@
 </head>
 <body>
 
-  <!-- Шапка -->
-  <header class="header">
-    <div class="logo">ЦУИМ</div>
-    <div class="search-box">
-      <input type="text" placeholder="Искать на ЦУИМ">
-    </div>
-    <div class="header-icons">
-      <a href="#" class="icon-item">👤<br>Кабинет</a>
-      <a href="#" class="icon-item">❤️<br>Избранное</a>
-      <a href="#" class="icon-item">🛒<br>Корзина</a>
-    </div>
-  </header>
+<!-- Шапка -->
+<header class="header">
+  <div class="logo">ЦУИМ</div>
+  <button class="catalog-btn">Каталог</button>
+  <div class="search-box">
+    <input type="text" placeholder="Искать на ЦУИМ">
+  </div>
+  <div class="header-icons">
+    <a href="#" class="icon-item">👤<br>Кабинет</a>
+    <a href="#" class="icon-item">❤️<br>Избранное</a>
+    <a href="#" class="icon-item">🛒<br>Корзина</a>
+  </div>
+</header>
 
   <!-- Баннер + категории -->
   <section class="main-content">
