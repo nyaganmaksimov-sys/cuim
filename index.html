@@ -28,6 +28,7 @@
       font-size: 24px;
       font-weight: bold;
       color: #FF6F00;
+      white-space: nowrap;
     }
     .search-box {
       flex: 1;
@@ -47,6 +48,7 @@
       display: flex;
       gap: 24px;
       font-size: 14px;
+      white-space: nowrap;
     }
     .icon-item {
       display: flex;
@@ -62,12 +64,9 @@
       display: flex;
       gap: 20px;
     }
-    .banner-image {
-      flex: 1;
-      max-width: 800px;
-    }
     .banner-image img {
       width: 100%;
+      max-width: 800px;
       height: auto;
       border-radius: 8px;
       display: block;
@@ -121,6 +120,10 @@
 
     /* Мобильная адаптация */
     @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 12px;
+      }
       .main-content {
         flex-direction: column;
         align-items: center;
@@ -148,7 +151,7 @@
   </header>
 
   <!-- Баннер + категории -->
-  <div class="main-content">
+  <section class="main-content">
     <div class="banner-image">
       <img src="images/banner-main.jpg" alt="Баннер">
     </div>
@@ -190,7 +193,7 @@
         <span>Канцелярские товары</span>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Инфо-баннеры -->
   <div class="info-banner">
