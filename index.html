@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ЦУИМ — Местный маркетплейс</title>
+  <title>ЦУИМ — Местный маркетплейс Барнаула</title>
   <style>
     * {
       margin: 0;
@@ -15,6 +15,8 @@
       background: white;
       color: #222;
     }
+
+    /* Шапка — на всю ширину */
     .header {
       display: flex;
       align-items: center;
@@ -28,6 +30,7 @@
       font-size: 24px;
       font-weight: bold;
       color: #FF6F00;
+      white-space: nowrap;
     }
     .search-box {
       flex: 1;
@@ -47,6 +50,7 @@
       display: flex;
       gap: 24px;
       font-size: 14px;
+      white-space: nowrap;
     }
     .icon-item {
       display: flex;
@@ -56,18 +60,25 @@
       color: inherit;
     }
 
+    /* Центрированный контейнер */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
     /* Баннер + категории */
     .main-content {
-      padding: 30px 32px;
+      margin: 30px 0;
+    }
+    .banner-content {
       display: flex;
       gap: 20px;
-    }
-    .banner-image {
-      flex: 1;
-      max-width: 800px;
+      align-items: flex-start;
     }
     .banner-image img {
       width: 100%;
+      max-width: 800px;
       height: auto;
       border-radius: 8px;
       display: block;
@@ -109,21 +120,27 @@
       font-size: 14px;
       color: #5d4037;
       border-bottom: 1px solid #e0e0e0;
-      margin: 0 32px;
+      margin: 0 16px;
     }
     .min-warning {
       background: #ffebee;
       color: #c62828;
       text-align: center;
       padding: 12px;
-      margin: 20px 32px;
+      margin: 20px 16px;
     }
 
     /* Мобильная адаптация */
     @media (max-width: 768px) {
-      .main-content {
+      .header {
         flex-direction: column;
-        align-items: center;
+        gap: 12px;
+      }
+      .container {
+        padding: 0 16px;
+      }
+      .banner-content {
+        flex-direction: column;
       }
       .category-grid {
         width: 100%;
@@ -136,68 +153,77 @@
 
   <!-- Шапка -->
   <header class="header">
-    <div class="logo">ЦУИМ</div>
-    <div class="search-box">
-      <input type="text" placeholder="Искать на ЦУИМ">
-    </div>
-    <div class="header-icons">
-      <a href="#" class="icon-item">👤<br>Кабинет</a>
-      <a href="#" class="icon-item">❤️<br>Избранное</a>
-      <a href="#" class="icon-item">🛒<br>Корзина</a>
+    <div class="container">
+      <div class="logo">ЦУИМ</div>
+      <div class="search-box">
+        <input type="text" placeholder="Искать на ЦУИМ">
+      </div>
+      <div class="header-icons">
+        <a href="#" class="icon-item">👤<br>Кабинет</a>
+        <a href="#" class="icon-item">❤️<br>Избранное</a>
+        <a href="#" class="icon-item">🛒<br>Корзина</a>
+      </div>
     </div>
   </header>
 
-  <!-- Баннер + категории -->
-  <div class="main-content">
-    <div class="banner-image">
-      <img src="images/banner-main.jpg" alt="Баннер">
-    </div>
-    <div class="category-grid">
-      <div class="category-item">
-        <img src="images/category-food.png" alt="Продукты Питания">
-        <span>Продукты Питания</span>
-      </div>
-      <div class="category-item">
-        <img src="images/category-meal.png" alt="Готовая еда">
-        <span>Готовая еда</span>
-      </div>
-      <div class="category-item">
-        <img src="images/category-clothes.png" alt="Одежда">
-        <span>Одежда</span>
-      </div>
-      <div class="category-item">
-        <img src="images/category-beauty.png" alt="Красота и здоровье">
-        <span>Красота и здоровье</span>
-      </div>
-      <div class="category-item">
-        <img src="images/category-toys.png" alt="Детские товары">
-        <span>Детские товары</span>
-      </div>
-      <div class="category-item">
-        <img src="images/category-home.png" alt="Дом и сад">
-        <span>Дом и сад</span>
-      </div>
-      <div class="category-item">
-        <img src="images/category-furniture.png" alt="Мебель">
-        <span>Мебель</span>
-      </div>
-      <div class="category-item">
-        <img src="images/category-fishing.png" alt="Рыбалка Охота">
-        <span>Рыбалка Охота</span>
-      </div>
-      <div class="category-item">
-        <img src="images/category-office.png" alt="Канцелярские товары">
-        <span>Канцелярские товары</span>
-      </div>
-    </div>
-  </div>
+  <!-- Центрированный контент -->
+  <div class="container">
 
-  <!-- Инфо-баннеры -->
-  <div class="info-banner">
-    🚚 Продукты — только с доставкой. Минимальный заказ: 1500 ₽.
-  </div>
-  <div class="min-warning">
-    ⚠️ Минимальная сумма заказа — 1500 ₽. Добавьте ещё на 1500 ₽.
+    <!-- Баннер + категории -->
+    <section class="main-content">
+      <div class="banner-content">
+        <div class="banner-image">
+          <img src="images/banner-main.jpg" alt="Баннер">
+        </div>
+        <div class="category-grid">
+          <div class="category-item">
+            <img src="images/category-food.png" alt="Продукты Питания">
+            <span>Продукты Питания</span>
+          </div>
+          <div class="category-item">
+            <img src="images/category-meal.png" alt="Готовая еда">
+            <span>Готовая еда</span>
+          </div>
+          <div class="category-item">
+            <img src="images/category-clothes.png" alt="Одежда">
+            <span>Одежда</span>
+          </div>
+          <div class="category-item">
+            <img src="images/category-beauty.png" alt="Красота и здоровье">
+            <span>Красота и здоровье</span>
+          </div>
+          <div class="category-item">
+            <img src="images/category-toys.png" alt="Детские товары">
+            <span>Детские товары</span>
+          </div>
+          <div class="category-item">
+            <img src="images/category-home.png" alt="Дом и сад">
+            <span>Дом и сад</span>
+          </div>
+          <div class="category-item">
+            <img src="images/category-furniture.png" alt="Мебель">
+            <span>Мебель</span>
+          </div>
+          <div class="category-item">
+            <img src="images/category-fishing.png" alt="Рыбалка Охота">
+            <span>Рыбалка Охота</span>
+          </div>
+          <div class="category-item">
+            <img src="images/category-office.png" alt="Канцелярские товары">
+            <span>Канцелярские товары</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Инфо-баннеры -->
+    <div class="info-banner">
+      🚚 Продукты — только с доставкой. Минимальный заказ: 1500 ₽.
+    </div>
+    <div class="min-warning">
+      ⚠️ Минимальная сумма заказа — 1500 ₽. Добавьте ещё на 1500 ₽.
+    </div>
+
   </div>
 
 </body>
