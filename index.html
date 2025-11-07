@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ЦУИМ — Маркетплейс</title>
   <style>
+    /* Сброс стилей */
     * {
       margin: 0;
       padding: 0;
@@ -15,26 +16,33 @@
       background: white;
       color: #222;
     }
+
+    /* Шапка — на 100% ширины без отступов */
     .header {
       display: flex;
       align-items: center;
-      padding: 16px 2% !important; /* Отступы по бокам 2% — адаптивно */
+      padding: 16px 32px; /* Отступы только внутри */
       background: white;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       gap: 20px;
-      width: 100%;
+      width: 100vw; /* 100% вьюпорта */
+      max-width: none;
+      margin: 0;
     }
+
     .logo {
       font-size: 24px;
       font-weight: bold;
       color: #FF6F00;
       white-space: nowrap;
     }
+
     .search-box {
       flex: 1;
       display: flex;
       max-width: 800px;
     }
+
     .search-box input {
       flex: 1;
       padding: 10px 16px;
@@ -43,18 +51,26 @@
       outline: none;
       font-size: 16px;
     }
+
     .header-icons {
       display: flex;
       gap: 24px;
       font-size: 14px;
       white-space: nowrap;
     }
+
     .icon-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-decoration: none;
       color: inherit;
+    }
+
+    /* Основной контент — тоже на всю ширину */
+    main {
+      padding: 40px 32px;
+      max-width: none;
     }
   </style>
 </head>
@@ -72,9 +88,9 @@
     </div>
   </header>
 
-  <div style="padding: 40px 2%; max-width: none;">
-    <p>✅ Шапка на всю ширину. Теперь можно добавлять баннер и категории.</p>
-  </div>
+  <main>
+    <p>✅ Шапка теперь на всю ширину страницы.</p>
+  </main>
 
 </body>
 </html>
