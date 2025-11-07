@@ -5,74 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ЦУИМ — Маркетплейс</title>
   <style>
-    /* Сброс стилей */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      background: white;
-      color: #222;
-    }
-
-    /* Шапка — на 100% ширины без отступов */
-    .header {
-      display: flex;
-      align-items: center;
-      padding: 16px 32px; /* Отступы только внутри */
-      background: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      gap: 20px;
-      width: 100vw; /* 100% вьюпорта */
-      max-width: none;
-      margin: 0;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #FF6F00;
-      white-space: nowrap;
-    }
-
-    .search-box {
-      flex: 1;
-      display: flex;
-      max-width: 800px;
-    }
-
-    .search-box input {
-      flex: 1;
-      padding: 10px 16px;
-      border: 2px solid #FF6F00;
-      border-radius: 24px;
-      outline: none;
-      font-size: 16px;
-    }
-
-    .header-icons {
-      display: flex;
-      gap: 24px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-
-    .icon-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* Основной контент — тоже на всю ширину */
-    main {
-      padding: 40px 32px;
-      max-width: none;
-    }
-  </style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  body {
+    background: white;
+    color: #222;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 16px 32px; /* отступы от краёв */
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    gap: 20px;
+    width: 100%;
+  }
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF6F00;
+    white-space: nowrap;
+  }
+  .search-box {
+    flex: 1;           /* главное: займёт всё свободное место */
+    display: flex;
+    min-width: 0;       /* позволяет сжиматься внутри flex */
+  }
+  .search-box input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 2px solid #FF6F00;
+    border-radius: 24px;
+    outline: none;
+    font-size: 16px;
+    min-width: 0;       /* важно для flex */
+  }
+  .header-icons {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
 </head>
 <body>
 
