@@ -115,17 +115,20 @@
     .header-inner{
       display:flex; align-items:center; gap:14px; height:74px;
     }
+    /* ОБНОВЛЁННЫЙ ЛОГОТИП - без текста, широкий */
     .logo{
-      display:flex; align-items:center; gap:10px; font-weight:800; font-size:22px;
-      color:var(--blue-600);
+      display:flex;
+      align-items:center;
+      /* Убрали текстовые стили */
     }
-    /* ОБНОВЛЁННЫЙ СТИЛЬ ДЛЯ ЛОГОТИПА */
     .logo-mark{
-      width:34px; height:34px; border-radius:10px;
-      display:flex; align-items:center; justify-content:center;
-      box-shadow:var(--shadow-1); object-fit:contain;
-      background:transparent; /* Убран градиент, так как у нас SVG */
+      width:120px; /* УВЕЛИЧЕНО */
+      height:40px; /* Автоматическая высота */
+      object-fit:contain;
+      box-shadow:var(--shadow-1);
+      border-radius:0; /* Убрали скругление */
     }
+
     .catalog-btn{
       display:inline-flex; align-items:center; gap:8px;
       background:var(--blue-600); color:#fff; border:none;
@@ -497,7 +500,7 @@
       .city-grid{grid-template-columns:1fr}
       .shops-title{font-size:16px}
       .shop-logo{width:110px; padding:10px 8px}
-      .logo-mark{width:30px; height:30px;}
+      .logo-mark{width:100px; height:auto;} /* Адаптивность для мобильных */
     }
     @media (prefers-reduced-motion: reduce){
       .slide, .hero .nav button, .category-card, .product-card, .season-card, .sale-card, .shop-logo{transition:none}
@@ -521,10 +524,9 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#" class="logo" aria-label="ЦУИМ — на главную">
-        <!-- ОБНОВЛЁННЫЙ ЛОГОТИП -->
+        <!-- ШИРОКИЙ ЛОГОТИП БЕЗ ТЕКСТА -->
         <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
              alt="ЦУИМ" class="logo-mark">
-        ЦУИМ
       </a>
 
       <button class="catalog-btn" id="catalogToggle" aria-expanded="false" aria-controls="categoriesPanel">
