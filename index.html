@@ -14,6 +14,9 @@
       --blue-400:#1E88E5;
       --orange-600:#FF6F00;
       --orange-500:#FF7A12;
+      --red-600:#E53935;
+      --red-500:#FF5252;
+      --yellow-600:#FFB300;
       --bg:#F6F8FB;
       --panel:#FFFFFF;
       --text:#1F2937;
@@ -55,7 +58,7 @@
     .location svg{width:16px; height:16px; color:var(--orange-600)}
     .delivery-info{font-weight:500}
 
-    /* ======= ЛУЧШИЕ МАГАЗИНЫ ======= */
+    /* Top shops */
     .top-shops{
       background:var(--panel); border-bottom:1px solid rgba(13,71,161,.08);
       padding:18px 0 14px; margin-bottom:10px;
@@ -257,17 +260,20 @@
     .promo-card p{margin:0; color:#476a97}
     .promo-accent{color:var(--orange-600); font-weight:800}
 
-    /* Popular products */
-    .popular-section{margin:40px 0 20px;}
-    .popular-header{
+    /* ======= СЕКЦИИ ТОВАРОВ ======= */
+    .section-title{
       display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;
     }
-    .popular-header h2{margin:0; font-size:24px; color:#163a69;}
+    .section-title h2{margin:0; font-size:24px; color:#163a69; display:flex; align-items:center; gap:8px;}
     .link-more{
       display:inline-flex; align-items:center; gap:6px; color:var(--blue-600); font-weight:600;
-      transition:gap .12s ease;
+      transition:gap .12s ease; font-size:14px;
     }
     .link-more:hover{gap:8px}
+
+    /* Популярные товары (синий акцент) */
+    .popular-section{margin:40px 0 20px;}
+    .popular-title h2 svg{color:var(--blue-600)}
     .product-grid{
       display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;
     }
@@ -297,6 +303,88 @@
     }
     .add-to-cart:hover{filter:brightness(1.05)}
     .add-to-cart:active{transform:translateY(1px)}
+
+    /* Хит сезона (красный акцент) */
+    .season-section{margin:40px 0 20px;}
+    .season-title h2{color:var(--red-600)}
+    .season-title h2 svg{color:var(--red-600); fill:var(--red-600)}
+    .season-grid{
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;
+    }
+    .season-card{
+      background:linear-gradient(135deg, #fff5f5, #fff); border-radius:var(--radius);
+      box-shadow:var(--shadow-1); overflow:hidden; transition:var(--transition); position:relative;
+      border:1px solid rgba(229,57,53,.08);
+    }
+    .season-card:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(229,57,53,.14)}
+    .season-badge{
+      position:absolute; top:10px; left:10px; background:var(--red-600); color:#fff;
+      padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700; z-index:2;
+    }
+    .season-image{
+      width:100%; height:180px; object-fit:cover; background:linear-gradient(135deg, #ffeaea, #fff5f5);
+    }
+    .season-body{padding:14px; display:flex; flex-direction:column; gap:8px;}
+    .season-title-text{
+      font-size:15px; line-height:1.3; color:var(--text); display:-webkit-box;
+      -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; height:38px;
+    }
+    .season-price{
+      font-size:20px; font-weight:800; color:var(--red-600); line-height:1;
+    }
+    .season-price .old{
+      font-size:13px; font-weight:400; color:var(--muted); text-decoration:line-through;
+    }
+    .add-to-season{
+      display:flex; align-items:center; justify-content:center; gap:6px;
+      background:var(--red-600); color:#fff; border:none; border-radius:10px;
+      padding:10px; font-weight:600; cursor:pointer; transition:filter .12s ease;
+    }
+    .add-to-season:hover{filter:brightness(1.05)}
+    .add-to-season:active{transform:translateY(1px)}
+
+    /* Акции (жёлтый акцент) */
+    .sale-section{margin:40px 0 20px;}
+    .sale-title h2{color:var(--yellow-600)}
+    .sale-title h2 svg{color:var(--yellow-600); fill:var(--yellow-600)}
+    .sale-grid{
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;
+    }
+    .sale-card{
+      background:linear-gradient(135deg, #fffbf0, #fff); border-radius:var(--radius);
+      box-shadow:var(--shadow-1); overflow:hidden; transition:var(--transition); position:relative;
+      border:1px solid rgba(255,179,0,.12);
+    }
+    .sale-card:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(255,179,0,.18)}
+    .sale-badge{
+      position:absolute; top:10px; left:10px; background:var(--yellow-600); color:#000;
+      padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700; z-index:2;
+    }
+    .sale-image{
+      width:100%; height:180px; object-fit:cover; background:linear-gradient(135deg, #fff8e1, #fffbf0);
+    }
+    .sale-body{padding:14px; display:flex; flex-direction:column; gap:8px;}
+    .sale-title-text{
+      font-size:15px; line-height:1.3; color:var(--text); display:-webkit-box;
+      -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; height:38px;
+    }
+    .sale-price{
+      font-size:20px; font-weight:800; color:var(--orange-600); line-height:1;
+    }
+    .sale-price .old{
+      font-size:13px; font-weight:400; color:var(--muted); text-decoration:line-through;
+    }
+    .sale-discount{
+      font-size:12px; font-weight:600; color:var(--red-600); background:rgba(229,57,53,.08);
+      padding:2px 6px; border-radius:6px; display:inline-block; margin-top:4px;
+    }
+    .add-to-sale{
+      display:flex; align-items:center; justify-content:center; gap:6px;
+      background:var(--yellow-600); color:#000; border:none; border-radius:10px;
+      padding:10px; font-weight:600; cursor:pointer; transition:filter .12s ease;
+    }
+    .add-to-sale:hover{filter:brightness(1.05)}
+    .add-to-sale:active{transform:translateY(1px)}
 
     /* PVZ Map section */
     .pvz-section{
@@ -393,7 +481,7 @@
         display:block; position:fixed; inset:74px 0 0 0; z-index:60; border-radius:0; height:calc(100dvh - 74px); overflow:auto;
       }
       .promos{grid-template-columns:1fr}
-      .product-grid{grid-template-columns:repeat(3, 1fr)}
+      .product-grid, .season-grid, .sale-grid{grid-template-columns:repeat(3, 1fr)}
       .pvz-content{grid-template-columns:1fr}
       .pvz-list{height:300px; order:2}
       .shop-logos{gap:12px}
@@ -401,7 +489,7 @@
     }
     @media (max-width: 600px){
       .search button{display:none}
-      .product-grid{grid-template-columns:repeat(2, 1fr)}
+      .product-grid, .season-grid, .sale-grid{grid-template-columns:repeat(2, 1fr)}
       .slide{grid-template-columns:1fr; padding:18px}
       .slide .img .ph{height:180px}
       .slide .txt h2{font-size:28px}
@@ -410,7 +498,7 @@
       .shop-logo{width:110px; padding:10px 8px}
     }
     @media (prefers-reduced-motion: reduce){
-      .slide, .hero .nav button, .category-card, .product-card, .shop-logo{transition:none}
+      .slide, .hero .nav button, .category-card, .product-card, .season-card, .sale-card, .shop-logo{transition:none}
     }
   </style>
 </head>
@@ -479,7 +567,7 @@
     </div>
   </header>
 
-  <!-- ======= ЛУЧШИЕ МАГАЗИНЫ ======= -->
+  <!-- Лучшие магазины -->
   <section class="top-shops">
     <div class="container">
       <div class="shops-header">
@@ -604,10 +692,15 @@
         </aside>
       </section>
 
-      <!-- Популярные товары -->
+      <!-- ======= ПОПУЛЯРНЫЕ ТОВАРЫ ======= -->
       <section class="popular-section">
-        <div class="popular-header">
-          <h2>Популярные товары</h2>
+        <div class="section-title popular-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            Популярные товары
+          </h2>
           <a href="#" class="link-more">
             Смотреть все
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -616,6 +709,48 @@
           </a>
         </div>
         <div class="product-grid" id="productGrid">
+          <!-- Генерируется JS -->
+        </div>
+      </section>
+
+      <!-- ======= ХИТ СЕЗОНА ======= -->
+      <section class="season-section">
+        <div class="section-title season-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Хит сезона
+          </h2>
+          <a href="#" class="link-more">
+            Все товары
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="season-grid" id="seasonGrid">
+          <!-- Генерируется JS -->
+        </div>
+      </section>
+
+      <!-- ======= АКЦИИ ======= -->
+      <section class="sale-section">
+        <div class="section-title sale-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+            </svg>
+            Акции
+          </h2>
+          <a href="#" class="link-more">
+            Все акции
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="sale-grid" id="saleGrid">
           <!-- Генерируется JS -->
         </div>
       </section>
@@ -699,6 +834,147 @@
       `).join('');
     }
     renderShops();
+
+    // ======= ПОПУЛЯРНЫЕ ТОВАРЫ =======
+    const popularProducts = [
+      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:"https://placehold.co/200x180/FFE0BD/FF6F00?text=Огурцы"},
+      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:"https://placehold.co/200x180/E9F1FF/0D47A1?text=Хлеб"},
+      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:"https://placehold.co/200x180/F8F9FA/FF6F00?text=Молоко"},
+      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:"https://placehold.co/200x180/FFF8EC/FF6F00?text=Яблоки"},
+      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:"https://placehold.co/200x180/F2F6FD/0D47A1?text=Колбаса"},
+      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:"https://placehold.co/200x180/FFE0BD/FF6F00?text=Сыр"},
+      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:"https://placehold.co/200x180/E9F1FF/0D47A1?text=Яйца"},
+      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:"https://placehold.co/200x180/F8F9FA/FF6F00?text=Обед"},
+    ];
+
+    function renderPopularProducts(){
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = popularProducts.map(p => `
+        <div class="product-card">
+          <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://placehold.co/200x180?text=Товар'">
+          <div class="product-body">
+            <div class="product-title">${p.title}</div>
+            <div class="product-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            <button class="add-to-cart" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-cart');
+    }
+
+    // ======= ХИТ СЕЗОНА =======
+    const seasonProducts = [
+      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:"https://placehold.co/200x180/FFEAEA/E53935?text=Арбуз"},
+      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:"https://placehold.co/200x180/FFF5F5/E53935?text=Дыня"},
+      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:"https://placehold.co/200x180/FFEAEA/E53935?text=Помидоры"},
+      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:"https://placehold.co/200x180/FFF5F5/E53935?text=Персики"},
+      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:"https://placehold.co/200x180/FFEAEA/E53935?text=Сок"},
+      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:"https://placehold.co/200x180/FFF5F5/E53935?text=Клубника"},
+      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:"https://placehold.co/200x180/FFEAEA/E53935?text=Салат"},
+      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:"https://placehold.co/200x180/FFF5F5/E53935?text=Лимонад"},
+    ];
+
+    function renderSeasonProducts(){
+      const grid = document.getElementById('seasonGrid');
+      grid.innerHTML = seasonProducts.map(p => `
+        <div class="season-card">
+          <div class="season-badge">${p.discount}</div>
+          <img src="${p.image}" alt="${p.title}" class="season-image" onerror="this.src='https://placehold.co/200x180?text=Товар'">
+          <div class="season-body">
+            <div class="season-title-text">${p.title}</div>
+            <div class="season-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            <button class="add-to-season" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-season');
+    }
+
+    // ======= АКЦИИ =======
+    const saleProducts = [
+      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:"https://placehold.co/200x180/FFF8E1/FFB300?text=Хлеб"},
+      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:"https://placehold.co/200x180/FFFDE7/FFB300?text=Набор"},
+      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:"https://placehold.co/200x180/FFF8E1/FFB300?text=Сироп"},
+      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:"https://placehold.co/200x180/FFFDE7/FFB300?text=Йогурты"},
+      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:"https://placehold.co/200x180/FFF8E1/FFB300?text=Кофе"},
+      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:"https://placehold.co/200x180/FFFDE7/FFB300?text=Чай"},
+      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:"https://placehold.co/200x180/FFF8E1/FFB300?text=Фрукты"},
+      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:"https://placehold.co/200x180/FFFDE7/FFB300?text=Печенье"},
+    ];
+
+    function renderSaleProducts(){
+      const grid = document.getElementById('saleGrid');
+      grid.innerHTML = saleProducts.map(p => `
+        <div class="sale-card">
+          <div class="sale-badge">${p.discount}</div>
+          <img src="${p.image}" alt="${p.title}" class="sale-image" onerror="this.src='https://placehold.co/200x180?text=Товар'">
+          <div class="sale-body">
+            <div class="sale-title-text">${p.title}</div>
+            <div class="sale-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            ${p.discount && p.oldPrice ? `<div class="sale-discount">Выгода: ${p.oldPrice - p.price} ₽</div>` : ''}
+            <button class="add-to-sale" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-sale');
+    }
+
+    // Универсальная функция анимации для кнопок "В корзину"
+    function addCartAnimation(selector){
+      document.querySelectorAll(selector).forEach(btn => {
+        btn.addEventListener('click', function(){
+          const originalHTML = this.innerHTML;
+          const originalBg = this.style.background;
+          
+          if(this.classList.contains('add-to-cart')){
+            this.style.background = 'var(--orange-600)';
+          } else if(this.classList.contains('add-to-season')){
+            this.style.background = 'var(--red-500)';
+          } else if(this.classList.contains('add-to-sale')){
+            this.style.background = 'var(--yellow-600)';
+            this.style.color = '#000';
+          }
+          
+          this.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Добавлено';
+          
+          setTimeout(() => {
+            this.style.background = originalBg;
+            this.style.color = '';
+            this.innerHTML = originalHTML;
+          }, 1500);
+        });
+      });
+    }
 
     // ======= СЛАЙДЕР =======
     const slides = Array.from(document.querySelectorAll('.slide'));
@@ -801,53 +1077,6 @@
       });
     });
 
-    // ======= ПОПУЛЯРНЫЕ ТОВАРЫ =======
-    const products = [
-      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:"https://placehold.co/200x180/FFE0BD/FF6F00?text=Огурцы"},
-      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:"https://placehold.co/200x180/E9F1FF/0D47A1?text=Хлеб"},
-      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:"https://placehold.co/200x180/F8F9FA/FF6F00?text=Молоко"},
-      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:"https://placehold.co/200x180/FFF8EC/FF6F00?text=Яблоки"},
-      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:"https://placehold.co/200x180/F2F6FD/0D47A1?text=Колбаса"},
-      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:"https://placehold.co/200x180/FFE0BD/FF6F00?text=Сыр"},
-      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:"https://placehold.co/200x180/E9F1FF/0D47A1?text=Яйца"},
-      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:"https://placehold.co/200x180/F8F9FA/FF6F00?text=Обед"},
-    ];
-
-    function renderProducts(){
-      const grid = document.getElementById('productGrid');
-      grid.innerHTML = products.map(p => `
-        <div class="product-card">
-          <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://placehold.co/200x180?text=Товар'">
-          <div class="product-body">
-            <div class="product-title">${p.title}</div>
-            <div class="product-price">
-              ${p.price} ₽
-              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
-            </div>
-            <button class="add-to-cart" data-id="${p.id}">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-              </svg>
-              В корзину
-            </button>
-          </div>
-        </div>
-      `).join('');
-      
-      document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', function(){
-          this.style.background = 'var(--orange-600)';
-          this.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Добавлено';
-          setTimeout(() => {
-            this.style.background = '';
-            this.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" /></svg> В корзину';
-          }, 1500);
-        });
-      });
-    }
-    renderProducts();
-
     // ======= КАРТА ПВЗ (Яндекс.Карты) =======
     let map, objectManager;
     const pvzData = [
@@ -929,6 +1158,11 @@
     document.getElementById('pvzFilter').addEventListener('change', (e) => {
       loadPVZ(e.target.value);
     });
+
+    // ======= РЕНДЕР ВСЕХ СЕКЦИЙ =======
+    renderPopularProducts();
+    renderSeasonProducts();
+    renderSaleProducts();
 
   </script>
 </body>
