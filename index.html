@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ЦУИМ — Маркетплейс</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: white;
+      color: #222;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 16px 32px;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      gap: 20px;
+      width: 100%;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #FF6F00;
+    }
+    .catalog-btn {
+      background: #0D47A1;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .search-box {
+      flex: 1;
+      display: flex;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 10px 16px;
+      border: 2px solid #FF6F00;
+      border-radius: 24px;
+      outline: none;
+      font-size: 16px;
+    }
+    .header-icons {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+    }
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Весь контент — на всю ширину */
+    main {
+      padding: 30px 32px;
+    }
+    .banner-section {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .banner-image img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 300px;
+    }
+    .category-item {
+      background: #FF6F00;
+      color: white;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .category-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 6px;
+    }
+    .info-banner {
+      background: #fff8e1;
+      padding: 10px 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header class="header">
+    <div class="logo">ЦУИМ</div>
+    <button class="catalog-btn">Каталог</button>
+    <div class="search-box">
+      <input type="text" placeholder="Искать на ЦУИМ">
+    </div>
+    <div class="header-icons">
+      <a href="#" class="icon-item">👤<br>Кабинет</a>
+      <a href="#" class="icon-item">❤️<br>Избранное</a>
+      <a href="#" class="icon-item">🛒<br>Корзина</a>
+    </div>
+  </header>
+
+  <!-- Контент на всю ширину -->
+  <main>
+    <section class="banner-section">
+      <div class="banner-image">
+        <img src="https://via.placeholder.com/800x400?text=БАННЕР" alt="Баннер">
+      </div>
+      <div class="category-grid">
+        <div class="category-item">
+          <img src="https://via.placeholder.com/60x60/FF6F00/FFFFFF?text=🥛" alt="Продукты">
+          <span>Продукты</span>
+        </div>
+        <div class="category-item">
+          <img src="https://via.placeholder.com/60x60/FF6F00/FFFFFF?text=🍱" alt="Еда">
+          <span>Еда</span>
+        </div>
+        <div class="category-item">
+          <img src="https://via.placeholder.com/60x60/FF6F00/FFFFFF?text=👕" alt="Одежда">
+          <span>Одежда</span>
+        </div>
+        <div class="category-item">
+          <img src="https://via.placeholder.com/60x60/FF6F00/FFFFFF?text=💄" alt="Красота">
+          <span>Красота</span>
+        </div>
+        <div class="category-item">
+          <img src="https://via.placeholder.com/60x60/FF6F00/FFFFFF?text=🧸" alt="Дети">
+          <span>Дети</span>
+        </div>
+        <div class="category-item">
+          <img src="https://via.placeholder.com/60x60/FF6F00/FFFFFF?text=🏡" alt="Дом">
+          <span>Дом</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="info-banner">
+      🚚 Продукты — только с доставкой. Минимальный заказ: 1500 ₽.
+    </div>
+  </main>
+
+</body>
+</html>
