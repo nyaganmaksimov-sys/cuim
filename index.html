@@ -94,7 +94,7 @@
     .shop-logo:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(13,71,161,.14)}
     
     .shop-logo img{
-      width:80px; height:60px; object-fit:contain; border-radius:8px;
+      width:80px; height:60px; object-fit:cover; border-radius:8px;
       background:linear-gradient(135deg, #f2f6fd, #e9f1ff); padding:6px;
     }
     .shop-name{
@@ -271,7 +271,7 @@
     }
     .link-more:hover{gap:8px}
 
-    /* Популярные товары (синий акцент) */
+    /* Популярные товары */
     .popular-section{margin:40px 0 20px;}
     .popular-title h2 svg{color:var(--blue-600)}
     .product-grid{
@@ -304,7 +304,7 @@
     .add-to-cart:hover{filter:brightness(1.05)}
     .add-to-cart:active{transform:translateY(1px)}
 
-    /* Хит сезона (красный акцент) */
+    /* Хит сезона */
     .season-section{margin:40px 0 20px;}
     .season-title h2{color:var(--red-600)}
     .season-title h2 svg{color:var(--red-600); fill:var(--red-600)}
@@ -343,7 +343,7 @@
     .add-to-season:hover{filter:brightness(1.05)}
     .add-to-season:active{transform:translateY(1px)}
 
-    /* Акции (жёлтый акцент) */
+    /* Акции */
     .sale-section{margin:40px 0 20px;}
     .sale-title h2{color:var(--yellow-600)}
     .sale-title h2 svg{color:var(--yellow-600); fill:var(--yellow-600)}
@@ -692,7 +692,7 @@
         </aside>
       </section>
 
-      <!-- ======= ПОПУЛЯРНЫЕ ТОВАРЫ ======= -->
+      <!-- Популярные товары -->
       <section class="popular-section">
         <div class="section-title popular-title">
           <h2>
@@ -713,12 +713,12 @@
         </div>
       </section>
 
-      <!-- ======= ХИТ СЕЗОНА ======= -->
+      <!-- Хит сезона -->
       <section class="season-section">
         <div class="section-title season-title">
           <h2>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.24l6.91-1.01L12 2z"/>
             </svg>
             Хит сезона
           </h2>
@@ -734,7 +734,7 @@
         </div>
       </section>
 
-      <!-- ======= АКЦИИ ======= -->
+      <!-- Акции -->
       <section class="sale-section">
         <div class="section-title sale-title">
           <h2>
@@ -810,21 +810,21 @@
   <script>
     // ======= ЛУЧШИЕ МАГАЗИНЫ =======
     const shops = [
-      {id:1, name:"Свежий маркет", rating:4.8, image:"https://placehold.co/80x60/FFE0BD/FF6F00?text=Shop"},
-      {id:2, name:"Мясной двор", rating:4.9, image:"https://placehold.co/80x60/E9F1FF/0D47A1?text=Meat"},
-      {id:3, name:"Овощной ряд", rating:4.7, image:"https://placehold.co/80x60/FFF8EC/FF6F00?text=Veg"},
-      {id:4, name:"Пекарня 'Хлебный дом'", rating:5.0, image:"https://placehold.co/80x60/F8F9FA/FF6F00?text=Bread"},
-      {id:5, name:"Молочная ферма", rating:4.6, image:"https://placehold.co/80x60/F2F6FD/0D47A1?text=Milk"},
-      {id:6, name:"Рыбный остров", rating:4.8, image:"https://placehold.co/80x60/FFE0BD/FF6F00?text=Fish"},
-      {id:7, name:"Кондитерская", rating:4.9, image:"https://placehold.co/80x60/E9F1FF/0D47A1?text=Sweet"},
-      {id:8, name:"Бакалея", rating:4.5, image:"https://placehold.co/80x60/FFF8EC/FF6F00?text=Food"},
+      {id:1, name:"Свежий маркет", rating:4.8, image:"https://ui-avatars.com/api/?name=СМ&background=FF6F00&color=fff&size=80"},
+      {id:2, name:"Мясной двор", rating:4.9, image:"https://ui-avatars.com/api/?name=МД&background=0D47A1&color=fff&size=80"},
+      {id:3, name:"Овощной ряд", rating:4.7, image:"https://ui-avatars.com/api/?name=ОР&background=FF6F00&color=fff&size=80"},
+      {id:4, name:"Пекарня Хлебный дом", rating:5.0, image:"https://ui-avatars.com/api/?name=ХД&background=FF6F00&color=fff&size=80"},
+      {id:5, name:"Молочная ферма", rating:4.6, image:"https://ui-avatars.com/api/?name=МФ&background=0D47A1&color=fff&size=80"},
+      {id:6, name:"Рыбный остров", rating:4.8, image:"https://ui-avatars.com/api/?name=РО&background=FF6F00&color=fff&size=80"},
+      {id:7, name:"Кондитерская", rating:4.9, image:"https://ui-avatars.com/api/?name=КС&background=0D47A1&color=fff&size=80"},
+      {id:8, name:"Бакалея", rating:4.5, image:"https://ui-avatars.com/api/?name=БК&background=FF6F00&color=fff&size=80"},
     ];
 
     function renderShops(){
       const container = document.getElementById('shopLogos');
       container.innerHTML = shops.map(s => `
         <a href="#" class="shop-logo" data-id="${s.id}">
-          <img src="${s.image}" alt="${s.name}" onerror="this.src='https://placehold.co/80x60?text=Shop'">
+          <img src="${s.image}" alt="${s.name}" onerror="this.src='https://via.placeholder.com/80x60?text=Shop'">
           <div class="shop-name">${s.name}</div>
           <div class="shop-rating">
             <div class="stars">${'★'.repeat(Math.floor(s.rating))}${'☆'.repeat(5-Math.floor(s.rating))}</div>
@@ -837,21 +837,21 @@
 
     // ======= ПОПУЛЯРНЫЕ ТОВАРЫ =======
     const popularProducts = [
-      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:"https://placehold.co/200x180/FFE0BD/FF6F00?text=Огурцы"},
-      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:"https://placehold.co/200x180/E9F1FF/0D47A1?text=Хлеб"},
-      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:"https://placehold.co/200x180/F8F9FA/FF6F00?text=Молоко"},
-      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:"https://placehold.co/200x180/FFF8EC/FF6F00?text=Яблоки"},
-      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:"https://placehold.co/200x180/F2F6FD/0D47A1?text=Колбаса"},
-      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:"https://placehold.co/200x180/FFE0BD/FF6F00?text=Сыр"},
-      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:"https://placehold.co/200x180/E9F1FF/0D47A1?text=Яйца"},
-      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:"https://placehold.co/200x180/F8F9FA/FF6F00?text=Обед"},
+      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:`https://picsum.photos/seed/product1/200/180`},
+      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:`https://picsum.photos/seed/product2/200/180`},
+      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:`https://picsum.photos/seed/product3/200/180`},
+      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:`https://picsum.photos/seed/product4/200/180`},
+      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:`https://picsum.photos/seed/product5/200/180`},
+      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:`https://picsum.photos/seed/product6/200/180`},
+      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:`https://picsum.photos/seed/product7/200/180`},
+      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:`https://picsum.photos/seed/product8/200/180`},
     ];
 
     function renderPopularProducts(){
       const grid = document.getElementById('productGrid');
       grid.innerHTML = popularProducts.map(p => `
         <div class="product-card">
-          <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://placehold.co/200x180?text=Товар'">
+          <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
           <div class="product-body">
             <div class="product-title">${p.title}</div>
             <div class="product-price">
@@ -874,14 +874,14 @@
 
     // ======= ХИТ СЕЗОНА =======
     const seasonProducts = [
-      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:"https://placehold.co/200x180/FFEAEA/E53935?text=Арбуз"},
-      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:"https://placehold.co/200x180/FFF5F5/E53935?text=Дыня"},
-      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:"https://placehold.co/200x180/FFEAEA/E53935?text=Помидоры"},
-      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:"https://placehold.co/200x180/FFF5F5/E53935?text=Персики"},
-      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:"https://placehold.co/200x180/FFEAEA/E53935?text=Сок"},
-      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:"https://placehold.co/200x180/FFF5F5/E53935?text=Клубника"},
-      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:"https://placehold.co/200x180/FFEAEA/E53935?text=Салат"},
-      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:"https://placehold.co/200x180/FFF5F5/E53935?text=Лимонад"},
+      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:`https://picsum.photos/seed/season9/200/180`},
+      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:`https://picsum.photos/seed/season10/200/180`},
+      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:`https://picsum.photos/seed/season11/200/180`},
+      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:`https://picsum.photos/seed/season12/200/180`},
+      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:`https://picsum.photos/seed/season13/200/180`},
+      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:`https://picsum.photos/seed/season14/200/180`},
+      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:`https://picsum.photos/seed/season15/200/180`},
+      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:`https://picsum.photos/seed/season16/200/180`},
     ];
 
     function renderSeasonProducts(){
@@ -889,7 +889,7 @@
       grid.innerHTML = seasonProducts.map(p => `
         <div class="season-card">
           <div class="season-badge">${p.discount}</div>
-          <img src="${p.image}" alt="${p.title}" class="season-image" onerror="this.src='https://placehold.co/200x180?text=Товар'">
+          <img src="${p.image}" alt="${p.title}" class="season-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
           <div class="season-body">
             <div class="season-title-text">${p.title}</div>
             <div class="season-price">
@@ -912,14 +912,14 @@
 
     // ======= АКЦИИ =======
     const saleProducts = [
-      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:"https://placehold.co/200x180/FFF8E1/FFB300?text=Хлеб"},
-      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:"https://placehold.co/200x180/FFFDE7/FFB300?text=Набор"},
-      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:"https://placehold.co/200x180/FFF8E1/FFB300?text=Сироп"},
-      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:"https://placehold.co/200x180/FFFDE7/FFB300?text=Йогурты"},
-      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:"https://placehold.co/200x180/FFF8E1/FFB300?text=Кофе"},
-      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:"https://placehold.co/200x180/FFFDE7/FFB300?text=Чай"},
-      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:"https://placehold.co/200x180/FFF8E1/FFB300?text=Фрукты"},
-      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:"https://placehold.co/200x180/FFFDE7/FFB300?text=Печенье"},
+      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:`https://picsum.photos/seed/sale17/200/180`},
+      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:`https://picsum.photos/seed/sale18/200/180`},
+      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:`https://picsum.photos/seed/sale19/200/180`},
+      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:`https://picsum.photos/seed/sale20/200/180`},
+      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:`https://picsum.photos/seed/sale21/200/180`},
+      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:`https://picsum.photos/seed/sale22/200/180`},
+      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:`https://picsum.photos/seed/sale23/200/180`},
+      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:`https://picsum.photos/seed/sale24/200/180`},
     ];
 
     function renderSaleProducts(){
@@ -927,7 +927,7 @@
       grid.innerHTML = saleProducts.map(p => `
         <div class="sale-card">
           <div class="sale-badge">${p.discount}</div>
-          <img src="${p.image}" alt="${p.title}" class="sale-image" onerror="this.src='https://placehold.co/200x180?text=Товар'">
+          <img src="${p.image}" alt="${p.title}" class="sale-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
           <div class="sale-body">
             <div class="sale-title-text">${p.title}</div>
             <div class="sale-price">
