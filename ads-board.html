@@ -304,6 +304,65 @@
       gap: 10px;
     }
 
+    /* Поиск по объявлениям */
+    .ads-search {
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-1);
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .ads-search-form {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .ads-search-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e9f1ff;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .ads-search-input:focus {
+      border-color: var(--blue-400);
+      box-shadow: var(--ring);
+    }
+
+    .ads-search-btn {
+      background: linear-gradient(90deg, var(--orange-600), var(--orange-500));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    .ads-search-btn:hover {
+      filter: brightness(1.05);
+    }
+
+    .search-results-info {
+      margin-top: 15px;
+      padding: 12px;
+      background: rgba(21,101,192,.05);
+      border-radius: 8px;
+      color: var(--blue-600);
+      font-size: 14px;
+      display: none;
+    }
+
+    .search-results-info.show {
+      display: block;
+    }
+
     .ads-filters {
       background: var(--panel);
       border-radius: var(--radius);
@@ -442,6 +501,19 @@
       display: flex;
       align-items: center;
       gap: 4px;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+
+    .no-results h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--text);
     }
 
     /* Footer */
@@ -612,6 +684,27 @@
         font-size: 1rem;
       }
 
+      .ads-search-form {
+        flex-direction: column;
+      }
+
+      .ads-search-input {
+        width: 100%;
+      }
+
+      .ads-search-btn {
+        width: 100%;
+      }
+
+      .ads-filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-group {
+        justify-content: space-between;
+      }
+
       .ads-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 15px;
@@ -653,15 +746,6 @@
 
       .ads-hero h1 {
         font-size: 1.8rem;
-      }
-
-      .ads-filters {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .filter-group {
-        justify-content: space-between;
       }
 
       .ads-grid {
@@ -825,6 +909,28 @@
             </svg>
             Все объявления
           </h2>
+
+          <!-- Поиск по объявлениям -->
+          <div class="ads-search">
+            <form class="ads-search-form" id="adsSearchForm">
+              <input 
+                type="text" 
+                class="ads-search-input" 
+                placeholder="Например: iPhone, диван, Toyota..."
+                id="adsSearchInput"
+              >
+              <button type="submit" class="ads-search-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                  <circle cx="11" cy="11" r="7"></circle>
+                  <path d="M20 20l-3.5-3.5"></path>
+                </svg>
+                Найти
+              </button>
+            </form>
+            <div class="search-results-info" id="searchResultsInfo">
+              <!-- Информация о результатах поиска -->
+            </div>
+          </div>
 
           <!-- Фильтры -->
           <div class="ads-filters">
@@ -994,7 +1100,8 @@
         image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         location: "Центр",
         date: "2 часа назад",
-        badge: "new"
+        badge: "new",
+        category: "electronics"
       },
       {
         id: 2,
@@ -1004,7 +1111,8 @@
         image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         location: "Южный",
         date: "5 часов назад",
-        badge: null
+        badge: null,
+        category: "home"
       },
       {
         id: 3,
@@ -1014,7 +1122,8 @@
         image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         location: "Северный",
         date: "Вчера",
-        badge: "urgent"
+        badge: "urgent",
+        category: "auto"
       },
       {
         id: 4,
@@ -1024,7 +1133,8 @@
         image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         location: "Западный",
         date: "Вчера",
-        badge: null
+        badge: null,
+        category: "clothes"
       },
       {
         id: 5,
@@ -1034,7 +1144,8 @@
         image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         location: "Восток",
         date: "2 дня назад",
-        badge: "new"
+        badge: "new",
+        category: "electronics"
       },
       {
         id: 6,
@@ -1044,7 +1155,8 @@
         image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         location: "Весь город",
         date: "2 дня назад",
-        badge: null
+        badge: null,
+        category: "services"
       },
       {
         id: 7,
@@ -1054,7 +1166,8 @@
         image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         location: "Центр",
         date: "3 дня назад",
-        badge: null
+        badge: null,
+        category: "hobby"
       },
       {
         id: 8,
@@ -1064,13 +1177,28 @@
         image: "https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         location: "Северный",
         date: "3 дня назад",
-        badge: null
+        badge: null,
+        category: "home"
       }
     ];
 
-    function renderAds() {
+    let currentAds = [...adsData];
+    let currentSearchQuery = '';
+
+    function renderAds(adsToRender = currentAds) {
       const grid = document.getElementById('adsGrid');
-      grid.innerHTML = adsData.map(ad => `
+      
+      if (adsToRender.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <h3>Объявления не найдены</h3>
+            <p>Попробуйте изменить поисковый запрос или параметры фильтрации</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = adsToRender.map(ad => `
         <div class="ad-card">
           ${ad.badge ? `<div class="ad-badge ${ad.badge}">${ad.badge === 'new' ? 'Новое' : 'Срочно'}</div>` : ''}
           <img src="${ad.image}" alt="${ad.title}" class="ad-image" onerror="this.src='https://via.placeholder.com/500x300?text=Объявление'">
@@ -1095,6 +1223,43 @@
           </div>
         </div>
       `).join('');
+    }
+
+    // ======= ПОИСК ПО ОБЪЯВЛЕНИЯМ =======
+    function searchAds(query) {
+      currentSearchQuery = query.toLowerCase().trim();
+      
+      if (!currentSearchQuery) {
+        currentAds = [...adsData];
+        renderAds();
+        hideSearchResultsInfo();
+        return;
+      }
+
+      const filteredAds = adsData.filter(ad => 
+        ad.title.toLowerCase().includes(currentSearchQuery) ||
+        ad.description.toLowerCase().includes(currentSearchQuery) ||
+        ad.location.toLowerCase().includes(currentSearchQuery)
+      );
+
+      currentAds = filteredAds;
+      renderAds(filteredAds);
+      showSearchResultsInfo(filteredAds.length, currentSearchQuery);
+    }
+
+    function showSearchResultsInfo(count, query) {
+      const infoElement = document.getElementById('searchResultsInfo');
+      if (count === 0) {
+        infoElement.innerHTML = `По запросу "<strong>${query}</strong>" ничего не найдено`;
+      } else {
+        infoElement.innerHTML = `Найдено <strong>${count}</strong> объявлений по запросу "<strong>${query}</strong>"`;
+      }
+      infoElement.classList.add('show');
+    }
+
+    function hideSearchResultsInfo() {
+      const infoElement = document.getElementById('searchResultsInfo');
+      infoElement.classList.remove('show');
     }
 
     // ======= ВЫБОР ГОРОДА =======
@@ -1138,6 +1303,32 @@
     document.addEventListener('DOMContentLoaded', function() {
       renderAdsCategories();
       renderAds();
+
+      // Обработка формы поиска
+      const searchForm = document.getElementById('adsSearchForm');
+      const searchInput = document.getElementById('adsSearchInput');
+
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        searchAds(searchInput.value);
+      });
+
+      // Поиск при вводе с задержкой
+      let searchTimeout;
+      searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          searchAds(this.value);
+        }, 500);
+      });
+
+      // Очистка поиска при нажатии Escape
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          this.value = '';
+          searchAds('');
+        }
+      });
     });
 
   </script>
