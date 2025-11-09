@@ -127,13 +127,25 @@
   object-fit:contain;
   box-shadow:var(--shadow-1);
   border-radius:0;
-  /* Убираем белый фон */
-  mix-blend-mode: multiply;
+  /* Агрессивное удаление белого фона */
   background: transparent !important;
-  /* Дополнительные фильтры для удаления белого фона */
-  filter: brightness(1.1) contrast(1.1);
-  /* Убираем любые возможные белые пиксели */
-  -webkit-filter: brightness(1.1) contrast(1.1);
+  /* Фильтр для удаления белого */
+  filter: 
+    brightness(0) 
+    invert(1) 
+    sepia(1) 
+    saturate(1000%) 
+    hue-rotate(200deg) 
+    brightness(0.8) 
+    contrast(1.2);
+  -webkit-filter: 
+    brightness(0) 
+    invert(1) 
+    sepia(1) 
+    saturate(1000%) 
+    hue-rotate(200deg) 
+    brightness(0.8) 
+    contrast(1.2);
 }
 
     .catalog-btn{
