@@ -772,3 +772,639 @@
       </button>
 
       <form class="search" role="search" aria-label="Поиск по сайту">
+        <div class="field">
+          <span class="icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="7" stroke-width="2"></circle>
+              <path d="M20 20l-3.5-3.5" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <input type="search" placeholder="Искать товары и категории..." aria-label="Поиск">
+        </div>
+        <button type="submit">Найти</button>
+      </form>
+
+      <nav class="header-actions" aria-label="Навигация пользователя">
+        <a href="#" class="h-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm7 9a7 7 0 1 0-14 0" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Кабинет</span>
+        </a>
+        <a href="#" class="h-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Избранное</span>
+        </a>
+        <a href="#" class="h-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+          </svg>
+          <span>Корзина</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Лучшие магазины -->
+  <section class="top-shops">
+    <div class="container">
+      <div class="shops-header">
+        <div class="shops-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
+          Лучшие магазины
+        </div>
+        <a href="#" class="link-more">
+          Все магазины
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="shop-logos" id="shopLogos">
+        <!-- Генерируется JS -->
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+
+      <!-- Грид: категории + слайдер + промо -->
+      <section class="hero-grid">
+        <aside class="categories" id="categoriesPanel">
+          <div class="cat-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 5h18M3 12h18M3 19h18" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Категории
+          </div>
+          <ul class="cat-list">
+            <li class="cat-item"><a href="#"><span class="cat-ico">🥦</span><span class="cat-name">Продукты питания</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🍱</span><span class="cat-name">Готовая еда</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">👕</span><span class="cat-name">Одежда</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">💄</span><span class="cat-name">Красота и здоровье</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🧸</span><span class="cat-name">Детские товары</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🏡</span><span class="cat-name">Дом и сад</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🛋️</span><span class="cat-name">Мебель</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🎣</span><span class="cat-name">Рыбалка и охота</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">✏️</span><span class="cat-name">Канцелярия</span></a></li>
+          </ul>
+        </aside>
+
+        <div class="hero" aria-label="Промо-слайдер">
+          <div class="slides" id="slides">
+            <div class="slide active">
+              <div class="txt">
+                <h2>Свежее рядом с вами</h2>
+                <p>Продукты и готовая еда с доставкой по Барнаулу</p>
+                <a class="cta" href="#">Смотреть каталог
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="img">
+                <div class="ph"></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="txt">
+                <h2>Оранжево‑синие скидки</h2>
+                <p>Собрали лучшее — переходите в раздел Акции</p>
+                <a class="cta" href="#">К акциям
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="img">
+                <div class="ph" style="background-image:linear-gradient(135deg, rgba(255,122,18,.2), rgba(21,101,192,.2)), url('images/banner-2.jpg');"></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="txt">
+                <h2>Быстрая доставка</h2>
+                <p>Среднее время — 45 минут. Оплата любым способом</p>
+                <a class="cta" href="#">Узнать условия
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="img">
+                <div class="ph" style="background-image:linear-gradient(135deg, rgba(21,101,192,.22), rgba(255,122,18,.22)), url('images/banner-3.jpg');"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav">
+            <button id="prevSlide" aria-label="Предыдущий слайд">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button id="nextSlide" aria-label="Следующий слайд">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="dots" id="dots" aria-label="Пагинация слайдов"></div>
+        </div>
+
+        <aside class="promos">
+          <a href="#" class="promo-card" style="background:linear-gradient(180deg, #fff, #fff8ec)">
+            <h3>Бонусы за заказ</h3>
+            <p>Копите и тратьте — <span class="promo-accent">1 бонус = 1 ₽</span></p>
+          </a>
+          <a href="#" class="promo-card" style="background:linear-gradient(180deg, #fff, #eef6ff)">
+            <h3>Пункты самовывоза</h3>
+            <p>Заберите в удобное время</p>
+          </a>
+          <a href="#" class="promo-card" style="background:linear-gradient(180deg, #fff, #f1f7ff)">
+            <h3>Экспресс‑доставка</h3>
+            <p>От 45 минут по городу</p>
+          </a>
+        </aside>
+      </section>
+
+      <!-- Популярные товары -->
+      <section class="popular-section">
+        <div class="section-title popular-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            Популярные товары
+          </h2>
+          <a href="#" class="link-more">
+            Смотреть все
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="product-grid" id="productGrid">
+          <!-- Генерируется JS -->
+        </div>
+      </section>
+
+      <!-- Хит сезона -->
+      <section class="season-section">
+        <div class="section-title season-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.24l6.91-1.01L12 2z"/>
+            </svg>
+            Хит сезона
+          </h2>
+          <a href="#" class="link-more">
+            Все товары
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="season-grid" id="seasonGrid">
+          <!-- Генерируется JS -->
+        </div>
+      </section>
+
+      <!-- Акции -->
+      <section class="sale-section">
+        <div class="section-title sale-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+            </svg>
+            Акции
+          </h2>
+          <a href="#" class="link-more">
+            Все акции
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="sale-grid" id="saleGrid">
+          <!-- Генерируется JS -->
+        </div>
+      </section>
+
+      <!-- Карта ПВЗ -->
+      <section class="pvz-section" aria-label="Пункты выдачи заказов">
+        <div class="pvz-header">
+          <h2>Пункты самовывоза в <span id="cityInPVZ">Барнауле</span></h2>
+          <div class="pvz-controls">
+            <select id="pvzFilter">
+              <option value="all">Все ПВЗ</option>
+              <option value="today">Открытые сегодня</option>
+              <option value="24h">Круглосуточные</option>
+            </select>
+          </div>
+        </div>
+        <div class="pvz-content">
+          <div class="map-container" id="map"></div>
+          <div class="pvz-list" id="pvzList">
+            <!-- Генерируется JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Инфо-баннеры -->
+      <section class="section">
+        <div class="info-banner">🚚 Продукты — только с доставкой. Минимальный заказ: 1500 ₽.</div>
+        <div class="min-warning">⚠️ Минимальная сумма заказа — 1500 ₽. Добавьте товары, чтобы оформить.</div>
+      </section>
+
+      <footer class="site-footer">
+        © 2025 ЦУИМ — Местный маркетплейс Барнаула. Сделано в оранжево‑синих тонах 💙🧡
+      </footer>
+    </div>
+  </main>
+
+  <!-- Модалка выбора города -->
+  <div class="modal-backdrop" id="cityModal" role="dialog" aria-modal="true" aria-labelledby="cityModalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="cityModalTitle">Выберите город</h3>
+        <button class="modal-close" id="closeCityModal" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="city-grid" id="cityGrid">
+          <button class="city-btn" data-city="Барнаул">Барнаул</button>
+          <button class="city-btn" data-city="Новоалтайск">Новоалтайск</button>
+          <button class="city-btn" data-city="Заринск">Заринск</button>
+          <button class="city-btn" data-city="Бийск">Бийск</button>
+          <button class="city-btn" data-city="Рубцовск">Рубцовск</button>
+          <button class="city-btn" data-city="Славгород">Славгород</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ======= ЛУЧШИЕ МАГАЗИНЫ =======
+    const shops = [
+      {id:1, name:"Свежий маркет", rating:4.8, image:"https://ui-avatars.com/api/?name=СМ&background=FF6F00&color=fff&size=80"},
+      {id:2, name:"Мясной двор", rating:4.9, image:"https://ui-avatars.com/api/?name=МД&background=0D47A1&color=fff&size=80"},
+      {id:3, name:"Овощной ряд", rating:4.7, image:"https://ui-avatars.com/api/?name=ОР&background=FF6F00&color=fff&size=80"},
+      {id:4, name:"Пекарня Хлебный дом", rating:5.0, image:"https://ui-avatars.com/api/?name=ХД&background=FF6F00&color=fff&size=80"},
+      {id:5, name:"Молочная ферма", rating:4.6, image:"https://ui-avatars.com/api/?name=МФ&background=0D47A1&color=fff&size=80"},
+      {id:6, name:"Рыбный остров", rating:4.8, image:"https://ui-avatars.com/api/?name=РО&background=FF6F00&color=fff&size=80"},
+      {id:7, name:"Кондитерская", rating:4.9, image:"https://ui-avatars.com/api/?name=КС&background=0D47A1&color=fff&size=80"},
+      {id:8, name:"Бакалея", rating:4.5, image:"https://ui-avatars.com/api/?name=БК&background=FF6F00&color=fff&size=80"},
+    ];
+
+    function renderShops(){
+      const container = document.getElementById('shopLogos');
+      container.innerHTML = shops.map(s => `
+        <a href="#" class="shop-logo" data-id="${s.id}">
+          <img src="${s.image}" alt="${s.name}" onerror="this.src='https://via.placeholder.com/80x60?text=Shop'">
+          <div class="shop-name">${s.name}</div>
+          <div class="shop-rating">
+            <div class="stars">${'★'.repeat(Math.floor(s.rating))}${'☆'.repeat(5-Math.floor(s.rating))}</div>
+            ${s.rating}
+          </div>
+        </a>
+      `).join('');
+    }
+    renderShops();
+
+    // ======= ПОПУЛЯРНЫЕ ТОВАРЫ =======
+    const popularProducts = [
+      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:`https://picsum.photos/seed/product1/200/180`},
+      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:`https://picsum.photos/seed/product2/200/180`},
+      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:`https://picsum.photos/seed/product3/200/180`},
+      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:`https://picsum.photos/seed/product4/200/180`},
+      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:`https://picsum.photos/seed/product5/200/180`},
+      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:`https://picsum.photos/seed/product6/200/180`},
+      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:`https://picsum.photos/seed/product7/200/180`},
+      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:`https://picsum.photos/seed/product8/200/180`},
+    ];
+
+    function renderPopularProducts(){
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = popularProducts.map(p => `
+        <div class="product-card">
+          <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
+          <div class="product-body">
+            <div class="product-title">${p.title}</div>
+            <div class="product-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            <button class="add-to-cart" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-cart');
+    }
+
+    // ======= ХИТ СЕЗОНА =======
+    const seasonProducts = [
+      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:`https://picsum.photos/seed/season9/200/180`},
+      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:`https://picsum.photos/seed/season10/200/180`},
+      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:`https://picsum.photos/seed/season11/200/180`},
+      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:`https://picsum.photos/seed/season12/200/180`},
+      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:`https://picsum.photos/seed/season13/200/180`},
+      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:`https://picsum.photos/seed/season14/200/180`},
+      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:`https://picsum.photos/seed/season15/200/180`},
+      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:`https://picsum.photos/seed/season16/200/180`},
+    ];
+
+    function renderSeasonProducts(){
+      const grid = document.getElementById('seasonGrid');
+      grid.innerHTML = seasonProducts.map(p => `
+        <div class="season-card">
+          <div class="season-badge">${p.discount}</div>
+          <img src="${p.image}" alt="${p.title}" class="season-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
+          <div class="season-body">
+            <div class="season-title-text">${p.title}</div>
+            <div class="season-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            <button class="add-to-season" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-season');
+    }
+
+    // ======= АКЦИИ =======
+    const saleProducts = [
+      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:`https://picsum.photos/seed/sale17/200/180`},
+      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:`https://picsum.photos/seed/sale18/200/180`},
+      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:`https://picsum.photos/seed/sale19/200/180`},
+      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:`https://picsum.photos/seed/sale20/200/180`},
+      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:`https://picsum.photos/seed/sale21/200/180`},
+      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:`https://picsum.photos/seed/sale22/200/180`},
+      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:`https://picsum.photos/seed/sale23/200/180`},
+      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:`https://picsum.photos/seed/sale24/200/180`},
+    ];
+
+    function renderSaleProducts(){
+      const grid = document.getElementById('saleGrid');
+      grid.innerHTML = saleProducts.map(p => `
+        <div class="sale-card">
+          <div class="sale-badge">${p.discount}</div>
+          <img src="${p.image}" alt="${p.title}" class="sale-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
+          <div class="sale-body">
+            <div class="sale-title-text">${p.title}</div>
+            <div class="sale-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            ${p.discount && p.oldPrice ? `<div class="sale-discount">Выгода: ${p.oldPrice - p.price} ₽</div>` : ''}
+            <button class="add-to-sale" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-sale');
+    }
+
+    // Универсальная функция анимации для кнопок "В корзину"
+    function addCartAnimation(selector){
+      document.querySelectorAll(selector).forEach(btn => {
+        btn.addEventListener('click', function(){
+          const originalHTML = this.innerHTML;
+          const originalBg = this.style.background;
+          
+          if(this.classList.contains('add-to-cart')){
+            this.style.background = 'var(--orange-600)';
+          } else if(this.classList.contains('add-to-season')){
+            this.style.background = 'var(--red-500)';
+          } else if(this.classList.contains('add-to-sale')){
+            this.style.background = 'var(--yellow-600)';
+            this.style.color = '#000';
+          }
+          
+          this.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Добавлено';
+          
+          setTimeout(() => {
+            this.style.background = originalBg;
+            this.style.color = '';
+            this.innerHTML = originalHTML;
+          }, 1500);
+        });
+      });
+    }
+
+    // ======= СЛАЙДЕР =======
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsWrap = document.getElementById('dots');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+
+    let current = 0, timer;
+
+    function renderDots(){
+      dotsWrap.innerHTML = '';
+      slides.forEach((_, i)=>{
+        const b = document.createElement('button');
+        b.setAttribute('aria-label', 'Перейти к слайду ' + (i+1));
+        if(i===current) b.classList.add('active');
+        b.addEventListener('click', ()=>go(i));
+        dotsWrap.appendChild(b);
+      });
+    }
+    function go(i){
+      slides[current].classList.remove('active');
+      current = (i + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      renderDots();
+      restart();
+    }
+    function next(){ go(current+1); }
+    function prev(){ go(current-1); }
+
+    function restart(){
+      clearInterval(timer);
+      timer = setInterval(next, 5000);
+    }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    renderDots();
+    restart();
+
+    // ======= КАТАЛОГ (мобильный) =======
+    const catalogToggle = document.getElementById('catalogToggle');
+    const categoriesPanel = document.getElementById('categoriesPanel');
+    let opened = false;
+
+    function toggleCatalog(){
+      opened = !opened;
+      categoriesPanel.classList.toggle('open', opened);
+      catalogToggle.setAttribute('aria-expanded', String(opened));
+      if(opened){
+        const closer = (e)=>{
+          if(!categoriesPanel.contains(e.target) && e.target !== catalogToggle){
+            opened = false; categoriesPanel.classList.remove('open');
+            catalogToggle.setAttribute('aria-expanded', 'false');
+            document.removeEventListener('click', closer);
+          }
+        };
+        setTimeout(()=>document.addEventListener('click', closer), 0);
+      }
+    }
+    catalogToggle.addEventListener('click', toggleCatalog);
+
+    // ======= ВЫБОР ГОРОДА =======
+    const locationPicker = document.getElementById('locationPicker');
+    const cityModal = document.getElementById('cityModal');
+    const closeCityModal = document.getElementById('closeCityModal');
+    const selectedCitySpan = document.getElementById('selectedCity');
+    const cityInPVZ = document.getElementById('cityInPVZ');
+    const cityButtons = document.querySelectorAll('.city-btn');
+
+    const savedCity = localStorage.getItem('selectedCity') || 'Барнаул';
+    selectedCitySpan.textContent = savedCity;
+    cityInPVZ.textContent = savedCity;
+
+    function openCityModal(){
+      cityModal.classList.add('open');
+      locationPicker.setAttribute('aria-expanded', 'true');
+      cityButtons.forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.city === selectedCitySpan.textContent);
+      });
+    }
+    function closeModal(){
+      cityModal.classList.remove('open');
+      locationPicker.setAttribute('aria-expanded', 'false');
+    }
+
+    locationPicker.addEventListener('click', openCityModal);
+    closeCityModal.addEventListener('click', closeModal);
+    cityModal.addEventListener('click', (e)=>{
+      if(e.target === cityModal) closeModal();
+    });
+
+    cityButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const city = btn.dataset.city;
+        selectedCitySpan.textContent = city;
+        cityInPVZ.textContent = city;
+        localStorage.setItem('selectedCity', city);
+        closeModal();
+        loadPVZ();
+      });
+    });
+
+    // ======= КАРТА ПВЗ (Яндекс.Карты) =======
+    let map, objectManager;
+    const pvzData = [
+      {id:1, name:"ПВЗ на Красноармейском", address:"пр. Красноармейский, 73", hours:"09:00—21:00", lat:53.3471, lng:83.7556, type:"today"},
+      {id:2, name:"ПВЗ в Мегацентре", address:"ул. Попова, 205", hours:"10:00—22:00", lat:53.3635, lng:83.8563, type:"24h"},
+      {id:3, name:"ПВЗ на Южном", address:"ул. Южная, 287", hours:"08:00—23:00", lat:53.3214, lng:83.7921, type:"today"},
+      {id:4, name:"ПВЗ в ЦУМе", address:"ул. Советская, 24", hours:"09:00—21:00", lat:53.3488, lng:83.7799, type:"24h"},
+      {id:5, name:"ПВЗ на Павловском", address:"ул. Павловского, 115", hours:"10:00—20:00", lat:53.3801, lng:83.7634, type:"today"},
+    ];
+
+    function loadPVZ(filter = 'all'){
+      const list = document.getElementById('pvzList');
+      const filtered = filter === 'all' ? pvzData : pvzData.filter(p => p.type === filter);
+      
+      list.innerHTML = filtered.map((p, i) => `
+        <div class="pvz-card ${i === 0 ? 'active' : ''}" data-id="${p.id}" data-lat="${p.lat}" data-lng="${p.lng}">
+          <div class="pvz-name">${p.name}</div>
+          <div class="pvz-address">${p.address}</div>
+          <div class="pvz-hours">${p.hours}</div>
+          <div class="pvz-dist">${(Math.random() * 5 + 1).toFixed(1)} км</div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.pvz-card').forEach(card => {
+        card.addEventListener('click', function(){
+          document.querySelectorAll('.pvz-card').forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          const lat = +this.dataset.lat;
+          const lng = +this.dataset.lng;
+          if(map) map.setCenter([lat, lng], 15);
+        });
+      });
+    }
+
+    function initMap(){
+      const script = document.createElement('script');
+      script.src = 'https://api-maps.yandex.ru/2.1/?apikey=ВАШ_API_КЛЮЧ&lang=ru_RU';
+      script.onload = () => {
+        ymaps.ready(() => {
+          map = new ymaps.Map('map', {
+            center: [53.3471, 83.7556],
+            zoom: 12,
+            controls: ['zoomControl', 'geolocationControl']
+          });
+
+          objectManager = new ymaps.ObjectManager({
+            clusterize: true,
+            gridSize: 32,
+          });
+          map.geoObjects.add(objectManager);
+
+          const objects = pvzData.map(p => ({
+            type: 'Feature',
+            id: p.id,
+            geometry: {type: 'Point', coordinates: [p.lat, p.lng]},
+            properties: {
+              balloonContent: `<strong>${p.name}</strong><br>${p.address}<br>${p.hours}`,
+              hintContent: p.name
+            }
+          }));
+          objectManager.add({type: 'FeatureCollection', features: objects});
+
+          objectManager.objects.events.add('click', (e) => {
+            const id = e.get('objectId');
+            const card = document.querySelector(`[data-id="${id}"]`);
+            if(card){
+              document.querySelectorAll('.pvz-card').forEach(c => c.classList.remove('active'));
+              card.classList.add('active');
+              card.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+            }
+          });
+        });
+      };
+      document.head.appendChild(script);
+    }
+    initMap();
+    loadPVZ();
+
+    document.getElementById('pvzFilter').addEventListener('change', (e) => {
+      loadPVZ(e.target.value);
+    });
+
+    // ======= РЕНДЕР ВСЕХ СЕКЦИЙ =======
+    renderPopularProducts();
+    renderSeasonProducts();
+    renderSaleProducts();
+
+  </script>
+</body>
+</html>
