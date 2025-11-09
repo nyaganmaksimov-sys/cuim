@@ -64,15 +64,49 @@
             background: white;
         }
 
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
         .logo img {
             max-width: 160px;
             height: auto;
+            transition: transform 0.3s;
+        }
+
+        .logo a:hover img {
+            transform: scale(1.05);
         }
 
         .logo-text {
             font-size: 14px;
             color: var(--gray);
             margin-top: 8px;
+        }
+
+        .shop-button {
+            display: block;
+            width: calc(100% - 40px);
+            margin: 15px auto;
+            padding: 12px 20px;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .shop-button:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         .mobile-barcode {
@@ -681,6 +715,10 @@
                 display: block;
             }
             
+            .shop-button {
+                display: none;
+            }
+            
             .nav-links {
                 display: flex;
                 overflow-x: auto;
@@ -713,6 +751,24 @@
             
             .search-bar {
                 width: 200px;
+            }
+            
+            .mobile-shop-button {
+                display: block;
+                width: calc(100% - 30px);
+                margin: 10px auto;
+                padding: 12px 20px;
+                background: var(--secondary);
+                color: white;
+                text-decoration: none;
+                border-radius: var(--radius);
+                text-align: center;
+                font-weight: 600;
+                transition: all 0.3s;
+            }
+            
+            .mobile-shop-button:hover {
+                background: var(--secondary-dark);
             }
         }
 
@@ -773,6 +829,12 @@
                 padding: 8px 12px;
             }
         }
+
+        @media (min-width: 901px) {
+            .mobile-shop-button {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -780,10 +842,17 @@
         <!-- Боковая панель -->
         <div class="sidebar">
             <div class="logo">
-                <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/b6983f424db7b6e1d8f2b8033ccc1d8e24830a29/images/logo.svg" alt="Логотип CUIM" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div style="display:none; color: var(--primary); font-size: 24px; font-weight: bold;">CUIM</div>
+                <a href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank">
+                    <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/b6983f424db7b6e1d8f2b8033ccc1d8e24830a29/images/logo.svg" alt="Логотип CUIM" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display:none; color: var(--primary); font-size: 24px; font-weight: bold;">CUIM</div>
+                </a>
                 <div class="logo-text">Кабинет покупателя</div>
             </div>
+            
+            <!-- Кнопка магазина для десктопной версии -->
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" class="shop-button">
+                <i class="fas fa-shopping-cart"></i> Продолжить покупки
+            </a>
             
             <!-- Штрих-код для мобильной версии -->
             <div class="mobile-barcode">
@@ -793,6 +862,11 @@
                 </div>
                 <div class="barcode-text">Штрих-код для получения товаров</div>
             </div>
+
+            <!-- Кнопка магазина для мобильной версии -->
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" class="mobile-shop-button">
+                <i class="fas fa-shopping-cart"></i> Продолжить покупки
+            </a>
 
             <ul class="nav-links">
                 <li><a href="#" class="active"><i class="fas fa-home"></i> Главная</a></li>
@@ -982,7 +1056,7 @@
             // Обработка кнопки "За покупками!"
             const promoButton = document.querySelector('.promo-button');
             promoButton.addEventListener('click', function() {
-                alert('Переход в каталог товаров!');
+                window.open('https://nyaganmaksimov-sys.github.io/cuim/', '_blank');
             });
             
             // Обработка плавающей корзины
