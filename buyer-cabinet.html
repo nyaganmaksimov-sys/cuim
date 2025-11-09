@@ -71,6 +71,64 @@
             margin-top: 8px;
         }
 
+        .mobile-barcode {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .barcode-container {
+            background: white;
+            padding: 10px;
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+        }
+
+        .barcode {
+            height: 60px;
+            background: 
+                repeating-linear-gradient(90deg, 
+                    #000 0px, #000 2px, 
+                    transparent 2px, transparent 4px);
+            background-size: 4px 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .barcode::before,
+        .barcode::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 4px;
+            background: #000;
+        }
+
+        .barcode::before {
+            left: 0;
+        }
+
+        .barcode::after {
+            right: 0;
+        }
+
+        .barcode-numbers {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            letter-spacing: 8px;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .barcode-text {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
         .nav-links {
             list-style: none;
             padding: 20px 0;
@@ -611,6 +669,10 @@
                 height: auto;
             }
             
+            .mobile-barcode {
+                display: block;
+            }
+            
             .nav-links {
                 display: flex;
                 overflow-x: auto;
@@ -670,6 +732,19 @@
                 width: 100%;
                 justify-content: space-between;
             }
+            
+            .mobile-barcode {
+                padding: 10px;
+            }
+            
+            .barcode {
+                height: 50px;
+            }
+            
+            .barcode-numbers {
+                font-size: 10px;
+                letter-spacing: 6px;
+            }
         }
     </style>
 </head>
@@ -678,10 +753,20 @@
         <!-- Боковая панель -->
         <div class="sidebar">
             <div class="logo">
-                <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/b6983f424db7b6e1d8f2b8033ccc1d8e24830a29/images/logo.svg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div style="display:none; color: white; font-size: 24px; font-weight: bold;"></div>
+                <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/b6983f424db7b6e1d8f2b8033ccc1d8e24830a29/images/logo.svg" alt="Логотип CUIM" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display:none; color: white; font-size: 24px; font-weight: bold;">CUIM</div>
                 <div class="logo-text">Кабинет покупателя</div>
             </div>
+            
+            <!-- Штрих-код для мобильной версии -->
+            <div class="mobile-barcode">
+                <div class="barcode-container">
+                    <div class="barcode" style="width: 200px;"></div>
+                    <div class="barcode-numbers">4 801234 567890</div>
+                </div>
+                <div class="barcode-text">Штрих-код для получения товаров</div>
+            </div>
+
             <ul class="nav-links">
                 <li><a href="#" class="active"><i class="fas fa-home"></i> Главная</a></li>
                 <li><a href="#"><i class="fas fa-shopping-basket"></i> Каталог</a></li>
@@ -888,6 +973,34 @@
                     fallback.style.display = 'block';
                 });
             }
+
+            // Генерация случайного штрих-кода
+            function generateBarcode() {
+                const barcode = document.querySelector('.barcode');
+                const numbers = document.querySelector('.barcode-numbers');
+                
+                // Случайная ширина полосок
+                let barcodePattern = '';
+                for (let i = 0; i < 40; i++) {
+                    const width = Math.random() > 0.3 ? 2 : 4;
+                    barcodePattern += `#000 ${width}px, transparent ${width}px, `;
+                }
+                
+                barcode.style.background = `repeating-linear-gradient(90deg, ${barcodePattern.slice(0, -2)})`;
+                
+                // Случайный номер
+                let barcodeNumber = '4 ';
+                for (let i = 0; i < 6; i++) {
+                    barcodeNumber += Math.floor(Math.random() * 10);
+                }
+                barcodeNumber += ' ';
+                for (let i = 0; i < 6; i++) {
+                    barcodeNumber += Math.floor(Math.random() * 10);
+                }
+                numbers.textContent = barcodeNumber;
+            }
+
+            generateBarcode();
         });
     </script>
 </body>
