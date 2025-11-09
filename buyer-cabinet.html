@@ -3,942 +3,526 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный кабинет покупателя | ЦУИМ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Личный кабинет покупателя</title>
     <style>
-        :root {
-            --blue-600: #0D47A1;
-            --blue-500: #1565C0;
-            --blue-400: #1E88E5;
-            --orange-600: #FF6F00;
-            --orange-500: #FF7A12;
-            --red-600: #E53935;
-            --red-500: #FF5252;
-            --yellow-600: #FFB300;
-            --green-600: #43A047;
-            --bg: #F6F8FB;
-            --panel: #FFFFFF;
-            --text: #1F2937;
-            --muted: #667085;
-            --radius: 14px;
-            --shadow-1: 0 8px 28px rgba(13,71,161,.10), 0 2px 8px rgba(0,0,0,.05);
-            --ring: 0 0 0 3px rgba(21,101,192,.16);
-            --container: 1280px;
-            --transition: all .15s cubic-bezier(.4,.0,.2,1);
-        }
-
+        /* Базовые стили */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
-
+        
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: #f5f5f5;
+            color: #333;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
         }
-
+        
         .container {
-            width: min(100% - 32px, var(--container));
-            margin-inline: auto;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-
-        /* Header */
-        .site-header {
-            background-color: var(--panel);
-            box-shadow: 0 1px 0 rgba(13,71,161,.08);
-            position: sticky;
-            top: 0;
-            z-index: 50;
+        
+        /* Шапка */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 0;
         }
-
-        .header-inner {
+        
+        .header-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            height: 74px;
+            align-items: center;
         }
-
+        
         .logo {
-            display: flex;
-            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
         }
-
-        .logo-mark {
-            width: 120px;
-            height: 40px;
-            object-fit: contain;
-            mix-blend-mode: multiply;
-            filter: brightness(1.1) contrast(1.1);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 24px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: background-color 0.15s ease;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(21,101,192,.08);
-        }
-
-        .nav-link.active {
-            background-color: var(--blue-600);
-            color: white;
-        }
-
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue-600), var(--orange-600));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Main Layout */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 24px;
-            margin: 24px 0;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 20px;
-            height: fit-content;
-            position: sticky;
-            top: 90px;
-        }
-
+        
         .user-info {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(13,71,161,.08);
         }
-
-        .user-avatar-large {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue-600), var(--orange-600));
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        
+        .user-name {
+            margin-right: 15px;
+        }
+        
+        .logout-btn {
+            background-color: #e74c3c;
             color: white;
-            font-weight: 700;
-            font-size: 24px;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
         }
-
-        .user-details h2 {
-            font-size: 18px;
-            margin-bottom: 4px;
+        
+        /* Основной контент */
+        .main-content {
+            display: flex;
+            margin-top: 20px;
         }
-
-        .user-details p {
-            color: var(--muted);
-            font-size: 14px;
+        
+        /* Боковая панель */
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-right: 20px;
         }
-
-        .sidebar-nav {
+        
+        .sidebar-menu {
             list-style: none;
         }
-
+        
         .sidebar-item {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-
+        
         .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 10px;
-            color: var(--text);
+            display: block;
+            padding: 12px 15px;
             text-decoration: none;
-            transition: background-color 0.15s ease;
+            color: #333;
+            border-radius: 4px;
+            transition: background-color 0.3s;
         }
-
-        .sidebar-link:hover {
-            background-color: rgba(21,101,192,.08);
-        }
-
-        .sidebar-link.active {
-            background-color: var(--blue-600);
+        
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: #3498db;
             color: white;
         }
-
-        .sidebar-link svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Content Area */
+        
+        /* Контентная область */
         .content {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-        }
-
-        .stat-card {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .stat-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-icon.blue {
-            background-color: rgba(21,101,192,.12);
-            color: var(--blue-600);
-        }
-
-        .stat-icon.orange {
-            background-color: rgba(255,122,18,.12);
-            color: var(--orange-600);
-        }
-
-        .stat-icon.green {
-            background-color: rgba(67,160,71,.12);
-            color: var(--green-600);
-        }
-
-        .stat-icon.red {
-            background-color: rgba(229,57,53,.12);
-            color: var(--red-600);
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .stat-label {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        /* Orders Section */
-        .section {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 24px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #163a69;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title svg {
-            color: var(--blue-600);
-        }
-
-        .link-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--blue-600);
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 14px;
-            transition: gap 0.12s ease;
-        }
-
-        .link-more:hover {
-            gap: 8px;
-        }
-
-        /* Orders Table */
-        .orders-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .orders-table th {
-            text-align: left;
-            padding: 12px 16px;
-            font-weight: 600;
-            color: var(--muted);
-            border-bottom: 1px solid rgba(13,71,161,.08);
-        }
-
-        .orders-table td {
-            padding: 16px;
-            border-bottom: 1px solid rgba(13,71,161,.08);
-        }
-
-        .order-id {
-            font-weight: 600;
-            color: var(--blue-600);
-        }
-
-        .order-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-delivered {
-            background-color: rgba(67,160,71,.12);
-            color: var(--green-600);
-        }
-
-        .status-processing {
-            background-color: rgba(255,179,0,.12);
-            color: var(--yellow-600);
-        }
-
-        .status-shipped {
-            background-color: rgba(21,101,192,.12);
-            color: var(--blue-600);
-        }
-
-        .status-cancelled {
-            background-color: rgba(229,57,53,.12);
-            color: var(--red-600);
-        }
-
-        .order-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: filter 0.15s ease;
-            font-size: 14px;
-        }
-
-        .btn:hover {
-            filter: brightness(1.05);
-        }
-
-        .btn-primary {
-            background-color: var(--blue-600);
-            color: white;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--blue-600);
-            color: var(--blue-600);
-        }
-
-        /* Favorites Grid */
-        .favorites-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .favorite-card {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .favorite-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(13,71,161,.14);
-        }
-
-        .favorite-image {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            background: linear-gradient(135deg, #f2f6fd, #e9f1ff);
-        }
-
-        .favorite-body {
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .favorite-title {
-            font-size: 14px;
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            height: 36px;
-        }
-
-        .favorite-price {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--orange-600);
-            line-height: 1;
-        }
-
-        .favorite-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.15s ease;
-        }
-
-        .btn-cart {
-            background-color: var(--blue-600);
-            color: white;
             flex: 1;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 25px;
         }
-
-        .btn-remove {
-            background-color: rgba(229,57,53,.12);
-            color: var(--red-600);
-        }
-
-        /* Addresses */
-        .addresses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 16px;
-        }
-
-        .address-card {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 20px;
-            border: 2px solid transparent;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .address-card:hover {
-            border-color: var(--blue-400);
-        }
-
-        .address-card.active {
-            border-color: var(--blue-600);
-            background-color: rgba(21,101,192,.04);
-        }
-
-        .address-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .address-name {
-            font-weight: 700;
-            color: #163a69;
-        }
-
-        .address-default {
-            background-color: var(--green-600);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .address-details {
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        .address-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--muted);
-        }
-
-        .empty-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 16px;
-            background-color: rgba(13,71,161,.06);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--blue-600);
-        }
-
-        .empty-title {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-
-        .empty-description {
-            margin-bottom: 20px;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid rgba(13,71,161,.08);
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            padding: 12px 20px;
-            font-weight: 600;
-            color: var(--muted);
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.15s ease;
-        }
-
-        .tab.active {
-            color: var(--blue-600);
-            border-bottom-color: var(--blue-600);
-        }
-
-        .tab-content {
+        
+        .section {
             display: none;
         }
-
-        .tab-content.active {
+        
+        .section.active {
             display: block;
         }
-
-        /* Settings Form */
-        .settings-form {
-            max-width: 600px;
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
         }
-
+        
+        /* Стили для таблиц */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Стили для форм */
         .form-group {
             margin-bottom: 20px;
         }
-
-        .form-label {
+        
+        label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text);
+            font-weight: bold;
         }
-
-        .form-input {
+        
+        input, select, textarea {
             width: 100%;
-            padding: 12px 16px;
-            border-radius: 10px;
-            border: 2px solid rgba(13,71,161,.12);
-            background-color: var(--bg);
-            outline: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             font-size: 16px;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
-
-        .form-input:focus {
-            border-color: var(--blue-400);
-            box-shadow: var(--ring);
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+        
+        .btn:hover {
+            background-color: #2980b9;
         }
-
-        .form-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
+        
+        .btn-danger {
+            background-color: #e74c3c;
         }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .dashboard {
-                grid-template-columns: 1fr;
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Стили для карточек */
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
             }
             
             .sidebar {
-                position: static;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-inner {
-                flex-direction: column;
-                height: auto;
-                padding: 16px 0;
-                gap: 16px;
-            }
-            
-            .nav-menu {
-                gap: 12px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .orders-table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .favorites-grid, .addresses-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .order-actions {
-                flex-direction: column;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo">
-                <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
-                     alt="ЦУИМ" class="logo-mark">
-            </a>
-            
-            <nav class="nav-menu">
-                <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">Главная</a>
-                <a href="#" class="nav-link">Каталог</a>
-                <a href="#" class="nav-link">Акции</a>
-                <a href="#" class="nav-link">Помощь</a>
-                <a href="#" class="nav-link active">Личный кабинет</a>
-            </nav>
-            
-            <div class="user-menu">
-                <div class="user-avatar">ИИ</div>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Магазин "Максимов"</div>
+                <div class="user-info">
+                    <span class="user-name">Иван Иванов</span>
+                    <button class="logout-btn">Выйти</button>
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        <div class="dashboard">
-            <!-- Sidebar -->
+    <!-- Основной контент -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Боковая панель -->
             <aside class="sidebar">
-                <div class="user-info">
-                    <div class="user-avatar-large">ИИ</div>
-                    <div class="user-details">
-                        <h2>Иван Иванов</h2>
-                        <p>ivan@example.com</p>
-                    </div>
-                </div>
-                
-                <ul class="sidebar-nav">
+                <ul class="sidebar-menu">
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link active" data-section="overview">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <polyline points="9 22 9 12 15 12 15 22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Обзор
-                        </a>
+                        <a href="#" class="sidebar-link active" data-section="profile">Профиль</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link" data-section="orders">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                            </svg>
-                            Мои заказы
-                        </a>
+                        <a href="#" class="sidebar-link" data-section="orders">Мои заказы</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link" data-section="favorites">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Избранное
-                        </a>
+                        <a href="#" class="sidebar-link" data-section="favorites">Избранное</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link" data-section="addresses">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M20 10.7C20 14.2 16.4 16 12 16s-8-1.8-8-5.3V7.8C4 5.1 7.6 3 12 3s8 2.1 8 4.8v2.9z" stroke-width="2"/>
-                                <path d="M4 10.7V16c0 2.8 3.6 5 8 5s8-2.2 8-5v-5.3" stroke-width="2"/>
-                            </svg>
-                            Адреса доставки
-                        </a>
+                        <a href="#" class="sidebar-link" data-section="addresses">Адреса доставки</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link" data-section="settings">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke-width="2"/>
-                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke-width="2"/>
-                            </svg>
-                            Настройки
-                        </a>
+                        <a href="#" class="sidebar-link" data-section="reviews">Мои отзывы</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="login.html" class="sidebar-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <polyline points="16,17 21,12 16,7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <line x1="21" y1="12" x2="9" y2="12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Выйти
-                        </a>
+                        <a href="#" class="sidebar-link" data-section="settings">Настройки</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link" data-section="support">Поддержка</a>
                     </li>
                 </ul>
             </aside>
 
-            <!-- Main Content -->
-            <div class="content">
-                <!-- Overview Section -->
-                <div id="overview" class="section-content active">
-                    <!-- Stats Cards -->
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div class="stat-icon blue">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="stat-value">7</div>
-                            <div class="stat-label">Всего заказов</div>
+            <!-- Контентная область -->
+            <main class="content">
+                <!-- Раздел Профиль -->
+                <section id="profile" class="section active">
+                    <h2 class="section-title">Профиль покупателя</h2>
+                    <div class="card">
+                        <h3 class="card-title">Личная информация</h3>
+                        <div class="form-group">
+                            <label for="fullName">ФИО</label>
+                            <input type="text" id="fullName" value="Иван Иванов">
                         </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div class="stat-icon orange">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">Товаров в избранном</div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="ivan@example.com">
                         </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div class="stat-icon green">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="stat-value">3</div>
-                            <div class="stat-label">Сохраненных адресов</div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" value="+7 (999) 123-45-67">
                         </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div class="stat-icon red">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M12 2L3 7v11c0 2.8 3.6 5 8 5s8-2.2 8-5V7l-9-5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M12 22V12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
+                        <button class="btn">Сохранить изменения</button>
+                    </div>
+                </section>
+
+                <!-- Раздел Мои заказы -->
+                <section id="orders" class="section">
+                    <h2 class="section-title">Мои заказы</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>№ заказа</th>
+                                <th>Дата</th>
+                                <th>Сумма</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#12345</td>
+                                <td>15.10.2023</td>
+                                <td>5 430 руб.</td>
+                                <td>Доставлен</td>
+                                <td>
+                                    <button class="btn">Повторить заказ</button>
+                                    <button class="btn">Оставить отзыв</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#12344</td>
+                                <td>10.10.2023</td>
+                                <td>3 210 руб.</td>
+                                <td>В пути</td>
+                                <td>
+                                    <button class="btn">Отследить</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#12343</td>
+                                <td>05.10.2023</td>
+                                <td>7 890 руб.</td>
+                                <td>Обрабатывается</td>
+                                <td>
+                                    <button class="btn">Отменить</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Раздел Избранное -->
+                <section id="favorites" class="section">
+                    <h2 class="section-title">Избранные товары</h2>
+                    <div class="favorites-list">
+                        <div class="card">
+                            <h3 class="card-title">Смартфон Samsung Galaxy S23</h3>
+                            <p>Цена: 65 990 руб.</p>
+                            <div style="margin-top: 10px;">
+                                <button class="btn">В корзину</button>
+                                <button class="btn btn-danger">Удалить</button>
                             </div>
-                            <div class="stat-value">1 540 ₽</div>
-                            <div class="stat-label">Накоплено бонусов</div>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Наушники Sony WH-1000XM4</h3>
+                            <p>Цена: 24 990 руб.</p>
+                            <div style="margin-top: 10px;">
+                                <button class="btn">В корзину</button>
+                                <button class="btn btn-danger">Удалить</button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Ноутбук Apple MacBook Air M2</h3>
+                            <p>Цена: 119 990 руб.</p>
+                            <div style="margin-top: 10px;">
+                                <button class="btn">В корзину</button>
+                                <button class="btn btn-danger">Удалить</button>
+                            </div>
                         </div>
                     </div>
+                </section>
 
-                    <!-- Recent Orders -->
-                    <section class="section">
-                        <div class="section-header">
-                            <h2 class="section-title">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                                </svg>
-                                Последние заказы
-                            </h2>
-                            <a href="#" class="link-more" data-section="orders">
-                                Все заказы
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
+                <!-- Раздел Адреса доставки -->
+                <section id="addresses" class="section">
+                    <h2 class="section-title">Адреса доставки</h2>
+                    <div class="card">
+                        <h3 class="card-title">Основной адрес</h3>
+                        <p>г. Москва, ул. Тверская, д. 10, кв. 25</p>
+                        <p>Индекс: 125009</p>
+                        <div style="margin-top: 10px;">
+                            <button class="btn">Редактировать</button>
+                            <button class="btn btn-danger">Удалить</button>
                         </div>
-                        
-                        <div class="tabs">
-                            <div class="tab active">Все</div>
-                            <div class="tab">Активные</div>
-                            <div class="tab">Завершенные</div>
-                        </div>
-                        
-                        <div class="tab-content active">
-                            <table class="orders-table">
-                                <thead>
-                                    <tr>
-                                        <th>Номер заказа</th>
-                                        <th>Дата</th>
-                                        <th>Сумма</th>
-                                        <th>Статус</th>
-                                        <th>Действия</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="order-id">#CUIM-7842</td>
-                                        <td>12.11.2023</td>
-                                        <td>4 560 ₽</td>
-                                        <td><span class="order-status status-delivered">Доставлен</span></td>
-                                        <td class="order-actions">
-                                            <button class="btn btn-primary" onclick="repeatOrder('CUIM-7842')">Повторить</button>
-                                            <button class="btn btn-outline" onclick="viewOrderDetails('CUIM-7842')">Детали</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="order-id">#CUIM-7791</td>
-                                        <td>05.11.2023</td>
-                                        <td>3 210 ₽</td>
-                                        <td><span class="order-status status-processing">Обрабатывается</span></td>
-                                        <td class="order-actions">
-                                            <button class="btn btn-primary" onclick="trackOrder('CUIM-7791')">Отследить</button>
-                                            <button class="btn btn-outline" onclick="viewOrderDetails('CUIM-7791')">Детали</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="order-id">#CUIM-7724</td>
-                                        <td>28.10.2023</td>
-                                        <td>5 890 ₽</td>
-                                        <td><span class="order-status status-shipped">В пути</span></td>
-                                        <td class="order-actions">
-                                            <button class="btn btn-primary" onclick="trackOrder('CUIM-7724')">Отследить</button>
-                                            <button class="btn btn-outline" onclick="viewOrderDetails('CUIM-7724')">Детали</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
+                    </div>
+                    <button class="btn">Добавить новый адрес</button>
+                </section>
 
-                    <!-- Favorites -->
-                    <section class="section">
-                        <div class="section-header">
-                            <h2 class="section-title">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                Избранные товары
-                            </h2>
-                            <a href="#" class="link-more" data-section="favorites">
-                                Все избранные
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
+                <!-- Раздел Мои отзывы -->
+                <section id="reviews" class="section">
+                    <h2 class="section-title">Мои отзывы</h2>
+                    <div class="card">
+                        <h3 class="card-title">Смартфон Samsung Galaxy S23</h3>
+                        <p>Оценка: ★★★★★</p>
+                        <p>Отличный телефон! Батарея держит долго, камера на высоте. Рекомендую!</p>
+                        <p>Дата: 18.10.2023</p>
+                        <div style="margin-top: 10px;">
+                            <button class="btn">Редактировать</button>
+                            <button class="btn btn-danger">Удалить</button>
                         </div>
-                        
-                        <div class="favorites-grid">
-                            <div class="favorite-card">
-                                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Наушники Sony WH-1000XM4</h3>
+                        <p>Оценка: ★★★★☆</p>
+                        <p>Хорошие наушники, но цена завышена. Шумоподавление работает отлично.</p>
+                        <p>Дата: 12.10.2023</p>
+                        <div style="margin-top: 10px;">
+                            <button class="btn">Редактировать</button>
+                            <button class="btn btn-danger">Удалить</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Раздел Настройки -->
+                <section id="settings" class="section">
+                    <h2 class="section-title">Настройки аккаунта</h2>
+                    <div class="card">
+                        <h3 class="card-title">Уведомления</h3>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" checked> Email-уведомления
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" checked> SMS-уведомления
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox"> Push-уведомления
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Смена пароля</h3>
+                        <div class="form-group">
+                            <label for="currentPassword">Текущий пароль</label>
+                            <input type="password" id="currentPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Новый пароль</label>
+                            <input type="password" id="newPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Подтвердите пароль</label>
+                            <input type="password" id="confirmPassword">
+                        </div>
+                        <button class="btn">Изменить пароль</button>
+                    </div>
+                </section>
+
+                <!-- Раздел Поддержка -->
+                <section id="support" class="section">
+                    <h2 class="section-title">Служба поддержки</h2>
+                    <div class="card">
+                        <h3 class="card-title">Задать вопрос</h3>
+                        <div class="form-group">
+                            <label for="supportTopic">Тема вопроса</label>
+                            <select id="supportTopic">
+                                <option>Проблемы с заказом</option>
+                                <option>Возврат товара</option>
+                                <option>Вопрос по доставке</option>
+                                <option>Другое</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="supportMessage">Сообщение</label>
+                            <textarea id="supportMessage" rows="5"></textarea>
+                        </div>
+                        <button class="btn">Отправить</button>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Контакты поддержки</h3>
+                        <p>Телефон: 8-800-123-45-67</p>
+                        <p>Email: support@example.com</p>
+                        <p>Часы работы: Пн-Пт с 9:00 до 18:00</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Функционал переключения разделов
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const sections = document.querySelectorAll('.section');
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Убираем активный класс у всех ссылок
+                    sidebarLinks.forEach(item => item.classList.remove('active'));
+                    
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                    
+                    // Скрываем все разделы
+                    sections.forEach(section => section.classList.remove('active'));
+                    
+                    // Показываем выбранный раздел
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+            
+            // Функционал кнопки выхода
+            const logoutBtn = document.querySelector('.logout-btn');
+            logoutBtn.addEventListener('click', function() {
+                if(confirm('Вы уверены, что хотите выйти?')) {
+                    alert('Вы вышли из системы');
+                    // В реальном приложении здесь будет редирект на страницу входа
+                }
+            });
+            
+            // Пример функционала для кнопок в разделах
+            const addToCartButtons = document.querySelectorAll('.favorites-list .btn:not(.btn-danger)');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Товар добавлен в корзину');
+                });
+            });
+            
+            const deleteButtons = document.querySelectorAll('.btn-danger');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if(confirm('Вы уверены, что хотите удалить этот элемент?')) {
+                        this.closest('.card').remove();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
