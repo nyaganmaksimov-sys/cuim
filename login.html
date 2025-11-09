@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,6 +18,7 @@
             --red-500: #FF5252;
             --yellow-600: #FFB300;
             --green-600: #43A047;
+            --purple-600: #8E24AA;
             --bg: #F6F8FB;
             --panel: #FFFFFF;
             --text: #1F2937;
@@ -116,7 +116,7 @@
             box-shadow: var(--shadow-1);
             padding: 40px;
             width: 100%;
-            max-width: 480px;
+            max-width: 520px;
         }
 
         .login-header {
@@ -139,7 +139,7 @@
         /* Role Selection */
         .role-selection {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 12px;
             margin-bottom: 24px;
         }
@@ -181,6 +181,11 @@
         .role-seller .role-icon {
             background-color: rgba(255,122,18,.12);
             color: var(--orange-600);
+        }
+
+        .role-courier .role-icon {
+            background-color: rgba(142,36,170,.12);
+            color: var(--purple-600);
         }
 
         .role-name {
@@ -471,6 +476,17 @@
                         <div class="role-name">Продавец</div>
                         <div class="role-description">Управление товарами и заказами</div>
                     </div>
+
+                    <div class="role-option role-courier" data-role="courier">
+                        <div class="role-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 4.5c-.3.6-.1 1.3.5 1.6.6.3 1.3.1 1.6-.5L11 13m5 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm-8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 8h4l2 4m-6-4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="role-name">Курьер</div>
+                        <div class="role-description">Доставка заказов клиентам</div>
+                    </div>
                 </div>
 
                 <!-- Login Form -->
@@ -495,6 +511,10 @@
                         <div class="demo-account" data-username="seller" data-password="123">
                             <div class="demo-role">Продавец</div>
                             <div class="demo-credentials">логин: seller | пароль: 123</div>
+                        </div>
+                        <div class="demo-account" data-username="courier" data-password="123">
+                            <div class="demo-role">Курьер</div>
+                            <div class="demo-credentials">логин: courier | пароль: 123</div>
                         </div>
                     </div>
 
@@ -566,7 +586,13 @@
                 password: '123',
                 role: 'seller',
                 name: 'Продавец',
-                redirectUrl: 'https://nyaganmaksimov-sys.github.io/seller-cabinet/'
+                redirectUrl: 'seller-cabinet.html'
+            },
+            courier: {
+                password: '123',
+                role: 'courier',
+                name: 'Курьер',
+                redirectUrl: 'courier-cabinet.html'
             }
         };
 
@@ -633,7 +659,7 @@
                     };
                 } else {
                     // Show role mismatch error
-                    errorMessage.textContent = `Выбранная роль не соответствует типу аккаунта. Используйте аккаунт ${currentRole === 'buyer' ? 'продавца' : 'покупателя'}.`;
+                    errorMessage.textContent = `Выбранная роль не соответствует типу аккаунта. Используйте аккаунт ${currentRole === 'buyer' ? 'продавца' : currentRole === 'seller' ? 'покупателя' : 'курьера'}.`;
                     errorModal.classList.add('open');
                 }
             } else {
@@ -665,6 +691,9 @@
                 } else if (username === 'seller') {
                     document.querySelector('.role-seller').classList.add('active');
                     currentRole = 'seller';
+                } else if (username === 'courier') {
+                    document.querySelector('.role-courier').classList.add('active');
+                    currentRole = 'courier';
                 }
             });
         });
