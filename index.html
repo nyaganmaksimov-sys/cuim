@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>ЦУИМ — Местный маркетплейс Барнаула</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="/">
+  <link rel="preconnect" href="/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -94,8 +94,7 @@
     .shop-logo:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(13,71,161,.14)}
     
     .shop-logo img{
-      width:80px; height:60px; object-fit:cover; border-radius:8px;
-      background:linear-gradient(135deg, #f2f6fd, #e9f1ff); padding:6px;
+      width:80px; height:60px; object-fit:cover; border-radius:8px; padding:6px;
     }
     .shop-name{
       font-size:13px; font-weight:600; color:#163a69; text-align:center; line-height:1.2;
@@ -116,20 +115,18 @@
       display:flex; align-items:center; gap:14px; height:74px;
     }
     /* ОБНОВЛЁННЫЙ ЛОГОТИП - без текста, широкий */
- .logo {
-  display: flex;
-  align-items: center;
-  background: transparent; /* Добавлено: прозрачный фон */
-}
-
-.logo-mark {
-  width: 120px; 
-  height: auto; /* Изменено: авто высота для сохранения пропорций */
-  object-fit: contain;
-  background: transparent; /* Добавлено: прозрачный фон */
-  box-shadow: none; /* Убрана тень */
-  border-radius: 0;
-  padding: 5px 0; /* Небольшой отступ для выравнивания */
+    .logo{
+      display:flex;
+      align-items:center;
+      /* Убрали текстовые стили */
+    }
+    .logo-mark{
+      width:120px; /* УВЕЛИЧЕНО */
+      height:40px; /* Автоматическая высота */
+      object-fit:contain;
+      box-shadow:var(--shadow-1);
+      border-radius:0; /* Убрали скругление */
+    }
 
     .catalog-btn{
       display:inline-flex; align-items:center; gap:8px;
@@ -522,17 +519,19 @@
     </div>
   </div>
 
-<!-- Шапка -->
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="#" class="logo" aria-label="ЦУИМ — на главную">
-      <!-- ЛОГОТИП БЕЗ ФОНА -->
-      <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
-           alt="ЦУИМ" class="logo-mark">
-    </a>
-    <!-- Остальной код шапки без изменений -->
-  </div>
-</header>
+  <!-- Шапка -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="ЦУИМ — на главную">
+        <!-- ШИРОКИЙ ЛОГОТИП БЕЗ ТЕКСТА -->
+        <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
+             alt="ЦУИМ" class="logo-mark">
+      </a>
+
+      <button class="catalog-btn" id="catalogToggle" aria-expanded="false" aria-controls="categoriesPanel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
         Каталог
       </button>
 
@@ -783,12 +782,12 @@
 
       <!-- Инфо-баннеры -->
       <section class="section">
-        <div class="info-banner">🚚 Продукты — только с доставкой. Минимальный заказ: 1500 ₽.</div>
-        <div class="min-warning">⚠️ Минимальная сумма заказа — 1500 ₽. Добавьте товары, чтобы оформить.</div>
+        <div class="info-banner">🚚 Продукты — только с доставкой. </div>
+        <div class="min-warning">⚠️ Добавьте товары, чтобы оформить.</div>
       </section>
 
       <footer class="site-footer">
-        © 2025 ЦУИМ — Местный маркетплейс Барнаула. Сделано в оранжево‑синих тонах 💙🧡
+        © 2025 ЦУИМ — Местный маркетплейс Барнаула.
       </footer>
     </div>
   </main>
