@@ -54,14 +54,24 @@
             margin-bottom: 25px;
         }
 
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 700;
+        .logo-image {
+            width: 120px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--primary);
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .logo span {
-            color: var(--secondary);
+        .logo-text {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: 500;
         }
 
         .nav-links {
@@ -539,7 +549,8 @@
         <!-- Боковая панель -->
         <div class="sidebar">
             <div class="logo">
-                <h1>Мой<span>Магазин</span></h1>
+                <div class="logo-image">ЛОГО</div>
+                <div class="logo-text">Кабинет покупателя</div>
             </div>
             <ul class="nav-links">
                 <li><a href="#" class="active"><i class="fas fa-home"></i> <span>Главная</span></a></li>
