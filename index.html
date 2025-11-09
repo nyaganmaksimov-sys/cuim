@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <style>
+  .logo, .header-logo, .logo-container {
+    background: none !important;
+  }
+</style>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>ЦУИМ — Местный маркетплейс Барнаула</title>
@@ -115,21 +120,22 @@
     .header-inner{
       display:flex; align-items:center; gap:14px; height:74px;
     }
-    /* ИСПРАВЛЕННЫЙ ЛОГОТИП - убран фон */
+    /* ОБНОВЛЁННЫЙ ЛОГОТИП - без текста, широкий */
     .logo{
       display:flex;
       align-items:center;
-      background: none !important;
+      /* Убрали текстовые стили */
     }
     .logo-mark{
-      width:120px;
-      height:40px;
+      width:120px; /* УВЕЛИЧЕНО */
+      height:40px; /* Автоматическая высота */
       object-fit:contain;
       box-shadow:var(--shadow-1);
-      border-radius:0;
+      border-radius:0; /* Убрали скругление */
       /* Убираем белый фон */
       mix-blend-mode: multiply;
       background: transparent !important;
+      filter: brightness(1.1) contrast(1.1);
     }
 
     .catalog-btn{
@@ -233,7 +239,7 @@
     .slide .img .ph{
       width:100%; height:240px; border-radius:12px;
       background:linear-gradient(135deg, rgba(21,101,192,.18), rgba(255,122,18,.18)),
-                 url('images/banner-main.jpg') center/cover no-repeat;
+                 url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
       box-shadow: var(--shadow-1);
     }
     .hero .nav{
@@ -290,7 +296,8 @@
     }
     .product-card:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(13,71,161,.14)}
     .product-image{
-      width:100%; height:180px; object-fit:cover; background:linear-gradient(135deg, #f2f6fd, #e9f1ff);
+      width:100%; height:180px; object-fit:cover; 
+      background:linear-gradient(135deg, #f2f6fd, #e9f1ff);
     }
     .product-body{padding:14px; display:flex; flex-direction:column; gap:8px;}
     .product-title{
@@ -759,7 +766,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#" class="logo" aria-label="ЦУИМ — на главную">
-        <!-- ЛОГОТИП БЕЗ ФОНА -->
+        <!-- ШИРОКИЙ ЛОГОТИП БЕЗ ТЕКСТА -->
         <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
              alt="ЦУИМ" class="logo-mark">
       </a>
@@ -785,7 +792,8 @@
       </form>
 
       <nav class="header-actions" aria-label="Навигация пользователя">
-        <a href="#" class="h-link">
+        <!-- ОБНОВЛЕННАЯ ССЫЛКА КАБИНЕТ - ведет на страницу логина -->
+        <a href="https://nyaganmaksimov-sys.github.io/cuim/login.html" class="h-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm7 9a7 7 0 1 0-14 0" stroke-width="2" stroke-linecap="round"/>
           </svg>
@@ -883,7 +891,7 @@
                 </a>
               </div>
               <div class="img">
-                <div class="ph" style="background-image:linear-gradient(135deg, rgba(255,122,18,.2), rgba(21,101,192,.2)), url('images/banner-2.jpg');"></div>
+                <div class="ph" style="background-image:linear-gradient(135deg, rgba(255,122,18,.2), rgba(21,101,192,.2)), url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
               </div>
             </div>
             <div class="slide">
@@ -897,7 +905,7 @@
                 </a>
               </div>
               <div class="img">
-                <div class="ph" style="background-image:linear-gradient(135deg, rgba(21,101,192,.22), rgba(255,122,18,.22)), url('images/banner-3.jpg');"></div>
+                <div class="ph" style="background-image:linear-gradient(135deg, rgba(21,101,192,.22), rgba(255,122,18,.22)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
               </div>
             </div>
           </div>
@@ -1051,21 +1059,21 @@
   <script>
     // ======= ЛУЧШИЕ МАГАЗИНЫ =======
     const shops = [
-      {id:1, name:"Свежий маркет", rating:4.8, image:"https://ui-avatars.com/api/?name=СМ&background=FF6F00&color=fff&size=80"},
-      {id:2, name:"Мясной двор", rating:4.9, image:"https://ui-avatars.com/api/?name=МД&background=0D47A1&color=fff&size=80"},
-      {id:3, name:"Овощной ряд", rating:4.7, image:"https://ui-avatars.com/api/?name=ОР&background=FF6F00&color=fff&size=80"},
-      {id:4, name:"Пекарня Хлебный дом", rating:5.0, image:"https://ui-avatars.com/api/?name=ХД&background=FF6F00&color=fff&size=80"},
-      {id:5, name:"Молочная ферма", rating:4.6, image:"https://ui-avatars.com/api/?name=МФ&background=0D47A1&color=fff&size=80"},
-      {id:6, name:"Рыбный остров", rating:4.8, image:"https://ui-avatars.com/api/?name=РО&background=FF6F00&color=fff&size=80"},
-      {id:7, name:"Кондитерская", rating:4.9, image:"https://ui-avatars.com/api/?name=КС&background=0D47A1&color=fff&size=80"},
-      {id:8, name:"Бакалея", rating:4.5, image:"https://ui-avatars.com/api/?name=БК&background=FF6F00&color=fff&size=80"},
+      {id:1, name:"Свежий маркет", rating:4.8, image:"https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:2, name:"Мясной двор", rating:4.9, image:"https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:3, name:"Овощной ряд", rating:4.7, image:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:4, name:"Пекарня Хлебный дом", rating:5.0, image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:5, name:"Молочная ферма", rating:4.6, image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:6, name:"Рыбный остров", rating:4.8, image:"https://images.unsplash.com/photo-1599088107758-2d2e8bd4c3f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:7, name:"Кондитерская", rating:4.9, image:"https://images.unsplash.com/photo-1555507036-ab794f27d2e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:8, name:"Бакалея", rating:4.5, image:"https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
     ];
 
     function renderShops(){
       const container = document.getElementById('shopLogos');
       container.innerHTML = shops.map(s => `
         <a href="#" class="shop-logo" data-id="${s.id}">
-          <img src="${s.image}" alt="${s.name}" onerror="this.src='https://via.placeholder.com/80x60?text=Shop'">
+          <img src="${s.image}" alt="${s.name}" onerror="this.src='https://via.placeholder.com/200x150?text=Shop'">
           <div class="shop-name">${s.name}</div>
           <div class="shop-rating">
             <div class="stars">${'★'.repeat(Math.floor(s.rating))}${'☆'.repeat(5-Math.floor(s.rating))}</div>
@@ -1078,21 +1086,21 @@
 
     // ======= ПОПУЛЯРНЫЕ ТОВАРЫ =======
     const popularProducts = [
-      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:`https://picsum.photos/seed/product1/200/180`},
-      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:`https://picsum.photos/seed/product2/200/180`},
-      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:`https://picsum.photos/seed/product3/200/180`},
-      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:`https://picsum.photos/seed/product4/200/180`},
-      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:`https://picsum.photos/seed/product5/200/180`},
-      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:`https://picsum.photos/seed/product6/200/180`},
-      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:`https://picsum.photos/seed/product7/200/180`},
-      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:`https://picsum.photos/seed/product8/200/180`},
+      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:"https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:"https://images.unsplash.com/photo-1552767059-ce182ead6c1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:"https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:"https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
     ];
 
     function renderPopularProducts(){
       const grid = document.getElementById('productGrid');
       grid.innerHTML = popularProducts.map(p => `
         <div class="product-card">
-          <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
+          <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
           <div class="product-body">
             <div class="product-title">${p.title}</div>
             <div class="product-price">
@@ -1115,14 +1123,14 @@
 
     // ======= ХИТ СЕЗОНА =======
     const seasonProducts = [
-      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:`https://picsum.photos/seed/season9/200/180`},
-      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:`https://picsum.photos/seed/season10/200/180`},
-      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:`https://picsum.photos/seed/season11/200/180`},
-      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:`https://picsum.photos/seed/season12/200/180`},
-      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:`https://picsum.photos/seed/season13/200/180`},
-      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:`https://picsum.photos/seed/season14/200/180`},
-      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:`https://picsum.photos/seed/season15/200/180`},
-      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:`https://picsum.photos/seed/season16/200/180`},
+      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:"https://images.unsplash.com/photo-1563116912-4870a6d148d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:"https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:"https://images.unsplash.com/photo-1571771019786-3c589e15ad0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:"https://images.unsplash.com/photo-1464454709131-ffd692591ee5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:"https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
     ];
 
     function renderSeasonProducts(){
@@ -1130,7 +1138,7 @@
       grid.innerHTML = seasonProducts.map(p => `
         <div class="season-card">
           <div class="season-badge">${p.discount}</div>
-          <img src="${p.image}" alt="${p.title}" class="season-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
+          <img src="${p.image}" alt="${p.title}" class="season-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
           <div class="season-body">
             <div class="season-title-text">${p.title}</div>
             <div class="season-price">
@@ -1153,14 +1161,14 @@
 
     // ======= АКЦИИ =======
     const saleProducts = [
-      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:`https://picsum.photos/seed/sale17/200/180`},
-      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:`https://picsum.photos/seed/sale18/200/180`},
-      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:`https://picsum.photos/seed/sale19/200/180`},
-      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:`https://picsum.photos/seed/sale20/200/180`},
-      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:`https://picsum.photos/seed/sale21/200/180`},
-      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:`https://picsum.photos/seed/sale22/200/180`},
-      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:`https://picsum.photos/seed/sale23/200/180`},
-      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:`https://picsum.photos/seed/sale24/200/180`},
+      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:"https://images.unsplash.com/photo-1570194065650-2f276eef4a34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:"https://images.unsplash.com/photo-1587734195503-904fca47e0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:"https://images.unsplash.com/photo-1558961367-7505a6c6d4b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
     ];
 
     function renderSaleProducts(){
@@ -1168,7 +1176,7 @@
       grid.innerHTML = saleProducts.map(p => `
         <div class="sale-card">
           <div class="sale-badge">${p.discount}</div>
-          <img src="${p.image}" alt="${p.title}" class="sale-image" onerror="this.src='https://via.placeholder.com/200x180?text=Товар'">
+          <img src="${p.image}" alt="${p.title}" class="sale-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
           <div class="sale-body">
             <div class="sale-title-text">${p.title}</div>
             <div class="sale-price">
