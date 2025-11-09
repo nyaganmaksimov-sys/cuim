@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - Интернет-магазин</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6de5;
+            --secondary-color: #3a5bd0;
+            --accent-color: #e74c3c;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 15px 0;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .cart-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 992px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cart Items */
+        .cart-items {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item {
+            display: flex;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            gap: 20px;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .item-name a {
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+
+        .item-name a:hover {
+            color: var(--primary-color);
+        }
+
+        .item-category {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .item-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .item-old-price {
+            font-size: 14px;
+            color: #95a5a6;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            background-color: #f8f9fa;
+            border: none;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        .quantity-input {
+            width: 50px;
+            height: 35px;
+            border: none;
+            text-align: center;
+            font-weight: 500;
+            background-color: white;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .remove-btn:hover {
+            color: #c0392b;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .summary-total {
+            font-weight: 600;
+            font-size: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            margin-top: 10px;
+        }
+
+        .promo-code {
+            margin: 20px 0;
+        }
+
+        .promo-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .promo-input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+        }
+
+        .promo-btn {
+            background-color: var(--dark-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 0 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .promo-btn:hover {
+            background-color: #34495e;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .secure-checkout {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #7f8c8d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .empty-cart-icon {
+            font-size: 80px;
+            color: #bdc3c7;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h2 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .empty-cart p {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Continue Shopping */
+        .continue-shopping {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .continue-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .continue-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+            }
+            
+            .item-image {
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="https://nyaganmaksimov-sys.github.io/cuim/index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    Магазин
+                </a>
+                <div class="nav-links">
+                    <a href="https://nyaganmaksimov-sys.github.io/cuim/index.html">Главная</a>
+                    <a href="#">Каталог</a>
+                    <a href="#">Акции</a>
+                    <a href="#">Новинки</a>
+                    <a href="#">О нас</a>
+                </div>
+                <div class="header-actions">
+                    <a href="#" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </a>
+                    <div class="user-actions">
+                        <button class="btn btn-outline">Войти</button>
+                        <button class="btn btn-primary">Регистрация</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/index.html">Главная</a> / Корзина
+        </div>
+
+        <h1>Корзина покупок</h1>
+
+        <div class="cart-container">
+            <div class="cart-items">
+                <h2 class="section-title">Товары в корзине</h2>
+                
+                <div class="cart-item">
+                    <div class="item-image">
+                        <img src="https://via.placeholder.com/300" alt="Ноутбук">
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-name"><a href="#">Ноутбук игровой ASUS TUF Gaming</a></h3>
+                        <div class="item-category">Электроника / Ноутбуки</div>
+                        <div class="item-price">64 990 ₽ <span class="item-old-price">72 990 ₽</span></div>
+                        <div class="item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus-btn"><i class="fas fa-minus"></i></button>
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="quantity-btn plus-btn"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <button class="remove-btn">
+                                <i class="fas fa-trash"></i> Удалить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cart-item">
+                    <div class="item-image">
+                        <img src="https://via.placeholder.com/300" alt="Смартфон">
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-name"><a href="#">Смартфон Samsung Galaxy S23</a></h3>
+                        <div class="item-category">Электроника / Смартфоны</div>
+                        <div class="item-price">54 990 ₽</div>
+                        <div class="item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus-btn"><i class="fas fa-minus"></i></button>
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="quantity-btn plus-btn"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <button class="remove-btn">
+                                <i class="fas fa-trash"></i> Удалить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cart-item">
+                    <div class="item-image">
+                        <img src="https://via.placeholder.com/300" alt="Наушники">
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-name"><a href="#">Наушники Sony WH-1000XM4</a></h3>
+                        <div class="item-category">Электроника / Аудио</div>
+                        <div class="item-price">24 990 ₽ <span class="item-old-price">29 990 ₽</span></div>
+                        <div class="item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus-btn"><i class="fas fa-minus"></i></button>
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="quantity-btn plus-btn"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <button class="remove-btn">
+                                <i class="fas fa-trash"></i> Удалить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="order-summary">
+                <h2 class="section-title">Ваш заказ</h2>
+                
+                <div class="summary-row">
+                    <span>Товары (3)</span>
+                    <span>144 970 ₽</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Скидка</span>
+                    <span style="color: var(--success-color);">-13 000 ₽</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Доставка</span>
+                    <span>Бесплатно</span>
+                </div>
+                
+                <div class="summary-row summary-total">
+                    <span>Итого</span>
+                    <span>131 970 ₽</span>
+                </div>
+                
+                <div class="promo-code">
+                    <h3>Промокод</h3>
+                    <div class="promo-form">
+                        <input type="text" class="promo-input" placeholder="Введите промокод">
+                        <button class="promo-btn">Применить</button>
+                    </div>
+                </div>
+                
+                <button class="checkout-btn">
+                    <i class="fas fa-lock"></i> Перейти к оформлению
+                </button>
+                
+                <div class="secure-checkout">
+                    <i class="fas fa-shield-alt"></i> Безопасная оплата
+                </div>
+            </div>
+        </div>
+        
+        <div class="continue-shopping">
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/index.html" class="continue-btn">
+                <i class="fas fa-arrow-left"></i> Продолжить покупки
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О магазине</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                        <li><a href="#">Новости</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Помощь</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Доставка</a></li>
+                        <li><a href="#">Оплата</a></li>
+                        <li><a href="#">Возврат</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Категории</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Электроника</a></li>
+                        <li><a href="#">Бытовая техника</a></li>
+                        <li><a href="#">Одежда</a></li>
+                        <li><a href="#">Красота и здоровье</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> +7 (800) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> info@example.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Примерная, 123</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Интернет-магазин. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quantity controls
+            const minusBtns = document.querySelectorAll('.minus-btn');
+            const plusBtns = document.querySelectorAll('.plus-btn');
+            const quantityInputs = document.querySelectorAll('.quantity-input');
+            const removeBtns = document.querySelectorAll('.remove-btn');
+            
+            // Update cart count
+            function updateCartCount() {
+                let totalCount = 0;
+                quantityInputs.forEach(input => {
+                    totalCount += parseInt(input.value);
+                });
+                document.querySelector('.cart-count').textContent = totalCount;
+                
+                // Update summary
+                updateOrderSummary();
+            }
+            
+            // Update order summary
+            function updateOrderSummary() {
+                let subtotal = 0;
+                const items = document.querySelectorAll('.cart-item');
+                
+                items.forEach(item => {
+                    const priceText = item.querySelector('.item-price').textContent;
+                    const price = parseInt(priceText.replace(/\D/g, ''));
+                    const quantity = parseInt(item.querySelector('.quantity-input').value);
+                    subtotal += price * quantity;
+                });
+                
+                // Format number with spaces
+                const formattedSubtotal = subtotal.toLocaleString('ru-RU') + ' ₽';
+                document.querySelector('.summary-row:first-child span:last-child').textContent = formattedSubtotal;
+                
+                // Calculate total (with discount)
+                const discount = 13000;
+                const total = subtotal - discount;
+                const formattedTotal = total.toLocaleString('ru-RU') + ' ₽';
+                document.querySelector('.summary-total span:last-child').textContent = formattedTotal;
+            }
+            
+            // Minus button click
+            minusBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const input = this.parentNode.querySelector('.quantity-input');
+                    let value = parseInt(input.value);
+                    if (value > 1) {
+                        input.value = value - 1;
+                        updateCartCount();
+                    }
+                });
+            });
+            
+            // Plus button click
+            plusBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const input = this.parentNode.querySelector('.quantity-input');
+                    let value = parseInt(input.value);
+                    input.value = value + 1;
+                    updateCartCount();
+                });
+            });
+            
+            // Input change
+            quantityInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    if (this.value < 1) this.value = 1;
+                    updateCartCount();
+                });
+            });
+            
+            // Remove button click
+            removeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const item = this.closest('.cart-item');
+                    item.style.opacity = '0';
+                    setTimeout(() => {
+                        item.remove();
+                        updateCartCount();
+                        
+                        // Check if cart is empty
+                        if (document.querySelectorAll('.cart-item').length === 0) {
+                            showEmptyCart();
+                        }
+                    }, 300);
+                });
+            });
+            
+            // Show empty cart
+            function showEmptyCart() {
+                const cartItems = document.querySelector('.cart-items');
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h2>Ваша корзина пуста</h2>
+                        <p>Добавьте товары из каталога, чтобы продолжить покупки</p>
+                        <a href="https://nyaganmaksimov-sys.github.io/cuim/index.html" class="continue-btn">
+                            <i class="fas fa-arrow-left"></i> Перейти в каталог
+                        </a>
+                    </div>
+                `;
+                
+                document.querySelector('.order-summary').style.display = 'none';
+            }
+            
+            // Promo code application
+            const promoBtn = document.querySelector('.promo-btn');
+            promoBtn.addEventListener('click', function() {
+                const promoInput = document.querySelector('.promo-input');
+                const promoCode = promoInput.value.trim();
+                
+                if (promoCode === '') {
+                    alert('Введите промокод');
+                    return;
+                }
+                
+                // In a real app, you would validate the promo code with the server
+                alert('Промокод применен: ' + promoCode);
+                promoInput.value = '';
+            });
+            
+            // Checkout button
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            checkoutBtn.addEventListener('click', function() {
+                alert('Переход к оформлению заказа');
+                // In a real app, you would redirect to checkout page
+            });
+            
+            // Initialize cart count
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
