@@ -52,7 +52,7 @@
       box-shadow: 0 1px 0 rgba(13,71,161,.08);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
     }
 
     .header-inner {
@@ -74,6 +74,30 @@
       mix-blend-mode: multiply;
       background: transparent !important;
       filter: brightness(1.1) contrast(1.1);
+    }
+
+    .nav-main {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-main a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      transition: background-color 0.2s ease;
+    }
+
+    .nav-main a:hover {
+      background: rgba(21,101,192,.08);
+    }
+
+    .nav-main a.active {
+      background: var(--blue-600);
+      color: white;
     }
 
     .header-actions {
@@ -98,6 +122,78 @@
     .publish-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(255,111,0,0.3);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--blue-600);
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-toggle:hover {
+      background: rgba(21,101,192,.08);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-1);
+      padding: 8px;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .dropdown-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: block;
+      width: 100%;
+      padding: 10px 12px;
+      text-decoration: none;
+      color: var(--text);
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+      text-align: left;
+      border: none;
+      background: none;
+      font-size: 0.9rem;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(21,101,192,.08);
     }
 
     /* Main Content */
@@ -125,6 +221,130 @@
       color: var(--muted);
       max-width: 600px;
       margin: 0 auto;
+    }
+
+    /* Advanced Filters */
+    .filters-section {
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-1);
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .filters-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      color: var(--blue-600);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 0;
+      margin-bottom: 15px;
+    }
+
+    .filters-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .filters-content.show {
+      max-height: 500px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .filter-group input,
+    .filter-group select {
+      padding: 10px 12px;
+      border: 2px solid #E5E7EB;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .filter-group input:focus,
+    .filter-group select:focus {
+      outline: none;
+      border-color: var(--blue-400);
+      box-shadow: var(--ring);
+    }
+
+    .price-range {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .price-range input {
+      flex: 1;
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      grid-column: 1 / -1;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: var(--blue-600);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-500);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--blue-600);
+      color: var(--blue-600);
+    }
+
+    .btn-outline:hover {
+      background: var(--blue-600);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--muted);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6370;
     }
 
     /* Search Bar */
@@ -290,40 +510,9 @@
       gap: 10px;
     }
 
-    .btn {
+    .btn-small {
       padding: 8px 16px;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.9rem;
-    }
-
-    .btn-primary {
-      background: var(--blue-600);
-      color: white;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .btn-primary:hover {
-      background: var(--blue-500);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--blue-600);
-      color: var(--blue-600);
-    }
-
-    .btn-outline:hover {
-      background: var(--blue-600);
-      color: white;
+      font-size: 0.8rem;
     }
 
     /* Footer */
@@ -344,6 +533,14 @@
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 15px;
       }
+      
+      .search-bar {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .filters-content {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     /* Мобильные устройства */
@@ -357,6 +554,28 @@
         flex-wrap: wrap;
         gap: 15px;
         padding: 10px 0;
+      }
+
+      .nav-main {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--panel);
+        box-shadow: var(--shadow-1);
+        padding: 20px;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+      }
+
+      .nav-main.mobile-open {
+        display: flex;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
       }
 
       .logo img {
@@ -376,7 +595,7 @@
         font-size: 1rem;
       }
 
-      /* Search Bar */
+      /* Search & Filters */
       .search-section {
         padding: 20px;
       }
@@ -389,6 +608,14 @@
       .search-btn {
         width: 100%;
         padding: 14px;
+      }
+
+      .filters-section {
+        padding: 20px;
+      }
+
+      .filters-content {
+        grid-template-columns: 1fr;
       }
 
       /* Ads Grid */
@@ -433,7 +660,8 @@
         font-size: 1.7rem;
       }
 
-      .search-section {
+      .search-section,
+      .filters-section {
         padding: 15px;
       }
 
@@ -479,6 +707,29 @@
       font-weight: 500;
       margin-bottom: 8px;
     }
+
+    .sort-options {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .sort-btn {
+      background: var(--panel);
+      border: 2px solid #E5E7EB;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+    }
+
+    .sort-btn.active {
+      background: var(--blue-600);
+      color: white;
+      border-color: var(--blue-600);
+    }
   </style>
 </head>
 <body>
@@ -490,11 +741,33 @@
           <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" alt="ЦУИМ">
         </a>
         
+        <nav class="nav-main" id="mainNav">
+          <a href="index.html">Главная</a>
+          <a href="#" class="active">Доска объявлений</a>
+          
+          <div class="dropdown">
+            <button class="dropdown-toggle" id="categoriesDropdown">
+              Категории ▼
+            </button>
+            <div class="dropdown-menu" id="categoriesMenu">
+              <a href="#" class="dropdown-item">🚗 Авто и транспорт</a>
+              <a href="#" class="dropdown-item">📱 Электроника</a>
+              <a href="#" class="dropdown-item">🏠 Недвижимость</a>
+              <a href="#" class="dropdown-item">🔧 Оборудование</a>
+              <a href="#" class="dropdown-item">🛋️ Мебель</a>
+              <a href="#" class="dropdown-item">👕 Одежда и обувь</a>
+            </div>
+          </div>
+          
+          <a href="#">Помощь</a>
+        </nav>
+
         <div class="header-actions">
           <a href="#publish" class="publish-btn">
             <span>+</span>
             Подать объявление
           </a>
+          <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
         </div>
       </div>
     </div>
@@ -505,6 +778,14 @@
     <div class="page-header">
       <h1 class="page-title">Доска объявлений</h1>
       <p class="page-subtitle">Продай быстро. Купи у соседа. Без посредников. Только проверенные объявления от местных продавцов.</p>
+    </div>
+
+    <!-- Sort Options -->
+    <div class="sort-options">
+      <button class="sort-btn active">Сначала новые</button>
+      <button class="sort-btn">Сначала дешевые</button>
+      <button class="sort-btn">Сначала дорогие</button>
+      <button class="sort-btn">По популярности</button>
     </div>
 
     <!-- Search Section -->
@@ -544,6 +825,62 @@
       </div>
     </section>
 
+    <!-- Advanced Filters -->
+    <section class="filters-section">
+      <button class="filters-toggle" id="filtersToggle">
+        <span>🔍</span>
+        Расширенный поиск ▼
+      </button>
+      
+      <div class="filters-content" id="filtersContent">
+        <div class="filter-group">
+          <label>Цена, ₽</label>
+          <div class="price-range">
+            <input type="number" placeholder="От" id="priceFrom">
+            <span>-</span>
+            <input type="number" placeholder="До" id="priceTo">
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <label>Состояние</label>
+          <select id="condition">
+            <option>Любое</option>
+            <option>Новое</option>
+            <option>Б/у отличное</option>
+            <option>Б/у хорошее</option>
+            <option>Требует ремонта</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label>Способ отдачи</label>
+          <select id="delivery">
+            <option>Любой</option>
+            <option>Самовывоз</option>
+            <option>Доставка</option>
+            <option>Можно посмотреть</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label>Дата публикации</label>
+          <select id="date">
+            <option>За все время</option>
+            <option>За сегодня</option>
+            <option>За 3 дня</option>
+            <option>За неделю</option>
+            <option>За месяц</option>
+          </select>
+        </div>
+        
+        <div class="filter-actions">
+          <button class="btn btn-primary" id="applyFilters">Применить фильтры</button>
+          <button class="btn btn-secondary" id="resetFilters">Сбросить</button>
+        </div>
+      </div>
+    </section>
+
     <!-- Ads Grid -->
     <div class="ads-grid">
       <!-- Объявление 1 -->
@@ -562,8 +899,8 @@
             <div class="ad-date">2 часа назад</div>
           </div>
           <div class="ad-actions">
-            <button class="btn btn-primary">Написать продавцу</button>
-            <button class="btn btn-outline">❤️</button>
+            <button class="btn btn-primary btn-small">Написать продавцу</button>
+            <button class="btn btn-outline btn-small">❤️</button>
           </div>
         </div>
       </div>
@@ -584,8 +921,8 @@
             <div class="ad-date">Вчера</div>
           </div>
           <div class="ad-actions">
-            <button class="btn btn-primary">Написать продавцу</button>
-            <button class="btn btn-outline">❤️</button>
+            <button class="btn btn-primary btn-small">Написать продавцу</button>
+            <button class="btn btn-outline btn-small">❤️</button>
           </div>
         </div>
       </div>
@@ -605,8 +942,8 @@
             <div class="ad-date">3 дня назад</div>
           </div>
           <div class="ad-actions">
-            <button class="btn btn-primary">Написать продавцу</button>
-            <button class="btn btn-outline">❤️</button>
+            <button class="btn btn-primary btn-small">Написать продавцу</button>
+            <button class="btn btn-outline btn-small">❤️</button>
           </div>
         </div>
       </div>
@@ -627,8 +964,8 @@
             <div class="ad-date">Сегодня</div>
           </div>
           <div class="ad-actions">
-            <button class="btn btn-primary">Написать продавцу</button>
-            <button class="btn btn-outline">❤️</button>
+            <button class="btn btn-primary btn-small">Написать продавцу</button>
+            <button class="btn btn-outline btn-small">❤️</button>
           </div>
         </div>
       </div>
@@ -648,8 +985,8 @@
             <div class="ad-date">5 дней назад</div>
           </div>
           <div class="ad-actions">
-            <button class="btn btn-primary">Написать продавцу</button>
-            <button class="btn btn-outline">❤️</button>
+            <button class="btn btn-primary btn-small">Написать продавцу</button>
+            <button class="btn btn-outline btn-small">❤️</button>
           </div>
         </div>
       </div>
@@ -670,8 +1007,8 @@
             <div class="ad-date">Неделю назад</div>
           </div>
           <div class="ad-actions">
-            <button class="btn btn-primary">Написать продавцу</button>
-            <button class="btn btn-outline">❤️</button>
+            <button class="btn btn-primary btn-small">Написать продавцу</button>
+            <button class="btn btn-outline btn-small">❤️</button>
           </div>
         </div>
       </div>
@@ -686,6 +1023,77 @@
   </footer>
 
   <script>
+    // Мобильное меню
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('mobile-open');
+    });
+
+    // Закрытие меню при клике вне его
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.header-inner')) {
+        mainNav.classList.remove('mobile-open');
+      }
+    });
+
+    // Выпадающее меню категорий
+    const categoriesDropdown = document.getElementById('categoriesDropdown');
+    const categoriesMenu = document.getElementById('categoriesMenu');
+
+    categoriesDropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+      categoriesMenu.classList.toggle('show');
+    });
+
+    // Закрытие выпадающего меню при клике вне его
+    document.addEventListener('click', () => {
+      categoriesMenu.classList.remove('show');
+    });
+
+    // Расширенный поиск
+    const filtersToggle = document.getElementById('filtersToggle');
+    const filtersContent = document.getElementById('filtersContent');
+
+    filtersToggle.addEventListener('click', () => {
+      filtersContent.classList.toggle('show');
+      filtersToggle.innerHTML = filtersContent.classList.contains('show') 
+        ? '<span>🔍</span> Скрыть фильтры ▲'
+        : '<span>🔍</span> Расширенный поиск ▼';
+    });
+
+    // Сортировка
+    const sortButtons = document.querySelectorAll('.sort-btn');
+    sortButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        sortButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Фильтры
+    const applyFilters = document.getElementById('applyFilters');
+    const resetFilters = document.getElementById('resetFilters');
+
+    applyFilters.addEventListener('click', () => {
+      const priceFrom = document.getElementById('priceFrom').value;
+      const priceTo = document.getElementById('priceTo').value;
+      const condition = document.getElementById('condition').value;
+      const delivery = document.getElementById('delivery').value;
+      const date = document.getElementById('date').value;
+      
+      alert(`Фильтры применены:\nЦена: ${priceFrom || '0'} - ${priceTo || '∞'} ₽\nСостояние: ${condition}\nДоставка: ${delivery}\nДата: ${date}`);
+    });
+
+    resetFilters.addEventListener('click', () => {
+      document.getElementById('priceFrom').value = '';
+      document.getElementById('priceTo').value = '';
+      document.getElementById('condition').selectedIndex = 0;
+      document.getElementById('delivery').selectedIndex = 0;
+      document.getElementById('date').selectedIndex = 0;
+    });
+
     // Анимация появления карточек
     const observerOptions = {
       threshold: 0.1,
