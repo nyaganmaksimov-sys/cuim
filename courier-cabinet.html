@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет курьера | ЦУИМ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-600: #0D47A1;
+            --blue-500: #1565C0;
+            --blue-400: #1E88E5;
+            --orange-600: #FF6F00;
+            --orange-500: #FF7A12;
+            --red-600: #E53935;
+            --red-500: #FF5252;
+            --yellow-600: #FFB300;
+            --green-600: #43A047;
+            --purple-600: #8E24AA;
+            --purple-500: #9C27B0;
+            --bg: #F6F8FB;
+            --panel: #FFFFFF;
+            --text: #1F2937;
+            --muted: #667085;
+            --radius: 14px;
+            --shadow-1: 0 8px 28px rgba(13,71,161,.10), 0 2px 8px rgba(0,0,0,.05);
+            --ring: 0 0 0 3px rgba(21,101,192,.16);
+            --container: 1280px;
+            --transition: all .15s cubic-bezier(.4,.0,.2,1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: min(100% - 32px, var(--container));
+            margin-inline: auto;
+        }
+
+        /* Header */
+        .site-header {
+            background-color: var(--panel);
+            box-shadow: 0 1px 0 rgba(13,71,161,.08);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 74px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-mark {
+            width: 120px;
+            height: 40px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background-color 0.15s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(21,101,192,.08);
+        }
+
+        .nav-link.active {
+            background-color: var(--purple-600);
+            color: white;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple-600), var(--blue-600));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(13,71,161,.08);
+        }
+
+        .user-avatar-large {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple-600), var(--blue-600));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .user-details h2 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .user-details p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .courier-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            background-color: rgba(67,160,71,.12);
+            color: var(--green-600);
+            margin-top: 4px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-item {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: var(--text);
+            text-decoration: none;
+            transition: background-color 0.15s ease;
+        }
+
+        .sidebar-link:hover {
+            background-color: rgba(142,36,170,.08);
+        }
+
+        .sidebar-link.active {
+            background-color: var(--purple-600);
+            color: white;
+        }
+
+        .sidebar-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Content Area */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .stat-card {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon.purple {
+            background-color: rgba(142,36,170,.12);
+            color: var(--purple-600);
+        }
+
+        .stat-icon.orange {
+            background-color: rgba(255,122,18,.12);
+            color: var(--orange-600);
+        }
+
+        .stat-icon.green {
+            background-color: rgba(67,160,71,.12);
+            color: var(--green-600);
+        }
+
+        .stat-icon.blue {
+            background-color: rgba(21,101,192,.12);
+            color: var(--blue-600);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .positive {
+            color: var(--green-600);
+        }
+
+        .negative {
+            color: var(--red-600);
+        }
+
+        /* Section Headers */
+        .section {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            padding: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #163a69;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title svg {
+            color: var(--purple-600);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: filter 0.15s ease;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--purple-600), var(--purple-500));
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, var(--green-600), #4CAF50);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--purple-600);
+            color: var(--purple-600);
+        }
+
+        /* Orders List */
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .order-card {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            padding: 20px;
+            border-left: 4px solid var(--purple-600);
+            transition: var(--transition);
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(142,36,170,.12);
+        }
+
+        .order-card.urgent {
+            border-left-color: var(--red-600);
+            background: linear-gradient(135deg, #fff, #fff5f5);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .order-id {
+            font-weight: 700;
+            color: var(--purple-600);
+        }
+
+        .order-time {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .order-body {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .order-info h4 {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .order-address {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .order-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .order-detail {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .order-detail .label {
+            color: var(--muted);
+        }
+
+        .order-detail .value {
+            font-weight: 600;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .btn-full {
+            flex: 1;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-new {
+            background-color: rgba(255,179,0,.12);
+            color: var(--yellow-600);
+        }
+
+        .status-assigned {
+            background-color: rgba(21,101,192,.12);
+            color: var(--blue-600);
+        }
+
+        .status-picked {
+            background-color: rgba(142,36,170,.12);
+            color: var(--purple-600);
+        }
+
+        .status-delivered {
+            background-color: rgba(67,160,71,.12);
+            color: var(--green-600);
+        }
+
+        .status-cancelled {
+            background-color: rgba(229,57,53,.12);
+            color: var(--red-600);
+        }
+
+        /* Map Section */
+        .map-section {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            padding: 24px;
+            height: 400px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e9f1ff, #f3e5f5);
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+        }
+
+        .map-placeholder svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            color: var(--purple-600);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(13,71,161,.08);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s ease;
+        }
+
+        .tab.active {
+            color: var(--purple-600);
+            border-bottom-color: var(--purple-600);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .order-body {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 16px 0;
+                gap: 16px;
+            }
+            
+            .nav-menu {
+                gap: 12px;
+            }
+            
+            .quick-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .order-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo">
+                <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
+                     alt="ЦУИМ" class="logo-mark">
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">Главная</a>
+                <a href="#" class="nav-link">Маршрут</a>
+                <a href="#" class="nav-link">История</a>
+                <a href="#" class="nav-link active">Заказы</a>
+            </nav>
+            
+            <div class="user-menu">
+                <div class="user-avatar">АК</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="user-info">
+                    <div class="user-avatar-large">АК</div>
+                    <div class="user-details">
+                        <h2>Алексей Курьеров</h2>
+                        <p>Курьер службы доставки</p>
+                        <div class="courier-status">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                                <path d="M12 8v4M12 16h.01" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            На смене
+                        </div>
+                    </div>
+                </div>
+                
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link active">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16,17 21,12 16,7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Текущие заказы
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            Выполненные
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            График
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                            Отчеты
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
+                                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path>
+                            </svg>
+                            Настройки
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="content">
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon purple">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16,17 21,12 16,7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Активных заказов</div>
+                        <div class="stat-change positive">+2 сегодня</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon orange">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">47 мин</div>
+                        <div class="stat-label">Среднее время доставки</div>
+                        <div class="stat-change negative">+5 мин</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon green">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Доставлено за неделю</div>
+                        <div class="stat-change positive">98% успеха</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon blue">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 2L3 7v11c0 2.8 3.6 5 8 5s8-2.2 8-5V7l-9-5z"></path>
+                                    <path d="M12 22V12"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">1 850 ₽</div>
+                        <div class="stat-label">Заработок за сегодня</div>
+                        <div class="stat-change positive">+320 ₽</div>
+                    </div>
+                </div>
+
+                <!-- Current Orders -->
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16,17 21,12 16,7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Текущие заказы
+                        </h2>
+                        <button class="btn btn-primary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Взять новый заказ
+                        </button>
+                    </div>
+                    
+                    <div class="tabs">
+                        <div class="tab active">Все заказы</div>
+                        <div class="tab">Срочные</div>
+                        <div class="tab">В процессе</div>
+                        <div class="tab">На доставке</div>
+                    </div>
+                    
+                    <div class="tab-content active">
+                        <div class="orders-list" id="ordersList">
+                            <!-- Orders will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Delivery Map -->
+                <section class="map-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5Z"/>
+                            </svg>
+                            Маршрут доставки
+                        </h2>
+                        <button class="btn btn-outline">
+                            Оптимизировать маршрут
+                        </button>
+                    </div>
+                    
+                    <div class="map-placeholder">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5Z"/>
+                        </svg>
+                        <h3>Карта маршрута</h3>
+                        <p>Здесь будет отображаться ваш текущий маршрут доставки</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Sample orders data
+        const sampleOrders = [
+            {
+                id: "CUIM-7942",
+                customer: "Иван Иванов",
+                address: "г. Барнаул, ул. Ленина, 54, кв. 28",
+                phone: "+7 (999) 123-45-67",
+                items: ["Огурцы (1кг)", "Помидоры (500г)", "Хлеб"],
+                total: 1240,
+                deliveryTime: "13:00-14:00",
+                status: "assigned",
+                urgent: false,
+                notes: "Код домофона: 28#"
+            },
+            {
+                id: "CUIM-7938",
+                customer: "Мария Петрова",
+                address: "г. Барнаул, пр. Красноармейский, 110, оф. 405",
+                phone: "+7 (999) 765-43-21",
+                items: ["Молоко 3.2% (1л)", "Яйца (10шт)", "Сыр Российский"],
+                total: 890,
+                deliveryTime: "14:30-15:30",
+                status: "picked",
+                urgent: true,
+                notes: "Позвонить за 15 минут"
+            },
+            {
+                id: "CUIM-7931",
+                customer: "Сергей Сидоров",
+                address: "г. Барнаул, ул. Матросова, 12, кв. 15",
+                phone: "+7 (999) 555-44-33",
+                items: ["Фруктовый набор", "Бананы (1кг)", "Яблоки Голден"],
+                total: 2150,
+                deliveryTime: "16:00-17:00",
+                status: "new",
+                urgent: false,
+                notes: ""
+            },
+            {
+                id: "CUIM-7925",
+                customer: "Ольга Козлова",
+                address: "г. Барнаул, ул. Юрина, 245, кв. 89",
+                phone: "+7 (999) 222-33-44",
+                items: ["Мясной набор", "Колбаса Докторская", "Сыр"],
+                total: 3420,
+                deliveryTime: "17:30-18:30",
+                status: "assigned",
+                urgent: false,
+                notes: "Оставить у двери"
+            }
+        ];
+
+        // Status labels and colors
+        const statusConfig = {
+            new: { label: "Новый", class: "status-new" },
+            assigned: { label: "Назначен", class: "status-assigned" },
+            picked: { label: "Забран", class: "status-picked" },
+            delivered: { label: "Доставлен", class: "status-delivered" },
+            cancelled: { label: "Отменен", class: "status-cancelled" }
+        };
+
+        // DOM Elements
+        const ordersList = document.getElementById('ordersList');
+
+        // Load orders
+        function loadOrders() {
+            ordersList.innerHTML = '';
+            
+            sampleOrders.forEach(order => {
+                const orderCard = document.createElement('div');
+                orderCard.className = `order-card ${order.urgent ? 'urgent' : ''}`;
+                
+                orderCard.innerHTML = `
+                    <div class="order-header">
+                        <div class="order-id">${order.id}</div>
+                        <div class="order-time">${order.deliveryTime}</div>
+                    </div>
+                    <div class="order-body">
+                        <div class="order-info">
+                            <h4>${order.customer}</h4>
+                            <div class="order-address">${order.address}</div>
+                            ${order.notes ? `<div class="order-notes" style="margin-top: 8px; font-size: 13px; color: var(--orange-600);">📝 ${order.notes}</div>` : ''}
+                        </div>
+                        <div class="order-details">
+                            <div class="order-detail">
+                                <span class="label">Телефон:</span>
+                                <span class="value">${order.phone}</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="label">Сумма:</span>
+                                <span class="value">${order.total} ₽</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="label">Статус:</span>
+                                <span class="status-badge ${statusConfig[order.status].class}">
+                                    ${statusConfig[order.status].label}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            <div class="label" style="margin-bottom: 4px;">Товары:</div>
+                            <div style="font-size: 14px; color: var(--text);">${order.items.join(', ')}</div>
+                        </div>
+                    </div>
+                    <div class="order-actions">
+                        ${order.status === 'new' ? `
+                            <button class="btn btn-primary btn-sm btn-full" onclick="takeOrder('${order.id}')">
+                                Взять заказ
+                            </button>
+                        ` : ''}
+                        ${order.status === 'assigned' ? `
+                            <button class="btn btn-success btn-sm btn-full" onclick="pickOrder('${order.id}')">
+                                Забрал товар
+                            </button>
+                        ` : ''}
+                        ${order.status === 'picked' ? `
+                            <button class="btn btn-success btn-sm btn-full" onclick="deliverOrder('${order.id}')">
+                                Доставлен
+                            </button>
+                        ` : ''}
+                        <button class="btn btn-outline btn-sm" onclick="callCustomer('${order.phone}')">
+                            📞 Позвонить
+                        </button>
+                    </div>
+                `;
+                ordersList.appendChild(orderCard);
+            });
+        }
+
+        // Order actions
+        function takeOrder(orderId) {
+            if (confirm(`Взять заказ ${orderId} в работу?`)) {
+                alert(`Заказ ${orderId} взят в работу!`);
+                loadOrders(); // Reload to update status
+            }
+        }
+
+        function pickOrder(orderId) {
+            if (confirm(`Отметить заказ ${orderId} как забранный?`)) {
+                alert(`Заказ ${orderId} отмечен как забранный!`);
+                loadOrders(); // Reload to update status
+            }
+        }
+
+        function deliverOrder(orderId) {
+            if (confirm(`Подтвердить доставку заказа ${orderId}?`)) {
+                alert(`Заказ ${orderId} доставлен!`);
+                loadOrders(); // Reload to update status
+            }
+        }
+
+        function callCustomer(phone) {
+            alert(`Звонок на номер: ${phone}`);
+            // In real app, this would initiate a phone call
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Here you would filter orders based on tab
+                // For demo, we'll just reload all orders
+                loadOrders();
+            });
+        });
+
+        // Initialize
+        loadOrders();
+    </script>
+</body>
+</html>
