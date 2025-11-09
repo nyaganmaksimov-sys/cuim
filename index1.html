@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CuiM - Главная</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+        }
+
+        .ads-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 215, 0, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .ads-icon:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .main-content {
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .cta-button:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .feature-card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .ads-button {
+            display: inline-block;
+            background: #4ecdc4;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .ads-button:hover {
+            background: #26a69a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav {
+                gap: 1rem;
+            }
+
+            .ads-icon span {
+                display: none;
+            }
+
+            .ads-icon {
+                padding: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-button, .ads-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .nav {
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">CuiM</div>
+                <nav class="nav">
+                    <a href="index.html">Главная</a>
+                    <a href="shop.html">Магазин</a>
+                    <a href="ads-board.html" class="ads-icon">
+                        <span>💰 Купи-Продай</span>
+                    </a>
+                    <a href="promotions.html">Акции</a>
+                    <a href="profile.html">Личный кабинет</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="hero">
+                <h1>Добро пожаловать в CuiM</h1>
+                <p>Ваш надежный партнер в мире покупок и продаж</p>
+                <a href="shop.html" class="cta-button">Начать покупки</a>
+                
+                <!-- Кнопка перехода на доску объявлений -->
+                <div style="margin-top: 2rem;">
+                    <a href="ads-board.html" class="ads-button">
+                        📢 Перейти к доске объявлений
+                    </a>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="feature-card">
+                    <h3>🛍️ Магазин</h3>
+                    <p>Широкий ассортимент товаров от проверенных продавцов с гарантией качества и быстрой доставкой</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📢 Доска объявлений</h3>
+                    <p>Покупайте и продавайте товары напрямую с другими пользователями. Находите лучшие предложения в вашем городе</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎁 Акции</h3>
+                    <p>Специальные предложения, скидки и распродажи для наших постоянных клиентов</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CuiM. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
