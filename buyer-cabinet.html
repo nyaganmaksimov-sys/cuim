@@ -39,7 +39,7 @@
             padding: 0 20px;
         }
         
-        /* Header Styles - как в предыдущей версии */
+        /* Header Styles */
         header {
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -55,13 +55,18 @@
             align-items: center;
         }
         
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--secondary);
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
+            color: var(--secondary);
         }
         
         .logo-img {
@@ -74,6 +79,30 @@
             justify-content: center;
             color: white;
             font-weight: bold;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .home-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: var(--primary-dark);
         }
         
         .user-info {
@@ -464,11 +493,15 @@
                 gap: 15px;
             }
             
+            .logo-section {
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+            
             .user-info {
-                order: 3;
                 width: 100%;
                 justify-content: flex-end;
-                margin-top: 10px;
             }
             
             .products-grid {
@@ -492,6 +525,18 @@
             .user-details {
                 display: none;
             }
+            
+            .logo-text {
+                font-size: 16px;
+            }
+            
+            .home-btn span {
+                display: none;
+            }
+            
+            .home-btn {
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
@@ -500,9 +545,15 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
-                    <div class="logo-img">ЦУИМ</div>
-                    <span>Центр Управления Интернет-Магазинами</span>
+                <div class="logo-section">
+                    <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo">
+                        <div class="logo-img">ЦУИМ</div>
+                        <div class="logo-text">Центр Управления Интернет-Магазинами</div>
+                    </a>
+                    <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="home-btn">
+                        <i class="fas fa-home"></i>
+                        <span>На главную</span>
+                    </a>
                 </div>
                 <div class="user-info">
                     <div class="user-details">
