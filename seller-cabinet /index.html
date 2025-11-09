@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет продавца | ЦУИМ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-600: #0D47A1;
+            --blue-500: #1565C0;
+            --blue-400: #1E88E5;
+            --orange-600: #FF6F00;
+            --orange-500: #FF7A12;
+            --red-600: #E53935;
+            --red-500: #FF5252;
+            --yellow-600: #FFB300;
+            --green-600: #43A047;
+            --bg: #F6F8FB;
+            --panel: #FFFFFF;
+            --text: #1F2937;
+            --muted: #667085;
+            --radius: 14px;
+            --shadow-1: 0 8px 28px rgba(13,71,161,.10), 0 2px 8px rgba(0,0,0,.05);
+            --ring: 0 0 0 3px rgba(21,101,192,.16);
+            --container: 1280px;
+            --transition: all .15s cubic-bezier(.4,.0,.2,1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: min(100% - 32px, var(--container));
+            margin-inline: auto;
+        }
+
+        /* Header */
+        .site-header {
+            background-color: var(--panel);
+            box-shadow: 0 1px 0 rgba(13,71,161,.08);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 74px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-mark {
+            width: 120px;
+            height: 40px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background-color 0.15s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(21,101,192,.08);
+        }
+
+        .nav-link.active {
+            background-color: var(--blue-600);
+            color: white;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange-600), var(--blue-600));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(13,71,161,.08);
+        }
+
+        .user-avatar-large {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange-600), var(--blue-600));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .user-details h2 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .user-details p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-item {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: var(--text);
+            text-decoration: none;
+            transition: background-color 0.15s ease;
+        }
+
+        .sidebar-link:hover {
+            background-color: rgba(21,101,192,.08);
+        }
+
+        .sidebar-link.active {
+            background-color: var(--blue-600);
+            color: white;
+        }
+
+        .sidebar-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Content Area */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .stat-card {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon.blue {
+            background-color: rgba(21,101,192,.12);
+            color: var(--blue-600);
+        }
+
+        .stat-icon.orange {
+            background-color: rgba(255,122,18,.12);
+            color: var(--orange-600);
+        }
+
+        .stat-icon.green {
+            background-color: rgba(67,160,71,.12);
+            color: var(--green-600);
+        }
+
+        .stat-icon.red {
+            background-color: rgba(229,57,53,.12);
+            color: var(--red-600);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .positive {
+            color: var(--green-600);
+        }
+
+        .negative {
+            color: var(--red-600);
+        }
+
+        /* Section Headers */
+        .section {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            padding: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #163a69;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title svg {
+            color: var(--blue-600);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: filter 0.15s ease;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--blue-600), var(--blue-500));
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, var(--green-600), #4CAF50);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--blue-600);
+            color: var(--blue-600);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(13,71,161,.08);
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(13,71,161,.14);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f2f6fd, #e9f1ff);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-active {
+            background-color: var(--green-600);
+            color: white;
+        }
+
+        .badge-inactive {
+            background-color: var(--muted);
+            color: white;
+        }
+
+        .badge-low-stock {
+            background-color: var(--yellow-600);
+            color: black;
+        }
+
+        .product-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text);
+            flex: 1;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: var(--muted);
+            background: rgba(13,71,161,.06);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--orange-600);
+        }
+
+        .product-stock {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .stock-low {
+            color: var(--red-600);
+            font-weight: 600;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        .btn-edit {
+            background-color: rgba(21,101,192,.12);
+            color: var(--blue-600);
+            flex: 1;
+        }
+
+        .btn-delete {
+            background-color: rgba(229,57,53,.12);
+            color: var(--red-600);
+        }
+
+        /* Orders Table */
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: var(--muted);
+            border-bottom: 1px solid rgba(13,71,161,.08);
+        }
+
+        .orders-table td {
+            padding: 16px;
+            border-bottom: 1px solid rgba(13,71,161,.08);
+        }
+
+        .order-id {
+            font-weight: 600;
+            color: var(--blue-600);
+        }
+
+        .order-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-new {
+            background-color: rgba(255,179,0,.12);
+            color: var(--yellow-600);
+        }
+
+        .status-processing {
+            background-color: rgba(21,101,192,.12);
+            color: var(--blue-600);
+        }
+
+        .status-shipped {
+            background-color: rgba(67,160,71,.12);
+            color: var(--green-600);
+        }
+
+        .status-cancelled {
+            background-color: rgba(229,57,53,.12);
+            color: var(--red-600);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(13,71,161,.08);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s ease;
+        }
+
+        .tab.active {
+            color: var(--blue-600);
+            border-bottom-color: var(--blue-600);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(13,71,161,.40);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--panel);
+            border-radius: var(--radius);
+            box-shadow: 0 20px 60px rgba(13,71,161,.25);
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow: auto;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(13,71,161,.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #163a69;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #f2f6fd;
+            border-radius: 50%;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            color: var(--blue-600);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 2px solid rgba(13,71,161,.12);
+            background-color: var(--bg);
+            outline: none;
+            font-size: 16px;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--blue-400);
+            box-shadow: var(--ring);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid rgba(13,71,161,.08);
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background-color: rgba(13,71,161,.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue-600);
+        }
+
+        .empty-title {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .empty-description {
+            margin-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 16px 0;
+                gap: 16px;
+            }
+            
+            .nav-menu {
+                gap: 12px;
+            }
+            
+            .quick-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .orders-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo">
+                <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
+                     alt="ЦУИМ" class="logo-mark">
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">Главная</a>
+                <a href="#" class="nav-link">Аналитика</a>
+                <a href="#" class="nav-link">Финансы</a>
+                <a href="#" class="nav-link active">Товары</a>
+            </nav>
+            
+            <div class="user-menu">
+                <div class="user-avatar">ПП</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="user-info">
+                    <div class="user-avatar-large">ПП</div>
+                    <div class="user-details">
+                        <h2>Петр Продавцов</h2>
+                        <p>Магазин "Свежие продукты"</p>
+                    </div>
+                </div>
+                
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline points="9 22 9 12 15 12 15 22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Обзор
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link active">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <line x1="7" y1="7" x2="7.01" y2="7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Товары
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+                            </svg>
+                            Заказы
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Отзывы
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2L3 7v11c0 2.8 3.6 5 8 5s8-2.2 8-5V7l-9-5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 22V12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Склад
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke-width="2"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke-width="2"/>
+                            </svg>
+                            Настройки
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="content">
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon blue">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Активных товаров</div>
+                        <div class="stat-change positive">+3 за неделю</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon orange">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">47</div>
+                        <div class="stat-label">Новых заказов</div>
+                        <div class="stat-change positive">+12 за неделю</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon green">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 2L3 7v11c0 2.8 3.6 5 8 5s8-2.2 8-5V7l-9-5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">42 580 ₽</div>
+                        <div class="stat-label">Выручка за месяц</div>
+                        <div class="stat-change positive">+8.5%</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon red">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Товара заканчиваются</div>
+                        <div class="stat-change negative">Срочно пополнить</div>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Каталог товаров
+                        </h2>
+                        <button class="btn btn-success" id="addProductBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Добавить товар
+                        </button>
+                    </div>
+                    
+                    <div class="tabs">
+                        <div class="tab active">Все товары</div>
+                        <div class="tab">Активные</div>
+                        <div class="tab">Скрытые</div>
+                        <div class="tab">Низкий запас</div>
+                    </div>
+                    
+                    <div class="tab-content active">
+                        <div class="products-grid" id="productsGrid">
+                            <!-- Products will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Orders -->
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+                            </svg>
+                            Последние заказы
+                        </h2>
+                        <a href="#" class="btn btn-outline">
+                            Все заказы
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Номер заказа</th>
+                                <th>Товары</th>
+                                <th>Сумма</th>
+                                <th>Статус</th>
+                                <th>Дата</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="order-id">#CUIM-7923</td>
+                                <td>Огурцы, Помидоры, Хлеб</td>
+                                <td>1 240 ₽</td>
+                                <td><span class="order-status status-new">Новый</span></td>
+                                <td>15.11.2023</td>
+                            </tr>
+                            <tr>
+                                <td class="order-id">#CUIM-7918</td>
+                                <td>Молоко, Яйца, Сыр</td>
+                                <td>890 ₽</td>
+                                <td><span class="order-status status-processing">В обработке</span></td>
+                                <td>14.11.2023</td>
+                            </tr>
+                            <tr>
+                                <td class="order-id">#CUIM-7905</td>
+                                <td>Фруктовый набор</td>
+                                <td>2 150 ₽</td>
+                                <td><span class="order-status status-shipped">Отправлен</span></td>
+                                <td>13.11.2023</td>
+                            </tr>
+                            <tr>
+                                <td class="order-id">#CUIM-7892</td>
+                                <td>Мясной набор</td>
+                                <td>3 420 ₽</td>
+                                <td><span class="order-status status-shipped">Отправлен</span></td>
+                                <td>12.11.2023</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Product Modal -->
+    <div class="modal-backdrop" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Добавить новый товар</h3>
+                <button class="modal-close" id="closeModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="productName" class="form-label">Название товара *</label>
+                        <input type="text" id="productName" class="form-input" placeholder="Введите название товара" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDescription" class="form-label">Описание товара</label>
+                        <textarea id="productDescription" class="form-textarea" placeholder="Опишите товар..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice" class="form-label">Цена *</label>
+                            <input type="number" id="productPrice" class="form-input" placeholder="0" min="0" step="0.01" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productStock" class="form-label">Количество на складе *</label>
+                            <input type="number" id="productStock" class="form-input" placeholder="0" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productCategory" class="form-label">Категория *</label>
+                            <select id="productCategory" class="form-select" required>
+                                <option value="">Выберите категорию</option>
+                                <option value="vegetables">Овощи</option>
+                                <option value="fruits">Фрукты</option>
+                                <option value="dairy">Молочные продукты</option>
+                                <option value="meat">Мясо</option>
+                                <option value="bakery">Выпечка</option>
+                                <option value="drinks">Напитки</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productStatus" class="form-label">Статус</label>
+                            <select id="productStatus" class="form-select">
+                                <option value="active">Активный</option>
+                                <option value="inactive">Скрытый</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productImage" class="form-label">Изображение товара</label>
+                        <input type="file" id="productImage" class="form-input" accept="image/*">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelBtn">Отмена</button>
+                <button class="btn btn-success" id="saveProductBtn">Сохранить товар</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample products data
+        const sampleProducts = [
+            {
+                id: 1,
+                name: "Свежие огурцы",
+                description: "Свежие хрустящие огурцы с местной фермы",
+                price: 150,
+                stock: 24,
+                category: "vegetables",
+                status: "active",
+                image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 2,
+                name: "Помидоры Черри",
+                description: "Сладкие помидоры черри в упаковке 500г",
+                price: 220,
+                stock: 3,
+                category: "vegetables",
+                status: "active",
+                image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 3,
+                name: "Молоко 3.2%",
+                description: "Свежее пастеризованное молоко 1 литр",
+                price: 89,
+                stock: 42,
+                category: "dairy",
+                status: "active",
+                image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 4,
+                name: "Бананы",
+                description: "Спелые бананы связка 1кг",
+                price: 95,
+                stock: 5,
+                category: "fruits",
+                status: "active",
+                image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 5,
+                name: "Хлеб Бородинский",
+                description: "Ржаной хлеб с тмином 500г",
+                price: 65,
+                stock: 18,
+                category: "bakery",
+                status: "active",
+                image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                id: 6,
+                name: "Сыр Российский",
+                description: "Твердый сыр 500г",
+                price: 450,
+                stock: 2,
+                category: "dairy",
+                status: "active",
+                image: "https://images.unsplash.com/photo-1552767059-ce182ead6c1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+            }
+        ];
+
+        // DOM Elements
+        const productsGrid = document.getElementById('productsGrid');
+        const productModal = document.getElementById('productModal');
+        const addProductBtn = document.getElementById('addProductBtn');
+        const closeModal = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const saveProductBtn = document.getElementById('saveProductBtn');
+        const productForm = document.getElementById('productForm');
+        const modalTitle = document.getElementById('modalTitle');
+
+        // Category labels
+        const categoryLabels = {
+            vegetables: "Овощи",
+            fruits: "Фрукты",
+            dairy: "Молочные продукты",
+            meat: "Мясо",
+            bakery: "Выпечка",
+            drinks: "Напитки"
+        };
+
+        // Load products
+        function loadProducts() {
+            productsGrid.innerHTML = '';
+            
+            sampleProducts.forEach(product => {
+                const stockClass = product.stock <= 5 ? 'stock-low' : '';
+                const badgeClass = product.stock <= 5 ? 'badge-low-stock' : 
+                                 product.status === 'active' ? 'badge-active' : 'badge-inactive';
+                const badgeText = product.stock <= 5 ? 'Мало' : 
+                                product.status === 'active' ? 'Активен' : 'Скрыт';
+                
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div style="position: relative;">
+                        <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
+                        <div class="product-badge ${badgeClass}">${badgeText}</div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-header">
+                            <div class="product-title">${product.name}</div>
+                            <div class="product-category">${categoryLabels[product.category]}</div>
+                        </div>
+                        <div class="product-description">${product.description}</div>
+                        <div class="product-meta">
+                            <div class="product-price">${product.price} ₽</div>
+                            <div class="product-stock ${stockClass}">${product.stock} шт.</div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-icon btn-edit" data-id="${product.id}">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon btn-delete" data-id="${product.id}">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.btn-edit').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = this.dataset.id;
+                    editProduct(productId);
+                });
+            });
+            
+            document.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = this.dataset.id;
+                    deleteProduct(productId);
+                });
+            });
+        }
+
+        // Open modal for adding product
+        addProductBtn.addEventListener('click', function() {
+            modalTitle.textContent = 'Добавить новый товар';
+            productForm.reset();
+            productModal.classList.add('open');
+        });
+
+        // Close modal
+        function closeProductModal() {
+            productModal.classList.remove('open');
+        }
+
+        closeModal.addEventListener('click', closeProductModal);
+        cancelBtn.addEventListener('click', closeProductModal);
+
+        // Save product
+        saveProductBtn.addEventListener('click', function() {
+            if (productForm.checkValidity()) {
+                // Here you would typically send data to server
+                alert('Товар успешно сохранен!');
+                closeProductModal();
+                // Reload products to show the new one
+                loadProducts();
+            } else {
+                alert('Пожалуйста, заполните все обязательные поля');
+            }
+        });
+
+        // Edit product
+        function editProduct(productId) {
+            const product = sampleProducts.find(p => p.id == productId);
+            if (product) {
+                modalTitle.textContent = 'Редактировать товар';
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productDescription').value = product.description;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productStock').value = product.stock;
+                document.getElementById('productCategory').value = product.category;
+                document.getElementById('productStatus').value = product.status;
+                productModal.classList.add('open');
+            }
+        }
+
+        // Delete product
+        function deleteProduct(productId) {
+            if (confirm('Вы уверены, что хотите удалить этот товар?')) {
+                // Here you would typically send delete request to server
+                alert('Товар удален!');
+                // Reload products
+                loadProducts();
+            }
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Here you would filter products based on tab
+                // For demo, we'll just reload all products
+                loadProducts();
+            });
+        });
+
+        // Initialize
+        loadProducts();
+    </script>
+</body>
+</html>
