@@ -121,16 +121,20 @@
       align-items:center;
       background: none !important;
     }
-    .logo-mark{
-      width:120px;
-      height:40px;
-      object-fit:contain;
-      box-shadow:var(--shadow-1);
-      border-radius:0;
-      /* Убираем белый фон */
-      mix-blend-mode: multiply;
-      background: transparent !important;
-    }
+.logo-mark{
+  width:120px;
+  height:40px;
+  object-fit:contain;
+  box-shadow:var(--shadow-1);
+  border-radius:0;
+  /* Убираем белый фон */
+  mix-blend-mode: multiply;
+  background: transparent !important;
+  /* Дополнительные фильтры для удаления белого фона */
+  filter: brightness(1.1) contrast(1.1);
+  /* Убираем любые возможные белые пиксели */
+  -webkit-filter: brightness(1.1) contrast(1.1);
+}
 
     .catalog-btn{
       display:inline-flex; align-items:center; gap:8px;
