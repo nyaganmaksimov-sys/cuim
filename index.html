@@ -1,1096 +1,1413 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный кабинет покупателя | ЦУИМ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --blue-600: #0D47A1;
-            --blue-500: #1565C0;
-            --blue-400: #1E88E5;
-            --orange-600: #FF6F00;
-            --orange-500: #FF7A12;
-            --red-600: #E53935;
-            --red-500: #FF5252;
-            --yellow-600: #FFB300;
-            --green-600: #43A047;
-            --bg: #F6F8FB;
-            --panel: #FFFFFF;
-            --text: #1F2937;
-            --muted: #667085;
-            --radius: 14px;
-            --shadow-1: 0 8px 28px rgba(13,71,161,.10), 0 2px 8px rgba(0,0,0,.05);
-            --ring: 0 0 0 3px rgba(21,101,192,.16);
-            --container: 1280px;
-            --transition: all .15s cubic-bezier(.4,.0,.2,1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            width: min(100% - 32px, var(--container));
-            margin-inline: auto;
-        }
-
-        /* Header */
-        .site-header {
-            background-color: var(--panel);
-            box-shadow: 0 1px 0 rgba(13,71,161,.08);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 74px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-mark {
-            width: 120px;
-            height: 40px;
-            object-fit: contain;
-            mix-blend-mode: multiply;
-            filter: brightness(1.1) contrast(1.1);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 24px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: background-color 0.15s ease;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(21,101,192,.08);
-        }
-
-        .nav-link.active {
-            background-color: var(--blue-600);
-            color: white;
-        }
-
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue-600), var(--orange-600));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Main Layout */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 24px;
-            margin: 24px 0;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 20px;
-            height: fit-content;
-            position: sticky;
-            top: 90px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(13,71,161,.08);
-        }
-
-        .user-avatar-large {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue-600), var(--orange-600));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 24px;
-        }
-
-        .user-details h2 {
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-
-        .user-details p {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .sidebar-nav {
-            list-style: none;
-        }
-
-        .sidebar-item {
-            margin-bottom: 8px;
-        }
-
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 10px;
-            color: var(--text);
-            text-decoration: none;
-            transition: background-color 0.15s ease;
-        }
-
-        .sidebar-link:hover {
-            background-color: rgba(21,101,192,.08);
-        }
-
-        .sidebar-link.active {
-            background-color: var(--blue-600);
-            color: white;
-        }
-
-        .sidebar-link svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Content Area */
-        .content {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-        }
-
-        .stat-card {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .stat-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-icon.blue {
-            background-color: rgba(21,101,192,.12);
-            color: var(--blue-600);
-        }
-
-        .stat-icon.orange {
-            background-color: rgba(255,122,18,.12);
-            color: var(--orange-600);
-        }
-
-        .stat-icon.green {
-            background-color: rgba(67,160,71,.12);
-            color: var(--green-600);
-        }
-
-        .stat-icon.red {
-            background-color: rgba(229,57,53,.12);
-            color: var(--red-600);
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .stat-label {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        /* Orders Section */
-        .section {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 24px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #163a69;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title svg {
-            color: var(--blue-600);
-        }
-
-        .link-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--blue-600);
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 14px;
-            transition: gap 0.12s ease;
-        }
-
-        .link-more:hover {
-            gap: 8px;
-        }
-
-        /* Orders Table */
-        .orders-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .orders-table th {
-            text-align: left;
-            padding: 12px 16px;
-            font-weight: 600;
-            color: var(--muted);
-            border-bottom: 1px solid rgba(13,71,161,.08);
-        }
-
-        .orders-table td {
-            padding: 16px;
-            border-bottom: 1px solid rgba(13,71,161,.08);
-        }
-
-        .order-id {
-            font-weight: 600;
-            color: var(--blue-600);
-        }
-
-        .order-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-delivered {
-            background-color: rgba(67,160,71,.12);
-            color: var(--green-600);
-        }
-
-        .status-processing {
-            background-color: rgba(255,179,0,.12);
-            color: var(--yellow-600);
-        }
-
-        .status-shipped {
-            background-color: rgba(21,101,192,.12);
-            color: var(--blue-600);
-        }
-
-        .status-cancelled {
-            background-color: rgba(229,57,53,.12);
-            color: var(--red-600);
-        }
-
-        .order-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: filter 0.15s ease;
-            font-size: 14px;
-        }
-
-        .btn:hover {
-            filter: brightness(1.05);
-        }
-
-        .btn-primary {
-            background-color: var(--blue-600);
-            color: white;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--blue-600);
-            color: var(--blue-600);
-        }
-
-        /* Favorites Grid */
-        .favorites-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .favorite-card {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .favorite-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(13,71,161,.14);
-        }
-
-        .favorite-image {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            background: linear-gradient(135deg, #f2f6fd, #e9f1ff);
-        }
-
-        .favorite-body {
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .favorite-title {
-            font-size: 14px;
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            height: 36px;
-        }
-
-        .favorite-price {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--orange-600);
-            line-height: 1;
-        }
-
-        .favorite-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.15s ease;
-        }
-
-        .btn-cart {
-            background-color: var(--blue-600);
-            color: white;
-            flex: 1;
-        }
-
-        .btn-remove {
-            background-color: rgba(229,57,53,.12);
-            color: var(--red-600);
-        }
-
-        /* Addresses */
-        .addresses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 16px;
-        }
-
-        .address-card {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 20px;
-            border: 2px solid transparent;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .address-card:hover {
-            border-color: var(--blue-400);
-        }
-
-        .address-card.active {
-            border-color: var(--blue-600);
-            background-color: rgba(21,101,192,.04);
-        }
-
-        .address-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .address-name {
-            font-weight: 700;
-            color: #163a69;
-        }
-
-        .address-default {
-            background-color: var(--green-600);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .address-details {
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        .address-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--muted);
-        }
-
-        .empty-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 16px;
-            background-color: rgba(13,71,161,.06);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--blue-600);
-        }
-
-        .empty-title {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-
-        .empty-description {
-            margin-bottom: 20px;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid rgba(13,71,161,.08);
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            padding: 12px 20px;
-            font-weight: 600;
-            color: var(--muted);
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.15s ease;
-        }
-
-        .tab.active {
-            color: var(--blue-600);
-            border-bottom-color: var(--blue-600);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                position: static;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-inner {
-                flex-direction: column;
-                height: auto;
-                padding: 16px 0;
-                gap: 16px;
-            }
-            
-            .nav-menu {
-                gap: 12px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .orders-table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .favorites-grid, .addresses-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-            
-            .order-actions {
-                flex-direction: column;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ЦУИМ — Местный маркетплейс Барнаула</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-600:#0D47A1;
+      --blue-500:#1565C0;
+      --blue-400:#1E88E5;
+      --orange-600:#FF6F00;
+      --orange-500:#FF7A12;
+      --red-600:#E53935;
+      --red-500:#FF5252;
+      --yellow-600:#FFB300;
+      --bg:#F6F8FB;
+      --panel:#FFFFFF;
+      --text:#1F2937;
+      --muted:#667085;
+      --radius:14px;
+      --shadow-1:0 8px 28px rgba(13,71,161,.10), 0 2px 8px rgba(0,0,0,.05);
+      --ring:0 0 0 3px rgba(21,101,192,.16);
+      --container: 1280px;
+      --transition:all .15s cubic-bezier(.4,.0,.2,1);
+    }
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;
+    }
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .container{
+      width:min(100% - 32px, var(--container)); margin-inline:auto;
+    }
+
+    /* Top address bar */
+    .address-bar{
+      background:linear-gradient(90deg, rgba(21,101,192,.06), rgba(255,122,18,.06));
+      border-bottom:1px solid rgba(13,71,161,.08); font-size:14px;
+    }
+    .address-bar .container{
+      display:flex; align-items:center; justify-content:space-between; padding:8px 0; color:#27446b;
+    }
+    .location{
+      display:inline-flex; align-items:center; gap:6px; cursor:pointer; padding:6px 10px;
+      border-radius:8px; transition:background .12s ease;
+    }
+    .location:hover{background:rgba(255,122,18,.10)}
+    .location svg{width:16px; height:16px; color:var(--orange-600)}
+    .delivery-info{font-weight:500}
+
+    /* Top shops */
+    .top-shops{
+      background:var(--panel); border-bottom:1px solid rgba(13,71,161,.08);
+      padding:18px 0 14px; margin-bottom:10px;
+    }
+    .top-shops .container{
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .shops-header{
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .shops-title{
+      font-size:18px; font-weight:700; color:#163a69; display:flex; align-items:center; gap:8px;
+    }
+    .shops-title svg{color:var(--orange-600)}
+    .link-more{
+      display:inline-flex; align-items:center; gap:6px; color:var(--blue-600); font-weight:600;
+      transition:gap .12s ease; font-size:14px;
+    }
+    .link-more:hover{gap:8px}
+    
+    .shop-logos{
+      display:flex; gap:16px; overflow-x:auto; padding-bottom:4px;
+      scrollbar-width:thin; scrollbar-color:var(--blue-400) transparent;
+    }
+    .shop-logos::-webkit-scrollbar{height:6px}
+    .shop-logos::-webkit-scrollbar-thumb{background:var(--blue-400); border-radius:6px}
+    
+    .shop-logo{
+      flex:0 0 auto; width:140px; background:var(--panel); border-radius:var(--radius);
+      box-shadow:var(--shadow-1); overflow:hidden; cursor:pointer; transition:var(--transition);
+      display:flex; flex-direction:column; align-items:center; padding:12px 10px; gap:8px;
+    }
+    .shop-logo:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(13,71,161,.14)}
+    
+    .shop-logo img{
+      width:80px; height:60px; object-fit:cover; border-radius:8px;
+      background:linear-gradient(135deg, #f2f6fd, #e9f1ff); padding:6px;
+    }
+    .shop-name{
+      font-size:13px; font-weight:600; color:#163a69; text-align:center; line-height:1.2;
+      width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .shop-rating{
+      display:flex; align-items:center; gap:4px; font-size:12px; color:var(--orange-600); font-weight:600;
+    }
+    .stars{display:flex; gap:1px}
+    .stars svg{width:12px; height:12px; fill:var(--orange-600)}
+
+    /* Header */
+    .site-header{
+      position:sticky; top:0; z-index:50; background:var(--panel);
+      box-shadow:0 1px 0 rgba(13,71,161,.08);
+    }
+    .header-inner{
+      display:flex; align-items:center; gap:14px; height:74px;
+    }
+    /* ИСПРАВЛЕННЫЙ ЛОГОТИП - убран фон */
+    .logo{
+      display:flex;
+      align-items:center;
+      background: none !important;
+    }
+    .logo-mark{
+      width:120px;
+      height:40px;
+      object-fit:contain;
+      box-shadow:var(--shadow-1);
+      border-radius:0;
+      /* Убираем белый фон */
+      mix-blend-mode: multiply;
+      background: transparent !important;
+      filter: brightness(1.1) contrast(1.1);
+    }
+
+    .catalog-btn{
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--blue-600); color:#fff; border:none;
+      padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600;
+      transition:transform .06s ease, filter .15s ease;
+    }
+    .catalog-btn:hover{filter:brightness(1.05)}
+    .catalog-btn:active{transform:translateY(1px)}
+    .catalog-btn svg{width:18px; height:18px}
+
+    .search{
+      flex:1; display:flex; align-items:center; gap:10px;
+    }
+    .search .field{
+      position:relative; flex:1; display:flex; align-items:center;
+    }
+    .search input{
+      width:100%; padding:14px 48px 14px 46px;
+      border-radius:999px; border:2px solid transparent;
+      background:#f2f6fd; outline:none; font-size:16px;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .search input::placeholder{color:#8aa1c1}
+    .search input:focus{
+      background:#fff; border-color:var(--blue-400); box-shadow: var(--ring);
+    }
+    .search .icon{
+      position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#7895bf;
+    }
+    .search button{
+      background:linear-gradient(90deg, var(--orange-600), var(--orange-500));
+      color:#fff; border:none; border-radius:999px; padding:12px 18px; font-weight:600; cursor:pointer;
+      transition:filter .15s ease;
+    }
+    .search button:hover{filter:brightness(1.05)}
+
+    .header-actions{
+      display:flex; align-items:center; gap:12px;
+    }
+    .h-link{
+      display:flex; flex-direction:column; align-items:center; gap:4px;
+      min-width:70px; padding:6px 8px; border-radius:10px; color:#224167;
+      transition:background .15s ease, transform .06s ease;
+    }
+    .h-link:hover{background:rgba(21,101,192,.08)}
+    .h-link:active{transform:translateY(1px)}
+    .h-link svg{width:20px; height:20px; color:var(--blue-600)}
+    .h-link span{font-size:12px}
+
+    /* Main layout */
+    .hero-grid{
+      display:grid; grid-template-columns:260px 1fr 300px; gap:20px; margin:20px 0 10px;
+    }
+
+    /* Categories */
+    .categories{
+      background:var(--panel); border-radius:var(--radius); box-shadow:var(--shadow-1); overflow:hidden;
+    }
+    .cat-title{
+      display:flex; align-items:center; gap:8px; padding:12px 16px; font-weight:700; color:#1b3b65;
+      border-bottom:1px solid rgba(13,71,161,.08);
+    }
+    .cat-list{list-style:none; margin:0; padding:8px}
+    .cat-item a{
+      display:flex; align-items:center; gap:10px; padding:10px 10px; border-radius:10px; color:#21446d;
+      transition:background .12s ease, transform .06s ease;
+    }
+    .cat-item a:hover{background:rgba(255,122,18,.10)}
+    .cat-ico{
+      width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:#fff;
+      background:linear-gradient(135deg, var(--orange-600), var(--orange-500));
+      font-size:16px;
+    }
+    .cat-name{font-size:14px; font-weight:600}
+
+    /* Hero slider */
+    .hero{
+      position:relative; min-height:320px; background:linear-gradient(120deg, #e9f1ff, #fff);
+      border-radius:var(--radius); box-shadow:var(--shadow-1); overflow:hidden;
+      display:flex; align-items:stretch;
+    }
+    .slides{position:relative; width:100%}
+    .slide{
+      position:absolute; inset:0; opacity:0; transition:opacity .5s ease;
+      display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:10px; padding:26px;
+    }
+    .slide.active{opacity:1}
+    .slide .txt h2{
+      margin:0 0 8px; font-size:36px; line-height:1.1; color:#0e2d57;
+    }
+    .slide .txt p{margin:0 0 14px; color:#385a86}
+    .slide .txt .cta{
+      display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:12px;
+      background:var(--blue-600); color:#fff; font-weight:700;
+      transition:filter .15s ease; box-shadow:var(--shadow-1);
+    }
+    .slide .txt .cta:hover{filter:brightness(1.05)}
+    .slide .img{ align-self:stretch; display:flex; align-items:center; justify-content:center;}
+    .slide .img .ph{
+      width:100%; height:240px; border-radius:12px;
+      background:linear-gradient(135deg, rgba(21,101,192,.18), rgba(255,122,18,.18)),
+                 url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+      box-shadow: var(--shadow-1);
+    }
+    .hero .nav{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none;
+      padding:0 8px;
+    }
+    .hero .nav button{
+      pointer-events:auto; width:40px; height:40px; border:none; border-radius:50%;
+      display:grid; place-items:center; background:rgba(255,255,255,.85); backdrop-filter: blur(6px);
+      box-shadow: var(--shadow-1); cursor:pointer;
+    }
+    .hero .dots{
+      position:absolute; left:0; right:0; bottom:12px; display:flex; justify-content:center; gap:8px;
+    }
+    .hero .dots button{
+      width:9px; height:9px; border-radius:999px; border:none; background:#c7d8f3; cursor:pointer;
+    }
+    .hero .dots button.active{background:linear-gradient(90deg, var(--blue-500), var(--orange-600))}
+
+    /* Promos */
+    .promos{display:grid; gap:20px;}
+    .promo-card{
+      background:var(--panel); border-radius:var(--radius); box-shadow:var(--shadow-1);
+      padding:18px; display:flex; flex-direction:column; gap:10px; min-height:150px; position:relative; overflow:hidden;
+    }
+    .promo-card::after{
+      content:""; position:absolute; right:-40px; bottom:-40px; width:180px; height:180px; border-radius:50%;
+      background:radial-gradient(closest-side, rgba(255,122,18,.25), transparent 70%);
+    }
+    .promo-card h3{margin:0; font-size:18px; color:#153a6a}
+    .promo-card p{margin:0; color:#476a97}
+    .promo-accent{color:var(--orange-600); font-weight:800}
+
+    /* ======= СЕКЦИИ ТОВАРОВ ======= */
+    .section-title{
+      display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;
+    }
+    .section-title h2{margin:0; font-size:24px; color:#163a69; display:flex; align-items:center; gap:8px;}
+    .link-more{
+      display:inline-flex; align-items:center; gap:6px; color:var(--blue-600); font-weight:600;
+      transition:gap .12s ease; font-size:14px;
+    }
+    .link-more:hover{gap:8px}
+
+    /* Популярные товары */
+    .popular-section{margin:40px 0 20px;}
+    .popular-title h2 svg{color:var(--blue-600)}
+    .product-grid{
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;
+    }
+    .product-card{
+      background:var(--panel); border-radius:var(--radius); box-shadow:var(--shadow-1);
+      overflow:hidden; transition:var(--transition); position:relative;
+    }
+    .product-card:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(13,71,161,.14)}
+    .product-image{
+      width:100%; height:180px; object-fit:cover; 
+      background:linear-gradient(135deg, #f2f6fd, #e9f1ff);
+    }
+    .product-body{padding:14px; display:flex; flex-direction:column; gap:8px;}
+    .product-title{
+      font-size:15px; line-height:1.3; color:var(--text); display:-webkit-box;
+      -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; height:38px;
+    }
+    .product-price{
+      font-size:20px; font-weight:800; color:var(--orange-600); line-height:1;
+    }
+    .product-price .old{
+      font-size:13px; font-weight:400; color:var(--muted); text-decoration:line-through;
+    }
+    .add-to-cart{
+      display:flex; align-items:center; justify-content:center; gap:6px;
+      background:var(--blue-600); color:#fff; border:none; border-radius:10px;
+      padding:10px; font-weight:600; cursor:pointer; transition:filter .12s ease;
+    }
+    .add-to-cart:hover{filter:brightness(1.05)}
+    .add-to-cart:active{transform:translateY(1px)}
+
+    /* Хит сезона */
+    .season-section{margin:40px 0 20px;}
+    .season-title h2{color:var(--red-600)}
+    .season-title h2 svg{color:var(--red-600); fill:var(--red-600)}
+    .season-grid{
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;
+    }
+    .season-card{
+      background:linear-gradient(135deg, #fff5f5, #fff); border-radius:var(--radius);
+      box-shadow:var(--shadow-1); overflow:hidden; transition:var(--transition); position:relative;
+      border:1px solid rgba(229,57,53,.08);
+    }
+    .season-card:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(229,57,53,.14)}
+    .season-badge{
+      position:absolute; top:10px; left:10px; background:var(--red-600); color:#fff;
+      padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700; z-index:2;
+    }
+    .season-image{
+      width:100%; height:180px; object-fit:cover; background:linear-gradient(135deg, #ffeaea, #fff5f5);
+    }
+    .season-body{padding:14px; display:flex; flex-direction:column; gap:8px;}
+    .season-title-text{
+      font-size:15px; line-height:1.3; color:var(--text); display:-webkit-box;
+      -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; height:38px;
+    }
+    .season-price{
+      font-size:20px; font-weight:800; color:var(--red-600); line-height:1;
+    }
+    .season-price .old{
+      font-size:13px; font-weight:400; color:var(--muted); text-decoration:line-through;
+    }
+    .add-to-season{
+      display:flex; align-items:center; justify-content:center; gap:6px;
+      background:var(--red-600); color:#fff; border:none; border-radius:10px;
+      padding:10px; font-weight:600; cursor:pointer; transition:filter .12s ease;
+    }
+    .add-to-season:hover{filter:brightness(1.05)}
+    .add-to-season:active{transform:translateY(1px)}
+
+    /* Акции */
+    .sale-section{margin:40px 0 20px;}
+    .sale-title h2{color:var(--yellow-600)}
+    .sale-title h2 svg{color:var(--yellow-600); fill:var(--yellow-600)}
+    .sale-grid{
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;
+    }
+    .sale-card{
+      background:linear-gradient(135deg, #fffbf0, #fff); border-radius:var(--radius);
+      box-shadow:var(--shadow-1); overflow:hidden; transition:var(--transition); position:relative;
+      border:1px solid rgba(255,179,0,.12);
+    }
+    .sale-card:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(255,179,0,.18)}
+    .sale-badge{
+      position:absolute; top:10px; left:10px; background:var(--yellow-600); color:#000;
+      padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700; z-index:2;
+    }
+    .sale-image{
+      width:100%; height:180px; object-fit:cover; background:linear-gradient(135deg, #fff8e1, #fffbf0);
+    }
+    .sale-body{padding:14px; display:flex; flex-direction:column; gap:8px;}
+    .sale-title-text{
+      font-size:15px; line-height:1.3; color:var(--text); display:-webkit-box;
+      -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; height:38px;
+    }
+    .sale-price{
+      font-size:20px; font-weight:800; color:var(--orange-600); line-height:1;
+    }
+    .sale-price .old{
+      font-size:13px; font-weight:400; color:var(--muted); text-decoration:line-through;
+    }
+    .sale-discount{
+      font-size:12px; font-weight:600; color:var(--red-600); background:rgba(229,57,53,.08);
+      padding:2px 6px; border-radius:6px; display:inline-block; margin-top:4px;
+    }
+    .add-to-sale{
+      display:flex; align-items:center; justify-content:center; gap:6px;
+      background:var(--yellow-600); color:#000; border:none; border-radius:10px;
+      padding:10px; font-weight:600; cursor:pointer; transition:filter .12s ease;
+    }
+    .add-to-sale:hover{filter:brightness(1.05)}
+    .add-to-sale:active{transform:translateY(1px)}
+
+    /* PVZ Map section */
+    .pvz-section{
+      margin:50px 0 40px; background:var(--panel); border-radius:var(--radius);
+      box-shadow:var(--shadow-1); overflow:hidden;
+    }
+    .pvz-header{
+      padding:18px 20px; border-bottom:1px solid rgba(13,71,161,.08);
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .pvz-header h2{margin:0; font-size:22px; color:#163a69;}
+    .pvz-controls{display:flex; gap:10px;}
+    .pvz-controls select{
+      padding:8px 12px; border:1px solid #d0deef; border-radius:10px; background:#fff;
+      font-size:14px; cursor:pointer;
+    }
+    .pvz-content{
+      display:grid; grid-template-columns:1fr 380px; height:500px;
+    }
+    .map-container{
+      position:relative; background:#f2f6fd;
+    }
+    .pvz-list{
+      overflow:auto; padding:10px;
+    }
+    .pvz-card{
+      padding:12px; border:1px solid #e9f1ff; border-radius:10px; margin-bottom:10px;
+      cursor:pointer; transition:background .12s ease;
+    }
+    .pvz-card:hover{background:#f8fbff}
+    .pvz-card.active{
+      border-color:var(--blue-400); background:#e9f1ff;
+    }
+    .pvz-name{font-weight:700; color:#163a69;}
+    .pvz-address{font-size:13px; color:#476a97; margin:4px 0;}
+    .pvz-hours{font-size:12px; color:var(--muted);}
+    .pvz-dist{float:right; font-size:12px; color:var(--orange-600); font-weight:600;}
+
+    /* Info banners */
+    .info-banner{
+      background:#fff8e8; border:1px solid #ffe2c4; color:#6d4c41;
+      padding:10px 14px; border-radius:12px; box-shadow: var(--shadow-1);
+    }
+    .min-warning{
+      background:#ffefef; border:1px solid #ffc6c6; color:#b23c3c;
+      padding:12px 14px; border-radius:12px; margin-top:12px; box-shadow: var(--shadow-1);
+    }
+
+    /* Footer */
+    .site-footer{
+      margin:30px 0 50px; color:#6b86a8; font-size:14px; text-align:center;
+    }
+
+    /* Modals */
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(13,71,161,.40); z-index:70;
+      display:none; align-items:center; justify-content:center; padding:20px;
+    }
+    .modal-backdrop.open{display:flex}
+    .modal{
+      background:#fff; border-radius:var(--radius); box-shadow:0 20px 60px rgba(13,71,161,.25);
+      max-width:520px; width:100%; max-height:80vh; overflow:auto;
+    }
+    .modal-header{
+      padding:16px 18px; border-bottom:1px solid #e9f1ff; display:flex; align-items:center; justify-content:space-between;
+    }
+    .modal-header h3{margin:0; font-size:18px; color:#163a69;}
+    .modal-close{
+      width:32px; height:32px; border:none; background:#f2f6fd; border-radius:50%; cursor:pointer;
+      display:grid; place-items:center; color:var(--blue-600);
+    }
+    .modal-body{padding:18px;}
+    .city-grid{
+      display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;
+    }
+    .city-btn{
+      padding:12px; border:1px solid #d0deef; border-radius:10px; background:#fff; cursor:pointer;
+      transition:background .12s ease, border-color .12s ease; text-align:left;
+    }
+    .city-btn:hover{border-color:var(--blue-400); background:#f8fbff}
+    .city-btn.selected{background:var(--blue-600); color:#fff; border-color:var(--blue-600)}
+
+    /* ========== УЛУЧШЕННАЯ АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ ========== */
+    
+    /* Мобильное меню */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--blue-600);
+      padding: 10px;
+    }
+
+    /* Адаптация для планшетов */
+    @media (max-width: 1200px){
+      .hero-grid{grid-template-columns:240px 1fr}
+      .promos{grid-column:1 / -1; grid-template-columns:repeat(3,1fr)}
+    }
+
+    /* Адаптация для маленьких планшетов */
+    @media (max-width: 900px){
+      .header-inner{
+        gap:8px;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 0;
+      }
+      
+      .logo {
+        order: 1;
+      }
+      
+      .catalog-btn {
+        order: 2;
+        margin-left: auto;
+      }
+      
+      .search {
+        order: 4;
+        flex: 1 0 100%;
+        margin-top: 10px;
+      }
+      
+      .header-actions {
+        order: 3;
+        gap: 8px;
+      }
+      
+      .h-link{
+        min-width:60px;
+        padding: 4px 6px;
+      }
+      
+      .h-link span{
+        font-size: 11px;
+      }
+      
+      .hero-grid{
+        grid-template-columns:1fr;
+        gap: 15px;
+      }
+      
+      .categories{
+        display:none;
+      }
+      
+      .categories.open{
+        display:block; 
+        position:fixed; 
+        inset:0; 
+        z-index:60; 
+        border-radius:0; 
+        height:100dvh; 
+        overflow:auto;
+        margin-top: 0;
+      }
+      
+      .promos{
+        grid-template-columns:1fr;
+        gap: 15px;
+      }
+      
+      .product-grid, .season-grid, .sale-grid{
+        grid-template-columns:repeat(3, 1fr);
+        gap: 12px;
+      }
+      
+      .pvz-content{
+        grid-template-columns:1fr;
+        height: auto;
+      }
+      
+      .pvz-list{
+        height:300px; 
+        order:2;
+      }
+      
+      .shop-logos{
+        gap:12px;
+      }
+      
+      .shop-logo{
+        width:120px;
+        padding: 10px 8px;
+      }
+      
+      .logo-mark{
+        width:100px; 
+        height:auto;
+      }
+    }
+
+    /* Адаптация для мобильных телефонов */
+    @media (max-width: 600px){
+      .container {
+        width: min(100% - 20px, var(--container));
+      }
+      
+      .address-bar .container {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+      
+      .delivery-info {
+        font-size: 13px;
+      }
+      
+      .search button{
+        display:none;
+      }
+      
+      .search input {
+        padding: 12px 40px 12px 38px;
+        font-size: 14px;
+      }
+      
+      .product-grid, .season-grid, .sale-grid{
+        grid-template-columns:repeat(2, 1fr);
+        gap: 10px;
+      }
+      
+      .slide{
+        grid-template-columns:1fr; 
+        padding:18px;
+        text-align: center;
+      }
+      
+      .slide .img .ph{
+        height:180px;
+        margin-top: 15px;
+      }
+      
+      .slide .txt h2{
+        font-size:28px;
+      }
+      
+      .slide .txt p {
+        font-size: 14px;
+      }
+      
+      .city-grid{
+        grid-template-columns:1fr;
+      }
+      
+      .shops-title{
+        font-size:16px;
+      }
+      
+      .shop-logo{
+        width:110px; 
+        padding:8px 6px;
+      }
+      
+      .logo-mark{
+        width:90px;
+      }
+      
+      .section-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .section-title h2 {
+        font-size: 20px;
+      }
+      
+      .popular-section, .season-section, .sale-section {
+        margin: 30px 0 15px;
+      }
+      
+      .product-card, .season-card, .sale-card {
+        margin-bottom: 5px;
+      }
+      
+      .product-body, .season-body, .sale-body {
+        padding: 10px;
+      }
+      
+      .product-title, .season-title-text, .sale-title-text {
+        font-size: 14px;
+        height: 36px;
+      }
+      
+      .product-price, .season-price, .sale-price {
+        font-size: 18px;
+      }
+      
+      .add-to-cart, .add-to-season, .add-to-sale {
+        padding: 8px;
+        font-size: 14px;
+      }
+      
+      .pvz-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .pvz-header h2 {
+        font-size: 18px;
+      }
+      
+      .hero .nav button {
+        width: 35px;
+        height: 35px;
+      }
+      
+      .info-banner, .min-warning {
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+    }
+
+    /* Адаптация для очень маленьких экранов */
+    @media (max-width: 400px){
+      .product-grid, .season-grid, .sale-grid{
+        grid-template-columns:1fr;
+      }
+      
+      .shop-logo{
+        width:100px;
+      }
+      
+      .logo-mark{
+        width:80px;
+      }
+      
+      .h-link {
+        min-width: 50px;
+      }
+      
+      .h-link span {
+        font-size: 10px;
+      }
+      
+      .catalog-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .slide, .hero .nav button, .category-card, .product-card, .season-card, .sale-card, .shop-logo{transition:none}
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo">
-                <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
-                     alt="ЦУИМ" class="logo-mark">
-            </a>
-            
-            <nav class="nav-menu">
-                <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">Главная</a>
-                <a href="#" class="nav-link">Каталог</a>
-                <a href="#" class="nav-link">Акции</a>
-                <a href="#" class="nav-link">Помощь</a>
-                <a href="#" class="nav-link active">Личный кабинет</a>
-            </nav>
-            
-            <div class="user-menu">
-                <div class="user-avatar">ИИ</div>
-            </div>
+
+  <!-- Верхняя плашка с адресом -->
+  <div class="address-bar">
+    <div class="container">
+      <span class="location" id="locationPicker" role="button" aria-haspopup="dialog" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5Z"/></svg>
+        <span id="selectedCity">Барнаул</span>
+      </span>
+      <span class="delivery-info">Доставка: от 45 мин · Самовывоз из <strong>12 ПВЗ</strong></span>
+    </div>
+  </div>
+
+  <!-- Шапка -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="ЦУИМ — на главную">
+        <!-- ЛОГОТИП БЕЗ ФОНА -->
+        <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
+             alt="ЦУИМ" class="logo-mark">
+      </a>
+
+      <button class="catalog-btn" id="catalogToggle" aria-expanded="false" aria-controls="categoriesPanel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        Каталог
+      </button>
+
+      <form class="search" role="search" aria-label="Поиск по сайту">
+        <div class="field">
+          <span class="icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="7" stroke-width="2"></circle>
+              <path d="M20 20l-3.5-3.5" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <input type="search" placeholder="Искать товары и категории..." aria-label="Поиск">
         </div>
-    </header>
+        <button type="submit">Найти</button>
+      </form>
 
-    <main class="container">
-        <div class="dashboard">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <div class="user-info">
-                    <div class="user-avatar-large">ИИ</div>
-                    <div class="user-details">
-                        <h2>Иван Иванов</h2>
-                        <p>ivan@example.com</p>
-                    </div>
-                </div>
-                
-                <ul class="sidebar-nav">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link active">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <polyline points="9 22 9 12 15 12 15 22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Обзор
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                            </svg>
-                            Мои заказы
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Избранное
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M20 10.7C20 14.2 16.4 16 12 16s-8-1.8-8-5.3V7.8C4 5.1 7.6 3 12 3s8 2.1 8 4.8v2.9z" stroke-width="2"/>
-                                <path d="M4 10.7V16c0 2.8 3.6 5 8 5s8-2.2 8-5v-5.3" stroke-width="2"/>
-                            </svg>
-                            Адреса доставки
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke-width="2"/>
-                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke-width="2"/>
-                            </svg>
-                            Настройки
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <polyline points="16,17 21,12 16,7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <line x1="21" y1="12" x2="9" y2="12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Выйти
-                        </a>
-                    </li>
-                </ul>
-            </aside>
+      <nav class="header-actions" aria-label="Навигация пользователя">
+        <!-- ИСПРАВЛЕННАЯ ССЫЛКА НА ЛИЧНЫЙ КАБИНЕТ -->
+        <a href="https://nyaganmaksimov-sys.github.io/seller-cabinet/" class="h-link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm7 9a7 7 0 1 0-14 0" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Кабинет</span>
+        </a>
+        <a href="#" class="h-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Избранное</span>
+        </a>
+        <a href="#" class="h-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+          </svg>
+          <span>Корзина</span>
+        </a>
+      </nav>
+    </div>
+  </header>
 
-            <!-- Main Content -->
-            <div class="content">
-                <!-- Stats Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon blue">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="stat-value">7</div>
-                        <div class="stat-label">Всего заказов</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon orange">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">Товаров в избранном</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon green">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-label">Сохраненных адресов</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon red">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M12 2L3 7v11c0 2.8 3.6 5 8 5s8-2.2 8-5V7l-9-5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M12 22V12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="stat-value">1 540 ₽</div>
-                        <div class="stat-label">Накоплено бонусов</div>
-                    </div>
-                </div>
-
-                <!-- Recent Orders -->
-                <section class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                            </svg>
-                            Последние заказы
-                        </h2>
-                        <a href="#" class="link-more">
-                            Все заказы
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="tabs">
-                        <div class="tab active">Все</div>
-                        <div class="tab">Активные</div>
-                        <div class="tab">Завершенные</div>
-                    </div>
-                    
-                    <div class="tab-content active">
-                        <table class="orders-table">
-                            <thead>
-                                <tr>
-                                    <th>Номер заказа</th>
-                                    <th>Дата</th>
-                                    <th>Сумма</th>
-                                    <th>Статус</th>
-                                    <th>Действия</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="order-id">#CUIM-7842</td>
-                                    <td>12.11.2023</td>
-                                    <td>4 560 ₽</td>
-                                    <td><span class="order-status status-delivered">Доставлен</span></td>
-                                    <td class="order-actions">
-                                        <button class="btn btn-primary">Повторить</button>
-                                        <button class="btn btn-outline">Детали</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#CUIM-7791</td>
-                                    <td>05.11.2023</td>
-                                    <td>3 210 ₽</td>
-                                    <td><span class="order-status status-processing">Обрабатывается</span></td>
-                                    <td class="order-actions">
-                                        <button class="btn btn-primary">Отследить</button>
-                                        <button class="btn btn-outline">Детали</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#CUIM-7724</td>
-                                    <td>28.10.2023</td>
-                                    <td>5 890 ₽</td>
-                                    <td><span class="order-status status-shipped">В пути</span></td>
-                                    <td class="order-actions">
-                                        <button class="btn btn-primary">Отследить</button>
-                                        <button class="btn btn-outline">Детали</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#CUIM-7658</td>
-                                    <td>15.10.2023</td>
-                                    <td>2 340 ₽</td>
-                                    <td><span class="order-status status-delivered">Доставлен</span></td>
-                                    <td class="order-actions">
-                                        <button class="btn btn-primary">Повторить</button>
-                                        <button class="btn btn-outline">Детали</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <!-- Favorites -->
-                <section class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Избранные товары
-                        </h2>
-                        <a href="#" class="link-more">
-                            Все избранные
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="favorites-grid">
-                        <div class="favorite-card">
-                            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                 alt="Продукты" class="favorite-image">
-                            <div class="favorite-body">
-                                <div class="favorite-title">Набор свежих овощей для салата</div>
-                                <div class="favorite-price">450 ₽</div>
-                                <div class="favorite-actions">
-                                    <button class="btn-icon btn-cart">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                                        </svg>
-                                    </button>
-                                    <button class="btn-icon btn-remove">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="favorite-card">
-                            <img src="https://images.unsplash.com/photo-1555507036-ab794f27d2e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                 alt="Кондитерские изделия" class="favorite-image">
-                            <div class="favorite-body">
-                                <div class="favorite-title">Пирожное "Картошка" 6 шт.</div>
-                                <div class="favorite-price">320 ₽</div>
-                                <div class="favorite-actions">
-                                    <button class="btn-icon btn-cart">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                                        </svg>
-                                    </button>
-                                    <button class="btn-icon btn-remove">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="favorite-card">
-                            <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                 alt="Молочные продукты" class="favorite-image">
-                            <div class="favorite-body">
-                                <div class="favorite-title">Молоко 3,2% 1 л (местное)</div>
-                                <div class="favorite-price">89 ₽</div>
-                                <div class="favorite-actions">
-                                    <button class="btn-icon btn-cart">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-                                        </svg>
-                                    </button>
-                                    <button class="btn-icon btn-remove">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Addresses -->
-                <section class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M20 10.7C20 14.2 16.4 16 12 16s-8-1.8-8-5.3V7.8C4 5.1 7.6 3 12 3s8 2.1 8 4.8v2.9z" stroke-width="2"/>
-                                <path d="M4 10.7V16c0 2.8 3.6 5 8 5s8-2.2 8-5v-5.3" stroke-width="2"/>
-                            </svg>
-                            Адреса доставки
-                        </h2>
-                        <button class="btn btn-primary">Добавить адрес</button>
-                    </div>
-                    
-                    <div class="addresses-grid">
-                        <div class="address-card active">
-                            <div class="address-header">
-                                <div class="address-name">Дом</div>
-                                <div class="address-default">По умолчанию</div>
-                            </div>
-                            <div class="address-details">
-                                г. Барнаул, ул. Ленина, 54, кв. 28<br>
-                                +7 (999) 123-45-67
-                            </div>
-                            <div class="address-actions">
-                                <button class="btn btn-outline">Изменить</button>
-                                <button class="btn btn-outline">Удалить</button>
-                            </div>
-                        </div>
-                        
-                        <div class="address-card">
-                            <div class="address-header">
-                                <div class="address-name">Работа</div>
-                            </div>
-                            <div class="address-details">
-                                г. Барнаул, пр. Красноармейский, 110, оф. 405<br>
-                                +7 (999) 123-45-67
-                            </div>
-                            <div class="address-actions">
-                                <button class="btn btn-outline">Изменить</button>
-                                <button class="btn btn-outline">Удалить</button>
-                            </div>
-                        </div>
-                        
-                        <div class="address-card">
-                            <div class="address-header">
-                                <div class="address-name">Родители</div>
-                            </div>
-                            <div class="address-details">
-                                г. Барнаул, ул. Матросова, 12, кв. 15<br>
-                                +7 (999) 765-43-21
-                            </div>
-                            <div class="address-actions">
-                                <button class="btn btn-outline">Изменить</button>
-                                <button class="btn btn-outline">Удалить</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
+  <!-- Лучшие магазины -->
+  <section class="top-shops">
+    <div class="container">
+      <div class="shops-header">
+        <div class="shops-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
+          Лучшие магазины
         </div>
-    </main>
+        <a href="#" class="link-more">
+          Все магазины
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="shop-logos" id="shopLogos">
+        <!-- Генерируется JS -->
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Tab functionality
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                // Add active class to clicked tab
-                this.classList.add('active');
-                
-                // You could add logic here to show different content based on the tab
-            });
+  <main>
+    <div class="container">
+
+      <!-- Грид: категории + слайдер + промо -->
+      <section class="hero-grid">
+        <aside class="categories" id="categoriesPanel">
+          <div class="cat-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 5h18M3 12h18M3 19h18" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Категории
+          </div>
+          <ul class="cat-list">
+            <li class="cat-item"><a href="#"><span class="cat-ico">🥦</span><span class="cat-name">Продукты питания</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🍱</span><span class="cat-name">Готовая еда</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">👕</span><span class="cat-name">Одежда</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">💄</span><span class="cat-name">Красота и здоровье</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🧸</span><span class="cat-name">Детские товары</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🏡</span><span class="cat-name">Дом и сад</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🛋️</span><span class="cat-name">Мебель</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🎣</span><span class="cat-name">Рыбалка и охота</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">✏️</span><span class="cat-name">Канцелярия</span></a></li>
+          </ul>
+        </aside>
+
+        <div class="hero" aria-label="Промо-слайдер">
+          <div class="slides" id="slides">
+            <div class="slide active">
+              <div class="txt">
+                <h2>Свежее рядом с вами</h2>
+                <p>Продукты и готовая еда с доставкой по Барнаулу</p>
+                <a class="cta" href="#">Смотреть каталог
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="img">
+                <div class="ph"></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="txt">
+                <h2>Оранжево‑синие скидки</h2>
+                <p>Собрали лучшее — переходите в раздел Акции</p>
+                <a class="cta" href="#">К акциям
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="img">
+                <div class="ph" style="background-image:linear-gradient(135deg, rgba(255,122,18,.2), rgba(21,101,192,.2)), url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="txt">
+                <h2>Быстрая доставка</h2>
+                <p>Среднее время — 45 минут. Оплата любым способом</p>
+                <a class="cta" href="#">Узнать условия
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="img">
+                <div class="ph" style="background-image:linear-gradient(135deg, rgba(21,101,192,.22), rgba(255,122,18,.22)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav">
+            <button id="prevSlide" aria-label="Предыдущий слайд">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button id="nextSlide" aria-label="Следующий слайд">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="dots" id="dots" aria-label="Пагинация слайдов"></div>
+        </div>
+
+        <aside class="promos">
+          <a href="#" class="promo-card" style="background:linear-gradient(180deg, #fff, #fff8ec)">
+            <h3>Бонусы за заказ</h3>
+            <p>Копите и тратьте — <span class="promo-accent">1 бонус = 1 ₽</span></p>
+          </a>
+          <a href="#" class="promo-card" style="background:linear-gradient(180deg, #fff, #eef6ff)">
+            <h3>Пункты самовывоза</h3>
+            <p>Заберите в удобное время</p>
+          </a>
+          <a href="#" class="promo-card" style="background:linear-gradient(180deg, #fff, #f1f7ff)">
+            <h3>Экспресс‑доставка</h3>
+            <p>От 45 минут по городу</p>
+          </a>
+        </aside>
+      </section>
+
+      <!-- Популярные товары -->
+      <section class="popular-section">
+        <div class="section-title popular-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            Популярные товары
+          </h2>
+          <a href="#" class="link-more">
+            Смотреть все
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="product-grid" id="productGrid">
+          <!-- Генерируется JS -->
+        </div>
+      </section>
+
+      <!-- Хит сезона -->
+      <section class="season-section">
+        <div class="section-title season-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.24l6.91-1.01L12 2z"/>
+            </svg>
+            Хит сезона
+          </h2>
+          <a href="#" class="link-more">
+            Все товары
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="season-grid" id="seasonGrid">
+          <!-- Генерируется JS -->
+        </div>
+      </section>
+
+      <!-- Акции -->
+      <section class="sale-section">
+        <div class="section-title sale-title">
+          <h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+            </svg>
+            Акции
+          </h2>
+          <a href="#" class="link-more">
+            Все акции
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="sale-grid" id="saleGrid">
+          <!-- Генерируется JS -->
+        </div>
+      </section>
+
+      <!-- Карта ПВЗ -->
+      <section class="pvz-section" aria-label="Пункты выдачи заказов">
+        <div class="pvz-header">
+          <h2>Пункты самовывоза в <span id="cityInPVZ">Барнауле</span></h2>
+          <div class="pvz-controls">
+            <select id="pvzFilter">
+              <option value="all">Все ПВЗ</option>
+              <option value="today">Открытые сегодня</option>
+              <option value="24h">Круглосуточные</option>
+            </select>
+          </div>
+        </div>
+        <div class="pvz-content">
+          <div class="map-container" id="map"></div>
+          <div class="pvz-list" id="pvzList">
+            <!-- Генерируется JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Инфо-баннеры -->
+      <section class="section">
+        <div class="info-banner">🚚 Продукты — только с доставкой. Минимальный заказ: 1500 ₽.</div>
+        <div class="min-warning">⚠️ Минимальная сумма заказа — 1500 ₽. Добавьте товары, чтобы оформить.</div>
+      </section>
+
+      <footer class="site-footer">
+        © 2025 ЦУИМ — Местный маркетплейс Барнаула. Сделано в оранжево‑синих тонах 💙🧡
+      </footer>
+    </div>
+  </main>
+
+  <!-- Модалка выбора города -->
+  <div class="modal-backdrop" id="cityModal" role="dialog" aria-modal="true" aria-labelledby="cityModalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="cityModalTitle">Выберите город</h3>
+        <button class="modal-close" id="closeCityModal" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="city-grid" id="cityGrid">
+          <button class="city-btn" data-city="Барнаул">Барнаул</button>
+          <button class="city-btn" data-city="Новоалтайск">Новоалтайск</button>
+          <button class="city-btn" data-city="Заринск">Заринск</button>
+          <button class="city-btn" data-city="Бийск">Бийск</button>
+          <button class="city-btn" data-city="Рубцовск">Рубцовск</button>
+          <button class="city-btn" data-city="Славгород">Славгород</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ======= ЛУЧШИЕ МАГАЗИНЫ =======
+    const shops = [
+      {id:1, name:"Свежий маркет", rating:4.8, image:"https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:2, name:"Мясной двор", rating:4.9, image:"https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:3, name:"Овощной ряд", rating:4.7, image:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:4, name:"Пекарня Хлебный дом", rating:5.0, image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:5, name:"Молочная ферма", rating:4.6, image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:6, name:"Рыбный остров", rating:4.8, image:"https://images.unsplash.com/photo-1599088107758-2d2e8bd4c3f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:7, name:"Кондитерская", rating:4.9, image:"https://images.unsplash.com/photo-1555507036-ab794f27d2e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+      {id:8, name:"Бакалея", rating:4.5, image:"https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
+    ];
+
+    function renderShops(){
+      const container = document.getElementById('shopLogos');
+      container.innerHTML = shops.map(s => `
+        <a href="#" class="shop-logo" data-id="${s.id}">
+          <img src="${s.image}" alt="${s.name}" onerror="this.src='https://via.placeholder.com/200x150?text=Shop'">
+          <div class="shop-name">${s.name}</div>
+          <div class="shop-rating">
+            <div class="stars">${'★'.repeat(Math.floor(s.rating))}${'☆'.repeat(5-Math.floor(s.rating))}</div>
+            ${s.rating}
+          </div>
+        </a>
+      `).join('');
+    }
+    renderShops();
+
+    // ======= ПОПУЛЯРНЫЕ ТОВАРЫ =======
+    const popularProducts = [
+      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:"https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:"https://images.unsplash.com/photo-1552767059-ce182ead6c1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:"https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:"https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+    ];
+
+    function renderPopularProducts(){
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = popularProducts.map(p => `
+        <div class="product-card">
+          <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
+          <div class="product-body">
+            <div class="product-title">${p.title}</div>
+            <div class="product-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            <button class="add-to-cart" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-cart');
+    }
+
+    // ======= ХИТ СЕЗОНА =======
+    const seasonProducts = [
+      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:"https://images.unsplash.com/photo-1563116912-4870a6d148d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:"https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:"https://images.unsplash.com/photo-1571771019786-3c589e15ad0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:"https://images.unsplash.com/photo-1464454709131-ffd692591ee5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:"https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+    ];
+
+    function renderSeasonProducts(){
+      const grid = document.getElementById('seasonGrid');
+      grid.innerHTML = seasonProducts.map(p => `
+        <div class="season-card">
+          <div class="season-badge">${p.discount}</div>
+          <img src="${p.image}" alt="${p.title}" class="season-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
+          <div class="season-body">
+            <div class="season-title-text">${p.title}</div>
+            <div class="season-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            <button class="add-to-season" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-season');
+    }
+
+    // ======= АКЦИИ =======
+    const saleProducts = [
+      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:"https://images.unsplash.com/photo-1570194065650-2f276eef4a34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:"https://images.unsplash.com/photo-1587734195503-904fca47e0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:"https://images.unsplash.com/photo-1558961367-7505a6c6d4b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+    ];
+
+    function renderSaleProducts(){
+      const grid = document.getElementById('saleGrid');
+      grid.innerHTML = saleProducts.map(p => `
+        <div class="sale-card">
+          <div class="sale-badge">${p.discount}</div>
+          <img src="${p.image}" alt="${p.title}" class="sale-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
+          <div class="sale-body">
+            <div class="sale-title-text">${p.title}</div>
+            <div class="sale-price">
+              ${p.price} ₽
+              ${p.oldPrice ? `<span class="old">${p.oldPrice} ₽</span>` : ''}
+            </div>
+            ${p.discount && p.oldPrice ? `<div class="sale-discount">Выгода: ${p.oldPrice - p.price} ₽</div>` : ''}
+            <button class="add-to-sale" data-id="${p.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      addCartAnimation('.add-to-sale');
+    }
+
+    // Универсальная функция анимации для кнопок "В корзину"
+    function addCartAnimation(selector){
+      document.querySelectorAll(selector).forEach(btn => {
+        btn.addEventListener('click', function(){
+          const originalHTML = this.innerHTML;
+          const originalBg = this.style.background;
+          
+          if(this.classList.contains('add-to-cart')){
+            this.style.background = 'var(--orange-600)';
+          } else if(this.classList.contains('add-to-season')){
+            this.style.background = 'var(--red-500)';
+          } else if(this.classList.contains('add-to-sale')){
+            this.style.background = 'var(--yellow-600)';
+            this.style.color = '#000';
+          }
+          
+          this.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Добавлено';
+          
+          setTimeout(() => {
+            this.style.background = originalBg;
+            this.style.color = '';
+            this.innerHTML = originalHTML;
+          }, 1500);
         });
-        
-        // Sidebar navigation
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active class from all sidebar links
-                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-                // Add active class to clicked link
-                this.classList.add('active');
-                
-                // You could add logic here to load different content based on the sidebar item
-            });
+      });
+    }
+
+    // ======= СЛАЙДЕР =======
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsWrap = document.getElementById('dots');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+
+    let current = 0, timer;
+
+    function renderDots(){
+      dotsWrap.innerHTML = '';
+      slides.forEach((_, i)=>{
+        const b = document.createElement('button');
+        b.setAttribute('aria-label', 'Перейти к слайду ' + (i+1));
+        if(i===current) b.classList.add('active');
+        b.addEventListener('click', ()=>go(i));
+        dotsWrap.appendChild(b);
+      });
+    }
+    function go(i){
+      slides[current].classList.remove('active');
+      current = (i + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      renderDots();
+      restart();
+    }
+    function next(){ go(current+1); }
+    function prev(){ go(current-1); }
+
+    function restart(){
+      clearInterval(timer);
+      timer = setInterval(next, 5000);
+    }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    renderDots();
+    restart();
+
+    // ======= КАТАЛОГ (мобильный) =======
+    const catalogToggle = document.getElementById('catalogToggle');
+    const categoriesPanel = document.getElementById('categoriesPanel');
+    let opened = false;
+
+    function toggleCatalog(){
+      opened = !opened;
+      categoriesPanel.classList.toggle('open', opened);
+      catalogToggle.setAttribute('aria-expanded', String(opened));
+      if(opened){
+        const closer = (e)=>{
+          if(!categoriesPanel.contains(e.target) && e.target !== catalogToggle){
+            opened = false; categoriesPanel.classList.remove('open');
+            catalogToggle.setAttribute('aria-expanded', 'false');
+            document.removeEventListener('click', closer);
+          }
+        };
+        setTimeout(()=>document.addEventListener('click', closer), 0);
+      }
+    }
+    catalogToggle.addEventListener('click', toggleCatalog);
+
+    // ======= ВЫБОР ГОРОДА =======
+    const locationPicker = document.getElementById('locationPicker');
+    const cityModal = document.getElementById('cityModal');
+    const closeCityModal = document.getElementById('closeCityModal');
+    const selectedCitySpan = document.getElementById('selectedCity');
+    const cityInPVZ = document.getElementById('cityInPVZ');
+    const cityButtons = document.querySelectorAll('.city-btn');
+
+    const savedCity = localStorage.getItem('selectedCity') || 'Барнаул';
+    selectedCitySpan.textContent = savedCity;
+    cityInPVZ.textContent = savedCity;
+
+    function openCityModal(){
+      cityModal.classList.add('open');
+      locationPicker.setAttribute('aria-expanded', 'true');
+      cityButtons.forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.city === selectedCitySpan.textContent);
+      });
+    }
+    function closeModal(){
+      cityModal.classList.remove('open');
+      locationPicker.setAttribute('aria-expanded', 'false');
+    }
+
+    locationPicker.addEventListener('click', openCityModal);
+    closeCityModal.addEventListener('click', closeModal);
+    cityModal.addEventListener('click', (e)=>{
+      if(e.target === cityModal) closeModal();
+    });
+
+    cityButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const city = btn.dataset.city;
+        selectedCitySpan.textContent = city;
+        cityInPVZ.textContent = city;
+        localStorage.setItem('selectedCity', city);
+        closeModal();
+        loadPVZ();
+      });
+    });
+
+    // ======= КАРТА ПВЗ (Яндекс.Карты) =======
+    let map, objectManager;
+    const pvzData = [
+      {id:1, name:"ПВЗ на Красноармейском", address:"пр. Красноармейский, 73", hours:"09:00—21:00", lat:53.3471, lng:83.7556, type:"today"},
+      {id:2, name:"ПВЗ в Мегацентре", address:"ул. Попова, 205", hours:"10:00—22:00", lat:53.3635, lng:83.8563, type:"24h"},
+      {id:3, name:"ПВЗ на Южном", address:"ул. Южная, 287", hours:"08:00—23:00", lat:53.3214, lng:83.7921, type:"today"},
+      {id:4, name:"ПВЗ в ЦУМе", address:"ул. Советская, 24", hours:"09:00—21:00", lat:53.3488, lng:83.7799, type:"24h"},
+      {id:5, name:"ПВЗ на Павловском", address:"ул. Павловского, 115", hours:"10:00—20:00", lat:53.3801, lng:83.7634, type:"today"},
+    ];
+
+    function loadPVZ(filter = 'all'){
+      const list = document.getElementById('pvzList');
+      const filtered = filter === 'all' ? pvzData : pvzData.filter(p => p.type === filter);
+      
+      list.innerHTML = filtered.map((p, i) => `
+        <div class="pvz-card ${i === 0 ? 'active' : ''}" data-id="${p.id}" data-lat="${p.lat}" data-lng="${p.lng}">
+          <div class="pvz-name">${p.name}</div>
+          <div class="pvz-address">${p.address}</div>
+          <div class="pvz-hours">${p.hours}</div>
+          <div class="pvz-dist">${(Math.random() * 5 + 1).toFixed(1)} км</div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.pvz-card').forEach(card => {
+        card.addEventListener('click', function(){
+          document.querySelectorAll('.pvz-card').forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          const lat = +this.dataset.lat;
+          const lng = +this.dataset.lng;
+          if(map) map.setCenter([lat, lng], 15);
         });
-        
-        // Add to cart animation
-        document.querySelectorAll('.btn-cart').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const originalHTML = this.innerHTML;
-                this.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-                
-                setTimeout(() => {
-                    this.innerHTML = originalHTML;
-                }, 1500);
-            });
+      });
+    }
+
+    function initMap(){
+      const script = document.createElement('script');
+      script.src = 'https://api-maps.yandex.ru/2.1/?apikey=ВАШ_API_КЛЮЧ&lang=ru_RU';
+      script.onload = () => {
+        ymaps.ready(() => {
+          map = new ymaps.Map('map', {
+            center: [53.3471, 83.7556],
+            zoom: 12,
+            controls: ['zoomControl', 'geolocationControl']
+          });
+
+          objectManager = new ymaps.ObjectManager({
+            clusterize: true,
+            gridSize: 32,
+          });
+          map.geoObjects.add(objectManager);
+
+          const objects = pvzData.map(p => ({
+            type: 'Feature',
+            id: p.id,
+            geometry: {type: 'Point', coordinates: [p.lat, p.lng]},
+            properties: {
+              balloonContent: `<strong>${p.name}</strong><br>${p.address}<br>${p.hours}`,
+              hintContent: p.name
+            }
+          }));
+          objectManager.add({type: 'FeatureCollection', features: objects});
+
+          objectManager.objects.events.add('click', (e) => {
+            const id = e.get('objectId');
+            const card = document.querySelector(`[data-id="${id}"]`);
+            if(card){
+              document.querySelectorAll('.pvz-card').forEach(c => c.classList.remove('active'));
+              card.classList.add('active');
+              card.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+            }
+          });
         });
-        
-        // Remove from favorites
-        document.querySelectorAll('.btn-remove').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const card = this.closest('.favorite-card');
-                card.style.opacity = '0';
-                card.style.transform = 'translateX(100px)';
-                
-                setTimeout(() => {
-                    card.remove();
-                }, 300);
-            });
-        });
-        
-        // Address selection
-        document.querySelectorAll('.address-card').forEach(card => {
-            card.addEventListener('click', function() {
-                // Remove active class from all address cards
-                document.querySelectorAll('.address-card').forEach(c => c.classList.remove('active'));
-                // Add active class to clicked card
-                this.classList.add('active');
-            });
-        });
-    </script>
+      };
+      document.head.appendChild(script);
+    }
+    initMap();
+    loadPVZ();
+
+    document.getElementById('pvzFilter').addEventListener('change', (e) => {
+      loadPVZ(e.target.value);
+    });
+
+    // ======= РЕНДЕР ВСЕХ СЕКЦИЙ =======
+    renderPopularProducts();
+    renderSeasonProducts();
+    renderSaleProducts();
+
+  </script>
 </body>
 </html>
