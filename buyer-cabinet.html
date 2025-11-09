@@ -55,17 +55,17 @@
         }
 
         .logo-image {
-            width: 120px;
+            width: 160px;
             height: 60px;
             margin: 0 auto 15px;
-            background: var(--accent);
-            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
-            font-size: 24px;
-            font-weight: bold;
+        }
+
+        .logo-image img {
+            max-width: 100%;
+            height: auto;
         }
 
         .logo-text {
@@ -549,7 +549,15 @@
         <!-- Боковая панель -->
         <div class="sidebar">
             <div class="logo">
-                <div class="logo-image"><img src="/images/logo.png"></div>
+                <div class="logo-image">
+                    <svg width="160" height="60" viewBox="0 0 160 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="160" height="60" rx="8" fill="#f8c100"/>
+                        <path d="M40 20L50 40L60 20L70 40L80 20" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="100" cy="30" r="15" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+                        <rect x="120" y="15" width="30" height="30" rx="5" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+                        <text x="45" y="55" font-family="Arial" font-size="14" fill="#1a1a1a" font-weight="bold">CUIM</text>
+                    </svg>
+                </div>
                 <div class="logo-text">Кабинет покупателя</div>
             </div>
             <ul class="nav-links">
