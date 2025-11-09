@@ -3,706 +3,734 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход в систему | ЦУИМ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>ЦУИМ - Интернет-магазин</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --blue-600: #0D47A1;
-            --blue-500: #1565C0;
-            --blue-400: #1E88E5;
-            --orange-600: #FF6F00;
-            --orange-500: #FF7A12;
-            --red-600: #E53935;
-            --red-500: #FF5252;
-            --yellow-600: #FFB300;
-            --green-600: #43A047;
-            --purple-600: #8E24AA;
-            --bg: #F6F8FB;
-            --panel: #FFFFFF;
-            --text: #1F2937;
-            --muted: #667085;
-            --radius: 14px;
-            --shadow-1: 0 8px 28px rgba(13,71,161,.10), 0 2px 8px rgba(0,0,0,.05);
-            --ring: 0 0 0 3px rgba(21,101,192,.16);
-            --transition: all .15s cubic-bezier(.4,.0,.2,1);
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --gray: #95a5a6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: #f8fafc;
+            color: #333;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
-
+        
         .container {
-            width: min(100% - 32px, 1200px);
-            margin-inline: auto;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-
-        /* Header */
-        .site-header {
-            background-color: var(--panel);
-            box-shadow: 0 1px 0 rgba(13,71,161,.08);
+        
+        /* Header Styles */
+        header {
+            background-color: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #e0e0e0;
         }
-
-        .header-inner {
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            height: 74px;
+            gap: 15px;
         }
-
+        
         .logo {
             display: flex;
             align-items: center;
-        }
-
-        .logo-mark {
-            width: 120px;
-            height: 40px;
-            object-fit: contain;
-            mix-blend-mode: multiply;
-            filter: brightness(1.1) contrast(1.1);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 24px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: background-color 0.15s ease;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(21,101,192,.08);
-        }
-
-        .nav-link.active {
-            background-color: var(--blue-600);
-            color: white;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 0;
-        }
-
-        /* Login Container */
-        .login-container {
-            background-color: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            padding: 40px;
-            width: 100%;
-            max-width: 520px;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .login-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #163a69;
-            margin-bottom: 8px;
-        }
-
-        .login-subtitle {
-            color: var(--muted);
-            font-size: 16px;
-        }
-
-        /* Role Selection */
-        .role-selection {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
             gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .role-option {
-            border: 2px solid rgba(13,71,161,.12);
-            border-radius: var(--radius);
-            padding: 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            background-color: var(--panel);
-        }
-
-        .role-option:hover {
-            border-color: var(--blue-400);
-        }
-
-        .role-option.active {
-            border-color: var(--blue-600);
-            background-color: rgba(21,101,192,.04);
-        }
-
-        .role-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 12px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .role-buyer .role-icon {
-            background-color: rgba(21,101,192,.12);
-            color: var(--blue-600);
-        }
-
-        .role-seller .role-icon {
-            background-color: rgba(255,122,18,.12);
-            color: var(--orange-600);
-        }
-
-        .role-courier .role-icon {
-            background-color: rgba(142,36,170,.12);
-            color: var(--purple-600);
-        }
-
-        .role-name {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .role-description {
-            font-size: 12px;
-            color: var(--muted);
-        }
-
-        /* Form */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 14px 16px;
-            border-radius: 10px;
-            border: 2px solid rgba(13,71,161,.12);
-            background-color: var(--bg);
-            outline: none;
-            font-size: 16px;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .form-input:focus {
-            border-color: var(--blue-400);
-            box-shadow: var(--ring);
-        }
-
-        .form-input::placeholder {
-            color: #8aa1c1;
-        }
-
-        .demo-accounts {
-            background-color: rgba(21,101,192,.06);
-            border-radius: var(--radius);
-            padding: 16px;
-            margin-bottom: 24px;
-        }
-
-        .demo-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--blue-600);
-        }
-
-        .demo-account {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(13,71,161,.08);
-            cursor: pointer;
-            transition: background-color 0.15s ease;
-        }
-
-        .demo-account:hover {
-            background-color: rgba(21,101,192,.04);
-        }
-
-        .demo-account:last-child {
-            border-bottom: none;
-        }
-
-        .demo-role {
-            font-weight: 500;
-        }
-
-        .demo-credentials {
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 14px 16px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: filter 0.15s ease;
-        }
-
-        .btn:hover {
-            filter: brightness(1.05);
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--blue-600), var(--blue-500));
-            color: white;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            border: 2px solid rgba(13,71,161,.12);
-            color: var(--blue-600);
-        }
-
-        .login-footer {
-            text-align: center;
-            margin-top: 24px;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .login-footer a {
-            color: var(--blue-600);
             text-decoration: none;
-            font-weight: 500;
         }
-
-        /* Modal */
-        .modal-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(13,71,161,.40);
-            z-index: 100;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-backdrop.open {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--panel);
-            border-radius: var(--radius);
-            box-shadow: 0 20px 60px rgba(13,71,161,.25);
-            max-width: 400px;
-            width: 100%;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .modal-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 16px;
-            border-radius: 50%;
+        
+        .logo-img {
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            background: var(--primary);
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
         }
-
-        .modal-icon.success {
-            background-color: rgba(67,160,71,.12);
-            color: var(--green-600);
-        }
-
-        .modal-icon.error {
-            background-color: rgba(229,57,53,.12);
-            color: var(--red-600);
-        }
-
-        .modal-title {
+        
+        .logo-text {
             font-size: 20px;
             font-weight: 700;
-            margin-bottom: 8px;
-            color: #163a69;
+            color: var(--secondary);
         }
-
-        .modal-message {
-            color: var(--muted);
-            margin-bottom: 24px;
-        }
-
-        .modal-actions {
+        
+        .nav-section {
             display: flex;
-            gap: 12px;
+            align-items: center;
+            gap: 20px;
         }
-
-        .modal-actions .btn {
-            flex: 1;
-        }
-
-        /* Footer */
-        .site-footer {
-            margin-top: auto;
-            padding: 30px 0;
-            color: #6b86a8;
+        
+        .catalog-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-size: 14px;
-            text-align: center;
-            border-top: 1px solid rgba(13,71,161,.08);
+            transition: all 0.3s;
+            font-weight: 500;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .login-container {
-                padding: 24px;
+        
+        .catalog-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .auth-btn {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 1px solid var(--primary);
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .auth-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .icon-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: var(--radius);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .icon-btn:hover {
+            background-color: #f8f9fa;
+            color: var(--primary);
+        }
+        
+        .icon-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Products Section */
+        .products-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            font-size: 16px;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .role-selection {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .logo-section {
+                order: 1;
+            }
+            
+            .nav-section {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            
+            .header-actions {
+                order: 2;
+                gap: 10px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .auth-btn span {
+                display: none;
+            }
+            
+            .auth-btn {
+                padding: 8px 12px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .product-info {
+                padding: 15px;
+            }
+            
+            .product-title {
+                font-size: 14px;
+                height: auto;
+            }
+            
+            .product-price {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-grid {
                 grid-template-columns: 1fr;
             }
             
-            .header-inner {
-                flex-direction: column;
-                height: auto;
-                padding: 16px 0;
-                gap: 16px;
+            .footer-content {
+                grid-template-columns: 1fr;
             }
             
-            .nav-menu {
-                gap: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 20px;
+            .hero {
+                padding: 40px 0;
             }
             
-            .modal {
-                padding: 20px;
+            .hero h1 {
+                font-size: 1.8rem;
             }
             
-            .modal-actions {
-                flex-direction: column;
+            .section-title {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">
-                <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
-                     alt="ЦУИМ" class="logo-mark">
-            </a>
-            
-            <nav class="nav-menu">
-                <a href="index.html" class="nav-link">Главная</a>
-                <a href="#" class="nav-link">Каталог</a>
-                <a href="#" class="nav-link">Акции</a>
-                <a href="#" class="nav-link">Помощь</a>
-                <a href="login.html" class="nav-link active">Войти</a>
-            </nav>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="#" class="logo">
+                        <div class="logo-img">
+                            ЦУИМ
+                        </div>
+                        <div class="logo-text">Центр Управления Интернет-Магазинами</div>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <button class="catalog-btn">
+                        <i class="fas fa-bars"></i>
+                        Каталог товаров
+                    </button>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="auth-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Войти</span>
+                    </button>
+                    <div class="icon-buttons">
+                        <button class="icon-btn">
+                            <i class="fas fa-heart"></i>
+                            <span class="icon-badge">3</span>
+                        </button>
+                        <button class="icon-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="icon-badge">5</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <div class="login-container">
-                <div class="login-header">
-                    <h1 class="login-title">Вход в систему</h1>
-                    <p class="login-subtitle">Выберите роль и введите данные для входа</p>
-                </div>
+            <h1>Лучшие товары по выгодным ценам</h1>
+            <p>Широкий ассортимент качественной продукции с быстрой доставкой по всей стране</p>
+            <button class="btn" style="background: white; color: var(--primary);">
+                <i class="fas fa-shopping-bag"></i>
+                Начать покупки
+            </button>
+        </div>
+    </section>
 
-                <!-- Role Selection -->
-                <div class="role-selection">
-                    <div class="role-option role-buyer active" data-role="buyer">
-                        <div class="role-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm7 9a7 7 0 1 0-14 0" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="role-name">Покупатель</div>
-                        <div class="role-description">Покупка товаров и услуг</div>
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Популярные товары</h2>
+            
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Наушники">
                     </div>
-                    
-                    <div class="role-option role-seller" data-role="seller">
-                        <div class="role-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 4.5c-.3.6-.1 1.3.5 1.6.6.3 1.3.1 1.6-.5L11 13m5 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm-8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                    <div class="product-info">
+                        <h3 class="product-title">Беспроводные наушники Sony WH-1000XM4</h3>
+                        <div class="product-price">24 990 ₽</div>
+                        <div class="product-actions">
+                            <button class="btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-heart"></i>
+                            </button>
                         </div>
-                        <div class="role-name">Продавец</div>
-                        <div class="role-description">Управление товарами и заказами</div>
-                    </div>
-
-                    <div class="role-option role-courier" data-role="courier">
-                        <div class="role-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 4.5c-.3.6-.1 1.3.5 1.6.6.3 1.3.1 1.6-.5L11 13m5 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm-8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M16 8h4l2 4m-6-4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <div class="role-name">Курьер</div>
-                        <div class="role-description">Доставка заказов клиентам</div>
                     </div>
                 </div>
-
-                <!-- Login Form -->
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="username" class="form-label">Логин</label>
-                        <input type="text" id="username" class="form-input" placeholder="Введите ваш логин" required>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1511385348-a52b4a160dc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Смартфон">
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="password" class="form-label">Пароль</label>
-                        <input type="password" id="password" class="form-input" placeholder="Введите ваш пароль" required>
-                    </div>
-
-                    <!-- Demo Accounts -->
-                    <div class="demo-accounts">
-                        <div class="demo-title">Демо-аккаунты для тестирования:</div>
-                        <div class="demo-account" data-username="buyer" data-password="123">
-                            <div class="demo-role">Покупатель</div>
-                            <div class="demo-credentials">логин: buyer | пароль: 123</div>
-                        </div>
-                        <div class="demo-account" data-username="seller" data-password="123">
-                            <div class="demo-role">Продавец</div>
-                            <div class="demo-credentials">логин: seller | пароль: 123</div>
-                        </div>
-                        <div class="demo-account" data-username="courier" data-password="123">
-                            <div class="demo-role">Курьер</div>
-                            <div class="demo-credentials">логин: courier | пароль: 123</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Смартфон Samsung Galaxy S23 Ultra 512GB</h3>
+                        <div class="product-price">89 990 ₽</div>
+                        <div class="product-actions">
+                            <button class="btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-heart"></i>
+                            </button>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.5 12H3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Войти в систему
-                    </button>
-                </form>
-
-                <div class="login-footer">
-                    Нет аккаунта? <a href="#">Зарегистрироваться</a>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Ноутбук">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ноутбук Apple MacBook Air M2 13.6" 256GB</h3>
+                        <div class="product-price">119 990 ₽</div>
+                        <div class="product-actions">
+                            <button class="btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Фотоаппарат">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Зеркальный фотоаппарат Canon EOS R6 Mark II</h3>
+                        <div class="product-price">189 990 ₽</div>
+                        <div class="product-actions">
+                            <button class="btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1505744386214-51dba16a26fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Умные часы">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Умные часы Apple Watch Series 8 45mm</h3>
+                        <div class="product-price">34 990 ₽</div>
+                        <div class="product-actions">
+                            <button class="btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Планшет">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Планшет iPad Air 5 10.9" 64GB Wi-Fi</h3>
+                        <div class="product-price">64 990 ₽</div>
+                        <div class="product-actions">
+                            <button class="btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1530893609608-32a9af3aa95c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Игровая консоль">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Игровая консоль Sony PlayStation 5</h3>
+                        <div class="product-price">54 990 ₽</div>
+                        <div class="product-actions">
+                            <button class="btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1606788075767-1c8bcfc8bd4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Колонка">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Умная колонка Яндекс Станция Макс</h3>
+                        <div class="product-price">24 990 ₽</div>
+                        <div class="product-actions">
+                            <button class="btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
-
-    <!-- Success Modal -->
-    <div class="modal-backdrop" id="successModal">
-        <div class="modal">
-            <div class="modal-icon success">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <h3 class="modal-title">Вход выполнен успешно!</h3>
-            <p class="modal-message" id="successMessage">Вы будете перенаправлены в личный кабинет</p>
-            <div class="modal-actions">
-                <button class="btn btn-primary" id="redirectBtn">Перейти сейчас</button>
-                <button class="btn btn-secondary" id="cancelRedirectBtn">Отмена</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Error Modal -->
-    <div class="modal-backdrop" id="errorModal">
-        <div class="modal">
-            <div class="modal-icon error">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <h3 class="modal-title">Ошибка входа</h3>
-            <p class="modal-message" id="errorMessage">Неверный логин или пароль</p>
-            <div class="modal-actions">
-                <button class="btn btn-primary" id="closeErrorBtn">Понятно</button>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
+    <footer>
         <div class="container">
-            © 2025 ЦУИМ — Местный маркетплейс Барнаула. Сделано в оранжево‑синих тонах 💙🧡
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О компании</h3>
+                    <ul>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                        <li><a href="#">Партнеры</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат товара</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Частые вопросы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Каталог</h3>
+                    <ul>
+                        <li><a href="#">Электроника</a></li>
+                        <li><a href="#">Бытовая техника</a></li>
+                        <li><a href="#">Компьютеры</a></li>
+                        <li><a href="#">Смартфоны</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li>+7 (800) 123-45-67</li>
+                        <li>info@cuim.ru</li>
+                        <li>Москва, ул. Примерная, 123</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Demo accounts data
-        const demoAccounts = {
-            buyer: {
-                password: '123',
-                role: 'buyer',
-                name: 'Покупатель',
-                redirectUrl: 'buyer-cabinet.html'
-            },
-            seller: {
-                password: '123',
-                role: 'seller',
-                name: 'Продавец',
-                redirectUrl: 'seller-cabinet.html'
-            },
-            courier: {
-                password: '123',
-                role: 'courier',
-                name: 'Курьер',
-                redirectUrl: 'courier-cabinet.html'
-            }
-        };
-
-        // DOM Elements
-        const roleOptions = document.querySelectorAll('.role-option');
-        const loginForm = document.getElementById('loginForm');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const successModal = document.getElementById('successModal');
-        const errorModal = document.getElementById('errorModal');
-        const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
-        const redirectBtn = document.getElementById('redirectBtn');
-        const cancelRedirectBtn = document.getElementById('cancelRedirectBtn');
-        const closeErrorBtn = document.getElementById('closeErrorBtn');
-        const demoAccountsElements = document.querySelectorAll('.demo-account');
-
-        // Current selected role
-        let currentRole = 'buyer';
-
-        // Role selection
-        roleOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove active class from all options
-                roleOptions.forEach(opt => opt.classList.remove('active'));
-                // Add active class to clicked option
-                this.classList.add('active');
-                // Update current role
-                currentRole = this.dataset.role;
-            });
-        });
-
-        // Form submission
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Простой скрипт для добавления товаров в корзину и избранное
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartButtons = document.querySelectorAll('.btn:not(.btn-outline)');
+            const favoriteButtons = document.querySelectorAll('.btn-outline');
+            const cartBadge = document.querySelector('.fa-shopping-cart').parentNode.querySelector('.icon-badge');
+            const favoriteBadge = document.querySelector('.fa-heart').parentNode.querySelector('.icon-badge');
             
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value;
+            let cartCount = 5;
+            let favoriteCount = 3;
             
-            // Validate credentials
-            if (demoAccounts[username] && demoAccounts[username].password === password) {
-                const account = demoAccounts[username];
-                
-                // Check if selected role matches account role
-                if (account.role === currentRole) {
-                    // Show success modal
-                    successMessage.textContent = `Вы вошли как ${account.name}. Вы будете перенаправлены в личный кабинет через 5 секунд.`;
-                    successModal.classList.add('open');
-                    
-                    // Set redirect URL
-                    redirectBtn.onclick = function() {
-                        window.location.href = account.redirectUrl;
-                    };
-                    
-                    // Auto-redirect after 5 seconds
-                    const redirectTimer = setTimeout(() => {
-                        window.location.href = account.redirectUrl;
-                    }, 5000);
-                    
-                    // Cancel redirect
-                    cancelRedirectBtn.onclick = function() {
-                        clearTimeout(redirectTimer);
-                        successModal.classList.remove('open');
-                    };
-                } else {
-                    // Show role mismatch error
-                    errorMessage.textContent = `Выбранная роль не соответствует типу аккаунта. Используйте аккаунт ${currentRole === 'buyer' ? 'продавца' : currentRole === 'seller' ? 'покупателя' : 'курьера'}.`;
-                    errorModal.classList.add('open');
-                }
-            } else {
-                // Show invalid credentials error
-                errorMessage.textContent = 'Неверный логин или пароль. Используйте демо-аккаунты для тестирования.';
-                errorModal.classList.add('open');
-            }
-        });
-
-        // Close error modal
-        closeErrorBtn.addEventListener('click', function() {
-            errorModal.classList.remove('open');
-        });
-
-        // Auto-fill demo accounts on click
-        demoAccountsElements.forEach(account => {
-            account.addEventListener('click', function() {
-                const username = this.dataset.username;
-                const password = this.dataset.password;
-                
-                usernameInput.value = username;
-                passwordInput.value = password;
-                
-                // Select appropriate role
-                roleOptions.forEach(opt => opt.classList.remove('active'));
-                if (username === 'buyer') {
-                    document.querySelector('.role-buyer').classList.add('active');
-                    currentRole = 'buyer';
-                } else if (username === 'seller') {
-                    document.querySelector('.role-seller').classList.add('active');
-                    currentRole = 'seller';
-                } else if (username === 'courier') {
-                    document.querySelector('.role-courier').classList.add('active');
-                    currentRole = 'courier';
-                }
+            cartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    cartCount++;
+                    cartBadge.textContent = cartCount;
+                    alert('Товар добавлен в корзину!');
+                });
             });
-        });
-
-        // Add enter key support
-        passwordInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                loginForm.dispatchEvent(new Event('submit'));
-            }
+            
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    favoriteCount++;
+                    favoriteBadge.textContent = favoriteCount;
+                    alert('Товар добавлен в избранное!');
+                });
+            });
         });
     </script>
 </body>
