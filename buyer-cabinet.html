@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет покупателя</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,23 +13,48 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        :root {
+            --primary-color: #4a76a8;
+            --secondary-color: #ffcc00;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --light-gray: #f0f0f0;
+            --dark-gray: #666;
+        }
+        
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
         
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Мобильная версия */
+        .mobile-container {
             max-width: 400px;
             margin: 0 auto;
             background-color: white;
             min-height: 100vh;
             position: relative;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .desktop-container {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
         
         .header {
-            background-color: #4a76a8;
+            background-color: var(--primary-color);
             color: white;
             padding: 15px;
             text-align: center;
@@ -59,8 +85,8 @@
         }
         
         .friend-status {
-            background-color: #ffcc00;
-            color: #333;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
             padding: 5px 10px;
             border-radius: 15px;
             font-size: 12px;
@@ -95,7 +121,7 @@
         .nav-icon {
             width: 40px;
             height: 40px;
-            background-color: #f0f0f0;
+            background-color: var(--light-gray);
             border-radius: 50%;
             margin: 0 auto 5px;
             display: flex;
@@ -118,7 +144,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: conic-gradient(#4a76a8 0% 20%, #f0f0f0 20% 100%);
+            background: conic-gradient(var(--primary-color) 0% 20%, var(--light-gray) 20% 100%);
             margin: 0 auto 5px;
             display: flex;
             align-items: center;
@@ -128,7 +154,7 @@
         }
         
         .progress-circle.second {
-            background: conic-gradient(#4a76a8 0% 89%, #f0f0f0 89% 100%);
+            background: conic-gradient(var(--primary-color) 0% 89%, var(--light-gray) 89% 100%);
         }
         
         .progress-label {
@@ -168,11 +194,11 @@
         
         .address {
             font-size: 14px;
-            color: #666;
+            color: var(--dark-gray);
         }
         
         .promo-section {
-            background-color: #4a76a8;
+            background-color: var(--primary-color);
             color: white;
             padding: 20px;
             text-align: center;
@@ -191,21 +217,27 @@
         }
         
         .shop-button {
-            background-color: #ffcc00;
-            color: #333;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
             border: none;
             padding: 12px 30px;
             border-radius: 25px;
             font-weight: bold;
             font-size: 16px;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .shop-button:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
         }
         
         .cart-section {
             position: fixed;
             bottom: 70px;
             right: 20px;
-            background-color: #4a76a8;
+            background-color: var(--primary-color);
             color: white;
             width: 60px;
             height: 60px;
@@ -215,6 +247,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
         }
         
         .cart-text {
@@ -232,22 +265,159 @@
             background-color: white;
             padding: 10px 0;
             border-top: 1px solid #eee;
+            z-index: 100;
         }
         
         .bottom-nav-item {
             text-align: center;
             font-size: 12px;
-            color: #666;
+            color: var(--dark-gray);
         }
         
         .bottom-nav-item.active {
-            color: #4a76a8;
+            color: var(--primary-color);
             font-weight: bold;
+        }
+        
+        /* Десктоп версия */
+        .desktop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .desktop-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .desktop-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .desktop-nav-item {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .desktop-nav-item.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        .desktop-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .desktop-sidebar {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .desktop-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .desktop-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .desktop-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .desktop-card-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .qr-text {
+            font-size: 14px;
+            color: var(--dark-gray);
+            margin-bottom: 10px;
+        }
+        
+        .pzv-address {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .pzv-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .pzv-info {
+            font-size: 14px;
+            color: var(--dark-gray);
+            margin-bottom: 5px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .mobile-container {
+                display: block;
+            }
+            
+            .desktop-container {
+                display: none;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-container {
+                display: none;
+            }
+            
+            .desktop-container {
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Мобильная версия -->
+    <div class="mobile-container">
         <div class="header">
             <div class="time">21:47</div>
             <div class="level-section">
@@ -307,6 +477,20 @@
             <div class="address">Москва, 11-я Парковая улица, 44к1</div>
         </div>
         
+        <div class="qr-section">
+            <div class="qr-text">QR-код для получения заказа</div>
+            <div class="qr-code">
+                <!-- Здесь будет QR-код -->
+                <i class="fas fa-qrcode" style="font-size: 80px; color: #333;"></i>
+            </div>
+            <div class="pzv-address">
+                <div class="pzv-title">Пункт выдачи заказов</div>
+                <div class="pzv-info">Москва, ТЦ "Мегаполис", ул. Ленина, 15</div>
+                <div class="pzv-info">Режим работы: 09:00 - 21:00</div>
+                <div class="pzv-info">Телефон: +7 (495) 123-45-67</div>
+            </div>
+        </div>
+        
         <div class="promo-section">
             <div class="promo-title">Молочный ш!</div>
             <div class="promo-text">ПОЛУЧАЙ КЕШБЭК И СКИДКИ НА ВАЖНЫЙ ЗАКАЗ</div>
@@ -326,5 +510,147 @@
             <div class="bottom-nav-item">Профиль</div>
         </div>
     </div>
+    
+    <!-- Десктоп версия -->
+    <div class="desktop-container">
+        <div class="desktop-header">
+            <div class="desktop-logo">МойМагазин</div>
+            <div class="desktop-nav">
+                <a href="#" class="desktop-nav-item active">Главная</a>
+                <a href="#" class="desktop-nav-item">Каталог</a>
+                <a href="#" class="desktop-nav-item">Акции</a>
+                <a href="#" class="desktop-nav-item">Корзина</a>
+                <a href="#" class="desktop-nav-item">Профиль</a>
+            </div>
+        </div>
+        
+        <div class="desktop-content">
+            <div class="desktop-sidebar">
+                <div class="level-section">
+                    <div class="level-label">уровень</div>
+                    <div class="cashback-value">кешбэк</div>
+                    <div class="friend-status">Лучший друг 2%</div>
+                    <div class="date">09.11.2025 21:38:19</div>
+                </div>
+                <div class="progress-text">Ещё 5 дней с покупками до 2% кешбэка в следующем...</div>
+                
+                <div class="navigation">
+                    <div class="nav-item">
+                        <div class="nav-icon">М</div>
+                        <div>Монеты</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon">Т</div>
+                        <div>Твои скидки</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon">П</div>
+                        <div>Промокоды</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon">К</div>
+                        <div>Купоны</div>
+                    </div>
+                </div>
+                
+                <div class="progress-section">
+                    <div class="progress-item">
+                        <div class="progress-circle">1/5</div>
+                        <div class="progress-label">Товары по карте</div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-circle second">8/9</div>
+                        <div class="progress-label">Любимые товары</div>
+                    </div>
+                </div>
+                
+                <div class="menu-section">
+                    <div class="menu-item">
+                        <div class="menu-icon">❤</div>
+                        <div>Любимые категории</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon">🎮</div>
+                        <div>Игра Планетяне</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="desktop-main">
+                <div class="desktop-card">
+                    <div class="desktop-card-header">
+                        <div class="desktop-card-title">Мои заказы</div>
+                    </div>
+                    <div class="qr-section">
+                        <div class="qr-text">QR-код для получения заказа</div>
+                        <div class="qr-code">
+                            <!-- Здесь будет QR-код -->
+                            <i class="fas fa-qrcode" style="font-size: 80px; color: #333;"></i>
+                        </div>
+                        <div class="pzv-address">
+                            <div class="pzv-title">Пункт выдачи заказов</div>
+                            <div class="pzv-info">Москва, ТЦ "Мегаполис", ул. Ленина, 15</div>
+                            <div class="pzv-info">Режим работы: 09:00 - 21:00</div>
+                            <div class="pzv-info">Телефон: +7 (495) 123-45-67</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="desktop-card">
+                    <div class="desktop-card-header">
+                        <div class="desktop-card-title">Адрес доставки</div>
+                    </div>
+                    <div class="address-section">
+                        <div class="address-title">
+                            <span>Основной адрес доставки ></span>
+                        </div>
+                        <div class="address">Москва, 11-я Парковая улица, 44к1</div>
+                    </div>
+                </div>
+                
+                <div class="desktop-card">
+                    <div class="desktop-card-header">
+                        <div class="desktop-card-title">Акции и предложения</div>
+                    </div>
+                    <div class="promo-section">
+                        <div class="promo-title">Молочный ш!</div>
+                        <div class="promo-text">ПОЛУЧАЙ КЕШБЭК И СКИДКИ НА ВАЖНЫЙ ЗАКАЗ</div>
+                        <button class="shop-button">За покупками!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Простая логика для переключения активных элементов
+        document.addEventListener('DOMContentLoaded', function() {
+            // Для мобильной версии
+            const mobileNavItems = document.querySelectorAll('.bottom-nav-item');
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    mobileNavItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Для десктоп версии
+            const desktopNavItems = document.querySelectorAll('.desktop-nav-item');
+            desktopNavItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    desktopNavItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Обработка кнопки "За покупками!"
+            const shopButtons = document.querySelectorAll('.shop-button');
+            shopButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Переход в каталог товаров!');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
