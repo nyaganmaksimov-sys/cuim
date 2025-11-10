@@ -421,6 +421,211 @@
     .add-to-sale:hover{filter:brightness(1.05)}
     .add-to-sale:active{transform:translateY(1px)}
 
+    /* ======= КНОПКА БЫСТРОГО ПРОСМОТРА ======= */
+    .quick-view-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(-5px);
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-1);
+      z-index: 3;
+    }
+
+    .product-card:hover .quick-view-btn,
+    .season-card:hover .quick-view-btn,
+    .sale-card:hover .quick-view-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quick-view-btn:hover {
+      background: var(--blue-600);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    /* ======= ПОП-АП БЫСТРОГО ПРОСМОТРА ======= */
+    .quick-view-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .quick-view-modal.open {
+      display: flex;
+    }
+
+    .quick-view-content {
+      background: white;
+      border-radius: var(--radius);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalAppear 0.3s ease;
+    }
+
+    @keyframes modalAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .quick-view-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #e9f1ff;
+    }
+
+    .quick-view-header h3 {
+      margin: 0;
+      font-size: 20px;
+      color: #163a69;
+    }
+
+    .quick-view-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--muted);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .quick-view-close:hover {
+      background: #f2f6fd;
+    }
+
+    .quick-view-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      padding: 30px;
+    }
+
+    .quick-view-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #f2f6fd, #e9f1ff);
+    }
+
+    .quick-view-info h2 {
+      margin: 0 0 15px;
+      font-size: 24px;
+      color: var(--text);
+    }
+
+    .quick-view-price {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--orange-600);
+      margin-bottom: 10px;
+    }
+
+    .quick-view-old-price {
+      font-size: 18px;
+      color: var(--muted);
+      text-decoration: line-through;
+      margin-left: 10px;
+    }
+
+    .quick-view-description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .quick-view-details {
+      margin-bottom: 25px;
+    }
+
+    .quick-view-detail {
+      display: flex;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .quick-view-detail strong {
+      min-width: 120px;
+      color: var(--text);
+    }
+
+    .quick-view-actions {
+      display: flex;
+      gap: 15px;
+    }
+
+    .quick-view-add-to-cart {
+      flex: 1;
+      background: var(--blue-600);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .quick-view-add-to-cart:hover {
+      filter: brightness(1.05);
+    }
+
+    .quick-view-buy-now {
+      flex: 1;
+      background: var(--orange-600);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    .quick-view-buy-now:hover {
+      filter: brightness(1.05);
+    }
+
     /* PVZ Map section */
     .pvz-section{
       margin:50px 0 40px; background:var(--panel); border-radius:var(--radius);
@@ -595,6 +800,15 @@
       .footer-content {
         grid-template-columns: 1fr 1fr;
         gap: 30px;
+      }
+      
+      .quick-view-body {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .quick-view-image {
+        height: 300px;
       }
     }
 
@@ -837,6 +1051,23 @@
       .ads-header-icon span:last-child {
         display: none;
       }
+      
+      .quick-view-body {
+        padding: 20px;
+        gap: 15px;
+      }
+      
+      .quick-view-actions {
+        flex-direction: column;
+      }
+      
+      .quick-view-header {
+        padding: 15px;
+      }
+      
+      .quick-view-header h3 {
+        font-size: 18px;
+      }
     }
 
     /* Адаптация для очень маленьких экранов */
@@ -942,7 +1173,7 @@
           </svg>
           <span>Избранное</span>
         </a>
-        <a href="#" class="h-link">
+        <a href="basket.html" class="h-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
@@ -1161,15 +1392,7 @@
         </div>
       </section>
 
-      <!-- Инфо-баннеры -->
-      <section class="section">
-        <div class="info-banner">🚚 Продукты — только с доставкой. Минимальный заказ: 1500 ₽.</div>
-        <div class="min-warning">⚠️ Минимальная сумма заказа — 1500 ₽. Добавьте товары, чтобы оформить.</div>
-      </section>
-    </div>
-  </main>
-
-  <!-- ФУТЕР С ИНФОРМАЦИЕЙ -->
+       <!-- ФУТЕР С ИНФОРМАЦИЕЙ -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-content">
@@ -1256,6 +1479,19 @@
     </div>
   </div>
 
+  <!-- ======= МОДАЛКА БЫСТРОГО ПРОСМОТРА ======= -->
+  <div class="quick-view-modal" id="quickViewModal">
+    <div class="quick-view-content">
+      <div class="quick-view-header">
+        <h3>Быстрый просмотр</h3>
+        <button class="quick-view-close" id="quickViewClose">✕</button>
+      </div>
+      <div class="quick-view-body" id="quickViewBody">
+        <!-- Контент заполняется JavaScript -->
+      </div>
+    </div>
+  </div>
+
   <script>
     // ======= ЛУЧШИЕ МАГАЗИНЫ =======
     const shops = [
@@ -1286,20 +1522,26 @@
 
     // ======= ПОПУЛЯРНЫЕ ТОВАРЫ =======
     const popularProducts = [
-      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:"https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:"https://images.unsplash.com/photo-1552767059-ce182ead6c1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:"https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:"https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:1, title:"Свежие огурцы (1 кг)", price:150, oldPrice:180, image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Свежие хрустящие огурцы с местной фермы. Идеально подходят для салатов и закусок.", details: {weight: "1 кг", category: "Овощи", supplier: "Ферма 'Зеленый край'"}},
+      {id:2, title:"Батон нарезной", price:45, oldPrice:null, image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Свежий пшеничный батон для бутербродов и тостов.", details: {weight: "400 г", category: "Хлеб", supplier: "Пекарня 'Хлебный дом'"}},
+      {id:3, title:"Молоко 3,2% 1л", price:89, oldPrice:95, image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Натуральное пастеризованное молоко от проверенных фермеров.", details: {weight: "1 л", category: "Молочные продукты", supplier: "Молочная ферма"}},
+      {id:4, title:"Яблоки Голден (1 кг)", price:120, oldPrice:null, image:"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Сладкие и сочные яблоки сорта Голден.", details: {weight: "1 кг", category: "Фрукты", supplier: "Фруктовый сад"}},
+      {id:5, title:"Колбаса 'Докторская'", price:320, oldPrice:350, image:"https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Классическая докторская колбаса по ГОСТу.", details: {weight: "500 г", category: "Колбасы", supplier: "Мясной двор"}},
+      {id:6, title:"Сыр 'Российский' 500г", price:450, oldPrice:null, image:"https://images.unsplash.com/photo-1552767059-ce182ead6c1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Популярный полутвердый сыр для бутербродов и выпечки.", details: {weight: "500 г", category: "Сыры", supplier: "Сыроварня"}},
+      {id:7, title:"Яйца куриные 10шт", price:95, oldPrice:105, image:"https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Свежие куриные яйца категории С0.", details: {weight: "10 шт", category: "Яйца", supplier: "Птицефабрика"}},
+      {id:8, title:"Готовый обед 'Борщ'", price:180, oldPrice:null, image:"https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Готовый борщ с мясом и сметаной. Просто разогрей и наслаждайся!", details: {weight: "500 г", category: "Готовая еда", supplier: "Столовая №1"}},
     ];
 
     function renderPopularProducts(){
       const grid = document.getElementById('productGrid');
       grid.innerHTML = popularProducts.map(p => `
         <div class="product-card">
+          <button class="quick-view-btn" data-id="${p.id}" title="Быстрый просмотр">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke-width="2"/>
+              <circle cx="12" cy="12" r="3" stroke-width="2"/>
+            </svg>
+          </button>
           <img src="${p.image}" alt="${p.title}" class="product-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
           <div class="product-body">
             <div class="product-title">${p.title}</div>
@@ -1319,24 +1561,31 @@
       `).join('');
       
       addCartAnimation('.add-to-cart');
+      initQuickViewButtons();
     }
 
     // ======= ХИТ СЕЗОНА =======
     const seasonProducts = [
-      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:"https://images.unsplash.com/photo-1563116912-4870a6d148d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:"https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:"https://images.unsplash.com/photo-1571771019786-3c589e15ad0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:"https://images.unsplash.com/photo-1464454709131-ffd692591ee5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:"https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:9, title:"Арбуз 'Сахарный' 5кг", price:299, oldPrice:450, discount:"-34%", image:"https://images.unsplash.com/photo-1563116912-4870a6d148d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Спелый сладкий арбуз. Идеален для утоления жажды в жаркий день.", details: {weight: "5 кг", category: "Фрукты", supplier: "Ферма 'Солнечная'"}},
+      {id:10, title:"Дыня 'Колхозница'", price:189, oldPrice:280, discount:"-32%", image:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Ароматная дыня с нежной мякотью.", details: {weight: "1.5 кг", category: "Фрукты", supplier: "Ферма 'Солнечная'"}},
+      {id:11, title:"Помидоры 'Черри' 500г", price:120, oldPrice:180, discount:"-33%", image:"https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Сладкие помидоры черри для салатов и закусок.", details: {weight: "500 г", category: "Овощи", supplier: "Теплицы 'Зеленые'"}},
+      {id:12, title:"Персики 'Южные' 1кг", price:350, oldPrice:null, discount:"Хит", image:"https://images.unsplash.com/photo-1571771019786-3c589e15ad0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Сочные персики с южных регионов.", details: {weight: "1 кг", category: "Фрукты", supplier: "Фруктовый сад"}},
+      {id:13, title:"Сок 'Яблочный' 2л", price:85, oldPrice:120, discount:"-29%", image:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Натуральный яблочный сок без добавления сахара.", details: {weight: "2 л", category: "Соки", supplier: "Соковый завод"}},
+      {id:14, title:"Клубника 500г", price:320, oldPrice:450, discount:"-29%", image:"https://images.unsplash.com/photo-1464454709131-ffd692591ee5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Свежая сладкая клубника.", details: {weight: "500 г", category: "Ягоды", supplier: "Ягодная ферма"}},
+      {id:15, title:"Салат 'Летний' 300г", price:95, oldPrice:null, discount:"Новинка", image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Свежий салат из сезонных овощей.", details: {weight: "300 г", category: "Готовая еда", supplier: "Столовая №1"}},
+      {id:16, title:"Лимонад 'Домашний' 1л", price:65, oldPrice:90, discount:"-28%", image:"https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Освежающий лимонад с натуральным вкусом.", details: {weight: "1 л", category: "Напитки", supplier: "Напиточный завод"}},
     ];
 
     function renderSeasonProducts(){
       const grid = document.getElementById('seasonGrid');
       grid.innerHTML = seasonProducts.map(p => `
         <div class="season-card">
+          <button class="quick-view-btn" data-id="${p.id}" title="Быстрый просмотр">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke-width="2"/>
+              <circle cx="12" cy="12" r="3" stroke-width="2"/>
+            </svg>
+          </button>
           <div class="season-badge">${p.discount}</div>
           <img src="${p.image}" alt="${p.title}" class="season-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
           <div class="season-body">
@@ -1357,24 +1606,31 @@
       `).join('');
       
       addCartAnimation('.add-to-season');
+      initQuickViewButtons();
     }
 
     // ======= АКЦИИ =======
     const saleProducts = [
-      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:"https://images.unsplash.com/photo-1570194065650-2f276eef4a34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:"https://images.unsplash.com/photo-1587734195503-904fca47e0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
-      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:"https://images.unsplash.com/photo-1558961367-7505a6c6d4b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"},
+      {id:17, title:"Скидка на хлеб 'Бородинский'", price:35, oldPrice:55, discount:"-36%", image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Ароматный бородинский хлеб с тмином и кориандром.", details: {weight: "500 г", category: "Хлеб", supplier: "Пекарня 'Хлебный дом'"}},
+      {id:18, title:"Набор 'Завтрак' 3 товара", price:299, oldPrice:450, discount:"-34%", image:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Идеальный набор для завтрака: хлеб, молоко, сыр.", details: {weight: "Набор", category: "Наборы", supplier: "ЦУИМ"}},
+      {id:19, title:"Сироп 'Кленовый' 500мл", price:180, oldPrice:280, discount:"-36%", image:"https://images.unsplash.com/photo-1570194065650-2f276eef4a34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Натуральный кленовый сироп для блинчиков и десертов.", details: {weight: "500 мл", category: "Сиропы", supplier: "Импортер"}},
+      {id:20, title:"Скидка на йогурты 2+1", price:120, oldPrice:180, discount:"Акция", image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Набор йогуртов: покупай 2, получай 3-й в подарок!", details: {weight: "3x125 г", category: "Йогурты", supplier: "Молочная ферма"}},
+      {id:21, title:"Кофе 'Арабика' 1кг", price:850, oldPrice:1200, discount:"-29%", image:"https://images.unsplash.com/photo-1587734195503-904fca47e0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Свежеобжаренный кофе арабика из Эфиопии.", details: {weight: "1 кг", category: "Кофе", supplier: "Кофейня 'Утро'"}},
+      {id:22, title:"Чай 'Зеленый' 100г", price:95, oldPrice:150, discount:"-37%", image:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Ароматный зеленый чай высшего сорта.", details: {weight: "100 г", category: "Чай", supplier: "Чайная компания"}},
+      {id:23, title:"Скидка на фрукты -30%", price:210, oldPrice:300, discount:"-30%", image:"https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Сезонные фрукты со скидкой 30%.", details: {weight: "Набор", category: "Фрукты", supplier: "Фруктовый сад"}},
+      {id:24, title:"Печенье 'Домашнее' 500г", price:150, oldPrice:null, discount:"2+1", image:"https://images.unsplash.com/photo-1558961367-7505a6c6d4b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80", description:"Вкусное домашнее печенье по бабушкиному рецепту.", details: {weight: "500 г", category: "Печенье", supplier: "Кондитерская"}},
     ];
 
     function renderSaleProducts(){
       const grid = document.getElementById('saleGrid');
       grid.innerHTML = saleProducts.map(p => `
         <div class="sale-card">
+          <button class="quick-view-btn" data-id="${p.id}" title="Быстрый просмотр">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke-width="2"/>
+              <circle cx="12" cy="12" r="3" stroke-width="2"/>
+            </svg>
+          </button>
           <div class="sale-badge">${p.discount}</div>
           <img src="${p.image}" alt="${p.title}" class="sale-image" onerror="this.src='https://via.placeholder.com/300x200?text=Товар'">
           <div class="sale-body">
@@ -1396,33 +1652,125 @@
       `).join('');
       
       addCartAnimation('.add-to-sale');
+      initQuickViewButtons();
     }
+
+    // ======= ФУНКЦИОНАЛ БЫСТРОГО ПРОСМОТРА =======
+    function initQuickViewButtons() {
+      document.querySelectorAll('.quick-view-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const productId = parseInt(this.dataset.id);
+          openQuickView(productId);
+        });
+      });
+    }
+
+    function openQuickView(productId) {
+      // Находим товар во всех массивах
+      let product = popularProducts.find(p => p.id === productId) ||
+                   seasonProducts.find(p => p.id === productId) ||
+                   saleProducts.find(p => p.id === productId);
+      
+      if (!product) return;
+
+      const modal = document.getElementById('quickViewModal');
+      const body = document.getElementById('quickViewBody');
+      
+      // Заполняем контент модалки
+      body.innerHTML = `
+        <div class="quick-view-image-container">
+          <img src="${product.image}" alt="${product.title}" class="quick-view-image" onerror="this.src='https://via.placeholder.com/500x400?text=Товар'">
+        </div>
+        <div class="quick-view-info">
+          <h2>${product.title}</h2>
+          <div class="quick-view-price">
+            ${product.price} ₽
+            ${product.oldPrice ? `<span class="quick-view-old-price">${product.oldPrice} ₽</span>` : ''}
+          </div>
+          ${product.discount ? `<div class="sale-badge" style="display: inline-block; margin-bottom: 15px;">${product.discount}</div>` : ''}
+          
+          <p class="quick-view-description">${product.description}</p>
+          
+          <div class="quick-view-details">
+            <div class="quick-view-detail"><strong>Вес:</strong> ${product.details.weight}</div>
+            <div class="quick-view-detail"><strong>Категория:</strong> ${product.details.category}</div>
+            <div class="quick-view-detail"><strong>Поставщик:</strong> ${product.details.supplier}</div>
+            <div class="quick-view-detail"><strong>Доставка:</strong> сегодня-завтра</div>
+          </div>
+          
+          <div class="quick-view-actions">
+            <button class="quick-view-add-to-cart" data-id="${product.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
+              </svg>
+              В корзину
+            </button>
+            <button class="quick-view-buy-now" data-id="${product.id}">Купить сейчас</button>
+          </div>
+        </div>
+      `;
+
+      // Показываем модалку
+      modal.classList.add('open');
+
+      // Добавляем обработчики для кнопок в модалке
+      document.querySelector('.quick-view-add-to-cart').addEventListener('click', function() {
+        addToCartAnimation(this, product.id);
+      });
+
+      document.querySelector('.quick-view-buy-now').addEventListener('click', function() {
+        addToCartAnimation(this, product.id);
+        // Здесь можно добавить логику для немедленного перехода к оформлению заказа
+        setTimeout(() => {
+          alert('Товар добавлен в корзину! Переходим к оформлению...');
+        }, 500);
+      });
+    }
+
+    // Закрытие модалки быстрого просмотра
+    document.getElementById('quickViewClose').addEventListener('click', function() {
+      document.getElementById('quickViewModal').classList.remove('open');
+    });
+
+    document.getElementById('quickViewModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('open');
+      }
+    });
 
     // Универсальная функция анимации для кнопок "В корзину"
     function addCartAnimation(selector){
       document.querySelectorAll(selector).forEach(btn => {
         btn.addEventListener('click', function(){
-          const originalHTML = this.innerHTML;
-          const originalBg = this.style.background;
-          
-          if(this.classList.contains('add-to-cart')){
-            this.style.background = 'var(--orange-600)';
-          } else if(this.classList.contains('add-to-season')){
-            this.style.background = 'var(--red-500)';
-          } else if(this.classList.contains('add-to-sale')){
-            this.style.background = 'var(--yellow-600)';
-            this.style.color = '#000';
-          }
-          
-          this.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Добавлено';
-          
-          setTimeout(() => {
-            this.style.background = originalBg;
-            this.style.color = '';
-            this.innerHTML = originalHTML;
-          }, 1500);
+          addToCartAnimation(this, this.dataset.id);
         });
       });
+    }
+
+    function addToCartAnimation(button, productId) {
+      const originalHTML = button.innerHTML;
+      const originalBg = button.style.background;
+      
+      if(button.classList.contains('add-to-cart') || button.classList.contains('quick-view-add-to-cart')){
+        button.style.background = 'var(--orange-600)';
+      } else if(button.classList.contains('add-to-season')){
+        button.style.background = 'var(--red-500)';
+      } else if(button.classList.contains('add-to-sale')){
+        button.style.background = 'var(--yellow-600)';
+        button.style.color = '#000';
+      }
+      
+      button.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Добавлено';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        button.style.background = originalBg;
+        button.style.color = '';
+        button.innerHTML = originalHTML;
+        button.disabled = false;
+      }, 1500);
     }
 
     // ======= СЛАЙДЕР =======
