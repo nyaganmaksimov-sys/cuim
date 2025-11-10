@@ -548,6 +548,104 @@
       right: 10px;
     }
 
+    /* ======= ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ ======= */
+
+    /* Для мобильных устройств - 2 карточки в ряд */
+    @media (max-width: 768px) {
+      /* Показываем слайдеры и скрываем обычные сетки */
+      .product-grid, .season-grid, .sale-grid {
+        display: none !important;
+      }
+      
+      .mobile-slider {
+        display: block !important;
+      }
+      
+      /* Настройка контейнера слайдера для 2 карточек */
+      .mobile-slider-container {
+        display: flex;
+        gap: 12px;
+        transition: transform 0.3s ease;
+      }
+      
+      .mobile-slide {
+        flex: 0 0 calc(50% - 6px); /* 2 карточки с отступом */
+        min-width: 0;
+      }
+      
+      /* Уменьшаем карточки для мобильных */
+      .product-card, .season-card, .sale-card {
+        margin-bottom: 0;
+        height: auto;
+      }
+      
+      .product-image, .season-image, .sale-image {
+        height: 140px; /* Уменьшаем высоту изображения */
+      }
+      
+      .product-body, .season-body, .sale-body {
+        padding: 10px;
+      }
+      
+      .product-title, .season-title-text, .sale-title-text {
+        font-size: 13px;
+        height: 32px;
+        -webkit-line-clamp: 2;
+      }
+      
+      .product-price, .season-price, .sale-price {
+        font-size: 16px;
+      }
+      
+      .add-to-cart, .add-to-season, .add-to-sale {
+        padding: 8px;
+        font-size: 12px;
+      }
+      
+      /* Показываем навигацию слайдера */
+      .slider-nav, .slider-arrow {
+        display: flex !important;
+      }
+    }
+
+    /* Для очень маленьких экранов */
+    @media (max-width: 480px) {
+      .mobile-slide {
+        flex: 0 0 calc(50% - 6px);
+      }
+      
+      .product-image, .season-image, .sale-image {
+        height: 120px;
+      }
+      
+      .product-title, .season-title-text, .sale-title-text {
+        font-size: 12px;
+        height: 30px;
+      }
+    }
+
+    /* Для планшетов - 3 карточки в ряд */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .product-grid, .season-grid, .sale-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .mobile-slider {
+        display: none !important;
+      }
+    }
+
+    /* Для десктопа - 4+ карточки в ряд */
+    @media (min-width: 1025px) {
+      .product-grid, .season-grid, .sale-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+      
+      .mobile-slider {
+        display: none !important;
+      }
+    }
+
     /* PVZ Map section */
     .pvz-section{
       margin:50px 0 40px; background:var(--panel); border-radius:var(--radius);
@@ -1038,19 +1136,6 @@
       .search input {
         padding: 12px 40px 12px 38px;
         font-size: 14px;
-      }
-      
-      /* СКРЫВАЕМ ОБЫЧНУЮ СЕТКУ И ПОКАЗЫВАЕМ СЛАЙДЕР НА МОБИЛЬНЫХ */
-      .product-grid, .season-grid, .sale-grid {
-        display: none;
-      }
-      
-      .mobile-slider {
-        display: block;
-      }
-      
-      .slider-nav, .slider-arrow {
-        display: flex;
       }
       
       .slide{
@@ -1912,7 +1997,7 @@
       }
     });
 
-    // ======= МОБИЛЬНЫЕ СЛАЙДЕРЫ =======
+    // ======= ОБНОВЛЕННАЯ ФУНКЦИЯ МОБИЛЬНОГО СЛАЙДЕРА =======
     function renderMobileSlider(type, products) {
       const container = document.getElementById(`${type}SliderContainer`);
       const nav = document.getElementById(`${type}Nav`);
@@ -1953,7 +2038,7 @@
                   </div>
                 </a>
                 <button class="add-to-cart" data-id="${product.id}">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
                   </svg>
@@ -1976,7 +2061,7 @@
                   </div>
                 </a>
                 <button class="add-to-season" data-id="${product.id}">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
                   </svg>
@@ -2000,7 +2085,7 @@
                   </div>
                 </a>
                 <button class="add-to-sale" data-id="${product.id}">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
                   </svg>
