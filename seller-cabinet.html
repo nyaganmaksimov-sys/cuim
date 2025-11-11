@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Личный кабинет продавца | ЦУИМ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,7 @@
             --ring: 0 0 0 3px rgba(21,101,192,.16);
             --container: 1280px;
             --transition: all .15s cubic-bezier(.4,.0,.2,1);
+            --header-h: 74px;
         }
 
         * {
@@ -56,14 +57,16 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            padding-top: max(0px, env(safe-area-inset-top));
         }
 
         .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 74px;
+            height: var(--header-h);
             position: relative;
+            gap: 16px;
         }
 
         .logo {
@@ -990,13 +993,108 @@
                 padding: 16px 20px;
             }
         }
+
+        /* ===== Адаптивные правки и улучшения ===== */
+        /* Уточняем высоту шапки на мобильных */
+        @media (max-width: 768px) { :root { --header-h: 70px; } }
+
+        /* Шапка — устойчивый грид для центрирования меню */
+        .header-inner {
+          display: grid;
+          grid-template-columns: auto 1fr auto;
+          align-items: center;
+          gap: 16px;
+        }
+
+        /* Меню по центру и с переносом при нехватке места */
+        .nav-menu {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 24px;
+          flex-wrap: wrap;
+        }
+        @media (max-width: 1280px) {
+          .nav-menu { gap: 20px; }
+        }
+        @media (max-width: 1100px) {
+          .nav-menu { gap: 14px; }
+          .nav-link { padding: 8px 10px; font-size: 14px; }
+        }
+
+        /* Сворачиваем меню в бургер раньше, чтобы не налезало (992px) */
+        @media (max-width: 992px) {
+          .nav-menu { display: none !important; }
+          .mobile-menu-toggle { display: flex !important; }
+        }
+
+        /* Логотип — без рамок/теней/подсветки */
+        .logo, .logo img, .logo-mark {
+          border: 0 !important;
+          outline: 0 !important;
+          box-shadow: none !important;
+          background: transparent !important;
+        }
+        .logo img { display: block; }
+
+        /* Мобильное меню: учитываем высоту шапки и вырезы экрана */
+        .mobile-nav {
+          padding-top: calc(var(--header-h) + 26px);
+          padding-left: 24px;
+          padding-right: 24px;
+          padding-bottom: 40px;
+        }
+        @supports (padding: max(0px)) {
+          .mobile-nav {
+            padding-top: calc(var(--header-h) + 26px + env(safe-area-inset-top));
+          }
+        }
+
+        /* Сетка карточек — безопасный минимум ширины */
+        .products-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+        @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr; } }
+
+        /* Картинка товара — фиксируем соотношение, чтобы не прыгала высота */
+        .product-image {
+          aspect-ratio: 16 / 9;
+          height: auto !important;
+          object-fit: cover;
+        }
+
+        /* Таблица: комфортный горизонтальный скролл на узких */
+        .orders-table-container {
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: contain;
+        }
+        @media (max-width: 420px) {
+          .orders-table td, .orders-table th {
+            padding: 10px 6px;
+            font-size: 12px;
+          }
+        }
+
+        /* Чуть более гибкая типографика */
+        .section-title { font-size: clamp(18px, 2.2vw, 20px); }
+        .stat-value   { font-size: clamp(20px, 2.4vw, 24px); }
+
+        /* Системные корректировки для мобильных */
+        html, body {
+          -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+        }
+        img { max-width: 100%; height: auto; }
+
+        /* Уважение к сниженной анимации */
+        @media (prefers-reduced-motion: reduce) {
+          * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="site-header">
         <div class="container header-inner">
-            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo">
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo" aria-label="На главную">
                 <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
                      alt="ЦУИМ" class="logo-mark">
             </a>
@@ -1009,8 +1107,8 @@
             </nav>
             
             <div class="user-menu">
-                <div class="user-avatar">ПП</div>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <div class="user-avatar" title="Профиль">ПП</div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileNav">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -1263,11 +1361,11 @@
     </main>
 
     <!-- Add Product Modal -->
-    <div class="modal-backdrop" id="productModal">
+    <div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal">
             <div class="modal-header">
                 <h3 id="modalTitle">Добавить новый товар</h3>
-                <button class="modal-close" id="closeModal">✕</button>
+                <button class="modal-close" id="closeModal" aria-label="Закрыть">✕</button>
             </div>
             <div class="modal-body">
                 <form id="productForm">
@@ -1421,7 +1519,9 @@
             e.stopPropagation();
             this.classList.toggle('active');
             mobileNav.classList.toggle('active');
-            document.body.style.overflow = this.classList.contains('active') ? 'hidden' : '';
+            const expanded = this.classList.contains('active');
+            this.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            document.body.style.overflow = expanded ? 'hidden' : '';
         });
 
         // Close mobile menu when clicking outside
@@ -1429,6 +1529,7 @@
             if (!event.target.closest('.mobile-nav') && !event.target.closest('.mobile-menu-toggle')) {
                 mobileMenuToggle.classList.remove('active');
                 mobileNav.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
         });
@@ -1438,6 +1539,7 @@
             link.addEventListener('click', function() {
                 mobileMenuToggle.classList.remove('active');
                 mobileNav.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
         });
