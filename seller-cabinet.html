@@ -6,1320 +6,861 @@
     <title>Личный кабинет продавца | ЦУИМ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #dbeafe;
-            --secondary: #f59e0b;
-            --accent: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --light: #f8fafc;
-            --dark: #1e293b;
-            --gray: #64748b;
-            --gray-light: #e2e8f0;
-            --border-radius: 8px;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --transition: all 0.2s ease;
-        }
+        /* Базовые стили */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
+
         body {
-            background-color: #f1f5f9;
-            color: var(--dark);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
             line-height: 1.5;
-            overflow-x: hidden;
         }
+
         .container {
-            max-width: 1400px;
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 16px;
+            padding: 0 15px;
         }
-        /* Header Styles */
-        header {
-            background: white;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo {
-            height: 40px;
-            width: auto;
-        }
-        .logo-text {
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--primary);
-        }
-        .nav-menu {
-            display: flex;
-            gap: 24px;
-        }
-        .nav-link {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .nav-link:hover, .nav-link.active {
-            background-color: var(--primary-light);
-            color: var(--primary);
-        }
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .notification-icon {
-            position: relative;
-            cursor: pointer;
-        }
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--danger);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--dark);
-        }
-        /* Mobile Navigation */
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: white;
-            z-index: 99;
-            padding: 80px 24px 40px;
-            overflow-y: auto;
-        }
-        .mobile-nav.active {
-            display: block;
-        }
-        .mobile-nav .nav-link {
-            display: block;
-            padding: 16px 20px;
-            margin-bottom: 8px;
-            font-size: 18px;
-            border-radius: 12px;
-        }
-        .mobile-nav-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 20px 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-        .mobile-user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 20px;
-        }
-        .mobile-user-info h3 {
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-        .mobile-user-info p {
-            color: var(--gray);
-            font-size: 14px;
-        }
-        /* Main Layout */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        /* Sidebar */
-        .sidebar {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 20px;
-            height: fit-content;
-            position: sticky;
-            top: 80px;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-        .user-avatar-large {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 24px;
-        }
-        .user-details h2 {
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-        .user-details p {
-            color: var(--gray);
-            font-size: 14px;
-        }
-        .sidebar-nav {
-            list-style: none;
-        }
-        .sidebar-item {
-            margin-bottom: 8px;
-        }
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 8px;
-            color: var(--dark);
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 15px;
-        }
-        .sidebar-link:hover {
-            background-color: rgba(37, 99, 235, 0.1);
-        }
-        .sidebar-link.active {
-            background-color: var(--primary);
-            color: white;
-        }
-        .sidebar-link i {
-            width: 20px;
-            text-align: center;
-        }
-        /* Content Area */
-        .content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+
         /* Welcome Card */
         .welcome-card {
             background: white;
-            border-radius: var(--border-radius);
-            padding: 24px;
-            box-shadow: var(--shadow);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
+
         .welcome-text h1 {
-            font-size: 24px;
+            font-size: 28px;
             margin-bottom: 8px;
-            color: var(--dark);
+            color: #1e293b;
         }
+
         .welcome-text p {
-            color: var(--gray);
+            color: #64748b;
+            font-size: 16px;
             margin-bottom: 0;
         }
+
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 12px 24px;
+            border-radius: 8px;
             border: none;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.2s ease;
             text-decoration: none;
             font-size: 14px;
+            white-space: nowrap;
         }
+
         .btn-primary {
-            background-color: var(--primary);
+            background-color: #2563eb;
             color: white;
         }
+
         .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
+            background-color: #1d4ed8;
         }
+
         /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            gap: 20px;
+            margin-bottom: 24px;
         }
+
         .stat-card {
             background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+
         .stat-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 16px;
         }
+
         .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
         }
+
         .stat-icon.blue {
             background-color: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
+            color: #2563eb;
         }
+
         .stat-icon.orange {
             background-color: rgba(245, 158, 11, 0.1);
-            color: var(--secondary);
+            color: #f59e0b;
         }
+
         .stat-icon.green {
             background-color: rgba(16, 185, 129, 0.1);
-            color: var(--accent);
+            color: #10b981;
         }
+
         .stat-icon.red {
             background-color: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
+            color: #ef4444;
         }
+
         .stat-value {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 700;
+            margin-bottom: 4px;
         }
+
         .stat-label {
-            color: var(--gray);
+            color: #64748b;
             font-size: 14px;
+            margin-bottom: 8px;
         }
+
         .stat-change {
             font-size: 12px;
             font-weight: 600;
         }
+
         .positive {
-            color: var(--accent);
+            color: #10b981;
         }
+
         .negative {
-            color: var(--danger);
+            color: #ef4444;
         }
-        /* Section Headers */
+
+        /* Section */
         .section {
             background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 20px;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 24px;
         }
+
         .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
+
         .section-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            color: var(--dark);
+            color: #1e293b;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .section-title i {
-            color: var(--primary);
-        }
+
         .btn-success {
-            background: var(--accent);
+            background: #10b981;
             color: white;
         }
-        .btn-success:hover {
-            background: #0d966c;
-            transform: translateY(-2px);
-        }
+
         .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
+            background: transparent;
+            border: 2px solid #2563eb;
+            color: #2563eb;
         }
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: white;
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
+
+        .tab {
+            padding: 12px 24px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .tab.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
         /* Products Grid */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
+
         .product-card {
             background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid var(--gray-light);
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
         }
+
         .product-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
+
         .product-image {
             width: 100%;
-            height: 160px;
+            height: 200px;
             object-fit: cover;
-            background: linear-gradient(135deg, #f2f6fd, #e9f1ff);
         }
+
         .product-badge {
             position: absolute;
             top: 12px;
             left: 12px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
             font-weight: 600;
         }
+
         .badge-active {
-            background-color: var(--accent);
+            background-color: #10b981;
             color: white;
         }
-        .badge-inactive {
-            background-color: var(--gray);
-            color: white;
-        }
+
         .badge-low-stock {
-            background-color: var(--warning);
+            background-color: #f59e0b;
             color: black;
         }
+
         .product-body {
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            padding: 20px;
         }
+
         .product-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 8px;
+            gap: 12px;
+            margin-bottom: 12px;
         }
+
         .product-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             line-height: 1.3;
-            color: var(--dark);
+            color: #1e293b;
             flex: 1;
         }
+
         .product-category {
-            font-size: 11px;
-            color: var(--gray);
-            background: rgba(37, 99, 235, 0.06);
+            font-size: 12px;
+            color: #64748b;
+            background: rgba(37, 99, 235, 0.1);
             padding: 4px 8px;
             border-radius: 4px;
         }
+
         .product-description {
-            font-size: 13px;
-            color: var(--gray);
+            font-size: 14px;
+            color: #64748b;
             line-height: 1.4;
+            margin-bottom: 16px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
         .product-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 16px;
         }
+
         .product-price {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            color: var(--secondary);
+            color: #f59e0b;
         }
+
         .product-stock {
-            font-size: 13px;
-            color: var(--gray);
+            font-size: 14px;
+            color: #64748b;
         }
+
         .stock-low {
-            color: var(--danger);
+            color: #ef4444;
             font-weight: 600;
         }
+
         .product-actions {
             display: flex;
             gap: 8px;
         }
+
         .btn-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: none;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.2s ease;
             font-size: 14px;
         }
+
         .btn-edit {
             background-color: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
+            color: #2563eb;
             flex: 1;
         }
+
         .btn-edit:hover {
-            background-color: var(--primary);
+            background-color: #2563eb;
             color: white;
         }
+
         .btn-delete {
             background-color: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
+            color: #ef4444;
         }
+
         .btn-delete:hover {
-            background-color: var(--danger);
+            background-color: #ef4444;
             color: white;
         }
+
         /* Orders Table */
         .orders-table-container {
             overflow-x: auto;
+            border-radius: 8px;
             -webkit-overflow-scrolling: touch;
-            border-radius: var(--border-radius);
         }
+
         .orders-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 700px;
+            min-width: 800px;
         }
+
         .orders-table th {
             text-align: left;
-            padding: 12px 16px;
+            padding: 16px 20px;
             font-weight: 600;
-            color: var(--gray);
-            border-bottom: 1px solid var(--gray-light);
+            color: #64748b;
+            border-bottom: 1px solid #e2e8f0;
             font-size: 14px;
         }
+
         .orders-table td {
-            padding: 16px;
-            border-bottom: 1px solid var(--gray-light);
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
             font-size: 14px;
         }
+
         .order-id {
             font-weight: 600;
-            color: var(--primary);
+            color: #2563eb;
         }
+
         .order-status {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 6px 12px;
-            border-radius: 999px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
         }
+
         .status-new {
             background-color: rgba(245, 158, 11, 0.1);
-            color: var(--secondary);
+            color: #f59e0b;
         }
+
         .status-processing {
             background-color: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
+            color: #2563eb;
         }
+
         .status-shipped {
             background-color: rgba(16, 185, 129, 0.1);
-            color: var(--accent);
+            color: #10b981;
         }
-        .status-cancelled {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-        /* Tabs */
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid var(--gray-light);
-            margin-bottom: 20px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .tabs::-webkit-scrollbar {
-            display: none;
-        }
-        .tab {
-            padding: 12px 20px;
-            font-weight: 600;
-            color: var(--gray);
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: var(--transition);
-            white-space: nowrap;
-            font-size: 14px;
-        }
-        .tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 40px 0;
-            margin-top: 60px;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-        .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: 16px;
-            color: white;
-        }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 14px;
-        }
-        .footer-links a:hover {
-            color: white;
-        }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 30px;
-            border-top: 1px solid #334155;
-            color: #94a3b8;
-            font-size: 14px;
-        }
-        /* ========== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
+
+        /* ========== АДАПТИВНОСТЬ ========== */
+
         /* Планшеты (1024px и меньше) */
         @media (max-width: 1024px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
-        }
-        /* Планшеты (992px и меньше) */
-        @media (max-width: 992px) {
-            .dashboard {
-                grid-template-columns: 1fr;
                 gap: 16px;
             }
-            .sidebar {
-                display: none;
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 16px;
             }
-            .nav-menu {
-                display: none;
+            
+            .welcome-card,
+            .section {
+                padding: 24px;
             }
-            .mobile-menu-toggle {
-                display: block;
-            }
+        }
+
+        /* Планшеты (768px и меньше) */
+        @media (max-width: 768px) {
             .welcome-card {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 16px;
+                text-align: left;
+                padding: 20px;
             }
-            .container {
-                padding: 0 12px;
+            
+            .welcome-text h1 {
+                font-size: 24px;
             }
-        }
-        /* Мобильные (768px и меньше) */
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 12px;
-            }
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
+            
             .btn {
                 width: 100%;
                 justify-content: center;
             }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .stat-card {
+                padding: 20px;
+            }
+            
+            .stat-value {
+                font-size: 28px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 12px;
+            }
+            
+            .product-body {
+                padding: 16px;
+            }
+        }
+
+        /* Мобильные (576px и меньше) */
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 12px;
+            }
+            
+            .welcome-card {
+                padding: 16px;
+            }
+            
             .welcome-text h1 {
                 font-size: 20px;
             }
-            .welcome-card, .section {
-                padding: 16px;
+            
+            .welcome-text p {
+                font-size: 14px;
             }
+            
             .stat-card {
                 padding: 16px;
             }
-            .header-content {
-                padding: 10px 0;
+            
+            .stat-value {
+                font-size: 24px;
             }
-            .logo-text {
+            
+            .stat-icon {
+                width: 40px;
+                height: 40px;
                 font-size: 18px;
             }
-        }
-        /* Мобильные (576px и меньше) */
-        @media (max-width: 576px) {
+            
+            .section {
+                padding: 16px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+            }
+            
             .products-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
+                gap: 12px;
             }
+            
             .product-image {
-                height: 140px;
+                height: 160px;
             }
+            
             .product-body {
                 padding: 12px;
             }
-            .section {
-                padding: 12px;
-            }
-            .stat-card {
-                padding: 12px;
-            }
-            .orders-table td, .orders-table th {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            .order-status {
-                font-size: 11px;
-                padding: 4px 8px;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .container {
-                padding: 0 10px;
-            }
-        }
-        /* Маленькие мобильные (480px и меньше) */
-        @media (max-width: 480px) {
-            .logo-text {
-                display: none;
-            }
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
+            
             .product-actions {
                 flex-direction: column;
             }
+            
             .btn-icon {
                 width: 100%;
+                height: 44px;
             }
+            
             .tabs {
                 flex-wrap: nowrap;
             }
+            
             .tab {
                 padding: 10px 16px;
                 font-size: 13px;
             }
-            .mobile-nav {
-                padding: 70px 20px 30px;
-            }
-            .mobile-nav .nav-link {
-                padding: 14px 16px;
-                font-size: 16px;
+            
+            .orders-table th,
+            .orders-table td {
+                padding: 12px 8px;
+                font-size: 13px;
             }
         }
+
+        /* Маленькие мобильные (480px и меньше) */
+        @media (max-width: 480px) {
+            .welcome-card {
+                padding: 12px;
+            }
+            
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .section {
+                padding: 12px;
+            }
+            
+            .product-body {
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+
         /* Очень маленькие мобильные (360px и меньше) */
         @media (max-width: 360px) {
             .container {
                 padding: 0 8px;
             }
-            .welcome-card, .section {
-                padding: 12px;
+            
+            .welcome-text h1 {
+                font-size: 18px;
             }
-            .stat-card {
-                padding: 12px;
-            }
-            .product-body {
-                padding: 10px;
-            }
-            .btn {
-                padding: 8px 16px;
-                font-size: 13px;
-            }
+            
             .section-title {
                 font-size: 16px;
             }
-            .stat-value {
-                font-size: 20px;
-            }
-            /* --- Добавленное правило для улучшения адаптации логотипа --- */
-            .logo {
-                height: 32px; /* Уменьшаем высоту логотипа */
-            }
-            /* --- Конец добавленного правила --- */
-        }
-         /* Ещё более маленькие экраны */
-         @media (max-width: 320px) {
-            .logo {
-                height: 28px; /* Дополнительно уменьшаем */
-            }
-            .header-content {
-                padding: 8px 0; /* Уменьшаем отступы в заголовке */
-            }
-         }
-        /* Улучшения для мобильных устройств */
-        .mobile-only {
-            display: none;
-        }
-        @media (max-width: 992px) {
-            .desktop-only {
-                display: none;
-            }
-            .mobile-only {
-                display: block;
-            }
-        }
-        /* Анимация для мобильного меню */
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-        .mobile-nav.active {
-            animation: slideIn 0.3s ease-out;
-        }
-        /* Улучшение доступности для мобильных */
-        @media (max-width: 768px) {
-            .btn, .nav-link, .tab {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-            }
-            .btn-icon {
-                min-height: 44px;
-                min-width: 44px;
+            
+            .tab {
+                padding: 8px 12px;
+                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-container">
-                    <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/9e37f67ebf53d1cdddd68d597d8f5502abb2245b/images/logo.png" alt="ЦУИМ" class="logo">
-                    <span class="logo-text">ЦУИМ</span>
-                </div>
-                <nav class="nav-menu desktop-only">
-                    <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        Главная
-                    </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-chart-bar"></i>
-                        Аналитика
-                    </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-wallet"></i>
-                        Финансы
-                    </a>
-                    <a href="#" class="nav-link active">
-                        <i class="fas fa-box"></i>
-                        Товары
-                    </a>
-                </nav>
-                <div class="user-menu">
-                    <div class="notification-icon">
-                        <i class="fas fa-bell" style="font-size: 20px; color: var(--gray);"></i>
-                        <span class="notification-badge">3</span>
-                    </div>
-                    <div class="user-avatar desktop-only" title="Профиль">ПП</div>
-                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Navigation -->
-        <nav class="mobile-nav" id="mobileNav">
-            <div class="mobile-nav-header">
-                <div class="mobile-user-avatar">ПП</div>
-                <div class="mobile-user-info">
-                    <h3>Петр Продавцов</h3>
-                    <p>Магазин "Свежие продукты"</p>
-                </div>
-            </div>
-            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">
-                <i class="fas fa-home"></i>
-                Главная
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-chart-bar"></i>
-                Аналитика
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-wallet"></i>
-                Финансы
-            </a>
-            <a href="#" class="nav-link active">
-                <i class="fas fa-box"></i>
-                Товары
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-shopping-cart"></i>
-                Заказы
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-star"></i>
-                Отзывы
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-warehouse"></i>
-                Склад
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-cog"></i>
-                Настройки
-            </a>
-        </nav>
-    </header>
     <main class="container">
-        <div class="dashboard">
-            <!-- Sidebar -->
-            <aside class="sidebar desktop-only">
-                <div class="user-info">
-                    <div class="user-avatar-large">ПП</div>
-                    <div class="user-details">
-                        <h2>Петр Продавцов</h2>
-                        <p>Магазин "Свежие продукты"</p>
+        <!-- Welcome Card -->
+        <div class="welcome-card">
+            <div class="welcome-text">
+                <h1>Добро пожаловать, Петр!</h1>
+                <p>Управляйте своими товарами, заказами и аналитикой продаж в одном месте.</p>
+            </div>
+            <button class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Добавить товар
+            </button>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-box"></i>
                     </div>
                 </div>
-                <ul class="sidebar-nav">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-home"></i>
-                            Обзор
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link active">
-                            <i class="fas fa-box"></i>
-                            Товары
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-shopping-cart"></i>
-                            Заказы
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-star"></i>
-                            Отзывы
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-warehouse"></i>
-                            Склад
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-chart-bar"></i>
-                            Аналитика
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-wallet"></i>
-                            Финансы
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-cog"></i>
-                            Настройки
-                        </a>
-                    </li>
-                </ul>
-            </aside>
-            <!-- Main Content -->
-            <div class="content">
-                <!-- Welcome Card -->
-                <div class="welcome-card">
-                    <div class="welcome-text">
-                        <h1>Добро пожаловать, Петр!</h1>
-                        <p>Управляйте своими товарами, заказами и аналитикой продаж в одном месте.</p>
-                    </div>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-plus"></i>
-                        Добавить товар
-                    </button>
-                </div>
-                <!-- Quick Stats -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon blue">
-                                <i class="fas fa-box"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">24</div>
-                        <div class="stat-label">Активных товаров</div>
-                        <div class="stat-change positive">+3 за неделю</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon orange">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">47</div>
-                        <div class="stat-label">Новых заказов</div>
-                        <div class="stat-change positive">+12 за неделю</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon green">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">42 580 ₽</div>
-                        <div class="stat-label">Выручка за месяц</div>
-                        <div class="stat-change positive">+8.5%</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon red">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-label">Товара заканчиваются</div>
-                        <div class="stat-change negative">Срочно пополнить</div>
+                <div class="stat-value">24</div>
+                <div class="stat-label">Активных товаров</div>
+                <div class="stat-change positive">+3 за неделю</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
                 </div>
-                <!-- Products Section -->
-                <section class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <i class="fas fa-box"></i>
-                            Каталог товаров
-                        </h2>
-                        <button class="btn btn-success">
-                            <i class="fas fa-plus"></i>
-                            Добавить товар
-                        </button>
+                <div class="stat-value">47</div>
+                <div class="stat-label">Новых заказов</div>
+                <div class="stat-change positive">+12 за неделю</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon green">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <div class="tabs">
-                        <div class="tab active">Все товары</div>
-                        <div class="tab">Активные</div>
-                        <div class="tab">Скрытые</div>
-                        <div class="tab">Низкий запас</div>
+                </div>
+                <div class="stat-value">42 580 ₽</div>
+                <div class="stat-label">Выручка за месяц</div>
+                <div class="stat-change positive">+8.5%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon red">
+                        <i class="fas fa-exclamation-triangle"></i>
                     </div>
-                    <div class="tab-content active">
-                        <div class="products-grid">
-                            <!-- Product Cards -->
-                            <div class="product-card">
-                                <div style="position: relative;">
-                                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Свежие огурцы" class="product-image">
-                                    <div class="product-badge badge-active">Активен</div>
-                                </div>
-                                <div class="product-body">
-                                    <div class="product-header">
-                                        <div class="product-title">Свежие огурцы</div>
-                                        <div class="product-category">Овощи</div>
-                                    </div>
-                                    <div class="product-description">Свежие хрустящие огурцы с местной фермы</div>
-                                    <div class="product-meta">
-                                        <div class="product-price">150 ₽</div>
-                                        <div class="product-stock">24 шт.</div>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="btn-icon btn-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn-icon btn-delete">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-card">
-                                <div style="position: relative;">
-                                    <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Помидоры Черри" class="product-image">
-                                    <div class="product-badge badge-low-stock">Мало</div>
-                                </div>
-                                <div class="product-body">
-                                    <div class="product-header">
-                                        <div class="product-title">Помидоры Черри</div>
-                                        <div class="product-category">Овощи</div>
-                                    </div>
-                                    <div class="product-description">Сладкие помидоры черри в упаковке 500г</div>
-                                    <div class="product-meta">
-                                        <div class="product-price">220 ₽</div>
-                                        <div class="product-stock stock-low">3 шт.</div>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="btn-icon btn-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn-icon btn-delete">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-card">
-                                <div style="position: relative;">
-                                    <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Молоко" class="product-image">
-                                    <div class="product-badge badge-active">Активен</div>
-                                </div>
-                                <div class="product-body">
-                                    <div class="product-header">
-                                        <div class="product-title">Молоко 3.2%</div>
-                                        <div class="product-category">Молочные продукты</div>
-                                    </div>
-                                    <div class="product-description">Свежее пастеризованное молоко 1 литр</div>
-                                    <div class="product-meta">
-                                        <div class="product-price">89 ₽</div>
-                                        <div class="product-stock">42 шт.</div>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="btn-icon btn-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn-icon btn-delete">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-card">
-                                <div style="position: relative;">
-                                    <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Бананы" class="product-image">
-                                    <div class="product-badge badge-active">Активен</div>
-                                </div>
-                                <div class="product-body">
-                                    <div class="product-header">
-                                        <div class="product-title">Бананы</div>
-                                        <div class="product-category">Фрукты</div>
-                                    </div>
-                                    <div class="product-description">Спелые бананы связка 1кг</div>
-                                    <div class="product-meta">
-                                        <div class="product-price">95 ₽</div>
-                                        <div class="product-stock stock-low">5 шт.</div>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="btn-icon btn-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn-icon btn-delete">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Recent Orders -->
-                <section class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <i class="fas fa-shopping-cart"></i>
-                            Последние заказы
-                        </h2>
-                        <a href="#" class="btn btn-outline">
-                            Все заказы
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                    <div class="orders-table-container">
-                        <table class="orders-table">
-                            <thead>
-                                <tr>
-                                    <th>Номер заказа</th>
-                                    <th>Товары</th>
-                                    <th>Сумма</th>
-                                    <th>Статус</th>
-                                    <th>Дата</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="order-id">#CUIM-7923</td>
-                                    <td>Огурцы, Помидоры, Хлеб</td>
-                                    <td>1 240 ₽</td>
-                                    <td><span class="order-status status-new">Новый</span></td>
-                                    <td>15.11.2023</td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#CUIM-7918</td>
-                                    <td>Молоко, Яйца, Сыр</td>
-                                    <td>890 ₽</td>
-                                    <td><span class="order-status status-processing">В обработке</span></td>
-                                    <td>14.11.2023</td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#CUIM-7905</td>
-                                    <td>Фруктовый набор</td>
-                                    <td>2 150 ₽</td>
-                                    <td><span class="order-status status-shipped">Отправлен</span></td>
-                                    <td>13.11.2023</td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#CUIM-7892</td>
-                                    <td>Мясной набор</td>
-                                    <td>3 420 ₽</td>
-                                    <td><span class="order-status status-shipped">Отправлен</span></td>
-                                    <td>12.11.2023</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+                </div>
+                <div class="stat-value">3</div>
+                <div class="stat-label">Товара заканчиваются</div>
+                <div class="stat-change negative">Срочно пополнить</div>
             </div>
         </div>
+
+        <!-- Products Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-box"></i>
+                    Каталог товаров
+                </h2>
+                <button class="btn btn-success">
+                    <i class="fas fa-plus"></i>
+                    Добавить товар
+                </button>
+            </div>
+            <div class="tabs">
+                <div class="tab active">Все товары</div>
+                <div class="tab">Активные</div>
+                <div class="tab">Скрытые</div>
+                <div class="tab">Низкий запас</div>
+            </div>
+            <div class="products-grid">
+                <!-- Product Cards -->
+                <div class="product-card">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Свежие огурцы" class="product-image">
+                        <div class="product-badge badge-active">Активен</div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-header">
+                            <div class="product-title">Свежие огурцы</div>
+                            <div class="product-category">Овощи</div>
+                        </div>
+                        <div class="product-description">Свежие хрустящие огурцы с местной фермы</div>
+                        <div class="product-meta">
+                            <div class="product-price">150 ₽</div>
+                            <div class="product-stock">24 шт.</div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-icon btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon btn-delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Помидоры Черри" class="product-image">
+                        <div class="product-badge badge-low-stock">Мало</div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-header">
+                            <div class="product-title">Помидоры Черри</div>
+                            <div class="product-category">Овощи</div>
+                        </div>
+                        <div class="product-description">Сладкие помидоры черри в упаковке 500г</div>
+                        <div class="product-meta">
+                            <div class="product-price">220 ₽</div>
+                            <div class="product-stock stock-low">3 шт.</div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-icon btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon btn-delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Молоко" class="product-image">
+                        <div class="product-badge badge-active">Активен</div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-header">
+                            <div class="product-title">Молоко 3.2%</div>
+                            <div class="product-category">Молочные продукты</div>
+                        </div>
+                        <div class="product-description">Свежее пастеризованное молоко 1 литр</div>
+                        <div class="product-meta">
+                            <div class="product-price">89 ₽</div>
+                            <div class="product-stock">42 шт.</div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-icon btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon btn-delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Бананы" class="product-image">
+                        <div class="product-badge badge-active">Активен</div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-header">
+                            <div class="product-title">Бананы</div>
+                            <div class="product-category">Фрукты</div>
+                        </div>
+                        <div class="product-description">Спелые бананы связка 1кг</div>
+                        <div class="product-meta">
+                            <div class="product-price">95 ₽</div>
+                            <div class="product-stock stock-low">5 шт.</div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-icon btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon btn-delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Orders -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-shopping-cart"></i>
+                    Последние заказы
+                </h2>
+                <a href="#" class="btn btn-outline">
+                    Все заказы
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="orders-table-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Номер заказа</th>
+                            <th>Товары</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                            <th>Дата</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="order-id">#CUIM-7923</td>
+                            <td>Огурцы, Помидоры, Хлеб</td>
+                            <td>1 240 ₽</td>
+                            <td><span class="order-status status-new">Новый</span></td>
+                            <td>15.11.2023</td>
+                        </tr>
+                        <tr>
+                            <td class="order-id">#CUIM-7918</td>
+                            <td>Молоко, Яйца, Сыр</td>
+                            <td>890 ₽</td>
+                            <td><span class="order-status status-processing">В обработке</span></td>
+                            <td>14.11.2023</td>
+                        </tr>
+                        <tr>
+                            <td class="order-id">#CUIM-7905</td>
+                            <td>Фруктовый набор</td>
+                            <td>2 150 ₽</td>
+                            <td><span class="order-status status-shipped">Отправлен</span></td>
+                            <td>13.11.2023</td>
+                        </tr>
+                        <tr>
+                            <td class="order-id">#CUIM-7892</td>
+                            <td>Мясной набор</td>
+                            <td>3 420 ₽</td>
+                            <td><span class="order-status status-shipped">Отправлен</span></td>
+                            <td>12.11.2023</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>ЦУИМ</h3>
-                    <p>Платформа для управления интернет-магазинами с 2023 года.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Навигация</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Главная</a></li>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Услуги</a></li>
-                        <li><a href="#">Контакты</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Поддержка</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Помощь</a></li>
-                        <li><a href="#">Документация</a></li>
-                        <li><a href="#">Сообщество</a></li>
-                        <li><a href="#">Статус системы</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:support@cuim.ru">support@cuim.ru</a></li>
-                        <li><a href="tel:+78001234567">8 (800) 123-45-67</a></li>
-                        <li>Москва, ул. Примерная, 123</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 ЦУИМ. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
+
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobileMenuToggle').addEventListener('click', function() {
-            const mobileNav = document.getElementById('mobileNav');
-            mobileNav.classList.toggle('active');
-            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
-        });
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('mobileNav').classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-        // Tab functionality
+        // Табы
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-            });
-        });
-        // Product card hover effects
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px)';
-            });
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
             });
         });
     </script>
