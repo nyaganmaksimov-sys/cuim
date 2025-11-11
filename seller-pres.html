@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЦУИМ для продавцов - Подключите ваш бизнес</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo-text {
+            margin-left: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+        
+        /* Герой-секция */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Преимущества для продавцов */
+        .advantages {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--text-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .advantage-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .advantage-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .advantage-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* Условия сотрудничества */
+        .conditions {
+            padding: 80px 0;
+            background-color: #f5f7fa;
+        }
+        
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        
+        .condition-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .condition-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .condition-card ul {
+            list-style: none;
+        }
+        
+        .condition-card li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .condition-card li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-color, #27ae60);
+            font-weight: bold;
+        }
+        
+        /* Как подключиться */
+        .how-to-join {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .steps:before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--light-color);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* Сравнение с конкурентами */
+        .comparison {
+            padding: 80px 0;
+            background-color: #f5f7fa;
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .cuim-check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .competitor-cross {
+            color: #e74c3c;
+        }
+        
+        /* Призыв к действию */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Адаптивность для планшетов */
+        @media (max-width: 992px) {
+            .advantages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .conditions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .steps:before {
+                display: none;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/c58853d1ca05d1c36a9598d8bf61588882dbf880/images/logo.png" alt="CUIM Logo">
+                    <div class="logo-text">ЦУИМ</div>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+                <nav>
+                    <ul>
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#">Преимущества</a></li>
+                        <li><a href="#">Условия</a></li>
+                        <li><a href="#">Тарифы</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="#" class="btn">Стать продавцом</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="container">
+            <h1>Подключите ваш бизнес к ЦУИМ</h1>
+            <p>Увеличивайте продажи, привлекайте новых клиентов и развивайте свой бизнес вместе с универсальным городским маркетплейсом</p>
+            <a href="#" class="btn">Подать заявку</a>
+        </div>
+    </section>
+
+    <!-- Преимущества для продавцов -->
+    <section class="advantages">
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему продавцы выбирают ЦУИМ</h2>
+                <p>Мы создали выгодные условия для развития местного бизнеса</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3>Низкие комиссии</h3>
+                    <p>Комиссия от 5% до 25% в зависимости от категории товаров и услуг</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Ежедневные выплаты</h3>
+                    <p>Получайте деньги на счет каждый день, а не раз в 1-2 недели</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Новые клиенты</h3>
+                    <p>Привлекайте покупателей, которые ищут местные товары и услуги</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Гибкая логистика</h3>
+                    <p>Самостоятельная доставка или использование наших ПВЗ</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Аналитика и отчетность</h3>
+                    <p>Подробные отчеты о продажах и поведении клиентов</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Поддержка 24/7</h3>
+                    <p>Круглосуточная помощь по всем вопросам работы на платформе</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Условия сотрудничества -->
+    <section class="conditions">
+        <div class="container">
+            <div class="section-title">
+                <h2>Условия сотрудничества</h2>
+                <p>Прозрачные и выгодные условия для партнеров</p>
+            </div>
+            <div class="conditions-grid">
+                <div class="condition-card">
+                    <h3><i class="fas fa-store"></i> Для магазинов</h3>
+                    <ul>
+                        <li>Комиссия: 12-15% в зависимости от категории товаров</li>
+                        <li>Минимальная комиссия: 10 рублей за заказ</li>
+                        <li>Выплаты: ежедневно на расчетный счет</li>
+                        <li>Логистика: самовывоз из магазина или ПВЗ ЦУИМ</li>
+                        <li>Первые 3 месяца - комиссия 0% для новых партнеров</li>
+                    </ul>
+                </div>
+                <div class="condition-card">
+                    <h3><i class="fas fa-utensils"></i> Для кафе и ресторанов</h3>
+                    <ul>
+                        <li>Комиссия: 15-25% в зависимости от среднего чека</li>
+                        <li>Минимальная комиссия: 15 рублей за заказ</li>
+                        <li>Выплаты: ежедневно на расчетный счет</li>
+                        <li>Доставка: собственными силами или курьерами ЦУИМ</li>
+                        <li>Бесплатное подключение и обучение</li>
+                    </ul>
+                </div>
+                <div class="condition-card">
+                    <h3><i class="fas fa-tools"></i> Для сервисов и услуг</h3>
+                    <ul>
+                        <li>Комиссия: 10-20% в зависимости от типа услуги</li>
+                        <li>Фиксированная плата: 50 рублей за заявку (для некоторых категорий)</li>
+                        <li>Выплаты: ежедневно на расчетный счет</li>
+                        <li>Гибкая система бронирования и уведомлений</li>
+                        <li>Интеграция с календарем и системой напоминаний</li>
+                    </ul>
+                </div>
+                <div class="condition-card">
+                    <h3><i class="fas fa-ticket-alt"></i> Для билетных операторов</h3>
+                    <ul>
+                        <li>Комиссия: 5-10% в зависимости от типа мероприятия</li>
+                        <li>Минимальная комиссия: 5 рублей за билет</li>
+                        <li>Выплаты: ежедневно на расчетный счет</li>
+                        <li>Полная интеграция с системой бронирования</li>
+                        <li>Мгновенное подтверждение бронирования</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как подключиться -->
+    <section class="how-to-join">
+        <div class="container">
+            <div class="section-title">
+                <h2>Как подключиться к ЦУИМ</h2>
+                <p>Всего 4 простых шага до начала продаж на платформе</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Подайте заявку</h3>
+                    <p>Заполните форму на сайте или позвоните нам</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Подпишите договор</h3>
+                    <p>Заключите договор сотрудничества с нами</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Настройте кабинет</h3>
+                    <p>Добавьте товары, услуги и настройте параметры</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Начните продавать</h3>
+                    <p>Ваши предложения появятся в каталоге ЦУИМ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сравнение с конкурентами -->
+    <section class="comparison">
+        <div class="container">
+            <div class="section-title">
+                <h2>Сравнение с конкурентами</h2>
+                <p>Почему ЦУИМ выгоднее для местного бизнеса</p>
+            </div>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Критерий</th>
+                            <th>ЦУИМ</th>
+                            <th>Ozon / Wildberries</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Комиссия</td>
+                            <td class="cuim-check">5-25%</td>
+                            <td class="competitor-cross">15-35%</td>
+                        </tr>
+                        <tr>
+                            <td>Выплаты</td>
+                            <td class="cuim-check">Ежедневно</td>
+                            <td class="competitor-cross">Раз в 7-14 дней</td>
+                        </tr>
+                        <tr>
+                            <td>Логистика</td>
+                            <td class="cuim-check">Гибкая (FBS или ПВЗ)</td>
+                            <td class="competitor-cross">FBO (товар на склад)</td>
+                        </tr>
+                        <tr>
+                            <td>Подключение</td>
+                            <td class="cuim-check">1 день</td>
+                            <td class="competitor-cross">3-14 дней</td>
+                        </tr>
+                        <tr>
+                            <td>Фокус</td>
+                            <td class="cuim-check">Только локальные магазины</td>
+                            <td class="competitor-cross">Миллионы товаров</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Призыв к действию -->
+    <section class="cta">
+        <div class="container">
+            <h2>Готовы увеличить продажи?</h2>
+            <p>Присоединяйтесь к ЦУИМ и начните получать новых клиентов уже сегодня</p>
+            <a href="#" class="btn" style="background: white; color: var(--primary-color);">Подать заявку на подключение</a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ЦУИМ для бизнеса</h3>
+                    <p>Платформа для подключения местного бизнеса к цифровой экономике города.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Продавцам</h3>
+                    <ul>
+                        <li><a href="#">Условия сотрудничества</a></li>
+                        <li><a href="#">Тарифы и комиссии</a></li>
+                        <li><a href="#">Подключение бизнеса</a></li>
+                        <li><a href="#">Помощь продавцам</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Документы</h3>
+                    <ul>
+                        <li><a href="#">Договор оферты</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Реквизиты компании</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="#">Телефон: +7 (986) 333-33-47</a></li>
+                        <li><a href="#">Email: 3333347@bk.ru</a></li>
+                        <li><a href="#">Отдел по работе с партнерами</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ЦУИМ. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике вне его области
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!nav.contains(event.target) && !menuBtn.contains(event.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
