@@ -773,7 +773,8 @@
         }
 
         /* ========== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
-        @media (max-width: 1200px) {
+        /* Планшеты (1024px и меньше) */
+        @media (max-width: 1024px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -783,9 +784,11 @@
             }
         }
 
+        /* Планшеты (992px и меньше) */
         @media (max-width: 992px) {
             .dashboard {
                 grid-template-columns: 1fr;
+                gap: 16px;
             }
             
             .sidebar {
@@ -805,15 +808,22 @@
                 align-items: flex-start;
                 gap: 16px;
             }
+            
+            .container {
+                padding: 0 12px;
+            }
         }
 
+        /* Мобильные (768px и меньше) */
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr;
+                gap: 12px;
             }
             
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 12px;
             }
             
             .section-header {
@@ -831,11 +841,24 @@
                 font-size: 20px;
             }
             
-            .container {
-                padding: 0 12px;
+            .welcome-card, .section {
+                padding: 16px;
+            }
+            
+            .stat-card {
+                padding: 16px;
+            }
+            
+            .header-content {
+                padding: 10px 0;
+            }
+            
+            .logo-text {
+                font-size: 18px;
             }
         }
 
+        /* Мобильные (576px и меньше) */
         @media (max-width: 576px) {
             .products-grid {
                 grid-template-columns: 1fr 1fr;
@@ -850,15 +873,15 @@
             }
             
             .section {
-                padding: 16px;
+                padding: 12px;
             }
             
             .stat-card {
-                padding: 16px;
+                padding: 12px;
             }
             
             .orders-table td, .orders-table th {
-                padding: 12px 8px;
+                padding: 10px 8px;
                 font-size: 13px;
             }
             
@@ -871,8 +894,13 @@
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
+            
+            .container {
+                padding: 0 10px;
+            }
         }
 
+        /* Маленькие мобильные (480px и меньше) */
         @media (max-width: 480px) {
             .logo-text {
                 display: none;
@@ -888,6 +916,56 @@
             
             .btn-icon {
                 width: 100%;
+            }
+            
+            .tabs {
+                flex-wrap: nowrap;
+            }
+            
+            .tab {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .mobile-nav {
+                padding: 70px 20px 30px;
+            }
+            
+            .mobile-nav .nav-link {
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+        }
+
+        /* Очень маленькие мобильные (360px и меньше) */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 8px;
+            }
+            
+            .welcome-card, .section {
+                padding: 12px;
+            }
+            
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .product-body {
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .section-title {
+                font-size: 16px;
+            }
+            
+            .stat-value {
+                font-size: 20px;
             }
         }
 
@@ -918,6 +996,20 @@
 
         .mobile-nav.active {
             animation: slideIn 0.3s ease-out;
+        }
+
+        /* Улучшение доступности для мобильных */
+        @media (max-width: 768px) {
+            .btn, .nav-link, .tab {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+            
+            .btn-icon {
+                min-height: 44px;
+                min-width: 44px;
+            }
         }
     </style>
 </head>
