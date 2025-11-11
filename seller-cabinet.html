@@ -27,6 +27,139 @@
             padding: 0 15px;
         }
 
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 24px;
+            color: #2563eb;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: #2563eb;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #1e293b;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 99;
+            padding: 80px 20px 40px;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav .nav-link {
+            display: block;
+            padding: 16px 20px;
+            margin-bottom: 8px;
+            font-size: 18px;
+            border-radius: 8px;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .mobile-user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
         /* Welcome Card */
         .welcome-card {
             background: white;
@@ -444,6 +577,14 @@
 
         /* Планшеты (768px и меньше) */
         @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
             .welcome-card {
                 flex-direction: column;
                 align-items: flex-start;
@@ -497,6 +638,18 @@
         @media (max-width: 576px) {
             .container {
                 padding: 0 12px;
+            }
+            
+            .header-content {
+                padding: 12px 0;
+            }
+            
+            .logo {
+                height: 35px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
             }
             
             .welcome-card {
@@ -573,6 +726,10 @@
 
         /* Маленькие мобильные (480px и меньше) */
         @media (max-width: 480px) {
+            .logo-text {
+                display: none;
+            }
+            
             .welcome-card {
                 padding: 12px;
             }
@@ -617,6 +774,87 @@
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/9e37f67ebf53d1cdddd68d597d8f5502abb2245b/images/logo.png" alt="ЦУИМ" class="logo">
+                    <span class="logo-text">ЦУИМ</span>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Главная
+                    </a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        Аналитика
+                    </a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-wallet"></i>
+                        Финансы
+                    </a>
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-box"></i>
+                        Товары
+                    </a>
+                </nav>
+                
+                <div class="user-menu">
+                    <div class="user-avatar">ПП</div>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <div class="mobile-user-avatar">ПП</div>
+                <div>
+                    <h3>Петр Продавцов</h3>
+                    <p>Магазин "Свежие продукты"</p>
+                </div>
+            </div>
+            <a href="#" class="nav-link">
+                <i class="fas fa-home"></i>
+                Главная
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-chart-bar"></i>
+                Аналитика
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-wallet"></i>
+                Финансы
+            </a>
+            <a href="#" class="nav-link active">
+                <i class="fas fa-box"></i>
+                Товары
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+                Заказы
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-star"></i>
+                Отзывы
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-warehouse"></i>
+                Склад
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cog"></i>
+                Настройки
+            </a>
+        </nav>
+    </header>
+
     <main class="container">
         <!-- Welcome Card -->
         <div class="welcome-card">
@@ -856,7 +1094,22 @@
     </main>
 
     <script>
-        // Табы
+        // Mobile menu
+        document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileNav').classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Tabs
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
