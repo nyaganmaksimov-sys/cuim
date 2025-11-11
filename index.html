@@ -119,97 +119,173 @@
     .stars{display:flex; gap:1px}
     .stars svg{width:12px; height:12px; fill:var(--orange-600)}
 
-    /* Header */
+    /* ======= ОБНОВЛЕННАЯ ШАПКА В СТИЛЕ OZON/WB ======= */
     .site-header{
       position:sticky; top:0; z-index:50; background:var(--panel);
-      box-shadow:0 1px 0 rgba(13,71,161,.08);
+      box-shadow:0 2px 8px rgba(13,71,161,.08);
+      border-bottom: 1px solid rgba(13,71,161,.06);
     }
     .header-inner{
-      display:flex; align-items:center; gap:14px; height:74px;
+      display:flex; align-items:center; gap:20px; height:72px;
     }
     .logo{
       display:flex;
       align-items:center;
+      margin-right: 10px;
     }
     .logo-mark{
-      width:120px;
-      height:40px;
+      width:110px;
+      height:36px;
       object-fit:contain;
-      box-shadow:var(--shadow-1);
       border-radius:0;
       mix-blend-mode: multiply;
       background: transparent !important;
       filter: brightness(1.1) contrast(1.1);
     }
 
+    /* Кнопка каталога как у Ozon */
     .catalog-btn{
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex; align-items:center; gap:10px;
       background:var(--blue-600); color:#fff; border:none;
-      padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600;
-      transition:transform .06s ease, filter .15s ease;
+      padding:12px 20px; border-radius:10px; cursor:pointer; font-weight:600;
+      transition:var(--transition);
+      font-size: 15px;
+      white-space: nowrap;
     }
-    .catalog-btn:hover{filter:brightness(1.05)}
-    .catalog-btn:active{transform:translateY(1px)}
-    .catalog-btn svg{width:18px; height:18px}
+    .catalog-btn:hover{
+      background:var(--blue-700);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-hover);
+    }
+    .catalog-btn:active{transform:translateY(0)}
+    .catalog-btn svg{width:20px; height:20px}
 
+    /* Поиск как у маркетплейсов */
     .search{
-      flex:1; display:flex; align-items:center; gap:10px;
+      flex:1; display:flex; align-items:center; gap:0;
+      max-width: 600px;
     }
     .search .field{
       position:relative; flex:1; display:flex; align-items:center;
     }
     .search input{
-      width:100%; padding:14px 48px 14px 46px;
-      border-radius:999px; border:2px solid transparent;
-      background:#f2f6fd; outline:none; font-size:16px;
-      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+      width:100%; padding:14px 52px 14px 48px;
+      border-radius:12px 0 0 12px; border:2px solid var(--blue-500);
+      border-right: none;
+      background:#fff; outline:none; font-size:16px;
+      transition:var(--transition);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
     }
     .search input::placeholder{color:#8aa1c1}
     .search input:focus{
-      background:#fff; border-color:var(--blue-400); box-shadow: var(--ring);
+      border-color:var(--blue-400); 
+      box-shadow: var(--ring), inset 0 1px 3px rgba(0,0,0,.05);
     }
     .search .icon{
-      position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#7895bf;
+      position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#7895bf;
+      z-index: 2;
     }
     .search button{
       background:linear-gradient(90deg, var(--orange-600), var(--orange-500));
-      color:#fff; border:none; border-radius:999px; padding:12px 18px; font-weight:600; cursor:pointer;
-      transition:filter .15s ease;
+      color:#fff; border:none; border-radius:0 12px 12px 0; 
+      padding:14px 24px; font-weight:600; cursor:pointer;
+      transition:var(--transition);
+      border: 2px solid var(--orange-600);
+      border-left: none;
+      white-space: nowrap;
     }
-    .search button:hover{filter:brightness(1.05)}
+    .search button:hover{
+      background:linear-gradient(90deg, var(--orange-700), var(--orange-600));
+      transform: translateY(-1px);
+    }
 
+    /* Действия в шапке */
     .header-actions{
-      display:flex; align-items:center; gap:12px;
+      display:flex; align-items:center; gap:16px;
+      margin-left: auto;
     }
-    .h-link{
-      display:flex; flex-direction:column; align-items:center; gap:4px;
-      min-width:70px; padding:6px 8px; border-radius:10px; color:#224167;
-      transition:background .15s ease, transform .06s ease;
-    }
-    .h-link:hover{background:rgba(21,101,192,.08)}
-    .h-link:active{transform:translateY(1px)}
-    .h-link svg{width:20px; height:20px; color:var(--blue-600)}
-    .h-link span{font-size:12px}
 
-    /* ИКОНКА КУПИ-ПРОДАЙ В ШАПКЕ */
+    /* ИКОНКА КУПИ-ПРОДАЙ В ШАПКЕ - улучшенная */
     .ads-header-icon {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       background: linear-gradient(135deg, var(--orange-500), var(--yellow-600));
       color: white;
-      padding: 8px 12px;
+      padding: 10px 16px;
       border-radius: 10px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 14px;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(255, 122, 18, 0.3);
+      box-shadow: 0 4px 12px rgba(255, 122, 18, 0.3);
+      white-space: nowrap;
     }
 
     .ads-header-icon:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 122, 18, 0.4);
+      box-shadow: 0 6px 16px rgba(255, 122, 18, 0.4);
       background: linear-gradient(135deg, var(--orange-600), var(--yellow-600));
+    }
+
+    /* Ссылки в шапке как у Ozon */
+    .h-link{
+      display:flex; flex-direction:column; align-items:center; gap:4px;
+      min-width:70px; padding:8px 10px; border-radius:10px; color:#224167;
+      transition:background .15s ease, transform .06s ease;
+      position: relative;
+    }
+    .h-link:hover{
+      background:rgba(21,101,192,.08);
+      transform: translateY(-1px);
+    }
+    .h-link:active{transform:translateY(0)}
+    .h-link svg{
+      width:22px; height:22px; color:var(--blue-600);
+      transition: var(--transition);
+    }
+    .h-link:hover svg{
+      transform: scale(1.1);
+    }
+    .h-link span{
+      font-size:12px;
+      font-weight: 500;
+    }
+
+    /* Бейдж для корзины */
+    .cart-badge {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      background: var(--red-500);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    /* Мобильное меню */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--blue-600);
+      transition: background 0.2s ease;
+    }
+
+    .mobile-menu-toggle:hover {
+      background: rgba(21,101,192,.08);
     }
 
     /* Main layout */
@@ -874,6 +950,34 @@
         grid-column: 1 / -1;
         grid-template-columns: repeat(3, 1fr);
       }
+
+      /* Шапка для планшетов */
+      .header-inner {
+        gap: 15px;
+      }
+      
+      .catalog-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+      }
+      
+      .search input {
+        padding: 12px 48px 12px 44px;
+      }
+      
+      .search button {
+        padding: 12px 20px;
+      }
+      
+      .ads-header-icon {
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+      
+      .h-link {
+        min-width: 65px;
+        padding: 6px 8px;
+      }
     }
 
     /* Мобильные устройства */
@@ -934,6 +1038,92 @@
       
       .promos {
         grid-template-columns: 1fr;
+      }
+
+      /* ШАПКА ДЛЯ МОБИЛЬНЫХ */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .header-inner {
+        height: 60px;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 8px 0;
+      }
+      
+      .logo {
+        order: 1;
+      }
+      
+      .logo-mark {
+        width: 90px;
+        height: 30px;
+      }
+      
+      .mobile-menu-toggle {
+        display: flex;
+        order: 2;
+        margin-left: auto;
+      }
+      
+      .catalog-btn {
+        order: 3;
+        display: none; /* Скрываем на мобильных */
+      }
+      
+      .search {
+        order: 5;
+        flex: 1 0 100%;
+        margin-top: 10px;
+        max-width: none;
+      }
+      
+      .search input {
+        border-radius: 10px;
+        border: 2px solid var(--blue-400);
+        padding: 12px 44px 12px 42px;
+      }
+      
+      .search button {
+        display: none; /* Скрываем кнопку поиска на мобильных */
+      }
+      
+      .header-actions {
+        order: 4;
+        gap: 8px;
+        margin-left: 0;
+      }
+      
+      /* КНОПКА КУПИ-ПРОДАЙ НА МОБИЛЬНЫХ - полный текст */
+      .ads-header-icon {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 6px;
+        white-space: nowrap;
+      }
+      
+      .ads-header-icon span:last-child {
+        display: inline !important; /* Всегда показываем полный текст */
+      }
+      
+      .h-link {
+        min-width: 55px;
+        padding: 4px 6px;
+      }
+      
+      .h-link span {
+        font-size: 11px;
+      }
+      
+      .cart-badge {
+        top: 2px;
+        right: 4px;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
       }
     }
 
@@ -1010,6 +1200,51 @@
       
       .quick-view-btn {
         right: 44px;
+      }
+
+      /* Шапка для маленьких мобильных */
+      .header-inner {
+        gap: 8px;
+      }
+      
+      .logo-mark {
+        width: 80px;
+        height: 28px;
+      }
+      
+      .ads-header-icon {
+        padding: 6px 10px;
+        font-size: 12px;
+        gap: 4px;
+      }
+      
+      .h-link {
+        min-width: 50px;
+      }
+      
+      .h-link span {
+        font-size: 10px;
+      }
+    }
+
+    /* Очень маленькие экраны */
+    @media (max-width: 360px) {
+      .header-actions {
+        gap: 6px;
+      }
+      
+      .ads-header-icon {
+        padding: 6px 8px;
+        font-size: 11px;
+      }
+      
+      .ads-header-icon span:first-child {
+        margin-right: 0;
+      }
+      
+      .h-link {
+        min-width: 45px;
+        padding: 4px 4px;
       }
     }
 
@@ -1131,7 +1366,7 @@
     .footer-contact {
       background: rgba(21,101,192,.05);
       padding: 15px;
-      border-radius: var(--radius);
+      borderRadius: var(--radius);
       margin-top: 10px;
     }
 
@@ -1549,7 +1784,7 @@
       }
 
       .ads-header-icon span:last-child {
-        display: none;
+        display: inline !important;
       }
       
       .quick-view-actions {
@@ -1617,9 +1852,15 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#" class="logo" aria-label="ЦУИМ — на главную">
-        <img src="https://github.com/nyaganmaksimov-sys/cuim/blob/0210d8c9afe39c9bce841c692e6ee31b9d8628e2/images/logo.png" 
+        <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
              alt="ЦУИМ" class="logo-mark">
       </a>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Меню">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 12h18M3 6h18M3 18h18" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
 
       <button class="catalog-btn" id="catalogToggle" aria-expanded="false" aria-controls="categoriesPanel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1667,10 +1908,14 @@
             <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
           </svg>
           <span>Корзина</span>
+          <span class="cart-badge">3</span>
         </a>
       </nav>
     </div>
   </header>
+
+  <!-- Остальной код остается без изменений -->
+  <!-- Лучшие магазины, основной контент, футер и т.д. -->
 
   <!-- Лучшие магазины -->
   <section class="top-shops">
@@ -2101,9 +2346,6 @@
       initQuickViewButtons();
       initWishlistButtons();
     }
-
-    // Остальной JavaScript код остается таким же...
-    // [Здесь должен быть остальной JavaScript код из предыдущего примера]
 
     // ======= ХИТ СЕЗОНА =======
     const seasonProducts = [
