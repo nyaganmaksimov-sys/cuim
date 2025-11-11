@@ -119,6 +119,62 @@
             cursor: pointer;
         }
 
+        /* Mobile Navigation */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--text);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: translateY(10px) rotate(45deg);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: translateY(-10px) rotate(-45deg);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--panel);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 16px;
+            z-index: 40;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav .nav-link {
+            display: block;
+            padding: 12px 16px;
+            margin-bottom: 4px;
+        }
+
         /* Main Layout */
         .dashboard {
             display: grid;
@@ -490,9 +546,15 @@
         }
 
         /* Orders Table */
+        .orders-table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         .orders-table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 700px;
         }
 
         .orders-table th {
@@ -548,6 +610,14 @@
             display: flex;
             border-bottom: 1px solid rgba(13,71,161,.08);
             margin-bottom: 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
         }
 
         .tab {
@@ -557,6 +627,7 @@
             cursor: pointer;
             border-bottom: 2px solid transparent;
             transition: all 0.15s ease;
+            white-space: nowrap;
         }
 
         .tab.active {
@@ -716,14 +787,15 @@
 
         @media (max-width: 768px) {
             .header-inner {
-                flex-direction: column;
-                height: auto;
-                padding: 16px 0;
-                gap: 16px;
+                height: 70px;
             }
             
             .nav-menu {
-                gap: 12px;
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
             }
             
             .quick-stats {
@@ -734,13 +806,27 @@
                 grid-template-columns: 1fr;
             }
             
-            .orders-table {
-                display: block;
-                overflow-x: auto;
-            }
-            
             .form-row {
                 grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .modal-footer {
+                flex-direction: column-reverse;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
             }
         }
 
@@ -749,14 +835,67 @@
                 grid-template-columns: 1fr;
             }
             
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
+            .tabs {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
             }
             
-            .tabs {
-                flex-wrap: wrap;
+            .section {
+                padding: 16px;
+            }
+            
+            .stat-card {
+                padding: 16px;
+            }
+            
+            .product-body {
+                padding: 12px;
+            }
+            
+            .modal-body {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 0 16px;
+            }
+            
+            .dashboard {
+                margin: 16px 0;
+                gap: 16px;
+            }
+            
+            .content {
+                gap: 16px;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+            
+            .user-details h2 {
+                font-size: 16px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+            }
+            
+            .stat-value {
+                font-size: 20px;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .btn-icon {
+                width: 100%;
             }
         }
     </style>
@@ -779,8 +918,21 @@
             
             <div class="user-menu">
                 <div class="user-avatar">ПП</div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">Главная</a>
+            <a href="#" class="nav-link">Аналитика</a>
+            <a href="#" class="nav-link">Финансы</a>
+            <a href="#" class="nav-link active">Товары</a>
+        </nav>
     </header>
 
     <main class="container">
@@ -959,47 +1111,49 @@
                         </a>
                     </div>
                     
-                    <table class="orders-table">
-                        <thead>
-                            <tr>
-                                <th>Номер заказа</th>
-                                <th>Товары</th>
-                                <th>Сумма</th>
-                                <th>Статус</th>
-                                <th>Дата</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="order-id">#CUIM-7923</td>
-                                <td>Огурцы, Помидоры, Хлеб</td>
-                                <td>1 240 ₽</td>
-                                <td><span class="order-status status-new">Новый</span></td>
-                                <td>15.11.2023</td>
-                            </tr>
-                            <tr>
-                                <td class="order-id">#CUIM-7918</td>
-                                <td>Молоко, Яйца, Сыр</td>
-                                <td>890 ₽</td>
-                                <td><span class="order-status status-processing">В обработке</span></td>
-                                <td>14.11.2023</td>
-                            </tr>
-                            <tr>
-                                <td class="order-id">#CUIM-7905</td>
-                                <td>Фруктовый набор</td>
-                                <td>2 150 ₽</td>
-                                <td><span class="order-status status-shipped">Отправлен</span></td>
-                                <td>13.11.2023</td>
-                            </tr>
-                            <tr>
-                                <td class="order-id">#CUIM-7892</td>
-                                <td>Мясной набор</td>
-                                <td>3 420 ₽</td>
-                                <td><span class="order-status status-shipped">Отправлен</span></td>
-                                <td>12.11.2023</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="orders-table-container">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Номер заказа</th>
+                                    <th>Товары</th>
+                                    <th>Сумма</th>
+                                    <th>Статус</th>
+                                    <th>Дата</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="order-id">#CUIM-7923</td>
+                                    <td>Огурцы, Помидоры, Хлеб</td>
+                                    <td>1 240 ₽</td>
+                                    <td><span class="order-status status-new">Новый</span></td>
+                                    <td>15.11.2023</td>
+                                </tr>
+                                <tr>
+                                    <td class="order-id">#CUIM-7918</td>
+                                    <td>Молоко, Яйца, Сыр</td>
+                                    <td>890 ₽</td>
+                                    <td><span class="order-status status-processing">В обработке</span></td>
+                                    <td>14.11.2023</td>
+                                </tr>
+                                <tr>
+                                    <td class="order-id">#CUIM-7905</td>
+                                    <td>Фруктовый набор</td>
+                                    <td>2 150 ₽</td>
+                                    <td><span class="order-status status-shipped">Отправлен</span></td>
+                                    <td>13.11.2023</td>
+                                </tr>
+                                <tr>
+                                    <td class="order-id">#CUIM-7892</td>
+                                    <td>Мясной набор</td>
+                                    <td>3 420 ₽</td>
+                                    <td><span class="order-status status-shipped">Отправлен</span></td>
+                                    <td>12.11.2023</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </div>
         </div>
@@ -1146,6 +1300,8 @@
         const saveProductBtn = document.getElementById('saveProductBtn');
         const productForm = document.getElementById('productForm');
         const modalTitle = document.getElementById('modalTitle');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
 
         // Category labels
         const categoryLabels = {
@@ -1156,6 +1312,20 @@
             bakery: "Выпечка",
             drinks: "Напитки"
         };
+
+        // Mobile menu toggle
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.user-menu') && !event.target.closest('.mobile-nav')) {
+                mobileMenuToggle.classList.remove('active');
+                mobileNav.classList.remove('active');
+            }
+        });
 
         // Load products
         function loadProducts() {
