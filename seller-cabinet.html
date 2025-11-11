@@ -32,12 +32,13 @@
             background-color: #f1f5f9;
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 16px;
         }
 
         /* Header Styles */
@@ -115,6 +116,64 @@
             font-size: 24px;
             cursor: pointer;
             color: var(--dark);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            z-index: 99;
+            padding: 80px 24px 40px;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav .nav-link {
+            display: block;
+            padding: 16px 20px;
+            margin-bottom: 8px;
+            font-size: 18px;
+            border-radius: 12px;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .mobile-user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .mobile-user-info h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .mobile-user-info p {
+            color: var(--gray);
+            font-size: 14px;
         }
 
         /* Main Layout */
@@ -675,7 +734,7 @@
             font-size: 14px;
         }
 
-        /* Responsive Styles */
+        /* ========== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
         @media (max-width: 1024px) {
             .dashboard {
                 grid-template-columns: 1fr;
@@ -687,6 +746,10 @@
         }
 
         @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
             .nav-menu {
                 display: none;
             }
@@ -695,7 +758,15 @@
                 display: block;
             }
             
-            .quick-stats {
+            .mobile-nav {
+                display: none;
+            }
+            
+            .mobile-nav.active {
+                display: block;
+            }
+            
+            .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
             
@@ -713,10 +784,18 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .welcome-card h1 {
+                font-size: 24px;
+            }
+            
+            .welcome-card p {
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 640px) {
-            .quick-stats {
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -736,11 +815,15 @@
             .product-body {
                 padding: 12px;
             }
+            
+            .container {
+                padding: 0 12px;
+            }
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 0 16px;
+                padding: 0 12px;
             }
             
             .dashboard {
@@ -780,12 +863,85 @@
             
             .orders-table td, .orders-table th {
                 padding: 12px 8px;
+                font-size: 14px;
             }
             
             .order-status {
                 font-size: 10px;
                 padding: 4px 8px;
             }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .section {
+                padding: 12px;
+            }
+            
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .product-body {
+                padding: 10px;
+            }
+            
+            .welcome-card {
+                padding: 16px;
+            }
+        }
+
+        /* Улучшения для мобильных устройств */
+        .mobile-only {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-only {
+                display: none;
+            }
+            
+            .mobile-only {
+                display: block;
+            }
+            
+            /* Улучшение отображения таблицы на мобильных */
+            .orders-table-container {
+                border: 1px solid var(--gray-light);
+                border-radius: var(--border-radius);
+            }
+            
+            /* Улучшение отображения карточек товаров */
+            .product-image {
+                height: 150px;
+            }
+            
+            /* Улучшение отображения боковой панели на мобильных */
+            .sidebar {
+                padding: 16px;
+            }
+        }
+
+        /* Анимация для мобильного меню */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .mobile-nav.active {
+            animation: slideIn 0.3s ease-out;
         }
     </style>
 </head>
@@ -799,7 +955,7 @@
                     <span>ЦУИМ</span>
                 </a>
                 
-                <nav class="nav-menu">
+                <nav class="nav-menu desktop-only">
                     <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">Главная</a>
                     <a href="#" class="nav-link">Аналитика</a>
                     <a href="#" class="nav-link">Финансы</a>
@@ -807,19 +963,38 @@
                 </nav>
                 
                 <div class="user-menu">
-                    <div class="user-avatar" title="Профиль">ПП</div>
+                    <div class="user-avatar desktop-only" title="Профиль">ПП</div>
                     <button class="mobile-menu-toggle" id="mobileMenuToggle">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
         </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <div class="mobile-user-avatar">ПП</div>
+                <div class="mobile-user-info">
+                    <h3>Петр Продавцов</h3>
+                    <p>Магазин "Свежие продукты"</p>
+                </div>
+            </div>
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="nav-link">Главная</a>
+            <a href="#" class="nav-link">Аналитика</a>
+            <a href="#" class="nav-link">Финансы</a>
+            <a href="#" class="nav-link active">Товары</a>
+            <a href="#" class="nav-link">Заказы</a>
+            <a href="#" class="nav-link">Отзывы</a>
+            <a href="#" class="nav-link">Склад</a>
+            <a href="#" class="nav-link">Настройки</a>
+        </nav>
     </header>
 
     <main class="container">
         <div class="dashboard">
             <!-- Sidebar -->
-            <aside class="sidebar">
+            <aside class="sidebar desktop-only">
                 <div class="user-info">
                     <div class="user-avatar-large">ПП</div>
                     <div class="user-details">
@@ -1138,8 +1313,17 @@
     <script>
         // Mobile menu toggle
         document.getElementById('mobileMenuToggle').addEventListener('click', function() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileNav').classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
 
         // Tab functionality
