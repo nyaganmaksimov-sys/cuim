@@ -108,22 +108,16 @@
       backdrop-filter:saturate(1.2) blur(10px);
       background:linear-gradient(to bottom, rgba(255,255,255,.7), rgba(255,255,255,.35));
       border-bottom:1px solid var(--border);
-      padding-left: calc(max(env(safe-area-inset-left, 0px), 16px) + var(--logo-size) + 16px);
     }
     @media (prefers-color-scheme: dark){
       .site-header{ background: linear-gradient(to bottom, rgba(11,18,32,.78), rgba(11,18,32,.4)); }
     }
     .brand-logo{
-      position:absolute;
-      left: calc(max(env(safe-area-inset-left, 0px), 16px));
-      top:50%; transform:translateY(-50%);
       display:inline-grid; place-items:center;
       width:var(--logo-size); height:var(--logo-size);
-      border-radius:14px; border:1px solid var(--border); background:#fff;
-      box-shadow: var(--shadow-sm);
     }
     .brand-logo img{
-      width:100%; height:100%; object-fit:contain; border-radius:12px;
+      width:100%; height:100%; object-fit:contain;
     }
 
     .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0}
@@ -317,13 +311,12 @@
 
   <!-- Header -->
   <header class="site-header" role="banner">
-    <!-- Логотип вне контейнера -->
-    <a class="brand-logo" href="#" aria-label="ЦУИМ — на главную">
-      <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png" alt="Логотип ЦУИМ">
-    </a>
-
-    <!-- Контейнер с навигацией и CTA -->
     <div class="container nav">
+      <!-- Логотип внутри контейнера, рядом с навигацией -->
+      <a class="brand-logo" href="#" aria-label="ЦУИМ — на главную">
+        <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png" alt="Логотип ЦУИМ">
+      </a>
+
       <nav id="nav" class="nav-links" aria-label="Главная навигация">
         <a href="#buyer" data-role="buyer">Покупателям</a>
         <a href="#seller" data-role="seller">Продавцам</a>
@@ -379,6 +372,7 @@
       </div>
     </section>
 
+    <!-- Остальной код остается без изменений -->
     <!-- Audience quick cards -->
     <section class="audience section">
       <div class="container">
@@ -409,6 +403,7 @@
       </div>
     </section>
 
+    <!-- Остальной код остается без изменений -->
     <!-- Sticky role tabs -->
     <div class="role-tabs-wrap" aria-hidden="false">
       <div class="container role-tabs" role="tablist" aria-label="Выбор роли">
