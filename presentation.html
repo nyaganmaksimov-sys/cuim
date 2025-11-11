@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>ЦУИМ — Единая локальная экосистема: маркетплейс + доска объявлений + доставка</title>
-  <meta name="description" content="ЦУИМ — единая локальная экосистема: маркетплейс + доска объявлений + служба доставки с бесплатной доставкой от 1500 ₽. Реальные метрики: 47 минут в среднем, 98% успеха.">
+  <title>ЦУИМ — Единая локальная экосистема: маркетплейс + объявления + доставка</title>
+  <meta name="description" content="ЦУИМ — городская экосистема: маркетплейс, доска объявлений и собственная служба доставки (бесплатно от 1500 ₽). Метрики: 47 мин, 98% успешности.">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0047BB">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1220">
 
   <meta property="og:type" content="website">
@@ -15,7 +15,9 @@
   <meta property="og:image" content="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png">
   <meta property="og:site_name" content="ЦУИМ">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%230F5FFF'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='44' font-weight='800' fill='%23fff'%3ECUIM%3C/text%3E%3C/svg%3E">
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%230047BB'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='44' font-weight='800' fill='%23fff'%3ECUIM%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
@@ -29,13 +31,13 @@
       --shadow-sm: 0 6px 18px rgba(0,0,0,.08);
       --shadow: 0 18px 50px rgba(0,0,0,.12);
 
-      /* Цвета бренда ЦУИМ */
-      --brand-500:#0F5FFF;  /* основной синий */
-      --brand-600:#0C49E6;
-      --brand-700:#0A3DBA;
-      --accent:#FF6B00;     /* оранжевый из бизнес-плана */
-      --accent-soft:#FFF3E6;
-      --danger:#FF5B5B;
+      /* Оранжево‑синий брендинг */
+      --brand-500:#0047BB;   /* основной синий */
+      --brand-600:#003EA3;
+      --brand-700:#003489;
+      --accent:#FF6B00;      /* акцентный оранжевый */
+      --accent-600:#E65F00;
+      --accent-soft:#FFF2E6;
 
       --bg:#ffffff;
       --bg-soft:#F6F8FB;
@@ -45,35 +47,40 @@
       --border:#E6EAF2;
       --glass:rgba(255,255,255,0.55);
 
-      --grad: radial-gradient(900px 460px at 110% -10%, rgba(15,95,255,.18), transparent 55%),
-              radial-gradient(700px 380px at -10% -10%, rgba(0,184,255,.12), transparent 50%),
-              linear-gradient(180deg, #ffffff, #F3F8FF 60%, #F0F7FF 100%);
+      /* Фоновая подложка с синим и оранжевым */
+      --grad:
+        radial-gradient(900px 460px at 110% -10%, rgba(0,71,187,.16), transparent 55%),
+        radial-gradient(700px 380px at -10% -10%, rgba(255,107,0,.10), transparent 50%),
+        linear-gradient(180deg, #ffffff, #F4F8FF 60%, #F2F7FF 100%);
     }
     @media (prefers-color-scheme: dark){
       :root{
         --bg:#0b1220; --bg-soft:#0e1627; --bg-elev:#111a2e;
         --text:#F5F7FB; --text-soft:#C6D0E3; --border:#1b2742;
         --glass:rgba(17,26,46,0.55);
-        --grad: radial-gradient(900px 460px at 110% -10%, rgba(15,95,255,.22), transparent 55%),
-                radial-gradient(700px 380px at -10% -10%, rgba(0,184,255,.16), transparent 50%),
-                linear-gradient(180deg, #0b1220, #0d1526 60%, #0e1627 100%);
+        --grad:
+          radial-gradient(900px 460px at 110% -10%, rgba(0,71,187,.22), transparent 55%),
+          radial-gradient(700px 380px at -10% -10%, rgba(255,107,0,.16), transparent 50%),
+          linear-gradient(180deg, #0b1220, #0d1526 60%, #0e1627 100%);
       }
     }
     html[data-theme="light"]{
       color-scheme: light;
       --bg:#ffffff; --bg-soft:#F6F8FB; --bg-elev:#ffffff;
       --text:#0B1220; --text-soft:#46556F; --border:#E6EAF2; --glass:rgba(255,255,255,.55);
-      --grad: radial-gradient(900px 460px at 110% -10%, rgba(15,95,255,.18), transparent 55%),
-              radial-gradient(700px 380px at -10% -10%, rgba(0,184,255,.12), transparent 50%),
-              linear-gradient(180deg, #ffffff, #F3F8FF 60%, #F0F7FF 100%);
+      --grad:
+        radial-gradient(900px 460px at 110% -10%, rgba(0,71,187,.16), transparent 55%),
+        radial-gradient(700px 380px at -10% -10%, rgba(255,107,0,.10), transparent 50%),
+        linear-gradient(180deg, #ffffff, #F4F8FF 60%, #F2F7FF 100%);
     }
     html[data-theme="dark"]{
       color-scheme: dark;
       --bg:#0b1220; --bg-soft:#0e1627; --bg-elev:#111a2e;
       --text:#F5F7FB; --text-soft:#C6D0E3; --border:#1b2742; --glass:rgba(17,26,46,.55);
-      --grad: radial-gradient(900px 460px at 110% -10%, rgba(15,95,255,.22), transparent 55%),
-              radial-gradient(700px 380px at -10% -10%, rgba(0,184,255,.16), transparent 50%),
-              linear-gradient(180deg, #0b1220, #0d1526 60%, #0e1627 100%);
+      --grad:
+        radial-gradient(900px 460px at 110% -10%, rgba(0,71,187,.22), transparent 55%),
+        radial-gradient(700px 380px at -10% -10%, rgba(255,107,0,.16), transparent 50%),
+        linear-gradient(180deg, #0b1220, #0d1526 60%, #0e1627 100%);
     }
 
     *,*::before,*::after{box-sizing:border-box}
@@ -108,7 +115,7 @@
     .brand img{width:40px; height:40px; border-radius:10px; object-fit:contain; border:1px solid var(--border); background:#fff}
     .nav-links{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .nav-links a{padding:10px 12px; border-radius:10px; color:var(--text-soft); font-weight:600; border:1px solid transparent}
-    .nav-links a:hover{color:var(--brand-600); background:rgba(15,95,255,.08); border-color:rgba(15,95,255,.18)}
+    .nav-links a:hover{color:var(--brand-600); background:rgba(0,71,187,.08); border-color:rgba(0,71,187,.18)}
     .nav-cta{display:flex; align-items:center; gap:10px}
     .theme-toggle,.hamburger{border:1px solid var(--border); background:var(--bg-elev); border-radius:10px; padding:10px; cursor:pointer}
     .icon{width:20px; height:20px}
@@ -124,7 +131,7 @@
     .btn{display:inline-flex; align-items:center; gap:10px; cursor:pointer;
       font-weight:700; border-radius:12px; padding:12px 16px; border:1px solid transparent; transition:.25s ease}
     .btn-primary{background:var(--brand-500); color:#fff}
-    .btn-primary:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(15,95,255,.35)}
+    .btn-primary:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,71,187,.35)}
     .btn-outline{background:transparent; color:var(--text); border-color:var(--border)}
     .btn-outline:hover{border-color:var(--brand-500); color:var(--brand-600)}
     .btn-ghost{background:transparent; color:var(--text); border:1px solid transparent}
@@ -140,16 +147,22 @@
       background:var(--bg-elev); color:var(--text); border:1px solid var(--border);
       border-radius:12px; padding:10px 12px; font:inherit; transition:.2s ease;
     }
-    .input:focus, select:focus{ outline:none; border-color:var(--brand-500); box-shadow:0 0 0 4px rgba(15,95,255,.12) }
+    .input:focus, select:focus{ outline:none; border-color:var(--brand-500); box-shadow:0 0 0 4px rgba(0,71,187,.12) }
 
     /* Hero */
     .hero{padding: clamp(28px, 4vw, 48px) 0 clamp(56px, 8vw, 120px)}
     .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:22px; align-items:center}
-    .hero h1 span{background:linear-gradient(90deg, var(--brand-500), var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .hero h1 span{
+      background:linear-gradient(90deg, var(--brand-500), var(--accent));
+      -webkit-background-clip:text; background-clip:text; color:transparent
+    }
     .hero-sub{font-size:clamp(16px, 1vw + 8px, 18px); margin:10px 0 18px}
     .hero-actions{display:flex; flex-wrap:wrap; gap:10px}
 
-    .media{position:relative; border:1px solid var(--border); border-radius:20px; overflow:hidden; aspect-ratio:16/10; background:linear-gradient(135deg, #E8F1FF, #FFEFE4)}
+    .media{
+      position:relative; border:1px solid var(--border); border-radius:20px; overflow:hidden; aspect-ratio:16/10;
+      background:linear-gradient(135deg, #E8F0FF, #FFE8D6)
+    }
     .media .overlay{position:absolute; inset:0; display:grid; place-items:center; background:radial-gradient(240px 240px at center, rgba(0,0,0,.12), transparent 65%)}
     @media (max-width: 980px){ .hero-grid{grid-template-columns:1fr} }
 
@@ -160,7 +173,7 @@
     .card{background:var(--bg-elev); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:22px; transition:.25s}
     .card:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
     .big-icon{width:64px; height:64px; border-radius:16px; display:grid; place-items:center;
-      background:linear-gradient(135deg, var(--brand-500), var(--brand-700)); color:#fff; font-size:28px; box-shadow:0 10px 22px rgba(15,95,255,.35)}
+      background:linear-gradient(135deg, var(--brand-500), var(--brand-700)); color:#fff; font-size:28px; box-shadow:0 10px 22px rgba(0,71,187,.35)}
     .card h3{margin-top:12px}
     .card p{margin:6px 0 14px}
     @media (max-width: 980px){ .cards{grid-template-columns:1fr} }
@@ -186,7 +199,10 @@
       .grid-4,.grid-3{grid-template-columns:1fr}
     }
 
-    .icon-circle{width:56px; height:56px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, #E8F0FF, #FFEEDD); color:var(--brand-600); font-size:22px; border:1px solid var(--border)}
+    .icon-circle{
+      width:56px; height:56px; border-radius:14px; display:grid; place-items:center;
+      background:linear-gradient(135deg, #E8F0FF, #FFEDDF); color:var(--brand-600); font-size:22px; border:1px solid var(--border)
+    }
     .muted{color:var(--text-soft); font-size:14px}
 
     /* Finance + highlights */
@@ -244,8 +260,16 @@
     .ads-embed iframe{ width:100%; height:820px; border:0; border-radius:16px; background:#fff; border:1px solid var(--border) }
 
     /* Demo strip */
-    .demo{ background: radial-gradient(600px 320px at 20% 30%, rgba(15,95,255,.15), transparent 60%), linear-gradient(135deg, #F7FBFF, #F0F8FF) }
-    @media (prefers-color-scheme: dark){ .demo{ background: radial-gradient(600px 320px at 20% 30%, rgba(15,95,255,.22), transparent 60%), linear-gradient(135deg, #0b1220, #0e1627) } }
+    .demo{ background:
+      radial-gradient(600px 320px at 20% 30%, rgba(0,71,187,.15), transparent 60%),
+      linear-gradient(135deg, #F7FBFF, #FFF4EC)
+    }
+    @media (prefers-color-scheme: dark){
+      .demo{ background:
+        radial-gradient(600px 320px at 20% 30%, rgba(0,71,187,.22), transparent 60%),
+        linear-gradient(135deg, #0b1220, #0e1627)
+      }
+    }
 
     /* Footer */
     footer{border-top:1px solid var(--border); background:var(--bg-elev)}
@@ -282,8 +306,8 @@
     <div class="container nav">
       <a class="brand" href="#">
         <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png" alt="Логотип ЦУИМ" width="40" height="40">
-        <span></span>
-        <span class="chip" style="margin-left:6px; font-weight:700;">Экосистема города</span>
+        <span>ЦУИМ</span>
+        <span class="chip" style="margin-left:6px; font-weight:700; border-color:rgba(255,107,0,.35); background:var(--accent-soft); color:#A14400">Экосистема города</span>
       </a>
       <nav id="nav" class="nav-links" aria-label="Главная навигация">
         <a href="#buyer" data-role="buyer">Покупателям</a>
@@ -320,8 +344,12 @@
           <div class="chips" style="margin-top:12px">
             <span class="chip"><i class="fa-solid fa-shield-halved"></i> Безопасные платежи</span>
             <span class="chip"><i class="fa-solid fa-bolt"></i> Доставка ~47 мин</span>
-            <span class="chip"><i class="fa-solid fa-gift"></i> Бесплатно от 1500 ₽</span>
-            <a class="chip" href="https://nyaganmaksimov-sys.github.io/cuim/courier-cabinet.html" target="_blank" rel="noopener"><i class="fa-solid fa-motorcycle"></i> Курьерский кабинет</a>
+            <span class="chip" style="border-color:rgba(255,107,0,.35); background:var(--accent-soft); color:#A14400">
+              <i class="fa-solid fa-gift"></i> Бесплатно от 1500 ₽
+            </span>
+            <a class="chip" href="https://nyaganmaksimov-sys.github.io/cuim/courier-cabinet.html" target="_blank" rel="noopener">
+              <i class="fa-solid fa-motorcycle"></i> Курьерский кабинет
+            </a>
           </div>
         </div>
         <div class="surface media">
@@ -329,7 +357,7 @@
             <div class="row">
               <span class="chip"><i class="fa-solid fa-city"></i> Города 60–650 тыс. чел.</span>
               <span class="chip"><i class="fa-solid fa-check-double"></i> Успешность 98%</span>
-              <span class="chip"><i class="fa-solid fa-ruble-sign"></i> Комиссия ~9%</span>
+              <span class="chip"><i class="fa-solid fa-percent"></i> Комиссия ~9%</span>
             </div>
           </div>
         </div>
@@ -359,7 +387,7 @@
           <div class="card reveal">
             <div class="big-icon"><i class="fa-solid fa-chart-line"></i></div>
             <h3>Инвесторам</h3>
-            <p>Модель «экосистемы города»: юнит‑прибыльная доставка, синергия модулей и roadmap на 6 мес.</p>
+            <p>Модель экосистемы: юнит‑прибыльная доставка, синергия модулей и roadmap на 6 мес.</p>
             <a href="#investor" class="btn btn-outline pill" data-role="investor">Узнать больше</a>
           </div>
         </div>
@@ -460,7 +488,7 @@
             <p class="muted">Среднее время доставки</p>
           </div>
           <div class="card center reveal">
-            <div class="icon-circle"><i class="fa-solid fa-badge-check"></i></div>
+            <div class="icon-circle"><i class="fa-solid fa-circle-check"></i></div>
             <h3>98%</h3>
             <p class="muted">Успешность заказов</p>
           </div>
@@ -634,14 +662,14 @@
 
         <div class="grid-3">
           <div class="card reveal center">
-            <div class="icon-circle" style="background:linear-gradient(135deg,#FEF3C7,#E7F0FF); color:#EAB308;">
+            <div class="icon-circle" style="background:linear-gradient(135deg,#FEF3C7,#E8F0FF); color:#A16200;">
               <i class="fa-solid fa-percent"></i>
             </div>
             <h3>Низкие комиссии</h3>
             <p class="muted">Магазины: 8–10% (ниже Ozon/WB в 2–3 раза)</p>
           </div>
           <div class="card reveal center">
-            <div class="icon-circle" style="background:linear-gradient(135deg,#D1FAFF,#E7F0FF); color:#00B8FF;">
+            <div class="icon-circle" style="background:linear-gradient(135deg,#FFE7D6,#E8F0FF); color:#E65F00;">
               <i class="fa-solid fa-money-bill-wave"></i>
             </div>
             <h3>Ежедневные выплаты</h3>
@@ -713,7 +741,7 @@
         </div>
 
         <div class="highlight-box" style="margin-top:16px">
-          <strong>Заказы < 1500 ₽</strong>: платная доставка компенсирует логистику и не влияет на бесплатные заказы — источник доп. выручки.
+          <strong>Заказы < 1500 ₽</strong>: платная доставка компенсирует логистику и не влияет на бесплатные — источник доп. выручки.
         </div>
 
         <div class="center" style="margin-top:20px">
@@ -851,7 +879,7 @@
           <div class="card reveal">
             <div class="icon-circle"><i class="fa-solid fa-layer-group"></i></div>
             <h3>Синергия модулей</h3>
-            <p class="muted">Маркетплейс + Объявления + Доставка усиливают LTV и retetion</p>
+            <p class="muted">Маркетплейс + Объявления + Доставка усиливают LTV и retention</p>
           </div>
         </div>
 
