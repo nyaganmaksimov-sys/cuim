@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru" data-theme="auto">
+<html lang="ру" data-theme="auto">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -47,7 +47,7 @@
       --border:#E6EAF2;
       --glass:rgba(255,255,255,0.55);
 
-      --logo-size: clamp(44px, 6vw, 64px);
+      --logo-size: clamp(40px, 5.2vw, 56px);
 
       /* Фоновая подложка с синим и оранжевым */
       --grad:
@@ -108,25 +108,15 @@
       backdrop-filter:saturate(1.2) blur(10px);
       background:linear-gradient(to bottom, rgba(255,255,255,.7), rgba(255,255,255,.35));
       border-bottom:1px solid var(--border);
-      padding-left: calc(max(env(safe-area-inset-left, 0px), 16px) + var(--logo-size) + 16px);
     }
     @media (prefers-color-scheme: dark){
       .site-header{ background: linear-gradient(to bottom, rgba(11,18,32,.78), rgba(11,18,32,.4)); }
     }
-    .brand-logo{
-      position:absolute;
-      left: calc(max(env(safe-area-inset-left, 0px), 16px));
-      top:50%; transform:translateY(-50%);
-      display:inline-grid; place-items:center;
-      width:var(--logo-size); height:var(--logo-size);
-      border-radius:14px; border:1px solid var(--border); background:#fff;
-      box-shadow: var(--shadow-sm);
-    }
-    .brand-logo img{
-      width:100%; height:100%; object-fit:contain; border-radius:12px;
-    }
-
     .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0}
+    .nav-left{display:flex; align-items:center; gap:14px}
+    .logo{display:inline-block; width:var(--logo-size); height:var(--logo-size)}
+    .logo img{display:block; width:100%; height:100%; object-fit:contain; border:0; border-radius:0; background:transparent; box-shadow:none}
+
     .nav-links{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .nav-links a{padding:10px 12px; border-radius:10px; color:var(--text-soft); font-weight:600; border:1px solid transparent}
     .nav-links a:hover{color:var(--brand-600); background:rgba(0,71,187,.08); border-color:rgba(0,71,187,.18)}
@@ -317,19 +307,18 @@
 
   <!-- Header -->
   <header class="site-header" role="banner">
-    <!-- Логотип вне контейнера -->
-    <a class="brand-logo" href="#" aria-label="ЦУИМ — на главную">
-      <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png" alt="Логотип ЦУИМ">
-    </a>
-
-    <!-- Контейнер с навигацией и CTA -->
     <div class="container nav">
-      <nav id="nav" class="nav-links" aria-label="Главная навигация">
-        <a href="#buyer" data-role="buyer">Покупателям</a>
-        <a href="#seller" data-role="seller">Продавцам</a>
-        <a href="#investor" data-role="investor">Инвесторам</a>
-        <a href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" rel="noopener">Демо</a>
-      </nav>
+      <div class="nav-left">
+        <a class="logo" href="#" aria-label="На главную">
+          <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png" alt="ЦУИМ">
+        </a>
+        <nav id="nav" class="nav-links" aria-label="Главная навигация">
+          <a href="#buyer" data-role="buyer">Покупателям</a>
+          <a href="#seller" data-role="seller">Продавцам</a>
+          <a href="#investor" data-role="investor">Инвесторам</a>
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" rel="noopener">Демо</a>
+        </nav>
+      </div>
       <div class="nav-cta">
         <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
           <i class="fa-solid fa-circle-half-stroke icon" aria-hidden="true"></i>
@@ -983,255 +972,4 @@
               <figcaption class="caption">Курьерская доставка</figcaption>
             </figure>
             <figure class="tile reveal">
-              <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1400&auto=format&fit=crop" alt="Витрина местного магазина — партнер ЦУИМ" loading="lazy" decoding="async">
-              <figcaption class="caption">Витрины партнеров</figcaption>
-            </figure>
-          </div>
-        </div>
-        <p class="muted center" style="margin-top:8px">Примечание: изображения — заглушки для демонстрации. Замените на ваши фото и скриншоты.</p>
-      </div>
-    </section>
-
-    <!-- Demo -->
-    <section class="section demo">
-      <div class="container center">
-        <h2>Ознакомьтесь с демо-версией</h2>
-        <p class="muted" style="max-width:640px; margin: 6px auto 14px">
-          Увидите, как работает платформа ЦУИМ: интерфейс покупателя, кабинет продавца, административная панель и <a href="https://nyaganmaksimov-sys.github.io/cuim/courier-cabinet.html" target="_blank" rel="noopener">курьерский кабинет</a>.
-        </p>
-        <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="btn btn-primary pill" target="_blank" rel="noopener">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Перейти к демо маркетплейса
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer role="contentinfo">
-    <div class="container footer">
-      <div>
-        <div class="row">
-          <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png" width="36" height="36" alt="ЦУИМ" style="border-radius:10px; border:1px solid var(--border); background:#fff">
-          <strong>ЦУИМ</strong>
-        </div>
-        <p class="muted" style="margin-top:8px">Единая локальная экосистема: маркетплейс + доска объявлений + собственная служба доставки.</p>
-      </div>
-      <div>
-        <strong>Презентации</strong>
-        <ul style="list-style:none; padding:0; margin:10px 0 0">
-          <li><a class="muted" href="#buyer" data-role="buyer">Для покупателей</a></li>
-          <li><a class="muted" href="#seller" data-role="seller">Для продавцов</a></li>
-          <li><a class="muted" href="#investor" data-role="investor">Для инвесторов</a></li>
-        </ul>
-      </div>
-      <div>
-        <strong>Демо</strong>
-        <ul style="list-style:none; padding:0; margin:10px 0 0">
-          <li><a class="muted" href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" rel="noopener">Маркетплейс</a></li>
-          <li><a class="muted" href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" rel="noopener">Кабинет продавца</a></li>
-          <li><a class="muted" href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" rel="noopener">Админ-панель</a></li>
-          <li><a class="muted" href="https://nyaganmaksimov-sys.github.io/cuim/courier-cabinet.html" target="_blank" rel="noopener">Курьерский кабинет</a></li>
-        </ul>
-      </div>
-      <div>
-        <strong>Контакты</strong>
-        <ul style="list-style:none; padding:0; margin:10px 0 0">
-          <li><a class="muted" href="tel:+79863333347">+7 (986) 333-33-47</a></li>
-          <li><a class="muted" href="mailto:3333347@bk.ru">3333347@bk.ru</a></li>
-          <li><span class="muted">Основатель: Павел • Барнаул</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container subfooter">
-      <div>© <span id="year"></span> ЦУИМ. Все права защищены.</div>
-      <div class="muted">Бесплатная доставка от 1500 ₽ • SLA доставки ~47 минут.</div>
-    </div>
-  </footer>
-
-  <!-- To top -->
-  <button class="btn btn-primary pill to-top" id="toTop" aria-label="Наверх"><i class="fa-solid fa-arrow-up"></i></button>
-
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile menu
-    const burger = document.getElementById('hamburger');
-    const nav = document.getElementById('nav');
-    burger?.addEventListener('click', () => {
-      nav.classList.toggle('open');
-      burger.setAttribute('aria-expanded', nav.classList.contains('open'));
-    });
-    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
-
-    // Theme toggle
-    const html = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) html.setAttribute('data-theme', savedTheme);
-    themeToggle?.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme') || 'auto';
-      const next = current === 'light' ? 'dark' : current === 'dark' ? 'auto' : 'light';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
-
-    // Reveal on scroll
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {threshold:.12});
-    revealEls.forEach(el => io.observe(el));
-
-    // Counters (optional numeric animations)
-    const counters = document.querySelectorAll('[data-animate="counter"]');
-    const ioCounters = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){ animateCounter(e.target, parseInt(e.target.dataset.target||'0',10)); ioCounters.unobserve(e.target); }
-      });
-    },{threshold:.6});
-    counters.forEach(c=>ioCounters.observe(c));
-    function animateCounter(el, target){
-      let current=0; const step=Math.max(1, Math.round(target/30));
-      const tick=()=>{ current+=step; if(current>=target) current=target; el.textContent=current; if(current<target) requestAnimationFrame(tick); };
-      requestAnimationFrame(tick);
-    }
-
-    // To top
-    const toTop=document.getElementById('toTop');
-    window.addEventListener('scroll', ()=>{
-      if(window.scrollY>600){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
-    });
-    toTop?.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-
-    // Roles logic (tabs + deep-link)
-    const ROLES = ['buyer','seller','investor'];
-    const tabButtons = Array.from(document.querySelectorAll('[role="tab"]'));
-    const roleLinks = Array.from(document.querySelectorAll('[data-role]'));
-    function setRole(role, scroll=true){
-      if(!ROLES.includes(role)) role='buyer';
-      tabButtons.forEach(btn=>{
-        const active = btn.dataset.role===role;
-        btn.setAttribute('aria-selected', active ? 'true':'false');
-        if(active) btn.focus({preventScroll:true});
-      });
-      ROLES.forEach(r=>{
-        const sec=document.getElementById(`${r}-content`);
-        if(!sec) return;
-        if(r===role){ sec.classList.remove('hidden'); sec.classList.add('active'); }
-        else { sec.classList.add('hidden'); sec.classList.remove('active'); }
-      });
-      document.querySelectorAll('a[data-role]').forEach(a=>{
-        const active = a.dataset.role===role;
-        a.setAttribute('aria-current', active ? 'page' : 'false');
-      });
-      if(location.hash.replace('#','')!==role){
-        history.replaceState(null,'',`#${role}`);
-      }
-      if(scroll){
-        const el = document.getElementById(`${role}-content`);
-        el?.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    }
-    tabButtons.forEach(btn=>{
-      btn.addEventListener('click', ()=> setRole(btn.dataset.role));
-      btn.addEventListener('keydown', (e)=>{
-        if(e.key==='ArrowRight' || e.key==='ArrowLeft'){
-          e.preventDefault();
-          const idx = tabButtons.indexOf(btn);
-          const next = e.key==='ArrowRight' ? (idx+1)%tabButtons.length : (idx-1+tabButtons.length)%tabButtons.length;
-          tabButtons[next].click();
-        }
-      });
-    });
-    roleLinks.forEach(l=>{
-      l.addEventListener('click', (e)=>{
-        const role=l.dataset.role;
-        if(ROLES.includes(role)){
-          e.preventDefault();
-          setRole(role);
-        }
-      });
-    });
-    function initRoleFromHash(){
-      const hash = (location.hash||'').replace('#','');
-      setRole(ROLES.includes(hash) ? hash : 'buyer', false);
-    }
-    window.addEventListener('hashchange', initRoleFromHash);
-    initRoleFromHash();
-
-    // Ads: filter/sort/search (demo data on this page)
-    const adsList = document.getElementById('adsList');
-    const adsSearch = document.getElementById('adsSearch');
-    const adsCity = document.getElementById('adsCity');
-    const adsSort = document.getElementById('adsSort');
-    const adsReset = document.getElementById('adsReset');
-    const catChips = Array.from(document.querySelectorAll('[data-ad-cat]'));
-
-    const state = { q:'', cat:'all', city:'all', sort:'new' };
-
-    function normalize(str){ return (str||'').toString().toLowerCase().trim(); }
-    function applyAds(){
-      const cards = Array.from(adsList.querySelectorAll('.ad-card'));
-      // Filter
-      cards.forEach(card=>{
-        const cat = card.dataset.category || 'other';
-        const city = card.dataset.city || '';
-        const title = (card.dataset.title || card.querySelector('.title')?.textContent || '');
-        const text = (card.dataset.text || card.querySelector('p')?.textContent || '');
-        const hay = normalize(title + ' ' + text);
-        const matches =
-          (state.cat==='all' || state.cat===cat) &&
-          (state.city==='all' || state.city===city) &&
-          (state.q==='' || hay.includes(state.q));
-        card.style.display = matches ? '' : 'none';
-      });
-
-      // Sort visible
-      const visible = cards.filter(c => c.style.display !== 'none');
-      const byDate = (c)=> new Date(c.dataset.date || '1970-01-01').getTime();
-      const byPrice = (c)=> parseFloat(c.dataset.price || '0');
-
-      let cmp = (a,b)=> byDate(b)-byDate(a); // default new first
-      if(state.sort==='price-asc') cmp = (a,b)=> byPrice(a)-byPrice(b);
-      if(state.sort==='price-desc') cmp = (a,b)=> byPrice(b)-byPrice(a);
-
-      visible.sort(cmp).forEach(c=> adsList.appendChild(c));
-    }
-    function selectCat(cat){
-      state.cat = cat;
-      catChips.forEach(ch => ch.classList.toggle('active', ch.dataset.adCat===cat));
-      applyAds();
-    }
-
-    adsSearch?.addEventListener('input', ()=>{ state.q = normalize(adsSearch.value); applyAds(); });
-    adsCity?.addEventListener('change', ()=>{ state.city = adsCity.value; applyAds(); });
-    adsSort?.addEventListener('change', ()=>{ state.sort = adsSort.value; applyAds(); });
-    catChips.forEach(ch => ch.addEventListener('click', ()=> selectCat(ch.dataset.adCat)));
-    adsReset?.addEventListener('click', ()=>{
-      state.q=''; state.cat='all'; state.city='all'; state.sort='new';
-      adsSearch.value=''; adsCity.value='all'; adsSort.value='new';
-      selectCat('all'); applyAds();
-    });
-
-    // Init filters
-    selectCat('all'); applyAds();
-
-    // Ads embed toggle
-    const adsEmbed = document.getElementById('adsEmbed');
-    const adsFrame = document.getElementById('adsFrame');
-    const toggleEmbedBtn = document.getElementById('toggleEmbed');
-    const ADS_URL = 'https://nyaganmaksimov-sys.github.io/cuim/ads-board.html';
-
-    toggleEmbedBtn?.addEventListener('click', ()=>{
-      const isHidden = adsEmbed.classList.contains('hidden');
-      adsEmbed.classList.toggle('hidden', !isHidden);
-      if(isHidden && !adsFrame.src) adsFrame.src = ADS_URL;
-      toggleEmbedBtn.innerHTML = isHidden
-        ? '<i class="fa-solid fa-eye-slash"></i> Скрыть встроенную версию'
-        : '<i class="fa-solid fa-window-restore"></i> Показать встроенную версию';
-      if(isHidden){ adsEmbed.scrollIntoView({behavior:'smooth', block:'start'}); }
-    });
-  </script>
-</body>
-</html>
+              <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1400&auto=format&fit=crop" alt="Витрина местного магазина — 
