@@ -3,21 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>ЦУИМ — Универсальный городской маркетплейс</title>
-  <meta name="description" content="ЦУИМ — единая цифровая платформа города: товары, услуги, еда, билеты и доска объявлений. Всё в одном приложении.">
+  <title>ЦУИМ — Единая локальная экосистема: маркетплейс + доска объявлений + доставка</title>
+  <meta name="description" content="ЦУИМ — единая локальная экосистема: маркетплейс + доска объявлений + служба доставки с бесплатной доставкой от 1500 ₽. Реальные метрики: 47 минут в среднем, 98% успеха.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1220">
+
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ЦУИМ — Универсальный городской маркетплейс">
-  <meta property="og:description" content="Товары, услуги, еда, билеты и доска объявлений — всё для города в одном приложении.">
+  <meta property="og:title" content="ЦУИМ — Единая локальная экосистема города">
+  <meta property="og:description" content="Маркетплейс + доска объявлений + доставка. Бесплатная доставка от 1500 ₽. Среднее время доставки — 47 минут.">
   <meta property="og:image" content="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png">
   <meta property="og:site_name" content="ЦУИМ">
+
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%230F5FFF'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='44' font-weight='800' fill='%23fff'%3ECUIM%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
   <style>
     :root{
       --container: 1200px;
@@ -30,7 +33,8 @@
       --brand-500:#0F5FFF;  /* основной синий */
       --brand-600:#0C49E6;
       --brand-700:#0A3DBA;
-      --accent:#00B8FF;     /* голубой акцент */
+      --accent:#FF6B00;     /* оранжевый из бизнес-плана */
+      --accent-soft:#FFF3E6;
       --danger:#FF5B5B;
 
       --bg:#ffffff;
@@ -145,7 +149,7 @@
     .hero-sub{font-size:clamp(16px, 1vw + 8px, 18px); margin:10px 0 18px}
     .hero-actions{display:flex; flex-wrap:wrap; gap:10px}
 
-    .media{position:relative; border:1px solid var(--border); border-radius:20px; overflow:hidden; aspect-ratio:16/10; background:linear-gradient(135deg, #E8F1FF, #E6FAFF)}
+    .media{position:relative; border:1px solid var(--border); border-radius:20px; overflow:hidden; aspect-ratio:16/10; background:linear-gradient(135deg, #E8F1FF, #FFEFE4)}
     .media .overlay{position:absolute; inset:0; display:grid; place-items:center; background:radial-gradient(240px 240px at center, rgba(0,0,0,.12), transparent 65%)}
     @media (max-width: 980px){ .hero-grid{grid-template-columns:1fr} }
 
@@ -182,16 +186,38 @@
       .grid-4,.grid-3{grid-template-columns:1fr}
     }
 
-    .icon-circle{width:56px; height:56px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, #E8F0FF, #EAF9FF); color:var(--brand-600); font-size:22px; border:1px solid var(--border)}
+    .icon-circle{width:56px; height:56px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, #E8F0FF, #FFEEDD); color:var(--brand-600); font-size:22px; border:1px solid var(--border)}
     .muted{color:var(--text-soft); font-size:14px}
 
-    /* Finance table */
+    /* Finance + highlights */
     .table-wrap{background:var(--bg-elev); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm)}
     table{width:100%; border-collapse:collapse}
     thead th{background:linear-gradient(135deg, var(--brand-500), var(--brand-700)); color:#fff; padding:14px; text-align:center}
     tbody td{padding:14px; border-bottom:1px solid var(--border); text-align:center}
     tbody tr:nth-child(odd) td{ background:var(--bg-soft) }
     tbody tr:last-child td{ border-bottom:none }
+
+    .highlight-box{
+      background: var(--accent-soft);
+      border-left: 6px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 0 12px 12px 0;
+      color: var(--text);
+    }
+    @media (prefers-color-scheme: dark){
+      .highlight-box{ background: rgba(255,107,0,.12) }
+    }
+    .graph{
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: pre;
+      font-size: 13px;
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
 
     /* Media showcase (скриншоты/фото ПВЗ) */
     .media-showcase .phone{
@@ -257,7 +283,7 @@
       <a class="brand" href="#">
         <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png" alt="Логотип ЦУИМ" width="40" height="40">
         <span>ЦУИМ</span>
-        <span class="chip" style="margin-left:6px; font-weight:700;">Маркетплейс</span>
+        <span class="chip" style="margin-left:6px; font-weight:700;">Экосистема города</span>
       </a>
       <nav id="nav" class="nav-links" aria-label="Главная навигация">
         <a href="#buyer" data-role="buyer">Покупателям</a>
@@ -284,8 +310,8 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <h1>ЦУИМ — <span>универсальный городской маркетплейс</span></h1>
-          <p class="hero-sub">Все для города в одном приложении: товары, услуги, еда, билеты и доска объявлений. Единая цифровая платформа для городской экономики.</p>
+          <h1>ЦУИМ — <span>единая локальная экосистема</span></h1>
+          <p class="hero-sub">Маркетплейс + доска объявлений + собственная служба доставки. Бесплатная доставка при заказе от 1500 ₽. Целевая зона — города 60–650 тыс. жителей.</p>
           <div class="hero-actions">
             <a href="#buyer" class="btn btn-primary pill" data-role="buyer"><i class="fa-solid fa-cart-shopping"></i> Я покупатель</a>
             <a href="#seller" class="btn btn-outline pill" data-role="seller"><i class="fa-solid fa-store"></i> Я продавец</a>
@@ -293,16 +319,17 @@
           </div>
           <div class="chips" style="margin-top:12px">
             <span class="chip"><i class="fa-solid fa-shield-halved"></i> Безопасные платежи</span>
-            <span class="chip"><i class="fa-solid fa-bolt"></i> Быстрая доставка</span>
-            <span class="chip"><i class="fa-solid fa-headset"></i> Поддержка 24/7</span>
+            <span class="chip"><i class="fa-solid fa-bolt"></i> Доставка ~47 мин</span>
+            <span class="chip"><i class="fa-solid fa-gift"></i> Бесплатно от 1500 ₽</span>
+            <a class="chip" href="https://nyaganmaksimov-sys.github.io/cuim/courier-cabinet.html" target="_blank" rel="noopener"><i class="fa-solid fa-motorcycle"></i> Курьерский кабинет</a>
           </div>
         </div>
         <div class="surface media">
           <div class="overlay">
             <div class="row">
-              <span class="chip"><i class="fa-solid fa-location-dot"></i> 520 городов — потенциал</span>
-              <span class="chip"><i class="fa-solid fa-users"></i> 35 млн целевая аудитория</span>
-              <span class="chip"><i class="fa-solid fa-ruble-sign"></i> 1.8 трлн ₽ TAM</span>
+              <span class="chip"><i class="fa-solid fa-city"></i> Города 60–650 тыс. чел.</span>
+              <span class="chip"><i class="fa-solid fa-check-double"></i> Успешность 98%</span>
+              <span class="chip"><i class="fa-solid fa-ruble-sign"></i> Комиссия ~9%</span>
             </div>
           </div>
         </div>
@@ -320,19 +347,19 @@
           <div class="card reveal">
             <div class="big-icon"><i class="fa-solid fa-cart-shopping"></i></div>
             <h3>Покупателям</h3>
-            <p>Все в одном: быстро, удобно, локально. Акции и безопасные платежи.</p>
+            <p>Все в одном: товары, услуги, еда, билеты и объявления с бесплатной доставкой от 1500 ₽.</p>
             <a href="#buyer" class="btn btn-primary pill" data-role="buyer">Узнать больше</a>
           </div>
           <div class="card reveal">
             <div class="big-icon"><i class="fa-solid fa-store"></i></div>
             <h3>Продавцам</h3>
-            <p>Низкие комиссии, ежедневные выплаты, новые клиенты и аналитика.</p>
+            <p>Комиссия 8–10% для магазинов, ежедневные выплаты, локальный спрос и аналитика.</p>
             <a href="#seller" class="btn btn-outline pill" data-role="seller">Узнать больше</a>
           </div>
           <div class="card reveal">
             <div class="big-icon"><i class="fa-solid fa-chart-line"></i></div>
             <h3>Инвесторам</h3>
-            <p>Маржинальная модель и масштабируемая инфраструктура городов.</p>
+            <p>Модель «экосистемы города»: юнит‑прибыльная доставка, синергия модулей и roadmap на 6 мес.</p>
             <a href="#investor" class="btn btn-outline pill" data-role="investor">Узнать больше</a>
           </div>
         </div>
@@ -359,14 +386,14 @@
       <div class="container">
         <div class="section-title">
           <h2>Все для города — в одном приложении</h2>
-          <p>Товары, услуги, еда и билеты в единой экосистеме. Теперь и доска объявлений для жителей города.</p>
+          <p>Маркетплейс, услуги, еда, билеты и доска объявлений. Бесплатная доставка от 1500 ₽ — по городу за ~47 минут.</p>
         </div>
 
         <div class="grid-4">
           <div class="card reveal">
             <div class="icon-circle"><i class="fa-solid fa-basket-shopping"></i></div>
             <h3>Товары</h3>
-            <p class="muted">Продукты, хозяйственные товары, электроника от местных магазинов</p>
+            <p class="muted">Продукты, хозтовары, электроника от местных магазинов</p>
           </div>
           <div class="card reveal">
             <div class="icon-circle"><i class="fa-solid fa-bell-concierge"></i></div>
@@ -376,7 +403,7 @@
           <div class="card reveal">
             <div class="icon-circle"><i class="fa-solid fa-utensils"></i></div>
             <h3>Доставка еды</h3>
-            <p class="muted">Блюда из местных кафе и ресторанов за 45 минут</p>
+            <p class="muted">Блюда из местных кафе и ресторанов за 45–50 минут</p>
           </div>
           <div class="card reveal">
             <div class="icon-circle"><i class="fa-solid fa-ticket"></i></div>
@@ -392,22 +419,22 @@
           <div class="card reveal center">
             <div class="icon-circle"><i class="fa-solid fa-bolt"></i></div>
             <h3>Быстро</h3>
-            <p class="muted">Еда за 45 минут, товары за 2–4 часа через сеть ПВЗ</p>
+            <p class="muted">Еда ~47 мин, товары за 2–4 часа через сеть ПВЗ</p>
           </div>
           <div class="card reveal center">
             <div class="icon-circle"><i class="fa-solid fa-mobile-screen"></i></div>
             <h3>Удобно</h3>
-            <p class="muted">Единый аккаунт для всех категорий</p>
+            <p class="muted">Единый аккаунт, единые корзина и платежи</p>
           </div>
           <div class="card reveal center">
             <div class="icon-circle"><i class="fa-solid fa-city"></i></div>
             <h3>Локально</h3>
-            <p class="muted">Поддержка городской экономики</p>
+            <p class="muted">Поддержка городской экономики и малого бизнеса</p>
           </div>
           <div class="card reveal center">
             <div class="icon-circle"><i class="fa-solid fa-ruble-sign"></i></div>
             <h3>Выгодно</h3>
-            <p class="muted">Акции и скидки от местных бизнесов</p>
+            <p class="muted">Бесплатная доставка ≥1500 ₽, акции и скидки</p>
           </div>
           <div class="card reveal center">
             <div class="icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
@@ -419,6 +446,54 @@
             <h3>Поддержка 24/7</h3>
             <p class="muted">Всегда на связи</p>
           </div>
+        </div>
+
+        <!-- Delivery KPIs from courier cabinet -->
+        <div class="section-title" style="margin-top:18px">
+          <h2>Служба доставки: реальные метрики</h2>
+          <p class="muted">Данные из курьерского кабинета: <a href="https://nyaganmaksimov-sys.github.io/cuim/courier-cabinet.html" target="_blank" rel="noopener">courier-cabinet.html</a></p>
+        </div>
+        <div class="grid-4">
+          <div class="card center reveal">
+            <div class="icon-circle"><i class="fa-solid fa-stopwatch"></i></div>
+            <h3>47 минут</h3>
+            <p class="muted">Среднее время доставки</p>
+          </div>
+          <div class="card center reveal">
+            <div class="icon-circle"><i class="fa-solid fa-badge-check"></i></div>
+            <h3>98%</h3>
+            <p class="muted">Успешность заказов</p>
+          </div>
+          <div class="card center reveal">
+            <div class="icon-circle"><i class="fa-solid fa-list-check"></i></div>
+            <h3>8/день</h3>
+            <p class="muted">Активных заказов на курьера</p>
+          </div>
+          <div class="card center reveal">
+            <div class="icon-circle"><i class="fa-solid fa-money-bill-wave"></i></div>
+            <h3>1 850 ₽/день</h3>
+            <p class="muted">Заработок курьера (~46 250 ₽/мес)</p>
+          </div>
+        </div>
+
+        <!-- Unit economics of an order -->
+        <div class="section-title" style="margin-top:18px">
+          <h2>Юнит‑экономика одного заказа ≥ 1500 ₽</h2>
+          <p class="muted">Бесплатная доставка — маркетинговый драйвер, который окупается за счет комиссии и эффективности маршрутов.</p>
+        </div>
+        <div class="table-wrap reveal">
+          <table aria-label="Юнит-экономика заказа">
+            <thead>
+              <tr><th>Показатель</th><th>Сумма, ₽</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Средний чек</td><td>2 000</td></tr>
+              <tr><td>Комиссия ЦУИМ (9%)</td><td>180</td></tr>
+              <tr><td>— Выплата курьеру</td><td>100</td></tr>
+              <tr><td>— Операционные затраты</td><td>30</td></tr>
+              <tr><td><strong>Чистая маржа ЦУИМ</strong></td><td><strong>50</strong></td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Доска объявлений -->
@@ -563,7 +638,7 @@
               <i class="fa-solid fa-percent"></i>
             </div>
             <h3>Низкие комиссии</h3>
-            <p class="muted">От 5% до 25% по категориям</p>
+            <p class="muted">Магазины: 8–10% (ниже Ozon/WB в 2–3 раза)</p>
           </div>
           <div class="card reveal center">
             <div class="icon-circle" style="background:linear-gradient(135deg,#D1FAFF,#E7F0FF); color:#00B8FF;">
@@ -580,7 +655,7 @@
           <div class="card reveal center">
             <div class="icon-circle"><i class="fa-solid fa-truck"></i></div>
             <h3>Гибкая логистика</h3>
-            <p class="muted">Собственная доставка или ПВЗ ЦУИМ</p>
+            <p class="muted">Собственная доставка ЦУИМ или самовывоз</p>
           </div>
           <div class="card reveal center">
             <div class="icon-circle"><i class="fa-solid fa-chart-column"></i></div>
@@ -602,20 +677,18 @@
           <div class="card reveal">
             <h3><i class="fa-solid fa-store"></i> Магазины</h3>
             <ul class="muted" style="margin:10px 0 0; padding-left:18px">
-              <li>Комиссия: 12–15% по категории</li>
-              <li>Минимум: 10 ₽ за заказ</li>
+              <li>Комиссия: 8–10% (среднее — 9%)</li>
+              <li>Бесплатная доставка для заказов ≥1500 ₽</li>
               <li>Выплаты: ежедневно</li>
-              <li>Логистика: самовывоз или ПВЗ ЦУИМ</li>
-              <li>Первые 3 месяца — комиссия 0% для новых партнеров</li>
+              <li>Логистика: самовывоз или доставка ЦУИМ</li>
             </ul>
           </div>
           <div class="card reveal">
             <h3><i class="fa-solid fa-utensils"></i> Кафе и рестораны</h3>
             <ul class="muted" style="margin:10px 0 0; padding-left:18px">
-              <li>Комиссия: 15–25% (зависит от среднего чека)</li>
-              <li>Минимум: 15 ₽ за заказ</li>
+              <li>Комиссия: 15–25% (по среднему чеку)</li>
+              <li>Доставка: своя или курьеры ЦУИМ (~47 мин)</li>
               <li>Выплаты: ежедневно</li>
-              <li>Доставка: своя или курьеры ЦУИМ</li>
               <li>Бесплатное подключение и обучение</li>
             </ul>
           </div>
@@ -624,7 +697,6 @@
             <ul class="muted" style="margin:10px 0 0; padding-left:18px">
               <li>Комиссия: 10–20% по типу услуги</li>
               <li>Фикс: 50 ₽ за заявку (для ряда категорий)</li>
-              <li>Выплаты: ежедневно</li>
               <li>Гибкое бронирование и уведомления</li>
               <li>Интеграция с календарем</li>
             </ul>
@@ -633,12 +705,15 @@
             <h3><i class="fa-solid fa-ticket"></i> Билетные операторы</h3>
             <ul class="muted" style="margin:10px 0 0; padding-left:18px">
               <li>Комиссия: 5–10% по типу события</li>
-              <li>Минимум: 5 ₽ за билет</li>
               <li>Выплаты: ежедневно</li>
               <li>Полная интеграция с бронированием</li>
               <li>Мгновенное подтверждение</li>
             </ul>
           </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top:16px">
+          <strong>Заказы < 1500 ₽</strong>: платная доставка компенсирует логистику и не влияет на бесплатные заказы — источник доп. выручки.
         </div>
 
         <div class="center" style="margin-top:20px">
@@ -654,52 +729,158 @@
       <div class="container">
         <div class="section-title">
           <h2>Инвестиции в цифровую инфраструктуру городской экономики</h2>
-          <p>Уникальная бизнес-модель с выходом на EBITDA 86% к 3-му году</p>
+          <p>Экосистема с синергией модулей: маркетплейс, объявления и собственная доставка (юнит‑прибыльна).</p>
         </div>
 
+        <!-- KPI cards -->
         <div class="grid-4">
           <div class="card center reveal">
             <div class="icon-circle"><i class="fa-solid fa-city"></i></div>
-            <div class="muted">Городов РФ 60–300 тыс. чел.</div>
-            <div style="font-size:28px; font-weight:800" data-animate="counter" data-target="520">0</div>
+            <div class="muted">Целевые города РФ</div>
+            <div style="font-size:28px; font-weight:800">60–650 тыс.</div>
           </div>
           <div class="card center reveal">
             <div class="icon-circle"><i class="fa-solid fa-users"></i></div>
-            <div class="muted">Целевая аудитория</div>
-            <div style="font-size:28px; font-weight:800" data-animate="counter" data-target="35">0</div>
-            <div class="muted">млн</div>
+            <div class="muted">Активные покупатели / город</div>
+            <div style="font-size:28px; font-weight:800">10 000</div>
           </div>
           <div class="card center reveal">
-            <div class="icon-circle"><i class="fa-solid fa-coins"></i></div>
-            <div class="muted">ТАМ (годовой рынок)</div>
-            <div style="font-size:28px; font-weight:800">1.8 трлн ₽</div>
+            <div class="icon-circle"><i class="fa-solid fa-basket-shopping"></i></div>
+            <div class="muted">Заказов в день / город</div>
+            <div style="font-size:28px; font-weight:800">250</div>
           </div>
           <div class="card center reveal">
-            <div class="icon-circle"><i class="fa-solid fa-sack-dollar"></i></div>
-            <div class="muted">SAM (онлайн-транзакции)</div>
-            <div style="font-size:28px; font-weight:800">450 млрд ₽</div>
+            <div class="icon-circle"><i class="fa-solid fa-truck-fast"></i></div>
+            <div class="muted">Курьеров / город</div>
+            <div style="font-size:28px; font-weight:800">10</div>
           </div>
         </div>
 
-        <div class="section-title" style="margin-top:18px"><h2>Финансовые прогнозы</h2></div>
-        <div class="table-wrap reveal">
-          <table aria-label="Финансовая модель">
-            <thead>
-              <tr>
-                <th>Показатель</th>
-                <th>Год 1</th>
-                <th>Год 2</th>
-                <th>Год 3</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><strong>Количество городов</strong></td><td>3</td><td>15</td><td>50</td></tr>
-              <tr><td><strong>GMV (млрд ₽)</strong></td><td>0.62</td><td>5.2</td><td>22</td></tr>
-              <tr><td><strong>Выручка (млн ₽)</strong></td><td>87</td><td>728</td><td>3,080</td></tr>
-              <tr><td><strong>EBITDA (млн ₽)</strong></td><td>39</td><td>548</td><td>2,660</td></tr>
-              <tr><td><strong>Маржа EBITDA</strong></td><td>45%</td><td>75%</td><td>86%</td></tr>
-            </tbody>
-          </table>
+        <div class="section-title" style="margin-top:18px"><h2>Финансовая модель: 1 город / месяц</h2></div>
+
+        <!-- Assumptions -->
+        <div class="highlight-box reveal">
+          <p><strong>Допущения:</strong> магазинов — 100; активных покупателей — 10 000; заказов/день — 250; средний чек — 2 000 ₽; объявлений/день — 160; курьеров — 10; рабочих дней — 25.</p>
+        </div>
+
+        <!-- Incomes -->
+        <div class="grid-2">
+          <div class="table-wrap reveal">
+            <table aria-label="Доходы 1 город / месяц">
+              <thead>
+                <tr>
+                  <th>Источник дохода</th>
+                  <th>Сумма, ₽</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Комиссия с маркетплейса (9%)</td><td>1 125 000</td></tr>
+                <tr><td>Платные услуги доски объявлений</td><td>150 000</td></tr>
+                <tr><td>Платная доставка (заказы <1500 ₽)</td><td>100 000</td></tr>
+                <tr><td>Реклама и партнёрства</td><td>25 000</td></tr>
+                <tr><td><strong>Итого доходы</strong></td><td><strong>1 400 000</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Expenses -->
+          <div class="table-wrap reveal">
+            <table aria-label="Расходы 1 город / месяц">
+              <thead>
+                <tr>
+                  <th>Статья расхода</th>
+                  <th>Сумма, ₽</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Выплаты курьерам</td><td>231 250</td></tr>
+                <tr><td>Зарплата команды (5 человек)</td><td>250 000</td></tr>
+                <tr><td>Аренда ПВЗ (2 точки)</td><td>60 000</td></tr>
+                <tr><td>Техподдержка, хостинг, ПО</td><td>50 000</td></tr>
+                <tr><td>Маркетинг</td><td>75 000</td></tr>
+                <tr><td>Модерация, логистика</td><td>35 000</td></tr>
+                <tr><td><strong>Итого расходы</strong></td><td><strong>701 250</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="highlight-box reveal" style="margin-top:12px">
+          <h3 style="margin:0 0 6px">Чистая прибыль: <strong>698 750 ₽/мес</strong></h3>
+          <p style="margin:0">Ориентировочная рентабельность: <strong>~50%</strong></p>
+        </div>
+
+        <!-- Graphs -->
+        <div class="grid-2" style="margin-top:12px">
+          <div class="graph reveal" aria-label="Доходы по источникам (ASCII)">
+Маркетплейс ████████████████████ 80%
+Доска         ████                 11%
+Доставка      ██                   7%
+Реклама       █                    2%
+          </div>
+          <div class="graph reveal" aria-label="Расходы по статьям (ASCII)">
+Курьеры       ██████████          33%
+Команда       ██████████          36%
+ПВЗ           ██                  9%
+Тех/маркетинг ████                16%
+Прочее        █                   5%
+          </div>
+        </div>
+
+        <div class="graph reveal" style="margin-top:12px" aria-label="Динамика прибыли 1–6 мес (ASCII)">
+Месяц 1: ████             200 000 ₽
+Месяц 2: ████████         400 000 ₽
+Месяц 3: ████████████     600 000 ₽
+Месяц 4: ██████████████   700 000 ₽
+Месяц 5: ███████████████  750 000 ₽
+Месяц 6: ████████████████ 800 000 ₽
+        </div>
+
+        <div class="section-title" style="margin-top:18px"><h2>Преимущества ЦУИМ</h2></div>
+        <div class="grid-3">
+          <div class="card reveal">
+            <div class="icon-circle"><i class="fa-solid fa-gift"></i></div>
+            <h3>Бесплатная доставка</h3>
+            <p class="muted">Сильный драйвер спроса (≥1500 ₽), окупается комиссией и маршрутами</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon-circle"><i class="fa-solid fa-handshake-angle"></i></div>
+            <h3>Поддержка малого бизнеса</h3>
+            <p class="muted">Комиссии 2–3 раза ниже, чем у федеральных маркетплейсов</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon-circle"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>Синергия модулей</h3>
+            <p class="muted">Маркетплейс + Объявления + Доставка усиливают LTV и retetion</p>
+          </div>
+        </div>
+
+        <div class="section-title" style="margin-top:18px"><h2>Roadmap (первые 6 месяцев)</h2></div>
+        <div class="grid-3">
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-flag-checkered"></i> Месяц 1</h3>
+            <p class="muted">MVP в Барнауле: маркетплейс + курьеры + ПВЗ</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-bullhorn"></i> Месяц 2</h3>
+            <p class="muted">Запуск доски объявлений</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-briefcase"></i> Месяц 3</h3>
+            <p class="muted">B2B‑заказы на доставку (внешние)</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-location-dot"></i> Месяц 4</h3>
+            <p class="muted">Выход во 2‑й город</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-city"></i> Месяц 6</h3>
+            <p class="muted">3 города, 500+ магазинов, 15+ курьеров, прибыль > 2 млн ₽/мес</p>
+          </div>
+          <div class="card reveal">
+            <h3><i class="fa-solid fa-motorcycle"></i> Операции</h3>
+            <p class="muted">Маршрутизация, SLA доставки, масштабирование ПВЗ</p>
+          </div>
         </div>
 
         <div class="section-title" style="margin-top:18px"><h2>Инвестиционное предложение</h2></div>
@@ -774,7 +955,7 @@
       <div class="container center">
         <h2>Ознакомьтесь с демо-версией</h2>
         <p class="muted" style="max-width:640px; margin: 6px auto 14px">
-          Увидите, как работает платформа ЦУИМ изнутри — интерфейс покупателя, кабинет продавца и административная панель.
+          Увидите, как работает платформа ЦУИМ: интерфейс покупателя, кабинет продавца, административная панель и <a href="https://nyaganmaksimov-sys.github.io/cuim/courier-cabinet.html" target="_blank" rel="noopener">курьерский кабинет</a>.
         </p>
         <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="btn btn-primary pill" target="_blank" rel="noopener">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> Перейти к демо маркетплейса
@@ -791,7 +972,7 @@
           <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png" width="36" height="36" alt="ЦУИМ" style="border-radius:10px; border:1px solid var(--border); background:#fff">
           <strong>ЦУИМ</strong>
         </div>
-        <p class="muted" style="margin-top:8px">Универсальный городской маркетплейс, объединяющий ключевые сервисы для комфортной жизни в городе.</p>
+        <p class="muted" style="margin-top:8px">Единая локальная экосистема: маркетплейс + доска объявлений + собственная служба доставки.</p>
       </div>
       <div>
         <strong>Презентации</strong>
@@ -807,6 +988,7 @@
           <li><a class="muted" href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" rel="noopener">Маркетплейс</a></li>
           <li><a class="muted" href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" rel="noopener">Кабинет продавца</a></li>
           <li><a class="muted" href="https://nyaganmaksimov-sys.github.io/cuim/" target="_blank" rel="noopener">Админ-панель</a></li>
+          <li><a class="muted" href="https://nyaganmaksimov-sys.github.io/cuim/courier-cabinet.html" target="_blank" rel="noopener">Курьерский кабинет</a></li>
         </ul>
       </div>
       <div>
@@ -814,13 +996,13 @@
         <ul style="list-style:none; padding:0; margin:10px 0 0">
           <li><a class="muted" href="tel:+79863333347">+7 (986) 333-33-47</a></li>
           <li><a class="muted" href="mailto:3333347@bk.ru">3333347@bk.ru</a></li>
-          <li><span class="muted">Города присутствия</span></li>
+          <li><span class="muted">Основатель: Павел • Барнаул</span></li>
         </ul>
       </div>
     </div>
     <div class="container subfooter">
       <div>© <span id="year"></span> ЦУИМ. Все права защищены.</div>
-      <div class="muted">Включена доска объявлений для покупателей.</div>
+      <div class="muted">Бесплатная доставка от 1500 ₽ • SLA доставки ~47 минут.</div>
     </div>
   </footer>
 
@@ -859,7 +1041,7 @@
     }, {threshold:.12});
     revealEls.forEach(el => io.observe(el));
 
-    // Counters
+    // Counters (optional numeric animations)
     const counters = document.querySelectorAll('[data-animate="counter"]');
     const ioCounters = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
