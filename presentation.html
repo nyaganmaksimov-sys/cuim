@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>ЦУИМ — Универсальный городской маркетплейс</title>
-  <meta name="description" content="ЦУИМ — единая цифровая платформа города: товары, услуги, еда, билеты. Все в одном приложении.">
+  <meta name="description" content="ЦУИМ — единая цифровая платформа города: товары, услуги, еда, билеты и доска объявлений. Всё в одном приложении.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1220">
   <meta property="og:type" content="website">
   <meta property="og:title" content="ЦУИМ — Универсальный городской маркетплейс">
-  <meta property="og:description" content="Все для города в одном приложении: товары, услуги, еда, билеты.">
+  <meta property="og:description" content="Товары, услуги, еда, билеты и доска объявлений — всё для города в одном приложении.">
   <meta property="og:image" content="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/main/images/logo.png">
   <meta property="og:site_name" content="ЦУИМ">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%230F5FFF'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='44' font-weight='800' fill='%23fff'%3ECUIM%3C/text%3E%3C/svg%3E">
@@ -26,7 +26,7 @@
       --shadow-sm: 0 6px 18px rgba(0,0,0,.08);
       --shadow: 0 18px 50px rgba(0,0,0,.12);
 
-      /* Цвета бренда ЦУИМ (можно быстро заменить на точные HEX) */
+      /* Цвета бренда ЦУИМ */
       --brand-500:#0F5FFF;  /* основной синий */
       --brand-600:#0C49E6;
       --brand-700:#0A3DBA;
@@ -116,7 +116,7 @@
       .nav-cta{display:none}
     }
 
-    /* Buttons */
+    /* Buttons and chips */
     .btn{display:inline-flex; align-items:center; gap:10px; cursor:pointer;
       font-weight:700; border-radius:12px; padding:12px 16px; border:1px solid transparent; transition:.25s ease}
     .btn-primary{background:var(--brand-500); color:#fff}
@@ -126,6 +126,17 @@
     .btn-ghost{background:transparent; color:var(--text); border:1px solid transparent}
     .btn-ghost:hover{background:rgba(0,0,0,.04)}
     .pill{border-radius:999px}
+    .chips{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); color:var(--text-soft);
+      background:var(--bg-elev); padding:8px 12px; border-radius:999px; font-weight:700; cursor:pointer; user-select:none}
+    .chip.active{ background: var(--brand-500); color:#fff; border-color: transparent }
+
+    /* Inputs */
+    .input, select{
+      background:var(--bg-elev); color:var(--text); border:1px solid var(--border);
+      border-radius:12px; padding:10px 12px; font:inherit; transition:.2s ease;
+    }
+    .input:focus, select:focus{ outline:none; border-color:var(--brand-500); box-shadow:0 0 0 4px rgba(15,95,255,.12) }
 
     /* Hero */
     .hero{padding: clamp(28px, 4vw, 48px) 0 clamp(56px, 8vw, 120px)}
@@ -133,14 +144,9 @@
     .hero h1 span{background:linear-gradient(90deg, var(--brand-500), var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent}
     .hero-sub{font-size:clamp(16px, 1vw + 8px, 18px); margin:10px 0 18px}
     .hero-actions{display:flex; flex-wrap:wrap; gap:10px}
-    .chips{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .chip{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); color:var(--text-soft);
-      background:var(--bg-elev); padding:8px 12px; border-radius:999px; font-weight:600}
 
-    /* Media (right side hero) */
     .media{position:relative; border:1px solid var(--border); border-radius:20px; overflow:hidden; aspect-ratio:16/10; background:linear-gradient(135deg, #E8F1FF, #E6FAFF)}
     .media .overlay{position:absolute; inset:0; display:grid; place-items:center; background:radial-gradient(240px 240px at center, rgba(0,0,0,.12), transparent 65%)}
-
     @media (max-width: 980px){ .hero-grid{grid-template-columns:1fr} }
 
     /* Audience cards */
@@ -155,7 +161,7 @@
     .card p{margin:6px 0 14px}
     @media (max-width: 980px){ .cards{grid-template-columns:1fr} }
 
-    /* Sticky role tabs (accessible) */
+    /* Sticky role tabs */
     .role-tabs-wrap{ position:sticky; top:64px; z-index:40; background:var(--bg-soft); border-block:1px solid var(--border) }
     .role-tabs{ display:flex; gap:8px; align-items:center; justify-content:center; padding:10px; flex-wrap:wrap }
     .role-tabs [role="tab"]{
@@ -198,6 +204,18 @@
     .tile{ position:relative; border-radius:14px; overflow:hidden; border:1px solid var(--border); background:var(--bg-elev) }
     .tile img{ display:block; width:100%; height:100%; object-fit:cover }
     .tile .caption{ position:absolute; left:8px; bottom:8px; background:rgba(0,0,0,.45); color:#fff; padding:6px 10px; border-radius:10px; font-size:12px; backdrop-filter: blur(6px) }
+
+    /* Ads board (buyers) */
+    .ads-controls{ display:grid; grid-template-columns: 1.3fr 1fr 1fr auto; gap:10px; align-items:center; margin: 10px 0 14px }
+    @media (max-width: 980px){ .ads-controls{ grid-template-columns: 1fr 1fr } }
+    @media (max-width: 520px){ .ads-controls{ grid-template-columns: 1fr } }
+    .ad-card .thumb{ border-radius:12px; overflow:hidden; aspect-ratio:16/10; border:1px solid var(--border); background:var(--bg-soft) }
+    .ad-card .thumb img{ width:100%; height:100%; object-fit:cover; display:block }
+    .ad-card .title{ font-weight:800; margin-top:10px }
+    .ad-card .meta{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:8px }
+    .price{ font-weight:800; color:var(--brand-600) }
+    .badge{ display:inline-block; font-weight:700; font-size:12px; border:1px solid var(--border); border-radius:999px; padding:6px 8px; background:var(--bg-elev); color:var(--text-soft) }
+    .ads-embed iframe{ width:100%; height:820px; border:0; border-radius:16px; background:#fff; border:1px solid var(--border) }
 
     /* Demo strip */
     .demo{ background: radial-gradient(600px 320px at 20% 30%, rgba(15,95,255,.15), transparent 60%), linear-gradient(135deg, #F7FBFF, #F0F8FF) }
@@ -267,13 +285,13 @@
       <div class="container hero-grid">
         <div>
           <h1>ЦУИМ — <span>универсальный городской маркетплейс</span></h1>
-          <p class="hero-sub">Все для города в одном приложении: товары, услуги, еда, билеты. Единая цифровая платформа для городской экономики.</p>
+          <p class="hero-sub">Все для города в одном приложении: товары, услуги, еда, билеты и доска объявлений. Единая цифровая платформа для городской экономики.</p>
           <div class="hero-actions">
             <a href="#buyer" class="btn btn-primary pill" data-role="buyer"><i class="fa-solid fa-cart-shopping"></i> Я покупатель</a>
             <a href="#seller" class="btn btn-outline pill" data-role="seller"><i class="fa-solid fa-store"></i> Я продавец</a>
             <a href="#investor" class="btn btn-outline pill" data-role="investor"><i class="fa-solid fa-chart-line"></i> Я инвестор</a>
           </div>
-          <div class="chips">
+          <div class="chips" style="margin-top:12px">
             <span class="chip"><i class="fa-solid fa-shield-halved"></i> Безопасные платежи</span>
             <span class="chip"><i class="fa-solid fa-bolt"></i> Быстрая доставка</span>
             <span class="chip"><i class="fa-solid fa-headset"></i> Поддержка 24/7</span>
@@ -302,7 +320,7 @@
           <div class="card reveal">
             <div class="big-icon"><i class="fa-solid fa-cart-shopping"></i></div>
             <h3>Покупателям</h3>
-            <p>Все в одном: быстро, удобно, локально. Скидки и безопасные платежи.</p>
+            <p>Все в одном: быстро, удобно, локально. Акции и безопасные платежи.</p>
             <a href="#buyer" class="btn btn-primary pill" data-role="buyer">Узнать больше</a>
           </div>
           <div class="card reveal">
@@ -341,7 +359,7 @@
       <div class="container">
         <div class="section-title">
           <h2>Все для города — в одном приложении</h2>
-          <p>Больше не нужно переключаться между сервисами — товары, услуги, еда и билеты в единой экосистеме.</p>
+          <p>Товары, услуги, еда и билеты в единой экосистеме. Теперь и доска объявлений для жителей города.</p>
         </div>
 
         <div class="grid-4">
@@ -403,7 +421,127 @@
           </div>
         </div>
 
-        <div class="center" style="margin-top:20px">
+        <!-- Доска объявлений -->
+        <div id="buyer-ads" class="section-title" style="margin-top:18px">
+          <h2>Доска объявлений</h2>
+          <p>Покупка/продажа, услуги, недвижимость, транспорт, работа — за пару кликов. Встроенный поиск и удобные фильтры.</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="ads-controls">
+          <label class="sr-only" for="adsSearch">Поиск объявлений</label>
+          <input id="adsSearch" class="input" type="search" placeholder="Поиск по заголовку или описанию...">
+          <label class="sr-only" for="adsCity">Город</label>
+          <select id="adsCity" aria-label="Город">
+            <option value="all">Все города</option>
+            <option value="Нягань">Нягань</option>
+            <option value="Сургут">Сургут</option>
+            <option value="Тюмень">Тюмень</option>
+          </select>
+          <label class="sr-only" for="adsSort">Сортировка</label>
+          <select id="adsSort" aria-label="Сортировка">
+            <option value="new">Сначала новые</option>
+            <option value="price-asc">Цена: по возрастанию</option>
+            <option value="price-desc">Цена: по убыванию</option>
+          </select>
+          <button id="adsReset" class="btn btn-ghost"><i class="fa-solid fa-rotate-right"></i> Сбросить</button>
+        </div>
+
+        <!-- Categories -->
+        <div class="chips" id="adsCats" style="margin-bottom:12px">
+          <span class="chip active" data-ad-cat="all"><i class="fa-solid fa-layer-group"></i> Все</span>
+          <span class="chip" data-ad-cat="goods"><i class="fa-solid fa-box-open"></i> Товары</span>
+          <span class="chip" data-ad-cat="services"><i class="fa-solid fa-screwdriver-wrench"></i> Услуги</span>
+          <span class="chip" data-ad-cat="realty"><i class="fa-solid fa-house"></i> Недвижимость</span>
+          <span class="chip" data-ad-cat="transport"><i class="fa-solid fa-truck"></i> Транспорт</span>
+          <span class="chip" data-ad-cat="jobs"><i class="fa-solid fa-briefcase"></i> Работа</span>
+        </div>
+
+        <!-- Listings (demo) -->
+        <div id="adsList" class="grid-3">
+          <div class="card ad-card reveal" data-category="goods" data-city="Нягань" data-price="7000" data-date="2025-11-05" data-title="Продаю городской велосипед" data-text="Отличное состояние, накат минимальный">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1517940310602-75bcff8d4c05?q=80&w=1200&auto=format&fit=crop" alt="Велосипед городской"></div>
+            <div class="title">Продаю городской велосипед</div>
+            <p class="muted">Отличное состояние, накат минимальный</p>
+            <div class="meta">
+              <span class="price">7 000 ₽</span>
+              <span class="badge">Нягань • Товары</span>
+            </div>
+          </div>
+
+          <div class="card ad-card reveal" data-category="services" data-city="Нягань" data-price="500" data-date="2025-11-08" data-title="Услуги электрика" data-text="Монтаж розеток, светильников, щитов">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?q=80&w=1200&auto=format&fit=crop" alt="Электрик на выезд"></div>
+            <div class="title">Услуги электрика</div>
+            <p class="muted">Монтаж розеток, светильников, щитов</p>
+            <div class="meta">
+              <span class="price">от 500 ₽</span>
+              <span class="badge">Нягань • Услуги</span>
+            </div>
+          </div>
+
+          <div class="card ad-card reveal" data-category="realty" data-city="Сургут" data-price="20000" data-date="2025-11-02" data-title="Сдам 1-к квартиру" data-text="Центр, мебель и техника, рядом парк">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1200&auto=format&fit=crop" alt="Квартира 1-к"></div>
+            <div class="title">Сдам 1-к квартиру</div>
+            <p class="muted">Центр, мебель и техника, рядом парк</p>
+            <div class="meta">
+              <span class="price">20 000 ₽/мес</span>
+              <span class="badge">Сургут • Недвижимость</span>
+            </div>
+          </div>
+
+          <div class="card ad-card reveal" data-category="transport" data-city="Тюмень" data-price="1200" data-date="2025-11-07" data-title="Грузоперевозки" data-text="Газель, по городу и области, аккуратно">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1593941707874-ef25b8b9071d?q=80&w=1200&auto=format&fit=crop" alt="Грузоперевозки"></div>
+            <div class="title">Грузоперевозки</div>
+            <p class="muted">Газель, по городу и области, аккуратно</p>
+            <div class="meta">
+              <span class="price">от 1 200 ₽/час</span>
+              <span class="badge">Тюмень • Транспорт</span>
+            </div>
+          </div>
+
+          <div class="card ad-card reveal" data-category="jobs" data-city="Нягань" data-price="50000" data-date="2025-11-09" data-title="Работа: курьер" data-text="Свободный график, выплаты ежедневно">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?q=80&w=1200&auto=format&fit=crop" alt="Работа курьером"></div>
+            <div class="title">Работа: курьер</div>
+            <p class="muted">Свободный график, выплаты ежедневно</p>
+            <div class="meta">
+              <span class="price">до 50 000 ₽</span>
+              <span class="badge">Нягань • Работа</span>
+            </div>
+          </div>
+
+          <div class="card ad-card reveal" data-category="goods" data-city="Сургут" data-price="4000" data-date="2025-11-04" data-title="Детская коляска" data-text="Чистая, складная, после одного ребенка">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Детская коляска"></div>
+            <div class="title">Детская коляска</div>
+            <p class="muted">Чистая, складная, после одного ребенка</p>
+            <div class="meta">
+              <span class="price">4 000 ₽</span>
+              <span class="badge">Сургут • Товары</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions: open external and embed -->
+        <div class="row" style="margin-top:16px; justify-content:center">
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/ads-board.html" target="_blank" rel="noopener" class="btn btn-primary pill">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Открыть доску объявлений
+          </a>
+          <button id="toggleEmbed" class="btn btn-outline pill">
+            <i class="fa-solid fa-window-restore"></i> Показать встроенную версию
+          </button>
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/ads-board.html?new=1" target="_blank" rel="noopener" class="btn btn-ghost pill">
+            <i class="fa-solid fa-circle-plus"></i> Создать объявление
+          </a>
+        </div>
+
+        <!-- Embedded board -->
+        <div id="adsEmbed" class="surface ads-embed reveal hidden" style="padding:12px; margin-top:12px">
+          <iframe id="adsFrame" title="Доска объявлений ЦУИМ"></iframe>
+          <p class="muted center" style="margin-top:8px">
+            Если доска не отображается (браузер заблокировал встраивание), откройте её по ссылке выше.
+          </p>
+        </div>
+
+        <div class="center" style="margin-top:18px">
           <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="btn btn-primary pill" target="_blank" rel="noopener">
             <i class="fa-solid fa-play"></i> Попробовать демо маркетплейса
           </a>
@@ -606,7 +744,6 @@
         <div class="grid-2 media-showcase">
           <div class="phone surface reveal" aria-label="Мобильный интерфейс ЦУИМ">
             <div class="notch" aria-hidden="true"></div>
-            <!-- Замените src на свой скриншот интерфейса -->
             <img class="screen" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1080&auto=format&fit=crop" alt="Скриншот мобильного интерфейса ЦУИМ" loading="lazy" decoding="async">
           </div>
           <div class="tiles">
@@ -683,7 +820,7 @@
     </div>
     <div class="container subfooter">
       <div>© <span id="year"></span> ЦУИМ. Все права защищены.</div>
-      <div class="muted">Сделано в фирменных цветах бренда ЦУИМ.</div>
+      <div class="muted">Включена доска объявлений для покупателей.</div>
     </div>
   </footer>
 
@@ -749,43 +886,31 @@
     const roleLinks = Array.from(document.querySelectorAll('[data-role]'));
     function setRole(role, scroll=true){
       if(!ROLES.includes(role)) role='buyer';
-
-      // Toggle tab selected
       tabButtons.forEach(btn=>{
         const active = btn.dataset.role===role;
         btn.setAttribute('aria-selected', active ? 'true':'false');
         if(active) btn.focus({preventScroll:true});
       });
-
-      // Toggle sections
       ROLES.forEach(r=>{
         const sec=document.getElementById(`${r}-content`);
         if(!sec) return;
         if(r===role){ sec.classList.remove('hidden'); sec.classList.add('active'); }
         else { sec.classList.add('hidden'); sec.classList.remove('active'); }
       });
-
-      // Update nav active state
       document.querySelectorAll('a[data-role]').forEach(a=>{
         const active = a.dataset.role===role;
         a.setAttribute('aria-current', active ? 'page' : 'false');
       });
-
-      // Update hash
       if(location.hash.replace('#','')!==role){
         history.replaceState(null,'',`#${role}`);
       }
-
-      // Scroll to section
       if(scroll){
         const el = document.getElementById(`${role}-content`);
         el?.scrollIntoView({behavior:'smooth', block:'start'});
       }
     }
-    // Click handlers
     tabButtons.forEach(btn=>{
       btn.addEventListener('click', ()=> setRole(btn.dataset.role));
-      // keyboard left/right
       btn.addEventListener('keydown', (e)=>{
         if(e.key==='ArrowRight' || e.key==='ArrowLeft'){
           e.preventDefault();
@@ -804,14 +929,85 @@
         }
       });
     });
-
     function initRoleFromHash(){
       const hash = (location.hash||'').replace('#','');
       setRole(ROLES.includes(hash) ? hash : 'buyer', false);
     }
     window.addEventListener('hashchange', initRoleFromHash);
-    initRoleFromHash(); // default
+    initRoleFromHash();
 
+    // Ads: filter/sort/search (demo data on this page)
+    const adsList = document.getElementById('adsList');
+    const adsSearch = document.getElementById('adsSearch');
+    const adsCity = document.getElementById('adsCity');
+    const adsSort = document.getElementById('adsSort');
+    const adsReset = document.getElementById('adsReset');
+    const catChips = Array.from(document.querySelectorAll('[data-ad-cat]'));
+
+    const state = { q:'', cat:'all', city:'all', sort:'new' };
+
+    function normalize(str){ return (str||'').toString().toLowerCase().trim(); }
+    function applyAds(){
+      const cards = Array.from(adsList.querySelectorAll('.ad-card'));
+      // Filter
+      cards.forEach(card=>{
+        const cat = card.dataset.category || 'other';
+        const city = card.dataset.city || '';
+        const title = (card.dataset.title || card.querySelector('.title')?.textContent || '');
+        const text = (card.dataset.text || card.querySelector('p')?.textContent || '');
+        const hay = normalize(title + ' ' + text);
+        const matches =
+          (state.cat==='all' || state.cat===cat) &&
+          (state.city==='all' || state.city===city) &&
+          (state.q==='' || hay.includes(state.q));
+        card.style.display = matches ? '' : 'none';
+      });
+
+      // Sort visible
+      const visible = cards.filter(c => c.style.display !== 'none');
+      const byDate = (c)=> new Date(c.dataset.date || '1970-01-01').getTime();
+      const byPrice = (c)=> parseFloat(c.dataset.price || '0');
+
+      let cmp = (a,b)=> byDate(b)-byDate(a); // default new first
+      if(state.sort==='price-asc') cmp = (a,b)=> byPrice(a)-byPrice(b);
+      if(state.sort==='price-desc') cmp = (a,b)=> byPrice(b)-byPrice(a);
+
+      visible.sort(cmp).forEach(c=> adsList.appendChild(c));
+    }
+    function selectCat(cat){
+      state.cat = cat;
+      catChips.forEach(ch => ch.classList.toggle('active', ch.dataset.adCat===cat));
+      applyAds();
+    }
+
+    adsSearch?.addEventListener('input', ()=>{ state.q = normalize(adsSearch.value); applyAds(); });
+    adsCity?.addEventListener('change', ()=>{ state.city = adsCity.value; applyAds(); });
+    adsSort?.addEventListener('change', ()=>{ state.sort = adsSort.value; applyAds(); });
+    catChips.forEach(ch => ch.addEventListener('click', ()=> selectCat(ch.dataset.adCat)));
+    adsReset?.addEventListener('click', ()=>{
+      state.q=''; state.cat='all'; state.city='all'; state.sort='new';
+      adsSearch.value=''; adsCity.value='all'; adsSort.value='new';
+      selectCat('all'); applyAds();
+    });
+
+    // Init filters
+    selectCat('all'); applyAds();
+
+    // Ads embed toggle
+    const adsEmbed = document.getElementById('adsEmbed');
+    const adsFrame = document.getElementById('adsFrame');
+    const toggleEmbedBtn = document.getElementById('toggleEmbed');
+    const ADS_URL = 'https://nyaganmaksimov-sys.github.io/cuim/ads-board.html';
+
+    toggleEmbedBtn?.addEventListener('click', ()=>{
+      const isHidden = adsEmbed.classList.contains('hidden');
+      adsEmbed.classList.toggle('hidden', !isHidden);
+      if(isHidden && !adsFrame.src) adsFrame.src = ADS_URL;
+      toggleEmbedBtn.innerHTML = isHidden
+        ? '<i class="fa-solid fa-eye-slash"></i> Скрыть встроенную версию'
+        : '<i class="fa-solid fa-window-restore"></i> Показать встроенную версию';
+      if(isHidden){ adsEmbed.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
   </script>
 </body>
 </html>
