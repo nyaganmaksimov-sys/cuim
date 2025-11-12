@@ -294,8 +294,8 @@
       box-shadow: var(--shadow-1);
     }
 
-    /* Mobile Page Switcher */
-    .mobile-switcher {
+    /* Mobile Marketplace Switcher */
+    .mobile-marketplace-switcher {
       display: none;
       width: 100%;
       background: #f8f9fa;
@@ -322,12 +322,29 @@
       color: #666;
       font-size: 11px;
       text-decoration: none;
+      text-align: center;
     }
     
     .mobile-switcher-option.active {
       background: white;
       color: var(--blue-600);
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-weight: 600;
+    }
+    
+    .mobile-switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+      color: white;
     }
     
     .mobile-switcher-option .icon {
@@ -885,13 +902,9 @@
         padding: 8px 12px;
       }
       
-      /* Переключатель страниц - теперь отдельная строка */
+      /* Переключатель страниц - скрываем на мобильных */
       .marketplace-switcher {
-        order: 2;
-        width: 100%;
-        margin-top: 5px;
-        justify-content: center;
-        display: none; /* Скрыт на мобильных по умолчанию */
+        display: none;
       }
       
       .header-actions {
@@ -906,14 +919,14 @@
         display: none;
       }
       
-      /* Мобильный переключатель страниц */
-      .mobile-switcher {
+      /* Мобильный переключатель маркетплейсов */
+      .mobile-marketplace-switcher {
         display: block;
-        order: 4;
+        order: 2;
       }
       
       .main-search-section {
-        order: 5;
+        order: 4;
       }
       
       .hero-content h2 {
@@ -1142,28 +1155,20 @@
         </div>
       </div>
       
-      <!-- Мобильный переключатель страниц -->
-      <div class="mobile-switcher">
+      <!-- Мобильный переключатель маркетплейсов -->
+      <div class="mobile-marketplace-switcher">
         <div class="mobile-switcher-options">
-          <a href="#" class="mobile-switcher-option active">
-            <span class="icon">🏠</span>
-            <span>Главная</span>
-          </a>
-          <a href="#" class="mobile-switcher-option">
+          <a href="#" class="mobile-switcher-option retail active">
             <span class="icon">🛍️</span>
-            <span>Каталог</span>
+            <span>Маркетплейс</span>
           </a>
-          <a href="#" class="mobile-switcher-option">
-            <span class="icon">❤️</span>
-            <span>Избранное</span>
-          </a>
-          <a href="#" class="mobile-switcher-option">
+          <a href="#" class="mobile-switcher-option opt">
             <span class="icon">📦</span>
-            <span>Заказы</span>
+            <span>Оптовый</span>
           </a>
-          <a href="#" class="mobile-switcher-option">
-            <span class="icon">👤</span>
-            <span>Профиль</span>
+          <a href="#" class="mobile-switcher-option ads">
+            <span class="icon">📋</span>
+            <span>Объявления</span>
           </a>
         </div>
       </div>
@@ -1380,7 +1385,7 @@
       document.getElementById('seasonGrid').innerHTML = productHTML;
       document.getElementById('saleGrid').innerHTML = productHTML;
       
-      // Переключение маркетплейсов
+      // Переключение маркетплейсов (десктоп)
       document.querySelectorAll('.switcher-option').forEach(option => {
         option.addEventListener('click', function() {
           document.querySelectorAll('.switcher-option').forEach(opt => opt.classList.remove('active'));
@@ -1394,15 +1399,24 @@
         });
       });
       
-      // Переключение мобильного меню
+      // Переключение мобильного маркетплейса
       document.querySelectorAll('.mobile-switcher-option').forEach(option => {
         option.addEventListener('click', function(e) {
           e.preventDefault();
           document.querySelectorAll('.mobile-switcher-option').forEach(opt => opt.classList.remove('active'));
           this.classList.add('active');
           
-          // Здесь можно добавить логику перехода между страницами
-          console.log('Переход на страницу:', this.querySelector('span:last-child').textContent);
+          // Логика перехода между маркетплейсами
+          if (this.classList.contains('retail')) {
+            // Обычный маркетплейс
+            console.log('Переход на обычный маркетплейс');
+          } else if (this.classList.contains('opt')) {
+            // Оптовый маркетплейс
+            window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/';
+          } else if (this.classList.contains('ads')) {
+            // Доска объявлений
+            window.location.href = 'ads-board.html';
+          }
         });
       });
       
