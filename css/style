@@ -11,10 +11,9 @@
   --shadow-1: 0 2px 12px rgba(13,71,161,.08);
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -26,34 +25,23 @@ body {
   margin-inline: auto;
 }
 
-/* Header Styles */
-.top-header {
-  background: linear-gradient(90deg, var(--orange-600) 0%, #ff8c42 100%);
-  color: white;
-  padding: 8px 0;
-  font-size: 14px;
-}
-
-.main-header {
-  background: var(--panel);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* Product Cards */
-.product-card {
-  background: var(--panel);
+/* Временно - базовые стили чтобы видеть контент */
+.top-shops, .hero-grid, .popular-section, .season-section, .sale-section {
+  background: white;
+  padding: 20px;
+  margin: 10px 0;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-1);
-  transition: all 0.2s ease;
-  cursor: pointer;
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(13,71,161,.12);
+.product-grid, .season-grid, .sale-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
 }
 
-/* Добавь остальные стили из оригинального файла */
+.product-card {
+  background: white;
+  padding: 15px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
