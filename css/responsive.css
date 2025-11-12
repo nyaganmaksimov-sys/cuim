@@ -1,35 +1,6 @@
-/* Tablets */
-@media (max-width: 1024px) {
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  
-  .hero-grid {
-    grid-template-columns: 240px 1fr;
-  }
-}
-
-/* Mobile */
+/* Пока оставь пустым или добавь базовые медиа-запросы */
 @media (max-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .categories {
-    display: none;
-  }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
   }
 }
