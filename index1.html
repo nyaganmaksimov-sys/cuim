@@ -3,542 +3,654 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CUIM - Главная</title>
+    <title>CUIM - Современный маркетплейс</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Базовые стили и сброс */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
-        
+
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 8px;
         }
-        
+
         body {
-            background-color: #f9f9f9;
-            color: var(--text-color);
+            background-color: #ffffff;
+            color: var(--dark);
             line-height: 1.6;
         }
-        
+
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
-        
-        /* Шапка сайта */
+
+        /* Header */
         header {
             background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
-        
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 16px 0;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
-        }
-        
-        .logo img {
-            height: 50px;
-            width: auto;
-        }
-        
-        .logo-text {
-            margin-left: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
             text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 5px 10px;
-            border-radius: var(--border-radius);
         }
-        
-        nav ul li a:hover {
-            color: var(--secondary-color);
-            background-color: rgba(52, 152, 219, 0.1);
+
+        .logo i {
+            font-size: 28px;
         }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary-color);
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
         }
-        
-        /* Герой-секция */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary);
             color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 7px 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .user-actions a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .user-actions a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             padding: 80px 0;
             text-align: center;
         }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
+
+        .hero-content {
             max-width: 700px;
-            margin: 0 auto 30px;
+            margin: 0 auto;
         }
-        
-        .btn {
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--secondary);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
             display: inline-block;
-            background-color: var(--accent-color);
+            background: var(--primary);
             color: white;
-            padding: 12px 30px;
-            border-radius: var(--border-radius);
+            padding: 14px 32px;
+            border-radius: var(--radius);
             text-decoration: none;
-            font-weight: bold;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
         }
-        
-        .btn:hover {
-            background-color: #c0392b;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Секции с товарами */
-        .section {
+
+        /* Categories */
+        .categories {
             padding: 60px 0;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 40px;
-            color: var(--primary-color);
-            font-size: 2rem;
-            position: relative;
+            font-size: 32px;
+            color: var(--dark);
         }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background-color: var(--secondary-color);
-            margin: 10px auto;
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
-        
-        /* Сетка карточек товаров */
+
+        .category-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid var(--border);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            font-size: 18px;
+            color: var(--dark);
+        }
+
+        /* Featured Products */
+        .featured-products {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 25px;
         }
-        
+
         .product-card {
-            background-color: white;
-            border-radius: var(--border-radius);
+            background: white;
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        
+
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .product-image {
             height: 200px;
-            width: 100%;
-            background-color: #f5f5f5;
+            background-color: #f1f5f9;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            color: var(--secondary);
         }
-        
-        .product-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-        }
-        
+
         .product-info {
             padding: 20px;
         }
-        
-        .product-title {
-            font-size: 1.1rem;
+
+        .product-info h3 {
+            font-size: 18px;
             margin-bottom: 10px;
-            font-weight: 600;
+            color: var(--dark);
         }
-        
+
         .product-price {
-            color: var(--accent-color);
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
             margin-bottom: 15px;
         }
-        
-        /* Футер */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 50px 0 20px;
+
+        .product-rating {
+            color: #fbbf24;
+            margin-bottom: 15px;
         }
-        
+
+        .add-to-cart {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 60px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .benefit-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .benefit-card p {
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
-        
+
         .footer-column h3 {
+            font-size: 18px;
             margin-bottom: 20px;
-            font-size: 1.2rem;
-            position: relative;
-            padding-bottom: 10px;
+            color: white;
         }
-        
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--secondary-color);
-        }
-        
+
         .footer-column ul {
             list-style: none;
         }
-        
+
         .footer-column ul li {
             margin-bottom: 10px;
         }
-        
+
         .footer-column ul li a {
-            color: #ddd;
+            color: #cbd5e1;
             text-decoration: none;
-            transition: var(--transition);
+            transition: color 0.3s;
         }
-        
+
         .footer-column ul li a:hover {
-            color: var(--secondary-color);
-            padding-left: 5px;
+            color: white;
         }
-        
-        .copyright {
+
+        .footer-bottom {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 14px;
         }
-        
-        /* Адаптивность для планшетов */
-        @media (max-width: 992px) {
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        /* Адаптивность для мобильных устройств */
+
+        /* Responsive */
         @media (max-width: 768px) {
             .header-content {
-                flex-wrap: wrap;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            nav {
-                width: 100%;
-                margin-top: 15px;
-                display: none;
-            }
-            
-            nav.active {
-                display: block;
-            }
-            
-            nav ul {
                 flex-direction: column;
+                gap: 15px;
             }
             
-            nav ul li {
-                margin: 5px 0;
+            .search-bar {
+                max-width: 100%;
+                margin: 10px 0;
+            }
+            
+            .nav-links, .user-actions {
+                gap: 15px;
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 36px;
             }
             
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section {
-                padding: 40px 0;
-            }
-            
-            .section-title {
-                font-size: 1.7rem;
-            }
-            
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
+            .categories-grid, .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
     </style>
 </head>
 <body>
-    <!-- Шапка сайта -->
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
-                    <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/c58853d1ca05d1c36a9598d8bf61588882dbf880/images/logo.png" alt="CUIM Logo">
-                    <div class="logo-text">CUIM</div>
+                <a href="#" class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>CUIM</span>
+                </a>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Поиск товаров...">
+                    <button><i class="fas fa-search"></i></button>
                 </div>
-                <button class="mobile-menu-btn">☰</button>
-                <nav>
-                    <ul>
-                        <li><a href="#">Главная</a></li>
-                        <li><a href="#">Каталог</a></li>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Контакты</a></li>
-                        <li><a href="#">Корзина</a></li>
-                    </ul>
+                
+                <nav class="nav-links">
+                    <a href="#"><i class="fas fa-th-large"></i> Категории</a>
+                    <a href="#"><i class="fas fa-fire"></i> Акции</a>
+                    <a href="#"><i class="fas fa-star"></i> Избранное</a>
                 </nav>
+                
+                <div class="user-actions">
+                    <a href="#"><i class="fas fa-user"></i> Войти</a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> Корзина</a>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Герой-секция -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Добро пожаловать в CUIM</h1>
-            <p>Мы предлагаем широкий ассортимент качественных товаров по доступным ценам. Откройте для себя лучшие предложения!</p>
-            <a href="#" class="btn">Перейти в каталог</a>
+            <div class="hero-content">
+                <h1>Все покупки в одном месте</h1>
+                <p>Откройте для себя тысячи товаров с быстрой доставкой и выгодными ценами. Покупайте с уверенностью!</p>
+                <a href="#" class="cta-button">Начать покупки</a>
+            </div>
         </div>
     </section>
 
-    <!-- Популярные товары -->
-    <section class="section">
+    <!-- Categories -->
+    <section class="categories">
         <div class="container">
-            <h2 class="section-title">Популярные товары</h2>
+            <h2 class="section-title">Популярные категории</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Электроника</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Одежда</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Дом и сад</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Продукты</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Спорт</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Книги</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Рекомендуемые товары</h2>
             <div class="products-grid">
-                <!-- Карточка товара 1 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Товар 1">
+                        <i class="fas fa-laptop fa-3x"></i>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title">Название товара 1</h3>
-                        <p class="product-price">2 499 ₽</p>
-                        <a href="#" class="btn">В корзину</a>
+                        <h3>Ноутбук игровой</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="product-price">54 990 ₽</div>
+                        <button class="add-to-cart">В корзину</button>
                     </div>
                 </div>
-                
-                <!-- Карточка товара 2 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Товар 2">
+                        <i class="fas fa-headphones fa-3x"></i>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title">Название товара 2</h3>
-                        <p class="product-price">3 199 ₽</p>
-                        <a href="#" class="btn">В корзину</a>
+                        <h3>Беспроводные наушники</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="product-price">7 490 ₽</div>
+                        <button class="add-to-cart">В корзину</button>
                     </div>
                 </div>
-                
-                <!-- Карточка товара 3 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Товар 3">
+                        <i class="fas fa-shoe-prints fa-3x"></i>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title">Название товара 3</h3>
-                        <p class="product-price">1 899 ₽</p>
-                        <a href="#" class="btn">В корзину</a>
+                        <h3>Кроссовки спортивные</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="product-price">4 299 ₽</div>
+                        <button class="add-to-cart">В корзину</button>
                     </div>
                 </div>
-                
-                <!-- Карточка товара 4 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Товар 4">
+                        <i class="fas fa-clock fa-3x"></i>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title">Название товара 4</h3>
-                        <p class="product-price">4 299 ₽</p>
-                        <a href="#" class="btn">В корзину</a>
+                        <h3>Умные часы</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="product-price">12 990 ₽</div>
+                        <button class="add-to-cart">В корзину</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Новинки -->
-    <section class="section" style="background-color: #f5f7fa;">
+    <!-- Benefits -->
+    <section class="benefits">
         <div class="container">
-            <h2 class="section-title">Новинки</h2>
-            <div class="products-grid">
-                <!-- Карточка товара 1 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Товар 1">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shipping-fast"></i>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Новинка 1</h3>
-                        <p class="product-price">5 499 ₽</p>
-                        <a href="#" class="btn">В корзину</a>
-                    </div>
+                    <h3>Быстрая доставка</h3>
+                    <p>Доставляем заказы в течение 1-2 дней по всей стране</p>
                 </div>
-                
-                <!-- Карточка товара 2 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Товар 2">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Новинка 2</h3>
-                        <p class="product-price">6 199 ₽</p>
-                        <a href="#" class="btn">В корзину</a>
-                    </div>
+                    <h3>Безопасная оплата</h3>
+                    <p>Все платежи защищены современными технологиями</p>
                 </div>
-                
-                <!-- Карточка товара 3 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Товар 3">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset"></i>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Новинка 3</h3>
-                        <p class="product-price">4 899 ₽</p>
-                        <a href="#" class="btn">В корзину</a>
-                    </div>
+                    <h3>Поддержка 24/7</h3>
+                    <p>Наша служба поддержки всегда готова помочь</p>
                 </div>
-                
-                <!-- Карточка товара 4 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Товар 4">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-undo"></i>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Новинка 4</h3>
-                        <p class="product-price">7 299 ₽</p>
-                        <a href="#" class="btn">В корзину</a>
-                    </div>
+                    <h3>Легкий возврат</h3>
+                    <p>Возврат товара в течение 30 дней без вопросов</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Футер -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>О компании</h3>
-                    <p>CUIM - это современный интернет-магазин с широким ассортиментом товаров и отличным сервисом.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Категории</h3>
                     <ul>
-                        <li><a href="#">Электроника</a></li>
-                        <li><a href="#">Одежда</a></li>
-                        <li><a href="#">Дом и сад</a></li>
-                        <li><a href="#">Спорт</a></li>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Карьера</a></li>
+                        <li><a href="#">Пресс-центр</a></li>
+                        <li><a href="#">Партнеры</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Помощь</h3>
                     <ul>
-                        <li><a href="#">Доставка</a></li>
-                        <li><a href="#">Оплата</a></li>
-                        <li><a href="#">Возврат</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Центр поддержки</a></li>
+                        <li><a href="#">Как сделать заказ</a></li>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат товара</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Контакты</h3>
                     <ul>
-                        <li>Телефон: +7 (XXX) XXX-XX-XX</li>
-                        <li>Email: info@cuim.ru</li>
-                        <li>Адрес: г. Москва, ул. Примерная, д. 1</li>
+                        <li><a href="#">+7 (800) 123-45-67</a></li>
+                        <li><a href="#">support@cuim.ru</a></li>
+                        <li><a href="#">Москва, ул. Примерная, 15</a></li>
                     </ul>
                 </div>
+                <div class="footer-column">
+                    <h3>Подписка</h3>
+                    <p>Получайте первыми информацию о скидках и новинках</p>
+                    <div class="search-bar" style="margin-top: 15px;">
+                        <input type="text" placeholder="Ваш email">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
             </div>
-            <div class="copyright">
-                &copy; 2023 CUIM. Все права защищены.
+            <div class="footer-bottom">
+                <p>&copy; 2023 CUIM Marketplace. Все права защищены.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Мобильное меню
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
-        });
-        
-        // Закрытие меню при клике вне его области
-        document.addEventListener('click', function(event) {
-            const nav = document.querySelector('nav');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            
-            if (!nav.contains(event.target) && !menuBtn.contains(event.target) && nav.classList.contains('active')) {
-                nav.classList.remove('active');
-            }
-        });
-    </script>
 </body>
 </html>
