@@ -121,20 +121,22 @@
       padding: 4px;
       position: relative;
       border: 1px solid #ddd;
+      gap: 2px;
     }
     
     .switcher-option {
-      padding: 8px 20px;
+      padding: 8px 16px;
       border-radius: 20px;
       cursor: pointer;
       font-weight: 500;
-      font-size: 14px;
+      font-size: 13px;
       transition: all 0.3s ease;
       z-index: 2;
       position: relative;
       text-align: center;
-      min-width: 120px;
+      min-width: 100px;
       color: #666;
+      white-space: nowrap;
     }
     
     .switcher-option.active {
@@ -148,6 +150,10 @@
     
     .switcher-option.opt.active {
       background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+    }
+    
+    .switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
     }
     
     /* Search Bar */
@@ -751,6 +757,17 @@
       .footer-content {
         grid-template-columns: 1fr 1fr;
       }
+      
+      .marketplace-switcher {
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      
+      .switcher-option {
+        min-width: 90px;
+        font-size: 12px;
+        padding: 6px 12px;
+      }
     }
 
     /* Мобильные устройства */
@@ -815,6 +832,7 @@
       .logo-section {
         order: 1;
         gap: 10px;
+        flex: 1;
       }
       
       .search-section {
@@ -827,7 +845,13 @@
       .header-actions {
         order: 2;
         gap: 8px;
-        margin-left: auto;
+      }
+      
+      .marketplace-switcher {
+        order: 4;
+        flex: 1 0 100%;
+        margin-top: 10px;
+        justify-content: center;
       }
       
       .nav-links {
@@ -902,9 +926,9 @@
       }
       
       .switcher-option {
-        min-width: 100px;
-        padding: 6px 16px;
-        font-size: 13px;
+        min-width: 80px;
+        padding: 6px 10px;
+        font-size: 11px;
       }
       
       .header-actions {
@@ -953,6 +977,12 @@
       .product-grid {
         grid-template-columns: 1fr;
       }
+      
+      .switcher-option {
+        min-width: 70px;
+        font-size: 10px;
+        padding: 5px 8px;
+      }
     }
 
     /* Большие экраны */
@@ -986,6 +1016,7 @@
           <div class="marketplace-switcher">
             <div class="switcher-option retail active">Обычный</div>
             <div class="switcher-option opt">Оптовый</div>
+            <div class="switcher-option ads">Объявления</div>
           </div>
         </div>
         
@@ -1247,6 +1278,8 @@
           
           if (this.classList.contains('opt')) {
             window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/';
+          } else if (this.classList.contains('ads')) {
+            window.location.href = 'ads-board.html';
           }
         });
       });
