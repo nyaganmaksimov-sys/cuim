@@ -54,21 +54,244 @@
       width:min(100% - 32px, var(--container)); margin-inline:auto;
     }
 
-    /* Top address bar */
-    .address-bar{
-      background:linear-gradient(90deg, rgba(21,101,192,.06), rgba(255,122,18,.06));
-      border-bottom:1px solid rgba(13,71,161,.08); font-size:14px;
+    /* ======= ОБНОВЛЕННАЯ ШАПКА КАК В ОПТОВОЙ ВЕРСИИ ======= */
+    .top-header {
+      background: linear-gradient(90deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
     }
-    .address-bar .container{
-      display:flex; align-items:center; justify-content:space-between; padding:8px 0; color:#27446b;
+    
+    .top-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .location{
-      display:inline-flex; align-items:center; gap:6px; cursor:pointer; padding:6px 10px;
-      border-radius:8px; transition:background .12s ease;
+    
+    .city-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
     }
-    .location:hover{background:rgba(255,122,18,.10)}
-    .location svg{width:16px; height:16px; color:var(--orange-600)}
-    .delivery-info{font-weight:500}
+    
+    .city-selector i {
+      font-size: 12px;
+    }
+    
+    .top-header-links {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .top-header-links a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    
+    .top-header-links a:hover {
+      opacity: 0.8;
+    }
+    
+    /* Main Header */
+    .main-header {
+      background-color: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-main-row {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      gap: 30px;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+    
+    /* Marketplace Switcher */
+    .marketplace-switcher {
+      display: flex;
+      background: var(--light-gray);
+      border-radius: 25px;
+      padding: 4px;
+      position: relative;
+      border: 1px solid #ddd;
+    }
+    
+    .switcher-option {
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      z-index: 2;
+      position: relative;
+      text-align: center;
+      min-width: 120px;
+      color: var(--medium-gray);
+    }
+    
+    .switcher-option.active {
+      color: var(--white);
+      font-weight: 600;
+    }
+    
+    .switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+    }
+    
+    .switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+    }
+    
+    /* Search Bar */
+    .search-section {
+      flex: 1;
+      max-width: 600px;
+    }
+    
+    .search-bar {
+      display: flex;
+      width: 100%;
+      border: 2px solid var(--orange-600);
+      border-radius: 25px;
+      overflow: hidden;
+    }
+    
+    .search-bar input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+    
+    .search-bar button {
+      background-color: var(--orange-600);
+      color: white;
+      border: none;
+      padding: 0 25px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .search-bar button:hover {
+      background-color: #e55a00;
+    }
+    
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .header-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--dark-gray);
+      transition: color 0.3s;
+    }
+    
+    .header-action i {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    
+    .header-action span {
+      font-size: 12px;
+    }
+    
+    .header-action:hover {
+      color: var(--orange-600);
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 14px;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--blue-600);
+      color: var(--blue-600);
+    }
+    
+    .btn-primary {
+      background-color: var(--orange-600);
+      color: var(--white);
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-1);
+    }
+    
+    /* Navigation */
+    .main-nav {
+      border-top: 1px solid #eee;
+      padding: 15px 0;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-gray);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .nav-links a:hover {
+      color: var(--orange-600);
+    }
+    
+    .nav-links a i {
+      font-size: 14px;
+    }
+
+    /* Остальные стили остаются без изменений */
+    /* Top shops, Hero grid, Categories, Products, Footer и т.д. */
 
     /* Top shops */
     .top-shops{
@@ -118,175 +341,6 @@
     }
     .stars{display:flex; gap:1px}
     .stars svg{width:12px; height:12px; fill:var(--orange-600)}
-
-    /* ======= ОБНОВЛЕННАЯ ШАПКА В СТИЛЕ OZON/WB ======= */
-    .site-header{
-      position:sticky; top:0; z-index:50; background:var(--panel);
-      box-shadow:0 2px 8px rgba(13,71,161,.08);
-      border-bottom: 1px solid rgba(13,71,161,.06);
-    }
-    .header-inner{
-      display:flex; align-items:center; gap:20px; height:72px;
-    }
-    .logo{
-      display:flex;
-      align-items:center;
-      margin-right: 10px;
-    }
-    .logo-mark{
-      width:110px;
-      height:36px;
-      object-fit:contain;
-      border-radius:0;
-      mix-blend-mode: multiply;
-      background: transparent !important;
-      filter: brightness(1.1) contrast(1.1);
-    }
-
-    /* Кнопка каталога как у Ozon */
-    .catalog-btn{
-      display:inline-flex; align-items:center; gap:10px;
-      background:var(--blue-600); color:#fff; border:none;
-      padding:12px 20px; border-radius:10px; cursor:pointer; font-weight:600;
-      transition:var(--transition);
-      font-size: 15px;
-      white-space: nowrap;
-    }
-    .catalog-btn:hover{
-      background:var(--blue-700);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-hover);
-    }
-    .catalog-btn:active{transform:translateY(0)}
-    .catalog-btn svg{width:20px; height:20px}
-
-    /* Поиск как у маркетплейсов */
-    .search{
-      flex:1; display:flex; align-items:center; gap:0;
-      max-width: 600px;
-    }
-    .search .field{
-      position:relative; flex:1; display:flex; align-items:center;
-    }
-    .search input{
-      width:100%; padding:14px 52px 14px 48px;
-      border-radius:12px 0 0 12px; border:2px solid var(--blue-500);
-      border-right: none;
-      background:#fff; outline:none; font-size:16px;
-      transition:var(--transition);
-      box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
-    }
-    .search input::placeholder{color:#8aa1c1}
-    .search input:focus{
-      border-color:var(--blue-400); 
-      box-shadow: var(--ring), inset 0 1px 3px rgba(0,0,0,.05);
-    }
-    .search .icon{
-      position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#7895bf;
-      z-index: 2;
-    }
-    .search button{
-      background:linear-gradient(90deg, var(--orange-600), var(--orange-500));
-      color:#fff; border:none; border-radius:0 12px 12px 0; 
-      padding:14px 24px; font-weight:600; cursor:pointer;
-      transition:var(--transition);
-      border: 2px solid var(--orange-600);
-      border-left: none;
-      white-space: nowrap;
-    }
-    .search button:hover{
-      background:linear-gradient(90deg, var(--orange-700), var(--orange-600));
-      transform: translateY(-1px);
-    }
-
-    /* Действия в шапке */
-    .header-actions{
-      display:flex; align-items:center; gap:16px;
-      margin-left: auto;
-    }
-
-    /* ИКОНКА КУПИ-ПРОДАЙ В ШАПКЕ - улучшенная */
-    .ads-header-icon {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--orange-500), var(--yellow-600));
-      color: white;
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(255, 122, 18, 0.3);
-      white-space: nowrap;
-    }
-
-    .ads-header-icon:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(255, 122, 18, 0.4);
-      background: linear-gradient(135deg, var(--orange-600), var(--yellow-600));
-    }
-
-    /* Ссылки в шапке как у Ozon */
-    .h-link{
-      display:flex; flex-direction:column; align-items:center; gap:4px;
-      min-width:70px; padding:8px 10px; border-radius:10px; color:#224167;
-      transition:background .15s ease, transform .06s ease;
-      position: relative;
-    }
-    .h-link:hover{
-      background:rgba(21,101,192,.08);
-      transform: translateY(-1px);
-    }
-    .h-link:active{transform:translateY(0)}
-    .h-link svg{
-      width:22px; height:22px; color:var(--blue-600);
-      transition: var(--transition);
-    }
-    .h-link:hover svg{
-      transform: scale(1.1);
-    }
-    .h-link span{
-      font-size:12px;
-      font-weight: 500;
-    }
-
-    /* Бейдж для корзины */
-    .cart-badge {
-      position: absolute;
-      top: 4px;
-      right: 6px;
-      background: var(--red-500);
-      color: white;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-    }
-
-    /* Мобильное меню */
-    .mobile-menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--blue-600);
-      transition: background 0.2s ease;
-    }
-
-    .mobile-menu-toggle:hover {
-      background: rgba(21,101,192,.08);
-    }
 
     /* Main layout */
     .hero-grid{
@@ -952,13 +1006,12 @@
       }
 
       /* Шапка для планшетов */
-      .header-inner {
+      .header-main-row {
         gap: 15px;
       }
       
-      .catalog-btn {
-        padding: 10px 16px;
-        font-size: 14px;
+      .search-section {
+        flex: 1;
       }
       
       .search input {
@@ -969,14 +1022,8 @@
         padding: 12px 20px;
       }
       
-      .ads-header-icon {
-        padding: 8px 14px;
-        font-size: 13px;
-      }
-      
-      .h-link {
-        min-width: 65px;
-        padding: 6px 8px;
+      .header-actions {
+        gap: 15px;
       }
     }
 
@@ -1041,89 +1088,40 @@
       }
 
       /* ШАПКА ДЛЯ МОБИЛЬНЫХ */
-      .site-header {
+      .main-header {
         position: sticky;
         top: 0;
         z-index: 100;
       }
       
-      .header-inner {
-        height: 60px;
-        gap: 10px;
+      .header-main-row {
         flex-wrap: wrap;
-        padding: 8px 0;
+        gap: 10px;
+        padding: 10px 0;
       }
       
-      .logo {
+      .logo-section {
         order: 1;
+        gap: 10px;
       }
       
-      .logo-mark {
-        width: 90px;
-        height: 30px;
-      }
-      
-      .mobile-menu-toggle {
-        display: flex;
-        order: 2;
-        margin-left: auto;
-      }
-      
-      .catalog-btn {
+      .search-section {
         order: 3;
-        display: none; /* Скрываем на мобильных */
-      }
-      
-      .search {
-        order: 5;
         flex: 1 0 100%;
         margin-top: 10px;
         max-width: none;
       }
       
-      .search input {
-        border-radius: 10px;
-        border: 2px solid var(--blue-400);
-        padding: 12px 44px 12px 42px;
-      }
-      
-      .search button {
-        display: none; /* Скрываем кнопку поиска на мобильных */
-      }
-      
       .header-actions {
-        order: 4;
+        order: 2;
         gap: 8px;
-        margin-left: 0;
+        margin-left: auto;
       }
       
-      /* КНОПКА КУПИ-ПРОДАЙ НА МОБИЛЬНЫХ - полный текст */
-      .ads-header-icon {
-        padding: 8px 12px;
-        font-size: 13px;
-        gap: 6px;
-        white-space: nowrap;
-      }
-      
-      .ads-header-icon span:last-child {
-        display: inline !important; /* Всегда показываем полный текст */
-      }
-      
-      .h-link {
-        min-width: 55px;
-        padding: 4px 6px;
-      }
-      
-      .h-link span {
-        font-size: 11px;
-      }
-      
-      .cart-badge {
-        top: 2px;
-        right: 4px;
-        width: 16px;
-        height: 16px;
-        font-size: 10px;
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
       }
     }
 
@@ -1203,48 +1201,57 @@
       }
 
       /* Шапка для маленьких мобильных */
-      .header-inner {
+      .header-main-row {
         gap: 8px;
       }
       
-      .logo-mark {
-        width: 80px;
-        height: 28px;
+      .logo img {
+        height: 35px;
       }
       
-      .ads-header-icon {
-        padding: 6px 10px;
-        font-size: 12px;
-        gap: 4px;
+      .switcher-option {
+        min-width: 100px;
+        padding: 6px 16px;
+        font-size: 13px;
       }
       
-      .h-link {
+      .header-actions {
+        gap: 6px;
+      }
+      
+      .header-action {
         min-width: 50px;
+        padding: 4px 6px;
       }
       
-      .h-link span {
-        font-size: 10px;
+      .header-action span {
+        font-size: 11px;
+      }
+      
+      .btn {
+        padding: 8px 12px;
+        font-size: 13px;
       }
     }
 
     /* Очень маленькие экраны */
     @media (max-width: 360px) {
       .header-actions {
-        gap: 6px;
+        gap: 4px;
       }
       
-      .ads-header-icon {
-        padding: 6px 8px;
-        font-size: 11px;
-      }
-      
-      .ads-header-icon span:first-child {
-        margin-right: 0;
-      }
-      
-      .h-link {
+      .header-action {
         min-width: 45px;
         padding: 4px 4px;
+      }
+      
+      .header-action span {
+        font-size: 10px;
+      }
+      
+      .btn {
+        padding: 6px 10px;
+        font-size: 12px;
       }
     }
 
@@ -1577,7 +1584,7 @@
 
     /* Адаптация для мобильных */
     @media (max-width: 768px) {
-      .header-inner{
+      .header-main-row{
         gap:8px;
         flex-wrap: wrap;
         height: auto;
@@ -1586,11 +1593,6 @@
       
       .logo {
         order: 1;
-      }
-      
-      .catalog-btn {
-        order: 2;
-        margin-left: auto;
       }
       
       .search {
@@ -1602,20 +1604,6 @@
       .header-actions {
         order: 3;
         gap: 8px;
-      }
-      
-      .h-link{
-        min-width:60px;
-        padding: 4px 6px;
-      }
-      
-      .h-link span{
-        font-size: 11px;
-      }
-
-      .ads-header-icon {
-        padding: 6px 10px;
-        font-size: 13px;
       }
       
       .hero-grid{
@@ -1660,11 +1648,6 @@
       .shop-logo{
         width:120px;
         padding: 10px 8px;
-      }
-      
-      .logo-mark{
-        width:100px; 
-        height:auto;
       }
 
       .footer-content {
@@ -1745,10 +1728,6 @@
         padding:8px 6px;
       }
       
-      .logo-mark{
-        width:90px;
-      }
-      
       .section-title {
         flex-direction: column;
         align-items: flex-start;
@@ -1777,15 +1756,6 @@
         width: 35px;
         height: 35px;
       }
-
-      .ads-header-icon {
-        padding: 5px 8px;
-        font-size: 12px;
-      }
-
-      .ads-header-icon span:last-child {
-        display: inline !important;
-      }
       
       .quick-view-actions {
         flex-direction: column;
@@ -1805,29 +1775,12 @@
         width:100px;
       }
       
-      .logo-mark{
-        width:80px;
-      }
-      
       .h-link {
         min-width: 50px;
       }
       
       .h-link span {
         font-size: 10px;
-      }
-      
-      .catalog-btn {
-        padding: 8px 12px;
-        font-size: 14px;
-      }
-
-      .ads-header-icon {
-        padding: 4px 6px;
-      }
-
-      .ads-header-icon span:first-child {
-        margin-right: 0;
       }
     }
 
@@ -1838,7 +1791,7 @@
 </head>
 <body>
   <!-- Верхняя плашка с адресом -->
-  <div class="address-bar">
+  <div class="top-header">
     <div class="container">
       <span class="location" id="locationPicker" role="button" aria-haspopup="dialog" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5Z"/></svg>
@@ -1848,73 +1801,65 @@
     </div>
   </div>
 
-  <!-- Шапка -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#" class="logo" aria-label="ЦУИМ — на главную">
-        <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
-             alt="ЦУИМ" class="logo-mark">
-      </a>
-
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Меню">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M3 12h18M3 6h18M3 18h18" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-      <button class="catalog-btn" id="catalogToggle" aria-expanded="false" aria-controls="categoriesPanel">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-        Каталог
-      </button>
-
-      <form class="search" role="search" aria-label="Поиск по сайту">
-        <div class="field">
-          <span class="icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <circle cx="11" cy="11" r="7" stroke-width="2"></circle>
-              <path d="M20 20l-3.5-3.5" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-          </span>
-          <input type="search" placeholder="Искать товары и категории..." aria-label="Поиск">
+  <!-- ОБНОВЛЕННАЯ ШАПКА КАК В ОПТОВОЙ ВЕРСИИ -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-main-row">
+        <div class="logo-section">
+          <a href="#" class="logo" aria-label="ЦУИМ — на главную">
+            <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" 
+                 alt="ЦУИМ" class="logo-mark">
+          </a>
+          
+          <div class="marketplace-switcher">
+            <div class="switcher-option retail active" data-target="retail">Обычный</div>
+            <div class="switcher-option opt" data-target="opt">Оптовый</div>
+          </div>
         </div>
-        <button type="submit">Найти</button>
-      </form>
-
-      <nav class="header-actions" aria-label="Навигация пользователя">
-        <!-- ИКОНКА КУПИ-ПРОДАЙ -->
-        <a href="ads-board.html" class="ads-header-icon">
-          <span>💰</span>
-          <span>Купи-Продай</span>
-        </a>
         
-        <!-- ОБНОВЛЕННАЯ ССЫЛКА КАБИНЕТ - ведет на страницу логина -->
-        <a href="https://nyaganmaksimov-sys.github.io/cuim/login.html" class="h-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm7 9a7 7 0 1 0-14 0" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>Кабинет</span>
-        </a>
-        <a href="#" class="h-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.55 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>Избранное</span>
-        </a>
-        <a href="basket.html" class="h-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M6 6h15l-1.5 9h-12z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="9" cy="20" r="1.8" /><circle cx="18" cy="20" r="1.8" />
-          </svg>
-          <span>Корзина</span>
-          <span class="cart-badge">3</span>
-        </a>
+        <div class="search-section">
+          <div class="search-bar">
+            <input type="text" placeholder="Поиск товаров для дома...">
+            <button><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        
+        <div class="header-actions">
+          <a href="#" class="header-action">
+            <i class="far fa-heart"></i>
+            <span>Избранное</span>
+          </a>
+          <a href="#" class="header-action">
+            <i class="far fa-bell"></i>
+            <span>Уведомления</span>
+          </a>
+          <a href="#" class="header-action">
+            <i class="far fa-user"></i>
+            <span>Профиль</span>
+          </a>
+          
+          <div class="auth-buttons">
+            <button class="btn btn-outline">Вход</button>
+            <button class="btn btn-primary">Регистрация</button>
+          </div>
+        </div>
+      </div>
+      
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
+          <li><a href="#"><i class="fas fa-th-large"></i> Категории</a></li>
+          <li><a href="#"><i class="fas fa-tshirt"></i> Одежда</a></li>
+          <li><a href="#"><i class="fas fa-mobile-alt"></i> Электроника</a></li>
+          <li><a href="#"><i class="fas fa-utensils"></i> Продукты</a></li>
+          <li><a href="#"><i class="fas fa-home"></i> Для дома</a></li>
+          <li><a href="#"><i class="fas fa-child"></i> Детские товары</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Остальной код остается без изменений -->
+  <!-- Весь остальной контент остается без изменений -->
   <!-- Лучшие магазины, основной контент, футер и т.д. -->
 
   <!-- Лучшие магазины -->
@@ -2232,6 +2177,34 @@
   </div>
 
   <script>
+    // ======= ПЕРЕКЛЮЧАТЕЛЬ МЕЖДУ МАРКЕТПЛЕЙСАМИ =======
+    document.addEventListener('DOMContentLoaded', function() {
+      const switcherOptions = document.querySelectorAll('.switcher-option');
+      
+      switcherOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          const target = this.getAttribute('data-target');
+          
+          // Убираем активный класс у всех опций
+          switcherOptions.forEach(opt => opt.classList.remove('active'));
+          
+          // Добавляем активный класс к выбранной опции
+          this.classList.add('active');
+          
+          // Переход на соответствующий маркетплейс
+          if (target === 'retail') {
+            // Мы уже на обычном маркетплейсе
+            console.log('Обычный маркетплейс');
+          } else if (target === 'opt') {
+            window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/'; // Оптовый маркетплейс
+          }
+        });
+      });
+    });
+
+    // Весь остальной JavaScript код остается без изменений
+    // Лучшие магазины, товары, слайдер, карта и т.д.
+
     // ======= ЛУЧШИЕ МАГАЗИНЫ =======
     const shops = [
       {id:1, name:"Свежий маркет", rating:4.8, image:"https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"},
