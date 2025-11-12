@@ -294,6 +294,47 @@
       box-shadow: var(--shadow-1);
     }
 
+    /* Mobile Page Switcher */
+    .mobile-switcher {
+      display: none;
+      width: 100%;
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 6px;
+      margin-top: 8px;
+    }
+    
+    .mobile-switcher-options {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    
+    .mobile-switcher-option {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #666;
+      font-size: 11px;
+      text-decoration: none;
+    }
+    
+    .mobile-switcher-option.active {
+      background: white;
+      color: var(--blue-600);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    
+    .mobile-switcher-option .icon {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
     /* Main Search Bar - под шапкой */
     .main-search-section {
       background: var(--panel);
@@ -865,8 +906,14 @@
         display: none;
       }
       
-      .main-search-section {
+      /* Мобильный переключатель страниц */
+      .mobile-switcher {
+        display: block;
         order: 4;
+      }
+      
+      .main-search-section {
+        order: 5;
       }
       
       .hero-content h2 {
@@ -973,6 +1020,15 @@
         padding: 0 15px;
         font-size: 14px;
       }
+      
+      .mobile-switcher-option {
+        font-size: 10px;
+        padding: 6px 2px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 14px;
+      }
     }
 
     @media (max-width: 360px) {
@@ -1007,6 +1063,14 @@
       .categories-btn {
         font-size: 11px;
         padding: 6px 8px;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 9px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 12px;
       }
     }
 
@@ -1075,6 +1139,32 @@
             <button class="btn btn-outline">Вход</button>
             <button class="btn btn-primary">Регистрация</button>
           </div>
+        </div>
+      </div>
+      
+      <!-- Мобильный переключатель страниц -->
+      <div class="mobile-switcher">
+        <div class="mobile-switcher-options">
+          <a href="#" class="mobile-switcher-option active">
+            <span class="icon">🏠</span>
+            <span>Главная</span>
+          </a>
+          <a href="#" class="mobile-switcher-option">
+            <span class="icon">🛍️</span>
+            <span>Каталог</span>
+          </a>
+          <a href="#" class="mobile-switcher-option">
+            <span class="icon">❤️</span>
+            <span>Избранное</span>
+          </a>
+          <a href="#" class="mobile-switcher-option">
+            <span class="icon">📦</span>
+            <span>Заказы</span>
+          </a>
+          <a href="#" class="mobile-switcher-option">
+            <span class="icon">👤</span>
+            <span>Профиль</span>
+          </a>
         </div>
       </div>
     </div>
@@ -1301,6 +1391,18 @@
           } else if (this.classList.contains('ads')) {
             window.location.href = 'ads-board.html';
           }
+        });
+      });
+      
+      // Переключение мобильного меню
+      document.querySelectorAll('.mobile-switcher-option').forEach(option => {
+        option.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelectorAll('.mobile-switcher-option').forEach(opt => opt.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Здесь можно добавить логику перехода между страницами
+          console.log('Переход на страницу:', this.querySelector('span:last-child').textContent);
         });
       });
       
