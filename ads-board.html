@@ -18,6 +18,7 @@
       --red-500:#FF5252;
       --yellow-600:#FFB300;
       --green-500:#4CAF50;
+      --green-600:#43A047;
       --purple-500:#9C27B0;
       --bg:#F6F8FB;
       --panel:#FFFFFF;
@@ -287,11 +288,80 @@
       opacity: 0.9;
     }
 
-    /* Ads Content */
-    .ads-content {
-      padding: 40px 0;
+    /* Filters */
+    .filters-section {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-1);
+      padding: 20px;
+      margin-bottom: 30px;
     }
     
+    .filters-row {
+      display: flex;
+      gap: 15px;
+      align-items: end;
+      flex-wrap: wrap;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 150px;
+    }
+    
+    .filter-group label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    
+    .filter-select {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--green-500);
+    }
+    
+    .view-toggle {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+    
+    .view-btn {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .view-btn.active {
+      background: var(--green-500);
+      color: white;
+      border-color: var(--green-500);
+    }
+    
+    .view-btn:hover {
+      border-color: var(--green-500);
+    }
+
+    /* Ads Content */
+    .ads-content {
+      padding: 20px 0 40px;
+    }
+    
+    /* Grid View */
     .ads-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -299,11 +369,35 @@
       margin-bottom: 40px;
     }
     
+    .ads-grid.view-list {
+      grid-template-columns: 1fr;
+    }
+    
+    .ads-grid.view-list .ad-card {
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .ads-grid.view-list .ad-image {
+      height: 150px;
+      width: 200px;
+    }
+    
+    .ads-grid.view-list .ad-body {
+      padding: 0;
+    }
+    
+    .ads-grid.view-list .ad-actions {
+      align-self: center;
+    }
+    
     .ad-card {
       background: var(--panel);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-1);
-      padding: 20px;
+      overflow: hidden;
       transition: var(--transition);
       border: 1px solid var(--border);
     }
@@ -313,11 +407,23 @@
       box-shadow: var(--shadow-hover);
     }
     
+    .ad-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    }
+    
+    .ad-body {
+      padding: 20px;
+    }
+    
     .ad-title {
       font-size: 18px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 10px;
+      line-height: 1.3;
     }
     
     .ad-price {
@@ -332,6 +438,10 @@
       font-size: 14px;
       line-height: 1.4;
       margin-bottom: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     
     .ad-meta {
@@ -339,6 +449,36 @@
       justify-content: space-between;
       font-size: 12px;
       color: var(--muted);
+      margin-bottom: 15px;
+    }
+    
+    .ad-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .ad-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid var(--green-500);
+      background: transparent;
+      color: var(--green-500);
+      border-radius: var(--radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 14px;
+    }
+    
+    .ad-btn.primary {
+      background: var(--green-500);
+      color: white;
+    }
+    
+    .ad-btn:hover {
+      background: var(--green-600);
+      color: white;
+      transform: translateY(-1px);
     }
     
     .add-ad-btn {
@@ -469,6 +609,26 @@
         font-size: 14px;
       }
       
+      .filters-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .view-toggle {
+        margin-left: 0;
+        justify-content: center;
+      }
+      
+      .ads-grid.view-list .ad-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .ads-grid.view-list .ad-image {
+        width: 100%;
+        height: 200px;
+      }
+      
       .ads-grid {
         grid-template-columns: 1fr;
       }
@@ -508,6 +668,10 @@
       
       .page-header p {
         font-size: 16px;
+      }
+      
+      .ad-actions {
+        flex-direction: column;
       }
     }
   </style>
@@ -583,70 +747,166 @@
   <!-- Основное содержимое -->
   <main class="ads-content">
     <div class="container">
-      <div class="ads-grid">
+      <!-- Фильтры -->
+      <section class="filters-section">
+        <div class="filters-row">
+          <div class="filter-group">
+            <label>Категория</label>
+            <select class="filter-select" id="categoryFilter">
+              <option value="all">Все категории</option>
+              <option value="electronics">Электроника</option>
+              <option value="realty">Недвижимость</option>
+              <option value="cars">Автомобили</option>
+              <option value="home">Для дома</option>
+              <option value="services">Услуги</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label>Цена от</label>
+            <input type="number" class="filter-select" placeholder="0 ₽" id="priceFrom">
+          </div>
+          
+          <div class="filter-group">
+            <label>Цена до</label>
+            <input type="number" class="filter-select" placeholder="1000000 ₽" id="priceTo">
+          </div>
+          
+          <div class="filter-group">
+            <label>Район</label>
+            <select class="filter-select" id="districtFilter">
+              <option value="all">Все районы</option>
+              <option value="center">Центр</option>
+              <option value="south">Южный</option>
+              <option value="north">Северный</option>
+              <option value="west">Западный</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label>Сортировка</label>
+            <select class="filter-select" id="sortFilter">
+              <option value="newest">Сначала новые</option>
+              <option value="oldest">Сначала старые</option>
+              <option value="price-low">Цена по возрастанию</option>
+              <option value="price-high">Цена по убыванию</option>
+            </select>
+          </div>
+          
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="grid">◼️ Сетка</button>
+            <button class="view-btn" data-view="list">📋 Список</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Объявления -->
+      <div class="ads-grid view-grid" id="adsContainer">
         <!-- Объявление 1 -->
-        <div class="ad-card">
-          <div class="ad-title">iPhone 13 Pro Max 256GB</div>
-          <div class="ad-price">65 000 ₽</div>
-          <div class="ad-description">Отличное состояние, батарея 98%, все функции работают. В комплекте зарядка и чехол.</div>
-          <div class="ad-meta">
-            <span>📅 Сегодня</span>
-            <span>📍 Центр</span>
+        <div class="ad-card" data-category="electronics" data-price="65000" data-district="center">
+          <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="iPhone" class="ad-image">
+          <div class="ad-body">
+            <div class="ad-title">iPhone 13 Pro Max 256GB</div>
+            <div class="ad-price">65 000 ₽</div>
+            <div class="ad-description">Отличное состояние, батарея 98%, все функции работают. В комплекте зарядка и чехол.</div>
+            <div class="ad-meta">
+              <span>📅 Сегодня</span>
+              <span>📍 Центр</span>
+            </div>
+            <div class="ad-actions">
+              <button class="ad-btn">❤️ В избранное</button>
+              <button class="ad-btn primary">💬 Написать</button>
+            </div>
           </div>
         </div>
         
         <!-- Объявление 2 -->
-        <div class="ad-card">
-          <div class="ad-title">Диван угловой новый</div>
-          <div class="ad-price">25 000 ₽</div>
-          <div class="ad-description">Новый угловой диван, не подошел по размеру. Распаковка, гарантия.</div>
-          <div class="ad-meta">
-            <span>📅 Вчера</span>
-            <span>📍 Южный</span>
+        <div class="ad-card" data-category="home" data-price="25000" data-district="south">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Диван" class="ad-image">
+          <div class="ad-body">
+            <div class="ad-title">Диван угловой новый</div>
+            <div class="ad-price">25 000 ₽</div>
+            <div class="ad-description">Новый угловой диван, не подошел по размеру. Распаковка, гарантия.</div>
+            <div class="ad-meta">
+              <span>📅 Вчера</span>
+              <span>📍 Южный</span>
+            </div>
+            <div class="ad-actions">
+              <button class="ad-btn">❤️ В избранное</button>
+              <button class="ad-btn primary">💬 Написать</button>
+            </div>
           </div>
         </div>
         
         <!-- Объявление 3 -->
-        <div class="ad-card">
-          <div class="ad-title">Услуги сантехника</div>
-          <div class="ad-price">Договорная</div>
-          <div class="ad-description">Установка и ремонт сантехники. Гарантия качества, доступные цены.</div>
-          <div class="ad-meta">
-            <span>📅 2 дня назад</span>
-            <span>📍 Весь город</span>
+        <div class="ad-card" data-category="services" data-price="0" data-district="all">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Сантехник" class="ad-image">
+          <div class="ad-body">
+            <div class="ad-title">Услуги сантехника</div>
+            <div class="ad-price">Договорная</div>
+            <div class="ad-description">Установка и ремонт сантехники. Гарантия качества, доступные цены.</div>
+            <div class="ad-meta">
+              <span>📅 2 дня назад</span>
+              <span>📍 Весь город</span>
+            </div>
+            <div class="ad-actions">
+              <button class="ad-btn">❤️ В избранное</button>
+              <button class="ad-btn primary">💬 Написать</button>
+            </div>
           </div>
         </div>
         
         <!-- Объявление 4 -->
-        <div class="ad-card">
-          <div class="ad-title">Квартира 2-к, 54м²</div>
-          <div class="ad-price">4 200 000 ₽</div>
-          <div class="ad-description">Евроремонт, новая мебель, техника. Район Докучаево, 5/9 этаж.</div>
-          <div class="ad-meta">
-            <span>📅 Сегодня</span>
-            <span>📍 Докучаево</span>
+        <div class="ad-card" data-category="realty" data-price="4200000" data-district="north">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Квартира" class="ad-image">
+          <div class="ad-body">
+            <div class="ad-title">Квартира 2-к, 54м²</div>
+            <div class="ad-price">4 200 000 ₽</div>
+            <div class="ad-description">Евроремонт, новая мебель, техника. Район Докучаево, 5/9 этаж.</div>
+            <div class="ad-meta">
+              <span>📅 Сегодня</span>
+              <span>📍 Северный</span>
+            </div>
+            <div class="ad-actions">
+              <button class="ad-btn">❤️ В избранное</button>
+              <button class="ad-btn primary">💬 Написать</button>
+            </div>
           </div>
         </div>
         
         <!-- Объявление 5 -->
-        <div class="ad-card">
-          <div class="ad-title">Toyota Camry 2018</div>
-          <div class="ad-price">1 850 000 ₽</div>
-          <div class="ad-description">Пробег 75 000 км, полная комплектация, сервисная история, один владелец.</div>
-          <div class="ad-meta">
-            <span>📅 3 дня назад</span>
-            <span>📍 Северный</span>
+        <div class="ad-card" data-category="cars" data-price="1850000" data-district="north">
+          <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Toyota" class="ad-image">
+          <div class="ad-body">
+            <div class="ad-title">Toyota Camry 2018</div>
+            <div class="ad-price">1 850 000 ₽</div>
+            <div class="ad-description">Пробег 75 000 км, полная комплектация, сервисная история, один владелец.</div>
+            <div class="ad-meta">
+              <span>📅 3 дня назад</span>
+              <span>📍 Северный</span>
+            </div>
+            <div class="ad-actions">
+              <button class="ad-btn">❤️ В избранное</button>
+              <button class="ad-btn primary">💬 Написать</button>
+            </div>
           </div>
         </div>
         
         <!-- Объявление 6 -->
-        <div class="ad-card">
-          <div class="ad-title">Ноутбук ASUS ROG</div>
-          <div class="ad-price">85 000 ₽</div>
-          <div class="ad-description">Игровой ноутбук, RTX 3060, 16GB RAM, 1TB SSD. Идеальное состояние.</div>
-          <div class="ad-meta">
-            <span>📅 Вчера</span>
-            <span>📍 Западный</span>
+        <div class="ad-card" data-category="electronics" data-price="85000" data-district="west">
+          <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Ноутбук" class="ad-image">
+          <div class="ad-body">
+            <div class="ad-title">Ноутбук ASUS ROG</div>
+            <div class="ad-price">85 000 ₽</div>
+            <div class="ad-description">Игровой ноутбук, RTX 3060, 16GB RAM, 1TB SSD. Идеальное состояние.</div>
+            <div class="ad-meta">
+              <span>📅 Вчера</span>
+              <span>📍 Западный</span>
+            </div>
+            <div class="ad-actions">
+              <button class="ad-btn">❤️ В избранное</button>
+              <button class="ad-btn primary">💬 Написать</button>
+            </div>
           </div>
         </div>
       </div>
@@ -725,6 +985,104 @@
           window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/';
         }
         // Для ads ничего не делаем - мы уже на этой странице
+      });
+    });
+
+    // Переключение вида (сетка/список)
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        const view = this.dataset.view;
+        const container = document.getElementById('adsContainer');
+        
+        if (view === 'list') {
+          container.classList.remove('view-grid');
+          container.classList.add('view-list');
+        } else {
+          container.classList.remove('view-list');
+          container.classList.add('view-grid');
+        }
+      });
+    });
+
+    // Фильтрация объявлений
+    function filterAds() {
+      const category = document.getElementById('categoryFilter').value;
+      const priceFrom = parseInt(document.getElementById('priceFrom').value) || 0;
+      const priceTo = parseInt(document.getElementById('priceTo').value) || Infinity;
+      const district = document.getElementById('districtFilter').value;
+      const sort = document.getElementById('sortFilter').value;
+      
+      const ads = document.querySelectorAll('.ad-card');
+      let visibleAds = [];
+      
+      ads.forEach(ad => {
+        const adCategory = ad.dataset.category;
+        const adPrice = parseInt(ad.dataset.price);
+        const adDistrict = ad.dataset.district;
+        
+        const categoryMatch = category === 'all' || adCategory === category;
+        const priceMatch = adPrice >= priceFrom && adPrice <= priceTo;
+        const districtMatch = district === 'all' || adDistrict === district;
+        
+        if (categoryMatch && priceMatch && districtMatch) {
+          ad.style.display = 'block';
+          visibleAds.push(ad);
+        } else {
+          ad.style.display = 'none';
+        }
+      });
+      
+      // Сортировка
+      sortAds(visibleAds, sort);
+    }
+    
+    function sortAds(ads, sortType) {
+      const container = document.getElementById('adsContainer');
+      const sortedAds = [...ads];
+      
+      switch(sortType) {
+        case 'price-low':
+          sortedAds.sort((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
+          break;
+        case 'price-high':
+          sortedAds.sort((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
+          break;
+        case 'oldest':
+          // Для демо просто меняем порядок
+          sortedAds.reverse();
+          break;
+        // newest - оставляем как есть
+      }
+      
+      // Переставляем элементы в DOM
+      sortedAds.forEach(ad => container.appendChild(ad));
+    }
+    
+    // Навешиваем обработчики на фильтры
+    document.getElementById('categoryFilter').addEventListener('change', filterAds);
+    document.getElementById('priceFrom').addEventListener('input', filterAds);
+    document.getElementById('priceTo').addEventListener('input', filterAds);
+    document.getElementById('districtFilter').addEventListener('change', filterAds);
+    document.getElementById('sortFilter').addEventListener('change', filterAds);
+    
+    // Кнопки избранного
+    document.querySelectorAll('.ad-btn:not(.primary)').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        if (this.classList.contains('active')) {
+          this.innerHTML = '❤️ В избранном';
+          this.style.background = 'var(--red-500)';
+          this.style.borderColor = 'var(--red-500)';
+          this.style.color = 'white';
+        } else {
+          this.innerHTML = '❤️ В избранное';
+          this.style.background = 'transparent';
+          this.style.borderColor = 'var(--green-500)';
+          this.style.color = 'var(--green-500)';
+        }
       });
     });
   </script>
