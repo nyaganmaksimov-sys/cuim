@@ -1,1 +1,59 @@
+:root {
+  --blue-600: #0D47A1;
+  --blue-500: #1565C0;
+  --orange-600: #FF6F00;
+  --bg: #F6F8FB;
+  --panel: #FFFFFF;
+  --text: #1F2937;
+  --muted: #667085;
+  --border: #E5E9F0;
+  --radius: 12px;
+  --shadow-1: 0 2px 12px rgba(13,71,161,.08);
+}
 
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.container {
+  width: min(100% - 32px, 1280px);
+  margin-inline: auto;
+}
+
+/* Header Styles */
+.top-header {
+  background: linear-gradient(90deg, var(--orange-600) 0%, #ff8c42 100%);
+  color: white;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.main-header {
+  background: var(--panel);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Product Cards */
+.product-card {
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(13,71,161,.12);
+}
+
+/* Добавь остальные стили из оригинального файла */
