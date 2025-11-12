@@ -735,178 +735,283 @@
 
     /* ======= АДАПТИВНЫЕ СТИЛИ ======= */
 
-    @media (max-width: 1024px) {
-      .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-      }
-      
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .promos {
-        grid-template-columns: repeat(3, 1fr);
-      }
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .promos {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-      .header-main-row {
-        gap: 15px;
-      }
-      
-      .header-actions {
-        gap: 15px;
-      }
-      
-      .footer-content {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
+  .header-main-row {
+    gap: 15px;
+  }
+  
+  .header-actions {
+    gap: 15px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .switcher-option {
+    min-width: 90px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
 
-    @media (max-width: 768px) {
-      .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-      
-      .product-card {
-        border-radius: 12px;
-      }
-      
-      .product-image {
-        height: 140px;
-      }
-      
-      .product-body {
-        padding: 12px;
-      }
-      
-      .product-title {
-        font-size: 13px;
-        height: 36px;
-      }
-      
-      .product-price {
-        font-size: 18px;
-      }
-      
-      .add-to-cart {
-        padding: 10px 12px;
-        font-size: 14px;
-      }
-      
-      .promos {
-        grid-template-columns: 1fr;
-      }
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .product-card {
+    border-radius: 12px;
+  }
+  
+  .product-image {
+    height: 140px;
+  }
+  
+  .product-body {
+    padding: 12px;
+  }
+  
+  .product-title {
+    font-size: 13px;
+    height: 36px;
+  }
+  
+  .product-price {
+    font-size: 18px;
+  }
+  
+  .add-to-cart {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .promos {
+    grid-template-columns: 1fr;
+  }
 
-      /* ШАПКА ДЛЯ МОБИЛЬНЫХ */
-      .main-header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-      
-      .header-main-row {
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 10px 0;
-      }
-      
-      .logo-section {
-        order: 1;
-        gap: 10px;
-        flex: 1;
-      }
-      
-      .categories-dropdown {
-        order: 3;
-        flex: 1 0 100%;
-        margin-top: 10px;
-      }
-      
-      .categories-btn {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .header-actions {
-        order: 2;
-        gap: 8px;
-        margin-left: 0;
-      }
-      
-      .marketplace-switcher {
-        order: 4;
-        flex: 1 0 100%;
-        margin-top: 10px;
-        justify-content: center;
-      }
-      
-      .main-search-bar {
-        margin: 0 10px;
-      }
-      
-      .hero-content h2 {
-        font-size: 28px;
-      }
-      
-      .hero-content p {
-        font-size: 16px;
-      }
-      
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
+  /* ИСПРАВЛЕННАЯ ШАПКА ДЛЯ МОБИЛЬНЫХ */
+  .main-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header-main-row {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  
+  .logo-section {
+    order: 1;
+    gap: 10px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    flex-shrink: 0;
+  }
+  
+  .categories-dropdown {
+    order: 3;
+    flex: 1 0 100%;
+    margin-top: 10px;
+  }
+  
+  .categories-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .marketplace-switcher {
+    order: 2;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+  
+  .header-actions {
+    order: 4;
+    gap: 8px;
+    margin-left: 0;
+    flex: 1 0 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .auth-buttons {
+    display: none; /* Скрываем кнопки входа на мобильных */
+  }
+  
+  .hero-content h2 {
+    font-size: 28px;
+  }
+  
+  .hero-content p {
+    font-size: 16px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
 
-      .footer-bottom {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-      }
-    }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}
 
-    @media (max-width: 480px) {
-      .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-      
-      .product-image {
-        height: 120px;
-      }
-      
-      .product-body {
-        padding: 10px;
-        gap: 8px;
-      }
-      
-      .product-title {
-        font-size: 12px;
-        height: 32px;
-      }
-      
-      .product-price {
-        font-size: 16px;
-      }
-      
-      .add-to-cart {
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-      
-      .shop-logo {
-        width: 120px;
-        padding: 10px 8px;
-      }
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .product-image {
+    height: 120px;
+  }
+  
+  .product-body {
+    padding: 10px;
+    gap: 8px;
+  }
+  
+  .product-title {
+    font-size: 12px;
+    height: 32px;
+  }
+  
+  .product-price {
+    font-size: 16px;
+  }
+  
+  .add-to-cart {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  
+  .shop-logo {
+    width: 120px;
+    padding: 10px 8px;
+  }
 
-      /* Шапка для маленьких мобильных */
-      .header-main-row {
-        gap: 8px;
-      }
-      
-      .logo img {
-        height: 35px;
-      }
+  /* Шапка для маленьких мобильных */
+  .header-main-row {
+    gap: 8px;
+  }
+  
+  .logo img {
+    height: 35px;
+  }
+  
+  .switcher-option {
+    min-width: 70px;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  
+  .header-actions {
+    gap: 6px;
+  }
+  
+  .header-action {
+    min-width: 50px;
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .section-title h2 {
+    font-size: 20px;
+  }
+  
+  .categories-menu {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  
+  .main-search-bar button {
+    padding: 0 15px;
+    font-size: 14px;
+  }
+  
+  /* Улучшаем отображение switcher на очень маленьких экранах */
+  .marketplace-switcher {
+    margin-right: 5px;
+  }
+  
+  .switcher-option {
+    min-width: 60px;
+    padding: 5px 6px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-actions {
+    gap: 4px;
+  }
+  
+  .header-action {
+    min-width: 45px;
+    padding: 4px 4px;
+    font-size: 10px;
+  }
+  
+  .btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .switcher-option {
+    min-width: 55px;
+    font-size: 9px;
+    padding: 4px 5px;
+  }
+  
+  .main-search-bar button {
+    padding: 0 12px;
+    font-size: 12px;
+  }
+  
+  .logo img {
+    height: 30px;
+  }
+}
       
       .switcher-option {
         min-width: 80px;
