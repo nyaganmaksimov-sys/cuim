@@ -733,7 +733,7 @@
       color: var(--blue-600);
     }
 
-    /* ======= АДАПТИВНЫЕ СТИЛИ ======= */
+  /* ======= АДАПТИВНЫЕ СТИЛИ ======= */
 
 @media (max-width: 1024px) {
   .product-grid {
@@ -759,12 +759,6 @@
   
   .footer-content {
     grid-template-columns: 1fr 1fr;
-  }
-  
-  .switcher-option {
-    min-width: 90px;
-    padding: 6px 12px;
-    font-size: 12px;
   }
 }
 
@@ -815,14 +809,15 @@
     flex-wrap: wrap;
     gap: 10px;
     padding: 10px 0;
+    align-items: center;
   }
   
   .logo-section {
     order: 1;
-    gap: 10px;
-    flex: 1;
     display: flex;
     align-items: center;
+    gap: 10px;
+    width: 100%;
     justify-content: space-between;
   }
   
@@ -831,15 +826,181 @@
   }
   
   .categories-dropdown {
-    order: 3;
-    flex: 1 0 100%;
-    margin-top: 10px;
+    order: 1;
+    flex: 1;
+    margin-left: 10px;
   }
   
   .categories-btn {
     width: 100%;
     justify-content: center;
+    font-size: 13px;
+    padding: 8px 12px;
   }
+  
+  .marketplace-switcher {
+    order: 2;
+    width: 100%;
+    margin-top: 5px;
+    justify-content: center;
+  }
+  
+  .header-actions {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 5px;
+  }
+  
+  .auth-buttons {
+    display: none;
+  }
+  
+  .main-search-section {
+    order: 4;
+  }
+  
+  .hero-content h2 {
+    font-size: 28px;
+  }
+  
+  .hero-content p {
+    font-size: 16px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .product-image {
+    height: 120px;
+  }
+  
+  .product-body {
+    padding: 10px;
+    gap: 8px;
+  }
+  
+  .product-title {
+    font-size: 12px;
+    height: 32px;
+  }
+  
+  .product-price {
+    font-size: 16px;
+  }
+  
+  .add-to-cart {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  
+  .shop-logo {
+    width: 120px;
+    padding: 10px 8px;
+  }
+
+  /* Шапка для маленьких мобильных */
+  .header-main-row {
+    gap: 8px;
+  }
+  
+  .logo img {
+    height: 32px;
+  }
+  
+  .categories-btn {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+  
+  .switcher-option {
+    min-width: 80px;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  
+  .header-actions {
+    gap: 10px;
+  }
+  
+  .header-action {
+    min-width: 45px;
+    padding: 4px 4px;
+    font-size: 10px;
+  }
+  
+  .section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .section-title h2 {
+    font-size: 20px;
+  }
+  
+  .categories-menu {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  
+  .main-search-bar button {
+    padding: 0 15px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-actions {
+    gap: 8px;
+  }
+  
+  .header-action {
+    min-width: 40px;
+    font-size: 9px;
+  }
+  
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .switcher-option {
+    min-width: 70px;
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+  
+  .main-search-bar button {
+    padding: 0 12px;
+    font-size: 12px;
+  }
+  
+  .logo img {
+    height: 28px;
+  }
+  
+  .categories-btn {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
   
   .marketplace-switcher {
     order: 2;
