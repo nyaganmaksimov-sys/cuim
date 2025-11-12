@@ -75,21 +75,10 @@
       cursor: pointer;
     }
     
-    .top-header-links {
-      display: flex;
-      gap: 20px;
+    .delivery-info {
+      font-size: 14px;
     }
-    
-    .top-header-links a {
-      color: white;
-      text-decoration: none;
-      transition: opacity 0.3s;
-    }
-    
-    .top-header-links a:hover {
-      opacity: 0.8;
-    }
-    
+
     /* Main Header */
     .main-header {
       background-color: white;
@@ -210,14 +199,6 @@
       text-decoration: none;
       color: #333;
       transition: color 0.3s;
-    }
-    
-    .header-action i {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-    
-    .header-action span {
       font-size: 12px;
     }
     
@@ -266,6 +247,8 @@
       display: flex;
       list-style: none;
       gap: 25px;
+      margin: 0;
+      padding: 0;
     }
     
     .nav-links a {
@@ -284,82 +267,309 @@
 
     /* Top shops */
     .top-shops{
-      background:var(--panel); border-bottom:1px solid rgba(13,71,161,.08);
-      padding:18px 0 14px; margin-bottom:10px;
+      background:var(--panel); 
+      border-bottom:1px solid rgba(13,71,161,.08);
+      padding:18px 0 14px; 
+      margin-bottom:10px;
     }
+    
     .shops-header{
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between;
+      margin-bottom: 12px;
     }
+    
     .shops-title{
-      font-size:18px; font-weight:700; color:#163a69; display:flex; align-items:center; gap:8px;
+      font-size:18px; 
+      font-weight:700; 
+      color:#163a69; 
+      display:flex; 
+      align-items:center; 
+      gap:8px;
     }
+    
     .link-more{
-      display:inline-flex; align-items:center; gap:6px; color:var(--blue-600); font-weight:600;
-      transition:gap .12s ease; font-size:14px;
+      display:inline-flex; 
+      align-items:center; 
+      gap:6px; 
+      color:var(--blue-600); 
+      font-weight:600;
+      transition:gap .12s ease; 
+      font-size:14px;
     }
-    .link-more:hover{gap:8px}
+    .link-more:hover{
+      gap:8px;
+      color: var(--blue-700);
+    }
     
     .shop-logos{
-      display:flex; gap:16px; overflow-x:auto; padding-bottom:4px;
+      display:flex; 
+      gap:16px; 
+      overflow-x:auto; 
+      padding-bottom:4px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--blue-400) transparent;
+    }
+    
+    .shop-logos::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .shop-logos::-webkit-scrollbar-thumb {
+      background: var(--blue-400);
+      border-radius: 6px;
     }
     
     .shop-logo{
-      flex:0 0 auto; width:140px; background:var(--panel); border-radius:var(--radius);
-      box-shadow:var(--shadow-1); overflow:hidden; cursor:pointer; transition:var(--transition);
-      display:flex; flex-direction:column; align-items:center; padding:12px 10px; gap:8px;
+      flex:0 0 auto; 
+      width:140px; 
+      background:var(--panel); 
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-1); 
+      overflow:hidden; 
+      cursor:pointer; 
+      transition:var(--transition);
+      display:flex; 
+      flex-direction:column; 
+      align-items:center; 
+      padding:12px 10px; 
+      gap:8px;
+      border: 1px solid var(--border);
     }
-    .shop-logo:hover{transform:translateY(-3px); box-shadow:var(--shadow-hover)}
     
-    .shop-logo img{
-      width:80px; height:60px; object-fit:cover; border-radius:8px;
-      background:linear-gradient(135deg, #f2f6fd, #e9f1ff); padding:6px;
+    .shop-logo:hover{
+      transform:translateY(-3px); 
+      box-shadow:var(--shadow-hover);
+      border-color: var(--blue-400);
     }
+    
+    .shop-image{
+      width:80px; 
+      height:60px; 
+      border-radius:8px;
+      background:linear-gradient(135deg, #f2f6fd, #e9f1ff); 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
     .shop-name{
-      font-size:13px; font-weight:600; color:#163a69; text-align:center; line-height:1.2;
+      font-size:13px; 
+      font-weight:600; 
+      color:#163a69; 
+      text-align:center; 
+      line-height:1.2;
+      width:100%; 
+      white-space:nowrap; 
+      overflow:hidden; 
+      text-overflow:ellipsis;
+    }
+    
+    .shop-rating{
+      display:flex; 
+      align-items:center; 
+      gap:4px; 
+      font-size:12px; 
+      color:var(--orange-600); 
+      font-weight:600;
+    }
+    
+    .stars{
+      display:flex; 
+      gap:1px;
+      color: var(--orange-600);
     }
 
     /* Main layout */
     .hero-grid{
-      display:grid; grid-template-columns:260px 1fr 300px; gap:20px; margin:20px 0 10px;
+      display:grid; 
+      grid-template-columns:260px 1fr 300px; 
+      gap:20px; 
+      margin:20px 0 10px;
     }
 
     /* Categories */
     .categories{
-      background:var(--panel); border-radius:var(--radius-lg); box-shadow:var(--shadow-1); overflow:hidden;
+      background:var(--panel); 
+      border-radius:var(--radius-lg); 
+      box-shadow:var(--shadow-1); 
+      overflow:hidden;
+      height: fit-content;
     }
+    
     .cat-title{
-      display:flex; align-items:center; gap:8px; padding:12px 16px; font-weight:700; color:#1b3b65;
+      display:flex; 
+      align-items:center; 
+      gap:8px; 
+      padding:12px 16px; 
+      font-weight:700; 
+      color:#1b3b65;
       border-bottom:1px solid rgba(13,71,161,.08);
     }
-    .cat-list{list-style:none; margin:0; padding:8px}
-    .cat-item a{
-      display:flex; align-items:center; gap:10px; padding:10px 10px; border-radius:10px; color:#21446d;
-      transition:background .12s ease;
+    
+    .cat-list{
+      list-style:none; 
+      margin:0; 
+      padding:8px;
     }
-    .cat-item a:hover{background:rgba(255,122,18,.10)}
+    
+    .cat-item a{
+      display:flex; 
+      align-items:center; 
+      gap:10px; 
+      padding:10px; 
+      border-radius:10px; 
+      color:#21446d;
+      transition:background .12s ease, transform .06s ease;
+    }
+    
+    .cat-item a:hover{
+      background:rgba(255,122,18,.10);
+      transform: translateX(4px);
+    }
+    
     .cat-ico{
-      width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:#fff;
+      width:30px; 
+      height:30px; 
+      border-radius:8px; 
+      display:grid; 
+      place-items:center; 
+      color:#fff;
       background:linear-gradient(135deg, var(--orange-600), var(--orange-500));
       font-size:16px;
     }
-    .cat-name{font-size:14px; font-weight:600}
+    
+    .cat-name{
+      font-size:14px; 
+      font-weight:600;
+    }
+
+    /* Hero Slider */
+    .hero{
+      position:relative; 
+      min-height:320px; 
+      background:linear-gradient(120deg, #e9f1ff, #fff);
+      border-radius:var(--radius-lg); 
+      box-shadow:var(--shadow-1); 
+      overflow:hidden;
+      display:flex; 
+      align-items:center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+    }
+    
+    .hero-content h2 {
+      font-size: 36px;
+      color: #0e2d57;
+      margin-bottom: 16px;
+    }
+    
+    .hero-content p {
+      font-size: 18px;
+      color: #385a86;
+      margin-bottom: 24px;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      background: var(--blue-600);
+      color: white;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      background: var(--blue-700);
+      transform: translateY(-2px);
+    }
+
+    /* Promos */
+    .promos{
+      display:grid; 
+      gap:20px;
+    }
+    
+    .promo-card{
+      background:var(--panel); 
+      border-radius:var(--radius-lg); 
+      box-shadow:var(--shadow-1);
+      padding:20px; 
+      display:flex; 
+      flex-direction:column; 
+      gap:10px; 
+      min-height:120px; 
+      position:relative; 
+      overflow:hidden;
+      transition: var(--transition);
+    }
+    
+    .promo-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .promo-card::after{
+      content:""; 
+      position:absolute; 
+      right:-40px; 
+      bottom:-40px; 
+      width:180px; 
+      height:180px; 
+      border-radius:50%;
+      background:radial-gradient(closest-side, rgba(255,122,18,.25), transparent 70%);
+    }
+    
+    .promo-card h3{
+      margin:0; 
+      font-size:18px; 
+      color:#153a6a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .promo-card p{
+      margin:0; 
+      color:#476a97;
+      font-size: 14px;
+    }
+    
+    .promo-accent{
+      color:var(--orange-600); 
+      font-weight:800;
+    }
 
     /* Product Sections */
     .section-title{
-      display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+      margin:40px 0 20px;
     }
+    
     .section-title h2{
-      margin:0; font-size:24px; color:#163a69; display:flex; align-items:center; gap:8px;
+      margin:0; 
+      font-size:24px; 
+      color:#163a69; 
+      display:flex; 
+      align-items:center; 
+      gap:8px;
       font-weight: 700;
     }
 
-    .popular-section{margin:40px 0 20px;}
-    .season-section{margin:40px 0 20px;}
-    .sale-section{margin:40px 0 20px;}
-
     /* Product Grid */
     .product-grid{
-      display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:20px;
+      display:grid; 
+      grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); 
+      gap:20px;
     }
 
     .product-card{
@@ -375,6 +585,7 @@
       flex-direction: column;
       height: 100%;
     }
+    
     .product-card:hover{
       transform:translateY(-4px); 
       box-shadow:var(--shadow-hover);
@@ -387,6 +598,7 @@
       object-fit:contain;
       padding: 16px;
       background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      border-bottom: 1px solid var(--border);
     }
     
     .product-body{
@@ -402,6 +614,11 @@
       line-height:1.4; 
       color:var(--text); 
       font-weight: 500;
+      height: 40px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
     
     .product-price{
@@ -427,6 +644,7 @@
       width: 100%;
       margin-top: auto;
     }
+    
     .add-to-cart:hover{
       background:var(--blue-700); 
       transform: translateY(-1px);
@@ -468,6 +686,7 @@
       color: #667085;
       font-size: 14px;
       transition: color 0.2s ease;
+      text-decoration: none;
     }
 
     .footer-links a:hover {
@@ -484,37 +703,262 @@
       font-size: 13px;
     }
 
-    /* Basic responsive */
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      color: #667085;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--blue-600);
+    }
+
+    /* ======= АДАПТИВНЫЕ СТИЛИ ======= */
+
+    /* Планшеты */
+    @media (max-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      
+      .hero-grid {
+        grid-template-columns: 240px 1fr;
+      }
+      
+      .promos {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .header-main-row {
+        gap: 15px;
+      }
+      
+      .search-section {
+        flex: 1;
+      }
+      
+      .header-actions {
+        gap: 15px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Мобильные устройства */
     @media (max-width: 768px) {
-      .header-main-row{
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      
+      .product-card {
+        border-radius: 12px;
+      }
+      
+      .product-image {
+        height: 140px;
+      }
+      
+      .product-body {
+        padding: 12px;
+      }
+      
+      .product-title {
+        font-size: 13px;
+        height: 36px;
+      }
+      
+      .product-price {
+        font-size: 18px;
+      }
+      
+      .add-to-cart {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+      
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .categories {
+        display: none;
+      }
+      
+      .promos {
+        grid-template-columns: 1fr;
+      }
+
+      /* ШАПКА ДЛЯ МОБИЛЬНЫХ */
+      .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .header-main-row {
         flex-wrap: wrap;
         gap: 10px;
         padding: 10px 0;
+      }
+      
+      .logo-section {
+        order: 1;
+        gap: 10px;
       }
       
       .search-section {
         order: 3;
         flex: 1 0 100%;
         margin-top: 10px;
+        max-width: none;
       }
       
-      .hero-grid{
-        grid-template-columns:1fr;
+      .header-actions {
+        order: 2;
+        gap: 8px;
+        margin-left: auto;
+      }
+      
+      .nav-links {
+        flex-wrap: wrap;
         gap: 15px;
+        justify-content: center;
+        font-size: 14px;
       }
       
-      .categories{
-        display:none;
+      .hero-content h2 {
+        font-size: 28px;
       }
       
-      .product-grid{
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+      .hero-content p {
+        font-size: 16px;
       }
       
       .footer-content {
         grid-template-columns: 1fr;
         gap: 25px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    /* Маленькие мобильные */
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      
+      .product-image {
+        height: 120px;
+      }
+      
+      .product-body {
+        padding: 10px;
+        gap: 8px;
+      }
+      
+      .product-title {
+        font-size: 12px;
+        height: 32px;
+      }
+      
+      .product-price {
+        font-size: 16px;
+      }
+      
+      .add-to-cart {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+      
+      .shop-logo {
+        width: 120px;
+        padding: 10px 8px;
+      }
+
+      /* Шапка для маленьких мобильных */
+      .header-main-row {
+        gap: 8px;
+      }
+      
+      .logo img {
+        height: 35px;
+      }
+      
+      .switcher-option {
+        min-width: 100px;
+        padding: 6px 16px;
+        font-size: 13px;
+      }
+      
+      .header-actions {
+        gap: 6px;
+      }
+      
+      .header-action {
+        min-width: 50px;
+        padding: 4px 6px;
+        font-size: 11px;
+      }
+      
+      .btn {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+      
+      .section-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .section-title h2 {
+        font-size: 20px;
+      }
+    }
+
+    /* Очень маленькие экраны */
+    @media (max-width: 360px) {
+      .header-actions {
+        gap: 4px;
+      }
+      
+      .header-action {
+        min-width: 45px;
+        padding: 4px 4px;
+        font-size: 10px;
+      }
+      
+      .btn {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+      
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Большие экраны */
+    @media (min-width: 1440px) {
+      .product-grid {
+        grid-template-columns: repeat(5, 1fr);
       }
     }
   </style>
@@ -609,22 +1053,35 @@
             <li class="cat-item"><a href="#"><span class="cat-ico">👕</span><span class="cat-name">Одежда</span></a></li>
             <li class="cat-item"><a href="#"><span class="cat-ico">💄</span><span class="cat-name">Красота и здоровье</span></a></li>
             <li class="cat-item"><a href="#"><span class="cat-ico">🧸</span><span class="cat-name">Детские товары</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🏡</span><span class="cat-name">Дом и сад</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🛋️</span><span class="cat-name">Мебель</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">🎣</span><span class="cat-name">Рыбалка и охота</span></a></li>
+            <li class="cat-item"><a href="#"><span class="cat-ico">✏️</span><span class="cat-name">Канцелярия</span></a></li>
           </ul>
         </aside>
 
         <div class="hero">
-          <h2>Добро пожаловать в ЦУИМ!</h2>
-          <p>Местный маркетплейс Барнаула</p>
+          <div class="hero-content">
+            <h2>Свежее рядом с вами</h2>
+            <p>Продукты и готовая еда с доставкой по Барнаулу</p>
+            <a href="#" class="cta-button">
+              Смотреть каталог →
+            </a>
+          </div>
         </div>
 
         <aside class="promos">
-          <div class="promo-card">
-            <h3>🚚 Быстрая доставка</h3>
-            <p>От 45 минут по городу</p>
+          <div class="promo-card" style="background:linear-gradient(180deg, #fff, #fff8ec)">
+            <h3>🎁 Бонусы за заказ</h3>
+            <p>Копите и тратьте — <span class="promo-accent">1 бонус = 1 ₽</span></p>
           </div>
-          <div class="promo-card">
-            <h3>🎁 Бонусы</h3>
-            <p>Копите и тратьте баллы</p>
+          <div class="promo-card" style="background:linear-gradient(180deg, #fff, #eef6ff)">
+            <h3>📦 Пункты самовывоза</h3>
+            <p>Заберите в удобное время</p>
+          </div>
+          <div class="promo-card" style="background:linear-gradient(180deg, #fff, #f1f7ff)">
+            <h3>🚚 Экспресс‑доставка</h3>
+            <p>От 45 минут по городу</p>
           </div>
         </aside>
       </section>
@@ -670,7 +1127,14 @@
       <div class="footer-content">
         <div class="footer-column">
           <h3>О ЦУИМ</h3>
-          <p>Местный маркетплейс Барнаула. Свежие продукты, готовые блюда, товары для дома.</p>
+          <p style="color: #667085; font-size: 14px; line-height: 1.5; margin-bottom: 15px;">
+            Местный маркетплейс Барнаула. Свежие продукты, готовые блюда, товары для дома и многое другое с быстрой доставкой и самовывозом.
+          </p>
+          <div style="background: rgba(21,101,192,.05); padding: 15px; border-radius: var(--radius); margin-top: 10px;">
+            <p style="margin: 5px 0; font-size: 13px;"><strong>Техническая поддержка:</strong></p>
+            <p style="margin: 5px 0; font-size: 13px;">📞 8 (800) 555-35-35</p>
+            <p style="margin: 5px 0; font-size: 13px;">✉️ support@cuim.ru</p>
+          </div>
         </div>
         
         <div class="footer-column">
@@ -679,6 +1143,8 @@
             <li><a href="#">Доставка и оплата</a></li>
             <li><a href="#">Возврат и обмен</a></li>
             <li><a href="#">Акции и скидки</a></li>
+            <li><a href="#">Бонусная программа</a></li>
+            <li><a href="#">Подарочные карты</a></li>
           </ul>
         </div>
         
@@ -688,6 +1154,8 @@
             <li><a href="#">Стать продавцом</a></li>
             <li><a href="#">Личный кабинет</a></li>
             <li><a href="#">Условия сотрудничества</a></li>
+            <li><a href="#">Комиссии и тарифы</a></li>
+            <li><a href="#">Партнёрская программа</a></li>
           </ul>
         </div>
         
@@ -697,17 +1165,20 @@
             <li><a href="#">О компании</a></li>
             <li><a href="#">Контакты</a></li>
             <li><a href="#">Вакансии</a></li>
+            <li><a href="#">Пользовательское соглашение</a></li>
+            <li><a href="#">Политика конфиденциальности</a></li>
           </ul>
         </div>
       </div>
       
       <div class="footer-bottom">
         <div class="footer-copyright">
-          © 2025 ЦУИМ — Местный маркетплейс Барнаула
+          © 2025 ЦУИМ — Местный маркетплейс Барнаула. Все права защищены.
         </div>
         <div class="footer-bottom-links">
           <a href="#">Пользовательское соглашение</a>
           <a href="#">Политика конфиденциальности</a>
+          <a href="#">Карта сайта</a>
         </div>
       </div>
     </div>
@@ -718,34 +1189,44 @@
     document.addEventListener('DOMContentLoaded', function() {
       // Магазины
       const shops = [
-        {name: "Свежий маркет", rating: "4.8"},
-        {name: "Мясной двор", rating: "4.9"}, 
-        {name: "Овощной ряд", rating: "4.7"},
-        {name: "Пекарня", rating: "5.0"},
-        {name: "Молочная ферма", rating: "4.6"}
+        {name: "Свежий маркет", rating: 4.8, icon: "🏪"},
+        {name: "Мясной двор", rating: 4.9, icon: "🥩"}, 
+        {name: "Овощной ряд", rating: 4.7, icon: "🥦"},
+        {name: "Пекарня Хлебный дом", rating: 5.0, icon: "🍞"},
+        {name: "Молочная ферма", rating: 4.6, icon: "🥛"},
+        {name: "Рыбный остров", rating: 4.8, icon: "🐟"},
+        {name: "Кондитерская", rating: 4.9, icon: "🍰"},
+        {name: "Бакалея", rating: 4.5, icon: "🛒"}
       ];
       
       document.getElementById('shopLogos').innerHTML = shops.map(shop => `
         <div class="shop-logo">
-          <div style="width:80px;height:60px;background:#e9f1ff;border-radius:8px;display:flex;align-items:center;justify-content:center;">🏪</div>
+          <div class="shop-image">${shop.icon}</div>
           <div class="shop-name">${shop.name}</div>
-          <div>⭐ ${shop.rating}</div>
+          <div class="shop-rating">
+            <div class="stars">${'★'.repeat(Math.floor(shop.rating))}${'☆'.repeat(5-Math.floor(shop.rating))}</div>
+            ${shop.rating}
+          </div>
         </div>
       `).join('');
       
       // Товары
       const products = [
-        {title: "Свежие огурцы (1 кг)", price: "150 ₽"},
-        {title: "Молоко 3,2% 1л", price: "89 ₽"},
-        {title: "Хлеб нарезной", price: "45 ₽"},
-        {title: "Яблоки Голден", price: "120 ₽"},
-        {title: "Сыр Российский", price: "450 ₽"},
-        {title: "Яйца куриные 10шт", price: "95 ₽"}
+        {title: "Свежие огурцы (1 кг)", price: "150 ₽", image: "🥒"},
+        {title: "Молоко 3,2% 1л", price: "89 ₽", image: "🥛"},
+        {title: "Хлеб нарезной", price: "45 ₽", image: "🍞"},
+        {title: "Яблоки Голден (1 кг)", price: "120 ₽", image: "🍎"},
+        {title: "Сыр Российский 500г", price: "450 ₽", image: "🧀"},
+        {title: "Яйца куриные 10шт", price: "95 ₽", image: "🥚"},
+        {title: "Колбаса Докторская", price: "320 ₽", image: "🌭"},
+        {title: "Готовый обед Борщ", price: "180 ₽", image: "🍲"}
       ];
       
       const productHTML = products.map(product => `
         <div class="product-card">
-          <img src="https://via.placeholder.com/200x150?text=Товар" class="product-image">
+          <div class="product-image" style="display: flex; align-items: center; justify-content: center; font-size: 48px;">
+            ${product.image}
+          </div>
           <div class="product-body">
             <div class="product-title">${product.title}</div>
             <div class="product-price">${product.price}</div>
@@ -758,7 +1239,19 @@
       document.getElementById('seasonGrid').innerHTML = productHTML;
       document.getElementById('saleGrid').innerHTML = productHTML;
       
-      console.log('ЦУИМ загружен!');
+      // Переключение маркетплейсов
+      document.querySelectorAll('.switcher-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.switcher-option').forEach(opt => opt.classList.remove('active'));
+          this.classList.add('active');
+          
+          if (this.classList.contains('opt')) {
+            window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/';
+          }
+        });
+      });
+      
+      console.log('ЦУИМ маркетплейс загружен!');
     });
   </script>
 </body>
