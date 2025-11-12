@@ -92,7 +92,7 @@
             display: flex;
             align-items: center;
             padding: 15px 0;
-            gap: 20px;
+            gap: 15px;
         }
 
         .logo {
@@ -103,15 +103,42 @@
             font-weight: 700;
             color: var(--primary);
             text-decoration: none;
+            min-width: 120px;
         }
 
-        .logo i {
-            font-size: 28px;
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .header-center {
+            display: flex;
+            flex: 1;
+            max-width: 700px;
+            gap: 10px;
+        }
+
+        .catalog-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            transition: background 0.3s;
+        }
+
+        .catalog-button:hover {
+            background: var(--primary-hover);
         }
 
         .search-container {
             flex: 1;
-            max-width: 600px;
             position: relative;
         }
 
@@ -503,7 +530,7 @@
                 flex-wrap: wrap;
             }
             
-            .search-container {
+            .header-center {
                 order: 3;
                 max-width: 100%;
                 margin-top: 10px;
@@ -519,6 +546,15 @@
         }
 
         @media (max-width: 480px) {
+            .header-center {
+                flex-direction: column;
+            }
+            
+            .catalog-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
             .products-grid {
                 grid-template-columns: 1fr;
             }
@@ -553,13 +589,20 @@
         <div class="container">
             <div class="header-main">
                 <a href="#" class="logo">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span>CUIM</span>
+                    <img src="images/logo.png" alt="CUIM" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span style="display: none;">CUIM</span>
                 </a>
                 
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Найти товары">
-                    <button class="search-button">Найти</button>
+                <div class="header-center">
+                    <button class="catalog-button">
+                        <i class="fas fa-bars"></i>
+                        Каталог
+                    </button>
+                    
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Найти товары">
+                        <button class="search-button">Найти</button>
+                    </div>
                 </div>
                 
                 <div class="header-actions">
@@ -859,5 +902,13 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Добавляем обработчик для кнопки каталога
+        document.querySelector('.catalog-button').addEventListener('click', function() {
+            alert('Открывается меню каталога товаров');
+            // Здесь можно добавить логику открытия выпадающего меню каталога
+        });
+    </script>
 </body>
 </html>
