@@ -15,6 +15,10 @@
             --success-color: #2ecc71;
             --warning-color: #f39c12;
             --danger-color: #e74c3c;
+            --market-color: #3498db;
+            --wholesale-color: #9b59b6;
+            --ads-color: #e67e22;
+            --courier-color: #27ae60;
         }
 
         * {
@@ -296,6 +300,26 @@
             color: var(--danger-color);
         }
 
+        /* Специфичные стили для разных кабинетов */
+        .cabinet-market-seller .stat-card:nth-child(1) {
+            border-top: 3px solid var(--market-color);
+        }
+        .cabinet-market-buyer .stat-card:nth-child(1) {
+            border-top: 3px solid var(--market-color);
+        }
+        .cabinet-wholesale-seller .stat-card:nth-child(1) {
+            border-top: 3px solid var(--wholesale-color);
+        }
+        .cabinet-wholesale-buyer .stat-card:nth-child(1) {
+            border-top: 3px solid var(--wholesale-color);
+        }
+        .cabinet-ads .stat-card:nth-child(1) {
+            border-top: 3px solid var(--ads-color);
+        }
+        .cabinet-courier .stat-card:nth-child(1) {
+            border-top: 3px solid var(--courier-color);
+        }
+
         /* Адаптивность */
         @media (max-width: 992px) {
             .charts-section {
@@ -350,6 +374,73 @@
                 min-width: auto;
                 width: 100%;
             }
+        }
+
+        /* Специфичные элементы для разных кабинетов */
+        .order-item, .product-item, .ad-item, .delivery-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .order-info, .product-info, .ad-info, .delivery-info {
+            flex: 1;
+        }
+        
+        .order-actions, .product-actions, .ad-actions, .delivery-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .quick-action-btn {
+            padding: 10px 15px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .quick-action-btn:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -444,84 +535,467 @@
                 </div>
             </header>
 
-            <!-- Карточки статистики -->
-            <section class="stats-cards">
-                <div class="stat-card">
-                    <div class="stat-title">Общий доход</div>
-                    <div class="stat-value">1,245,000 ₽</div>
-                    <div class="stat-change positive">↑ 12.5% за месяц</div>
+            <!-- Контент для ЦУИМ Маркет: Кабинет Продавца -->
+            <div id="market-seller" class="cabinet-content cabinet-market-seller">
+                <div class="quick-actions">
+                    <button class="quick-action-btn">
+                        <span>📦</span> Добавить товар
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>📋</span> Управление заказами
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>📊</span> Аналитика продаж
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>🏪</span> Настройки магазина
+                    </button>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-title">Новые заказы</div>
-                    <div class="stat-value">48</div>
-                    <div class="stat-change positive">↑ 8.2% за неделю</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-title">Активные клиенты</div>
-                    <div class="stat-value">1,284</div>
-                    <div class="stat-change positive">↑ 3.1% за месяц</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-title">Товаров в наличии</div>
-                    <div class="stat-value">5,672</div>
-                    <div class="stat-change negative">↓ 2.4% за неделю</div>
-                </div>
-            </section>
-
-            <!-- Графики и таблицы -->
-            <section class="charts-section">
-                <div class="chart-container">
-                    <h2 class="section-title">Динамика продаж</h2>
-                    <div class="chart-placeholder">
-                        График продаж за последние 12 месяцев
+                
+                <section class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-title">Выручка за месяц</div>
+                        <div class="stat-value">324,560 ₽</div>
+                        <div class="stat-change positive">↑ 15.3% за месяц</div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Новые заказы</div>
+                        <div class="stat-value">47</div>
+                        <div class="stat-change positive">↑ 8.2% за неделю</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Товары в каталоге</div>
+                        <div class="stat-value">128</div>
+                        <div class="stat-change positive">↑ 5.8% за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Рейтинг магазина</div>
+                        <div class="stat-value">4.8/5</div>
+                        <div class="stat-change positive">↑ 0.2 за месяц</div>
+                    </div>
+                </section>
+
+                <section class="charts-section">
+                    <div class="chart-container">
+                        <h2 class="section-title">Динамика продаж</h2>
+                        <div class="chart-placeholder">
+                            График продаж по товарным категориям
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <h2 class="section-title">Последние заказы</h2>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#ORD-7842</strong> - ООО "ТехноПром"</div>
+                                <div>Сумма: 45,200 ₽ | 3 товара</div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-primary">Обработать</button>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#ORD-7841</strong> - ИП Смирнов А.В.</div>
+                                <div>Сумма: 28,750 ₽ | 2 товара</div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-primary">Обработать</button>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#ORD-7840</strong> - ООО "СтройМастер"</div>
+                                <div>Сумма: 62,400 ₽ | 5 товаров</div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-primary">Обработать</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Контент для ЦУИМ Маркет: Кабинет Покупателя -->
+            <div id="market-buyer" class="cabinet-content cabinet-market-buyer hidden">
+                <div class="quick-actions">
+                    <button class="quick-action-btn">
+                        <span>🔍</span> Поиск товаров
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>❤️</span> Избранное
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>🛒</span> Корзина
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>📋</span> История заказов
+                    </button>
                 </div>
-                <div class="table-container">
-                    <h2 class="section-title">Последние заказы</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID заказа</th>
-                                <th>Клиент</th>
-                                <th>Сумма</th>
-                                <th>Статус</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#ORD-7842</td>
-                                <td>ООО "ТехноПром"</td>
-                                <td>45,200 ₽</td>
-                                <td><span class="status-badge status-completed">Выполнен</span></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-7841</td>
-                                <td>ИП Смирнов А.В.</td>
-                                <td>28,750 ₽</td>
-                                <td><span class="status-badge status-pending">В обработке</span></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-7840</td>
-                                <td>ООО "СтройМастер"</td>
-                                <td>62,400 ₽</td>
-                                <td><span class="status-badge status-completed">Выполнен</span></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-7839</td>
-                                <td>ЗАО "ТоргСервис"</td>
-                                <td>15,800 ₽</td>
-                                <td><span class="status-badge status-cancelled">Отменен</span></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-7838</td>
-                                <td>ИП Козлова Е.П.</td>
-                                <td>33,100 ₽</td>
-                                <td><span class="status-badge status-pending">В обработке</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                
+                <section class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-title">Активные заказы</div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-change negative">↓ 1 за неделю</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Потрачено в этом месяце</div>
+                        <div class="stat-value">24,850 ₽</div>
+                        <div class="stat-change positive">↑ 12.5% за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Избранные товары</div>
+                        <div class="stat-value">17</div>
+                        <div class="stat-change positive">↑ 3 за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Бонусные баллы</div>
+                        <div class="stat-value">1,245</div>
+                        <div class="stat-change positive">↑ 245 за месяц</div>
+                    </div>
+                </section>
+
+                <section class="charts-section">
+                    <div class="chart-container">
+                        <h2 class="section-title">Рекомендуемые товары</h2>
+                        <div class="chart-placeholder">
+                            Персонализированные рекомендации на основе истории покупок
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <h2 class="section-title">История заказов</h2>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#ORD-7835</strong> - Электроника</div>
+                                <div>Сумма: 15,200 ₽ | Статус: <span class="status-badge status-completed">Доставлен</span></div>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#ORD-7829</strong> - Одежда</div>
+                                <div>Сумма: 8,750 ₽ | Статус: <span class="status-badge status-completed">Доставлен</span></div>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#ORD-7822</strong> - Книги</div>
+                                <div>Сумма: 3,400 ₽ | Статус: <span class="status-badge status-completed">Доставлен</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Контент для ЦУИМ Опт: Кабинет Продавца -->
+            <div id="wholesale-seller" class="cabinet-content cabinet-wholesale-seller hidden">
+                <div class="quick-actions">
+                    <button class="quick-action-btn">
+                        <span>📦</span> Управление складом
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>📋</span> Оптовые заказы
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>👥</span> Клиенты (B2B)
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>💰</span> Цены и скидки
+                    </button>
                 </div>
-            </section>
+                
+                <section class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-title">Оптовый оборот</div>
+                        <div class="stat-value">2,450,000 ₽</div>
+                        <div class="stat-change positive">↑ 18.7% за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Крупные заказы</div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-change positive">↑ 3 за неделю</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Корпоративные клиенты</div>
+                        <div class="stat-value">84</div>
+                        <div class="stat-change positive">↑ 5 за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Остаток на складе</div>
+                        <div class="stat-value">56,782 шт.</div>
+                        <div class="stat-change negative">↓ 4,218 за неделю</div>
+                    </div>
+                </section>
+
+                <section class="charts-section">
+                    <div class="chart-container">
+                        <h2 class="section-title">Оптовые поставки</h2>
+                        <div class="chart-placeholder">
+                            График отгрузок по клиентам и регионам
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <h2 class="section-title">Крупные заказы</h2>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#WHO-4215</strong> - ООО "СтройЛогистик"</div>
+                                <div>Сумма: 450,000 ₽ | Срок: 14 дней</div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-primary">Подготовить</button>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#WHO-4212</strong> - ТД "ПромСнаб"</div>
+                                <div>Сумма: 320,000 ₽ | Срок: 7 дней</div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-primary">Подготовить</button>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#WHO-4208</strong> - ЗАО "ТехноСистемы"</div>
+                                <div>Сумма: 185,000 ₽ | Срок: 10 дней</div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-primary">Подготовить</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Контент для ЦУИМ Опт: Кабинет Покупателя -->
+            <div id="wholesale-buyer" class="cabinet-content cabinet-wholesale-buyer hidden">
+                <div class="quick-actions">
+                    <button class="quick-action-btn">
+                        <span>🔍</span> Поиск поставщиков
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>📋</span> Запросы цен
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>📊</span> Сравнение предложений
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>📦</span> Мои закупки
+                    </button>
+                </div>
+                
+                <section class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-title">Закупки в этом месяце</div>
+                        <div class="stat-value">1,245,000 ₽</div>
+                        <div class="stat-change positive">↑ 22.3% за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Активные поставщики</div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-change positive">↑ 3 за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Экономия от опта</div>
+                        <div class="stat-value">187,500 ₽</div>
+                        <div class="stat-change positive">↑ 24,000 за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Товаров в пути</div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-change negative">↓ 2 за неделю</div>
+                    </div>
+                </section>
+
+                <section class="charts-section">
+                    <div class="chart-container">
+                        <h2 class="section-title">Анализ закупок</h2>
+                        <div class="chart-placeholder">
+                            График закупок по категориям и поставщикам
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <h2 class="section-title">Текущие заказы</h2>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#PUR-2154</strong> - ООО "МеталлПром"</div>
+                                <div>Сумма: 320,000 ₽ | Статус: <span class="status-badge status-pending">В пути</span></div>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#PUR-2151</strong> - ТД "ЭлектроКомплект"</div>
+                                <div>Сумма: 185,000 ₽ | Статус: <span class="status-badge status-pending">Обработка</span></div>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div><strong>#PUR-2148</strong> - ЗАО "ХимРеактив"</div>
+                                <div>Сумма: 420,000 ₽ | Статус: <span class="status-badge status-completed">Доставлен</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Контент для ЦУИМ Объявления -->
+            <div id="ads" class="cabinet-content cabinet-ads hidden">
+                <div class="quick-actions">
+                    <button class="quick-action-btn">
+                        <span>➕</span> Подать объявление
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>📋</span> Мои объявления
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>💬</span> Сообщения
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>⭐</span> Избранное
+                    </button>
+                </div>
+                
+                <section class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-title">Активные объявления</div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-change positive">↑ 3 за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Просмотры за неделю</div>
+                        <div class="stat-value">1,245</div>
+                        <div class="stat-change positive">↑ 324 за неделю</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Отклики</div>
+                        <div class="stat-value">28</div>
+                        <div class="stat-change positive">↑ 8 за неделю</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Рейтинг профиля</div>
+                        <div class="stat-value">4.6/5</div>
+                        <div class="stat-change positive">↑ 0.1 за месяц</div>
+                    </div>
+                </section>
+
+                <section class="charts-section">
+                    <div class="chart-container">
+                        <h2 class="section-title">Статистика объявлений</h2>
+                        <div class="chart-placeholder">
+                            График просмотров и откликов по объявлениям
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <h2 class="section-title">Недавние отклики</h2>
+                        <div class="ad-item">
+                            <div class="ad-info">
+                                <div><strong>Продам автомобиль</strong></div>
+                                <div>Иван Петров: "Здравствуйте, интересует обмен?"</div>
+                            </div>
+                            <div class="ad-actions">
+                                <button class="btn btn-primary">Ответить</button>
+                            </div>
+                        </div>
+                        <div class="ad-item">
+                            <div class="ad-info">
+                                <div><strong>Сниму квартиру</strong></div>
+                                <div>Мария Сидорова: "Есть подходящий вариант, звоните"</div>
+                            </div>
+                            <div class="ad-actions">
+                                <button class="btn btn-primary">Ответить</button>
+                            </div>
+                        </div>
+                        <div class="ad-item">
+                            <div class="ad-info">
+                                <div><strong>Ищу работу</strong></div>
+                                <div>ООО "ТехноПрофи": "Приглашаем на собеседование"</div>
+                            </div>
+                            <div class="ad-actions">
+                                <button class="btn btn-primary">Ответить</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Контент для ЦУИМ Курьер -->
+            <div id="courier" class="cabinet-content cabinet-courier hidden">
+                <div class="quick-actions">
+                    <button class="quick-action-btn">
+                        <span>📦</span> Активные заказы
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>✅</span> Завершенные доставки
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>🗺️</span> Маршрут на сегодня
+                    </button>
+                    <button class="quick-action-btn">
+                        <span>💰</span> Заработок
+                    </button>
+                </div>
+                
+                <section class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-title">Заказов сегодня</div>
+                        <div class="stat-value">14</div>
+                        <div class="stat-change positive">↑ 3 за неделю</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Заработок за день</div>
+                        <div class="stat-value">3,850 ₽</div>
+                        <div class="stat-change positive">↑ 450 за неделю</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Средний рейтинг</div>
+                        <div class="stat-value">4.9/5</div>
+                        <div class="stat-change positive">↑ 0.1 за месяц</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Км пройдено</div>
+                        <div class="stat-value">67 км</div>
+                        <div class="stat-change negative">↓ 12 за неделю</div>
+                    </div>
+                </section>
+
+                <section class="charts-section">
+                    <div class="chart-container">
+                        <h2 class="section-title">Маршрут доставки</h2>
+                        <div class="chart-placeholder">
+                            Карта с маршрутом и точками доставки
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <h2 class="section-title">Текущие доставки</h2>
+                        <div class="delivery-item">
+                            <div class="delivery-info">
+                                <div><strong>#DEL-4215</strong> - ул. Ленина, 15</div>
+                                <div>Получатель: Иванов А. | Время: 14:00-16:00</div>
+                            </div>
+                            <div class="delivery-actions">
+                                <button class="btn btn-success">Доставлено</button>
+                            </div>
+                        </div>
+                        <div class="delivery-item">
+                            <div class="delivery-info">
+                                <div><strong>#DEL-4216</strong> - пр. Мира, 42</div>
+                                <div>Получатель: Петрова М. | Время: 16:00-18:00</div>
+                            </div>
+                            <div class="delivery-actions">
+                                <button class="btn btn-success">Доставлено</button>
+                            </div>
+                        </div>
+                        <div class="delivery-item">
+                            <div class="delivery-info">
+                                <div><strong>#DEL-4217</strong> - ул. Садовая, 7</div>
+                                <div>Получатель: Сидоров П. | Время: 18:00-20:00</div>
+                            </div>
+                            <div class="delivery-actions">
+                                <button class="btn btn-warning">В пути</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </main>
     </div>
 
@@ -529,6 +1003,7 @@
         // Переключение между демо-режимами
         const modeButtons = document.querySelectorAll('.demo-mode-btn');
         const pageTitle = document.getElementById('page-title');
+        const cabinetContents = document.querySelectorAll('.cabinet-content');
         
         const modeTitles = {
             'market-seller': 'ЦУИМ Маркет: Кабинет Продавца',
@@ -539,25 +1014,40 @@
             'courier': 'ЦУИМ Курьер: Личный кабинет'
         };
         
+        function switchCabinet(mode) {
+            // Скрываем все кабинеты
+            cabinetContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Показываем выбранный кабинет
+            const activeCabinet = document.getElementById(mode);
+            if (activeCabinet) {
+                activeCabinet.classList.remove('hidden');
+            }
+            
+            // Обновляем заголовок страницы
+            pageTitle.textContent = `Панель управления - ${modeTitles[mode]}`;
+            
+            // Обновляем активную кнопку
+            modeButtons.forEach(button => {
+                button.classList.remove('active');
+                if (button.getAttribute('data-mode') === mode) {
+                    button.classList.add('active');
+                }
+            });
+        }
+        
         modeButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Убираем активный класс у всех кнопок в группе
-                const group = this.closest('.demo-mode-buttons');
-                group.querySelectorAll('.demo-mode-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                
-                // Добавляем активный класс к нажатой кнопке
-                this.classList.add('active');
-                
-                // Обновляем заголовок страницы
                 const mode = this.getAttribute('data-mode');
-                pageTitle.textContent = `Панель управления - ${modeTitles[mode]}`;
-                
-                // Здесь можно добавить дополнительную логику для переключения режимов
+                switchCabinet(mode);
                 console.log(`Активирован режим: ${modeTitles[mode]}`);
             });
         });
+        
+        // Инициализация первого кабинета
+        switchCabinet('market-seller');
     </script>
 </body>
 </html>
