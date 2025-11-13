@@ -61,6 +61,7 @@
         .logo {
             height: 50px;
             width: auto;
+            max-width: 100%;
         }
 
         .nav-menu {
@@ -489,26 +490,8 @@
         <!-- Сайдбар -->
         <aside class="sidebar">
             <div class="logo-container">
-                <!-- Логотип ЦУИМ -->
-                <svg class="logo" width="150" height="50" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Фон логотипа -->
-                    <rect x="0" y="0" width="50" height="50" fill="#3498db" rx="8"/>
-                    
-                    <!-- Буква Ц -->
-                    <path d="M10 15 H40 V20 H15 V35 H35 V30 H40 V40 H10 V15 Z" fill="white"/>
-                    
-                    <!-- Буква У -->
-                    <path d="M55 15 H60 V25 H70 V15 H75 V40 H70 V30 H60 V40 H55 V15 Z" fill="#333"/>
-                    
-                    <!-- Буква И -->
-                    <path d="M80 15 H85 V40 H80 V15 Z M85 15 H95 V20 H90 V35 H95 V40 H85 V15 Z" fill="#333"/>
-                    
-                    <!-- Буква М -->
-                    <path d="M100 15 H105 V25 L112.5 15 H117.5 L125 25 V15 H130 V40 H125 V30 L117.5 40 H112.5 L105 30 V40 H100 V15 Z" fill="#333"/>
-                    
-                    <!-- Текст Dashboard -->
-                    <text x="140" y="30" text-anchor="end" fill="#333" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Dashboard</text>
-                </svg>
+                <!-- Логотип ЦУИМ PNG -->
+                <img src="https://via.placeholder.com/150x50/3498db/ffffff?text=CUIM+Dashboard" alt="CUIM Dashboard" class="logo">
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -554,31 +537,31 @@
         <main class="main-content">
             <!-- Компактный хедер -->
             <header class="compact-header">
-                <h1 class="page-title" id="page-title">Объявления: Личный кабинет</h1>
+                <h1 class="page-title" id="page-title">ЦУИМ Объявления: Личный кабинет</h1>
                 <div class="compact-controls">
                     <div class="cabinet-selector">
                         <div class="cabinet-group">
-                            <span class="cabinet-label">Маркет</span>
+                            <span class="cabinet-label">ЦУИМ Маркет</span>
                             <div class="cabinet-buttons">
                                 <button class="cabinet-btn" data-mode="market-seller">Продавец</button>
                                 <button class="cabinet-btn" data-mode="market-buyer">Покупатель</button>
                             </div>
                         </div>
                         <div class="cabinet-group">
-                            <span class="cabinet-label">Опт</span>
+                            <span class="cabinet-label">ЦУИМ Опт</span>
                             <div class="cabinet-buttons">
                                 <button class="cabinet-btn" data-mode="wholesale-seller">Продавец</button>
                                 <button class="cabinet-btn" data-mode="wholesale-buyer">Покупатель</button>
                             </div>
                         </div>
                         <div class="cabinet-group">
-                            <span class="cabinet-label">Объявления</span>
+                            <span class="cabinet-label">ЦУИМ Объявления</span>
                             <div class="cabinet-buttons">
                                 <button class="cabinet-btn active" data-mode="ads">Личный кабинет</button>
                             </div>
                         </div>
                         <div class="cabinet-group">
-                            <span class="cabinet-label">Курьер</span>
+                            <span class="cabinet-label">ЦУИМ Курьер</span>
                             <div class="cabinet-buttons">
                                 <button class="cabinet-btn" data-mode="courier">Личный кабинет</button>
                             </div>
@@ -591,7 +574,7 @@
                 </div>
             </header>
 
-            <!-- Контент для Маркет: Кабинет Продавца -->
+            <!-- Контент для ЦУИМ Маркет: Кабинет Продавца -->
             <div id="market-seller" class="cabinet-content cabinet-market-seller hidden">
                 <div class="quick-actions">
                     <button class="quick-action-btn">
@@ -671,7 +654,7 @@
                 </section>
             </div>
 
-            <!--Контент для Маркет: Кабинет Покупателя -->
+            <!-- Контент для ЦУИМ Маркет: Кабинет Покупателя -->
             <div id="market-buyer" class="cabinet-content cabinet-market-buyer hidden">
                 <div class="quick-actions">
                     <button class="quick-action-btn">
@@ -742,7 +725,7 @@
                 </section>
             </div>
 
-            <!-- Контент ЦУИМ Опт: Кабинет Продавца -->
+            <!-- Контент для ЦУИМ Опт: Кабинет Продавца -->
             <div id="wholesale-seller" class="cabinet-content cabinet-wholesale-seller hidden">
                 <div class="quick-actions">
                     <button class="quick-action-btn">
@@ -822,7 +805,7 @@
                 </section>
             </div>
 
-            <!-- Контент Опт: Кабинет Покупателя -->
+            <!-- Контент для ЦУИМ Опт: Кабинет Покупателя -->
             <div id="wholesale-buyer" class="cabinet-content cabinet-wholesale-buyer hidden">
                 <div class="quick-actions">
                     <button class="quick-action-btn">
@@ -893,7 +876,7 @@
                 </section>
             </div>
 
-            <!-- Контент Объявления -->
+            <!-- Контент для ЦУИМ Объявления -->
             <div id="ads" class="cabinet-content cabinet-ads">
                 <div class="quick-actions">
                     <button class="quick-action-btn">
