@@ -119,23 +119,48 @@
 
         .demo-mode-selector {
             display: flex;
+            flex-direction: column;
+            gap: 10px;
             background-color: var(--card-bg);
             border-radius: 5px;
-            overflow: hidden;
+            padding: 15px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            min-width: 250px;
+        }
+
+        .demo-mode-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .demo-mode-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .demo-mode-buttons {
+            display: flex;
+            gap: 5px;
         }
 
         .demo-mode-btn {
-            padding: 8px 16px;
+            padding: 6px 12px;
             background: none;
-            border: none;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-size: 12px;
+            flex: 1;
         }
 
         .demo-mode-btn.active {
             background-color: var(--primary-color);
             color: white;
+            border-color: var(--primary-color);
         }
 
         .user-profile {
@@ -276,6 +301,10 @@
             .charts-section {
                 grid-template-columns: 1fr;
             }
+            
+            .demo-mode-selector {
+                min-width: 200px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -304,6 +333,22 @@
             
             .stats-cards {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .demo-mode-selector {
+                min-width: auto;
+                width: 100%;
             }
         }
     </style>
@@ -362,11 +407,35 @@
         <!-- Основной контент -->
         <main class="main-content">
             <header class="header">
-                <h1 class="page-title">Панель управления</h1>
+                <h1 class="page-title" id="page-title">Панель управления - ЦУИМ Маркет: Кабинет Продавца</h1>
                 <div class="user-actions">
                     <div class="demo-mode-selector">
-                        <button class="demo-mode-btn active" id="seller-mode">Оптовый продавец</button>
-                        <button class="demo-mode-btn" id="buyer-mode">Покупатель</button>
+                        <div class="demo-mode-group">
+                            <div class="demo-mode-label">ЦУИМ Маркет</div>
+                            <div class="demo-mode-buttons">
+                                <button class="demo-mode-btn active" data-mode="market-seller">Кабинет Продавца</button>
+                                <button class="demo-mode-btn" data-mode="market-buyer">Кабинет Покупателя</button>
+                            </div>
+                        </div>
+                        <div class="demo-mode-group">
+                            <div class="demo-mode-label">ЦУИМ Опт</div>
+                            <div class="demo-mode-buttons">
+                                <button class="demo-mode-btn" data-mode="wholesale-seller">Кабинет Продавца</button>
+                                <button class="demo-mode-btn" data-mode="wholesale-buyer">Кабинет Покупателя</button>
+                            </div>
+                        </div>
+                        <div class="demo-mode-group">
+                            <div class="demo-mode-label">ЦУИМ Объявления</div>
+                            <div class="demo-mode-buttons">
+                                <button class="demo-mode-btn" data-mode="ads">Личный кабинет</button>
+                            </div>
+                        </div>
+                        <div class="demo-mode-group">
+                            <div class="demo-mode-label">ЦУИМ Курьер</div>
+                            <div class="demo-mode-buttons">
+                                <button class="demo-mode-btn" data-mode="courier">Личный кабинет</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="user-profile">
                         <div class="avatar">АИ</div>
@@ -458,18 +527,36 @@
 
     <script>
         // Переключение между демо-режимами
-        document.getElementById('seller-mode').addEventListener('click', function() {
-            document.getElementById('seller-mode').classList.add('active');
-            document.getElementById('buyer-mode').classList.remove('active');
-            // Здесь можно добавить логику для переключения на режим оптового продавца
-            console.log('Режим оптового продавца активирован');
-        });
-
-        document.getElementById('buyer-mode').addEventListener('click', function() {
-            document.getElementById('buyer-mode').classList.add('active');
-            document.getElementById('seller-mode').classList.remove('active');
-            // Здесь можно добавить логику для переключения на режим покупателя
-            console.log('Режим покупателя активирован');
+        const modeButtons = document.querySelectorAll('.demo-mode-btn');
+        const pageTitle = document.getElementById('page-title');
+        
+        const modeTitles = {
+            'market-seller': 'ЦУИМ Маркет: Кабинет Продавца',
+            'market-buyer': 'ЦУИМ Маркет: Кабинет Покупателя',
+            'wholesale-seller': 'ЦУИМ Опт: Кабинет Продавца',
+            'wholesale-buyer': 'ЦУИМ Опт: Кабинет Покупателя',
+            'ads': 'ЦУИМ Объявления: Личный кабинет',
+            'courier': 'ЦУИМ Курьер: Личный кабинет'
+        };
+        
+        modeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Убираем активный класс у всех кнопок в группе
+                const group = this.closest('.demo-mode-buttons');
+                group.querySelectorAll('.demo-mode-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Добавляем активный класс к нажатой кнопке
+                this.classList.add('active');
+                
+                // Обновляем заголовок страницы
+                const mode = this.getAttribute('data-mode');
+                pageTitle.textContent = `Панель управления - ${modeTitles[mode]}`;
+                
+                // Здесь можно добавить дополнительную логику для переключения режимов
+                console.log(`Активирован режим: ${modeTitles[mode]}`);
+            });
         });
     </script>
 </body>
