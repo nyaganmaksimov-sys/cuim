@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CUIM Dashboard - Светлая версия</title>
+    <title>CUIM Dashboard</title>
     <style>
         :root {
             --primary-color: #3498db;
@@ -53,10 +53,13 @@
             padding: 0 20px 20px;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo {
-            height: 40px;
+            height: 50px;
             width: auto;
         }
 
@@ -486,10 +489,25 @@
         <!-- Сайдбар -->
         <aside class="sidebar">
             <div class="logo-container">
-                <svg class="logo" width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="40" height="40" fill="#3498db" rx="5"/>
-                    <text x="20" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">CUIM</text>
-                    <text x="70" y="25" text-anchor="middle" fill="#333" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Dashboard</text>
+                <!-- Логотип ЦУИМ -->
+                <svg class="logo" width="150" height="50" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Фон логотипа -->
+                    <rect x="0" y="0" width="50" height="50" fill="#3498db" rx="8"/>
+                    
+                    <!-- Буква Ц -->
+                    <path d="M10 15 H40 V20 H15 V35 H35 V30 H40 V40 H10 V15 Z" fill="white"/>
+                    
+                    <!-- Буква У -->
+                    <path d="M55 15 H60 V25 H70 V15 H75 V40 H70 V30 H60 V40 H55 V15 Z" fill="#333"/>
+                    
+                    <!-- Буква И -->
+                    <path d="M80 15 H85 V40 H80 V15 Z M85 15 H95 V20 H90 V35 H95 V40 H85 V15 Z" fill="#333"/>
+                    
+                    <!-- Буква М -->
+                    <path d="M100 15 H105 V25 L112.5 15 H117.5 L125 25 V15 H130 V40 H125 V30 L117.5 40 H112.5 L105 30 V40 H100 V15 Z" fill="#333"/>
+                    
+                    <!-- Текст Dashboard -->
+                    <text x="140" y="30" text-anchor="end" fill="#333" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Dashboard</text>
                 </svg>
             </div>
             <ul class="nav-menu">
