@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <style>
+  .logo, .header-logo, .logo-container {
+    background: none !important;
+  }
+</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Магазины — ЦУИМ Местный маркетплейс Барнаула</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-600:#0D47A1;
+      --blue-500:#1565C0;
+      --blue-400:#1E88E5;
+      --orange-600:#FF6F00;
+      --orange-500:#FF7A12;
+      --red-600:#E53935;
+      --red-500:#FF5252;
+      --yellow-600:#FFB300;
+      --green-500:#4CAF50;
+      --purple-500:#9C27B0;
+      --bg:#F6F8FB;
+      --panel:#FFFFFF;
+      --text:#1F2937;
+      --muted:#667085;
+      --border:#E5E9F0;
+      --radius:12px;
+      --radius-lg:16px;
+      --shadow-1:0 2px 12px rgba(13,71,161,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow-2:0 8px 24px rgba(13,71,161,.12), 0 2px 6px rgba(0,0,0,.06);
+      --shadow-hover:0 12px 32px rgba(13,71,161,.16), 0 4px 12px rgba(0,0,0,.08);
+      --ring:0 0 0 3px rgba(21,101,192,.12);
+      --container: 1280px;
+      --transition:all .2s cubic-bezier(.4,.0,.2,1);
+    }
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;
+      line-height: 1.5;
+    }
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit; cursor: pointer;}
+    .container{
+      width:min(100% - 32px, var(--container)); margin-inline:auto;
+    }
+
+    /* ======= ОБНОВЛЕННАЯ ШАПКА ======= */
+    .top-header {
+      background: linear-gradient(90deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    
+    .top-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .city-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    
+    .delivery-info {
+      font-size: 14px;
+    }
+
+    /* Main Header */
+    .main-header {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-main-row {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      gap: 20px;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+    
+    /* Categories Dropdown */
+    .categories-dropdown {
+      position: relative;
+    }
+
+    .categories-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--blue-600);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .categories-btn:hover {
+      background: var(--orange-600);
+      transform: translateY(-1px);
+    }
+
+    .categories-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 280px;
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      padding: 12px;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .categories-dropdown:hover .categories-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .categories-menu .cat-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .categories-menu .cat-item a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .categories-menu .cat-item a:hover {
+      background: rgba(255,122,18,.15);
+    }
+
+    .categories-menu .cat-ico {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange-600), var(--orange-500));
+      font-size: 12px;
+    }
+
+    .categories-menu .cat-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    /* Marketplace Switcher */
+    .marketplace-switcher {
+      display: flex;
+      background: #f5f5f5;
+      border-radius: 25px;
+      padding: 4px;
+      position: relative;
+      border: 1px solid #ddd;
+      gap: 2px;
+    }
+    
+    .switcher-option {
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      z-index: 2;
+      position: relative;
+      text-align: center;
+      min-width: 100px;
+      color: #666;
+      white-space: nowrap;
+    }
+    
+    .switcher-option.active {
+      color: white;
+      font-weight: 600;
+    }
+    
+    .switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+    }
+    
+    .switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+    }
+    
+    .switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+    }
+    
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .header-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      transition: color 0.3s;
+      font-size: 12px;
+    }
+    
+    .header-action:hover {
+      color: var(--orange-600);
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 14px;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--blue-600);
+      color: var(--blue-600);
+    }
+    
+    .btn-primary {
+      background-color: var(--orange-600);
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-1);
+    }
+
+    /* Mobile Marketplace Switcher */
+    .mobile-marketplace-switcher {
+      display: none;
+      width: 100%;
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 6px;
+      margin-top: 8px;
+    }
+    
+    .mobile-switcher-options {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    
+    .mobile-switcher-option {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #666;
+      font-size: 11px;
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .mobile-switcher-option.active {
+      background: white;
+      color: var(--blue-600);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-weight: 600;
+    }
+    
+    .mobile-switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option .icon {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    /* Main Search Bar - под шапкой */
+    .main-search-section {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .main-search-bar {
+      display: flex;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border: 2px solid var(--orange-600);
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+    }
+    
+    .main-search-bar input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: white;
+    }
+    
+    .main-search-bar button {
+      background-color: var(--orange-600);
+      color: white;
+      border: none;
+      padding: 0 30px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    
+    .main-search-bar button:hover {
+      background-color: #e55a00;
+    }
+
+    /* ======= СТРАНИЦА МАГАЗИНОВ ======= */
+    
+    /* Хлебные крошки */
+    .breadcrumbs {
+      margin: 20px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    
+    .breadcrumbs a {
+      color: var(--blue-600);
+      text-decoration: none;
+    }
+    
+    .breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Заголовок страницы */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #163a69;
+      margin: 0;
+    }
+    
+    .shops-count {
+      color: var(--muted);
+      font-size: 16px;
+    }
+    
+    /* Основной контейнер магазинов */
+    .shops-container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    
+    /* Фильтры */
+    .filters-panel {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-1);
+      padding: 20px;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+    
+    .filter-section {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .filter-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .filter-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      color: var(--text);
+    }
+    
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    
+    .filter-option input {
+      margin: 0;
+    }
+    
+    .filter-option label {
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+    }
+    
+    .filter-option:hover label {
+      color: var(--blue-600);
+    }
+    
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .filter-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: var(--radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+      background: white;
+    }
+    
+    .filter-btn.apply {
+      background: var(--blue-600);
+      color: white;
+      border-color: var(--blue-600);
+    }
+    
+    .filter-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-1);
+    }
+    
+    /* Список магазинов */
+    .shops-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .shop-card {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-1);
+      overflow: hidden;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    
+    .shop-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--blue-400);
+    }
+    
+    .shop-header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      gap: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .shop-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f2f6fd, #e9f1ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    
+    .shop-info {
+      flex: 1;
+    }
+    
+    .shop-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #163a69;
+      margin: 0 0 5px 0;
+    }
+    
+    .shop-rating {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 5px;
+    }
+    
+    .stars {
+      display: flex;
+      gap: 1px;
+      color: var(--orange-600);
+    }
+    
+    .rating-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--orange-600);
+    }
+    
+    .reviews-count {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    
+    .shop-category {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    
+    .shop-body {
+      padding: 20px;
+    }
+    
+    .shop-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    
+    .shop-description {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .shop-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .shop-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 16px;
+      background: var(--blue-600);
+      color: white;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    
+    .shop-link:hover {
+      background: var(--blue-700);
+      transform: translateY(-1px);
+    }
+    
+    .shop-products-count {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    
+    /* Пагинация */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    
+    .pagination-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .pagination-btn.active {
+      background: var(--blue-600);
+      color: white;
+      border-color: var(--blue-600);
+    }
+    
+    .pagination-btn:hover:not(.active) {
+      background: var(--bg);
+      transform: translateY(-1px);
+    }
+    
+    /* Footer */
+    .site-footer{
+      background: var(--panel);
+      border-top: 1px solid rgba(13,71,161,.08);
+      padding: 40px 0 20px;
+      margin-top: 50px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-column h3 {
+      color: #163a69;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #667085;
+      font-size: 14px;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue-600);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(13,71,161,.08);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      color: #667085;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--blue-600);
+    }
+
+    /* ======= АДАПТИВНЫЕ СТИЛИ ======= */
+
+    @media (max-width: 1024px) {
+      .shops-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .filters-panel {
+        position: static;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .shops-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .page-title {
+        font-size: 24px;
+      }
+      
+      .header-main-row {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 0;
+        align-items: center;
+      }
+      
+      .logo-section {
+        order: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .logo {
+        flex-shrink: 0;
+      }
+      
+      .categories-dropdown {
+        order: 1;
+        flex: 1;
+        margin-left: 10px;
+      }
+      
+      .categories-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+      
+      /* Переключатель страниц - скрываем на мобильных */
+      .marketplace-switcher {
+        display: none;
+      }
+      
+      .header-actions {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 5px;
+      }
+      
+      .auth-buttons {
+        display: none;
+      }
+      
+      /* Мобильный переключатель маркетплейсов */
+      .mobile-marketplace-switcher {
+        display: block;
+        order: 2;
+      }
+      
+      .main-search-section {
+        order: 4;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .shop-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+      
+      .shop-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      
+      .shop-link {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      /* Шапка для маленьких мобильных */
+      .header-main-row {
+        gap: 8px;
+      }
+      
+      .logo img {
+        height: 32px;
+      }
+      
+      .categories-btn {
+        font-size: 12px;
+        padding: 7px 10px;
+      }
+      
+      .switcher-option {
+        min-width: 80px;
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+      
+      .header-actions {
+        gap: 8px;
+      }
+      
+      .header-action {
+        min-width: 50px;
+        padding: 4px 4px;
+        font-size: 10px;
+      }
+      
+      .categories-menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+      }
+      
+      .main-search-bar button {
+        padding: 0 15px;
+        font-size: 14px;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 10px;
+        padding: 6px 2px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .header-actions {
+        gap: 6px;
+      }
+      
+      .header-action {
+        min-width: 45px;
+        font-size: 9px;
+      }
+      
+      .switcher-option {
+        min-width: 70px;
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+      
+      .main-search-bar button {
+        padding: 0 12px;
+        font-size: 12px;
+      }
+      
+      .logo img {
+        height: 28px;
+      }
+      
+      .categories-btn {
+        font-size: 11px;
+        padding: 6px 8px;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 9px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Верхняя плашка с адресом -->
+  <div class="top-header">
+    <div class="container">
+      <span class="city-selector" id="locationPicker">
+        📍 <span id="selectedCity">Барнаул</span>
+      </span>
+      <span class="delivery-info">Доставка: от 45 мин · Самовывоз из <strong>12 ПВЗ</strong></span>
+    </div>
+  </div>
+
+  <!-- Основная шапка -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-main-row">
+        <div class="logo-section">
+          <a href="#" class="logo">
+            <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" alt="ЦУИМ">
+          </a>
+          
+          <!-- Кнопка категорий -->
+          <div class="categories-dropdown">
+            <button class="categories-btn">
+              📋 Категории
+              <span>▼</span>
+            </button>
+            <div class="categories-menu">
+              <ul class="cat-list">
+                <li class="cat-item"><a href="#"><span class="cat-ico">🥦</span><span class="cat-name">Продукты питания</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🍱</span><span class="cat-name">Готовая еда</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">👕</span><span class="cat-name">Одежда</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">💄</span><span class="cat-name">Красота и здоровье</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🧸</span><span class="cat-name">Детские товары</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🏡</span><span class="cat-name">Дом и сад</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🛋️</span><span class="cat-name">Мебель</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🎣</span><span class="cat-name">Рыбалка и охота</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">✏️</span><span class="cat-name">Канцелярия</span></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="marketplace-switcher">
+            <div class="switcher-option retail active">Обычный</div>
+            <div class="switcher-option opt">Оптовый</div>
+            <div class="switcher-option ads">Объявления</div>
+          </div>
+        </div>
+        
+        <div class="header-actions">
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/pages/favourites.html" class="header-action">❤️ <span>Избранное</span></a>
+          <a href="#" class="header-action">🔔 <span>Уведомления</span></a>
+          <a href="#" class="header-action">👤 <span>Профиль</span></a>
+           <a href="#" class="header-action">🛒 <span>Корзина</span></a> 
+          <div class="auth-buttons">
+            <button class="btn btn-outline">Вход</button>
+            <button class="btn btn-primary">Регистрация</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Мобильный переключатель маркетплейсов -->
+      <div class="mobile-marketplace-switcher">
+        <div class="mobile-switcher-options">
+          <a href="#" class="mobile-switcher-option retail active">
+            <span class="icon">🛍️</span>
+            <span>Маркетплейс</span>
+          </a>
+          <a href="#" class="mobile-switcher-option opt">
+            <span class="icon">📦</span>
+            <span>Оптовый</span>
+          </a>
+          <a href="#" class="mobile-switcher-option ads">
+            <span class="icon">📋</span>
+            <span>Объявления</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Поисковая строка под шапкой -->
+  <section class="main-search-section">
+    <div class="container">
+      <div class="main-search-bar">
+        <input type="text" placeholder="Поиск магазинов по названию или категории...">
+        <button>🔍 Найти</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Основной контент страницы магазинов -->
+  <main>
+    <div class="container">
+      <!-- Хлебные крошки -->
+      <div class="breadcrumbs">
+        <a href="#">Главная</a> / <span>Магазины</span>
+      </div>
+      
+      <!-- Заголовок страницы -->
+      <div class="page-header">
+        <h1 class="page-title">Магазины ЦУИМ</h1>
+        <div class="shops-count">Найдено <span id="shopsCount">24</span> магазина</div>
+      </div>
+      
+      <!-- Контейнер с фильтрами и списком магазинов -->
+      <div class="shops-container">
+        <!-- Панель фильтров -->
+        <aside class="filters-panel">
+          <div class="filter-section">
+            <h3 class="filter-title">Категории магазинов</h3>
+            <div class="filter-options">
+              <div class="filter-option">
+                <input type="checkbox" id="cat-food" checked>
+                <label for="cat-food">Продукты питания</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="cat-clothes">
+                <label for="cat-clothes">Одежда и обувь</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="cat-home">
+                <label for="cat-home">Дом и сад</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="cat-electronics">
+                <label for="cat-electronics">Электроника</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="cat-beauty">
+                <label for="cat-beauty">Красота и здоровье</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="cat-kids">
+                <label for="cat-kids">Детские товары</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="filter-section">
+            <h3 class="filter-title">Рейтинг магазина</h3>
+            <div class="filter-options">
+              <div class="filter-option">
+                <input type="checkbox" id="rating-5">
+                <label for="rating-5">★★★★★ 4.5 и выше</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="rating-4">
+                <label for="rating-4">★★★★☆ 4.0 - 4.5</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="rating-3">
+                <label for="rating-3">★★★☆☆ 3.5 - 4.0</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="rating-2">
+                <label for="rating-2">★★☆☆☆ 3.0 - 3.5</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="filter-section">
+            <h3 class="filter-title">Доставка</h3>
+            <div class="filter-options">
+              <div class="filter-option">
+                <input type="checkbox" id="delivery-express" checked>
+                <label for="delivery-express">Экспресс-доставка (до 2 часов)</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="delivery-sameday">
+                <label for="delivery-sameday">В день заказа</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="delivery-nextday">
+                <label for="delivery-nextday">На следующий день</label>
+              </div>
+              <div class="filter-option">
+                <input type="checkbox" id="delivery-pickup" checked>
+                <label for="delivery-pickup">Самовывоз</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="filter-buttons">
+            <button class="filter-btn reset">Сбросить</button>
+            <button class="filter-btn apply">Применить</button>
+          </div>
+        </aside>
+        
+        <!-- Список магазинов -->
+        <section class="shops-list" id="shopsList">
+          <!-- Магазины будут заполнены через JavaScript -->
+        </section>
+      </div>
+      
+      <!-- Пагинация -->
+      <div class="pagination">
+        <button class="pagination-btn">←</button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">4</button>
+        <button class="pagination-btn">→</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Футер -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>О ЦУИМ</h3>
+          <p style="color: #667085; font-size: 14px; line-height: 1.5; margin-bottom: 15px;">
+            Местный маркетплейс Барнаула. Свежие продукты, готовые блюда, товары для дома и многое другое с быстрой доставкой и самовывозом.
+          </p>
+          <div style="background: rgba(21,101,192,.05); padding: 15px; border-radius: var(--radius); margin-top: 10px;">
+            <p style="margin: 5px 0; font-size: 13px;"><strong>Техническая поддержка:</strong></p>
+            <p style="margin: 5px 0; font-size: 13px;">📞 8 (800) 555-35-35</p>
+            <p style="margin: 5px 0; font-size: 13px;">✉️ support@cuim.ru</p>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Покупателям</h3>
+          <ul class="footer-links">
+            <li><a href="#">Доставка и оплата</a></li>
+            <li><a href="#">Возврат и обмен</a></li>
+            <li><a href="#">Акции и скидки</a></li>
+            <li><a href="#">Бонусная программа</a></li>
+            <li><a href="#">Подарочные карты</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Продавцам</h3>
+          <ul class="footer-links">
+            <li><a href="#">Стать продавцом</a></li>
+            <li><a href="#">Личный кабинет</a></li>
+            <li><a href="#">Условия сотрудничества</a></li>
+            <li><a href="#">Комиссии и тарифы</a></li>
+            <li><a href="#">Партнёрская программа</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Информация</h3>
+          <ul class="footer-links">
+            <li><a href="#">О компании</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Вакансии</a></li>
+            <li><a href="#">Пользовательское соглашение</a></li>
+            <li><a href="#">Политика конфиденциальности</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2025 ЦУИМ — Местный маркетплейс Барнаула. Все права защищены.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#">Пользовательское соглашение</a>
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Карта сайта</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Данные магазинов
+    const shopsData = [
+      {
+        id: 1,
+        name: "Свежий маркет",
+        category: "Продукты питания",
+        rating: 4.8,
+        reviews: 124,
+        icon: "🏪",
+        description: "Свежие продукты, овощи и фрукты с доставкой по всему Барнаулу. Работаем с местными фермерами.",
+        features: ["🚚 Доставка за 45 мин", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 245,
+        deliveryTime: "45 мин - 2 часа"
+      },
+      {
+        id: 2,
+        name: "Мясной двор",
+        category: "Продукты питания",
+        rating: 4.9,
+        reviews: 89,
+        icon: "🥩",
+        description: "Свежее мясо, птица и колбасные изделия от местных производителей. Гарантия качества.",
+        features: ["🚚 Доставка за 1 час", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 156,
+        deliveryTime: "1-3 часа"
+      },
+      {
+        id: 3,
+        name: "Овощной ряд",
+        category: "Продукты питания",
+        rating: 4.7,
+        reviews: 67,
+        icon: "🥦",
+        description: "Сезонные овощи и фрукты напрямую с полей. Всегда свежие и по доступным ценам.",
+        features: ["🚚 Доставка за 45 мин", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 98,
+        deliveryTime: "45 мин - 2 часа"
+      },
+      {
+        id: 4,
+        name: "Пекарня Хлебный дом",
+        category: "Продукты питания",
+        rating: 5.0,
+        reviews: 203,
+        icon: "🍞",
+        description: "Свежая выпечка, хлеб и кондитерские изделия. Выпекаем ежедневно с 5 утра.",
+        features: ["🚚 Доставка за 1 час", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 78,
+        deliveryTime: "1-2 часа"
+      },
+      {
+        id: 5,
+        name: "Молочная ферма",
+        category: "Продукты питания",
+        rating: 4.6,
+        reviews: 45,
+        icon: "🥛",
+        description: "Молочные продукты от местных ферм. Молоко, сыры, йогурты и многое другое.",
+        features: ["🚚 Доставка за 1 час", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 112,
+        deliveryTime: "1-3 часа"
+      },
+      {
+        id: 6,
+        name: "Рыбный остров",
+        category: "Продукты питания",
+        rating: 4.8,
+        reviews: 78,
+        icon: "🐟",
+        description: "Свежая рыба и морепродукты. Доставляем ежедневно с рыбных рынков.",
+        features: ["🚚 Доставка за 2 часа", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 64,
+        deliveryTime: "2-4 часа"
+      },
+      {
+        id: 7,
+        name: "Кондитерская Сладости",
+        category: "Продукты питания",
+        rating: 4.9,
+        reviews: 156,
+        icon: "🍰",
+        description: "Торты, пирожные и сладости ручной работы. Идеально для праздников и особых случаев.",
+        features: ["🚚 Доставка за 1 час", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 89,
+        deliveryTime: "1-2 часа"
+      },
+      {
+        id: 8,
+        name: "Бакалея У дома",
+        category: "Продукты питания",
+        rating: 4.5,
+        reviews: 34,
+        icon: "🛒",
+        description: "Крупы, макароны, консервы и другие бакалейные товары по выгодным ценам.",
+        features: ["🚚 Доставка за 1 час", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 187,
+        deliveryTime: "1-3 часа"
+      },
+      {
+        id: 9,
+        name: "Модный стиль",
+        category: "Одежда и обувь",
+        rating: 4.3,
+        reviews: 56,
+        icon: "👕",
+        description: "Стильная одежда и обувь для всей семьи. Актуальные коллекции и тренды.",
+        features: ["🚚 Доставка за 1 день", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 324,
+        deliveryTime: "1-2 дня"
+      },
+      {
+        id: 10,
+        name: "Дом и уют",
+        category: "Дом и сад",
+        rating: 4.7,
+        reviews: 89,
+        icon: "🏡",
+        description: "Товары для дома, текстиль, посуда и предметы интерьера для создания уюта.",
+        features: ["🚚 Доставка за 1 день", "📦 Самовывоз", "💳 Онлайн-оплата"],
+        productsCount: 278,
+        deliveryTime: "1-2 дня"
+      }
+    ];
+
+    // Заполнение списка магазинов
+    document.addEventListener('DOMContentLoaded', function() {
+      const shopsList = document.getElementById('shopsList');
+      const shopsCount = document.getElementById('shopsCount');
+      
+      // Обновляем счетчик магазинов
+      shopsCount.textContent = shopsData.length;
+      
+      // Генерируем HTML для каждого магазина
+      shopsList.innerHTML = shopsData.map(shop => `
+        <div class="shop-card" data-shop-id="${shop.id}">
+          <div class="shop-header">
+            <div class="shop-logo">${shop.icon}</div>
+            <div class="shop-info">
+              <h3 class="shop-name">${shop.name}</h3>
+              <div class="shop-rating">
+                <div class="stars">${'★'.repeat(Math.floor(shop.rating))}${'☆'.repeat(5-Math.floor(shop.rating))}</div>
+                <span class="rating-value">${shop.rating}</span>
+                <span class="reviews-count">(${shop.reviews} отзывов)</span>
+              </div>
+              <div class="shop-category">${shop.category}</div>
+            </div>
+          </div>
+          <div class="shop-body">
+            <div class="shop-features">
+              ${shop.features.map(feature => `<div class="feature">${feature}</div>`).join('')}
+            </div>
+            <p class="shop-description">${shop.description}</p>
+            <div class="shop-footer">
+              <a href="#" class="shop-link">Перейти в магазин →</a>
+              <div class="shop-products-count">${shop.productsCount} товаров</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      
+      // Обработчики для фильтров
+      document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          if (this.classList.contains('reset')) {
+            // Сброс фильтров
+            document.querySelectorAll('.filter-option input').forEach(input => {
+              input.checked = false;
+            });
+          } else if (this.classList.contains('apply')) {
+            // Применение фильтров
+            applyFilters();
+          }
+        });
+      });
+      
+      // Переключение маркетплейсов (десктоп)
+      document.querySelectorAll('.switcher-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.switcher-option').forEach(opt => opt.classList.remove('active'));
+          this.classList.add('active');
+          
+          if (this.classList.contains('opt')) {
+            window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/';
+          } else if (this.classList.contains('ads')) {
+            window.location.href = 'pages/ads-board.html';
+          }
+        });
+      });
+      
+      // Переключение мобильного маркетплейса
+      document.querySelectorAll('.mobile-switcher-option').forEach(option => {
+        option.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelectorAll('.mobile-switcher-option').forEach(opt => opt.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Логика перехода между маркетплейсами
+          if (this.classList.contains('retail')) {
+            // Обычный маркетплейс
+            console.log('Переход на обычный маркетплейс');
+          } else if (this.classList.contains('opt')) {
+            // Оптовый маркетплейс
+            window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/';
+          } else if (this.classList.contains('ads')) {
+            // Доска объявлений
+            window.location.href = 'pages/ads-board.html';
+          }
+        });
+      });
+    });
+    
+    // Функция применения фильтров
+    function applyFilters() {
+      // Здесь будет логика фильтрации магазинов
+      console.log('Применены фильтры');
+      // В реальном приложении здесь будет код для фильтрации магазинов
+      // по выбранным критериям и обновления списка
+    }
+  </script>
+</body>
+</html>
