@@ -3,343 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Избранное - CUIM</title>
+    <title>Избранное - ЦУИМ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Общие стили */
+        :root {
+            --blue-600: #0D47A1;
+            --blue-500: #1565C0;
+            --blue-400: #1E88E5;
+            --orange-600: #FF6F00;
+            --orange-500: #FF7A12;
+            --red-600: #E53935;
+            --red-500: #FF5252;
+            --yellow-600: #FFB300;
+            --green-500: #4CAF50;
+            --purple-500: #9C27B0;
+            --bg: #F6F8FB;
+            --panel: #FFFFFF;
+            --text: #1F2937;
+            --muted: #667085;
+            --border: #E5E9F0;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --shadow-1: 0 2px 12px rgba(13,71,161,.08), 0 1px 4px rgba(0,0,0,.04);
+            --shadow-2: 0 8px 24px rgba(13,71,161,.12), 0 2px 6px rgba(0,0,0,.06);
+            --shadow-hover: 0 12px 32px rgba(13,71,161,.16), 0 4px 12px rgba(0,0,0,.08);
+            --ring: 0 0 0 3px rgba(21,101,192,.12);
+            --container: 1280px;
+            --transition: all .2s cubic-bezier(.4,.0,.2,1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
         }
 
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
         }
 
-        /* Шапка - ТОЧНАЯ КОПИЯ С ГЛАВНОЙ */
-        .header {
-            background: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .container {
+            width: min(100% - 32px, var(--container));
+            margin-inline: auto;
         }
 
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* ======= ТОЧНАЯ ШАПКА С ГЛАВНОЙ ======= */
+        .top-header {
+            background: linear-gradient(90deg, var(--orange-600) 0%, #ff8c42 100%);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
         }
-
-        .header-top {
+        
+        .top-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .city-selector {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .delivery-info {
+            font-size: 14px;
         }
 
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-main-row {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            gap: 20px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
         .logo {
             display: flex;
             align-items: center;
+            gap: 10px;
+            text-decoration: none;
         }
-
+        
         .logo img {
             height: 40px;
             width: auto;
         }
+        
+        .categories-dropdown {
+            position: relative;
+        }
 
+        .categories-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--blue-600);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .categories-btn:hover {
+            background: var(--orange-600);
+            transform: translateY(-1px);
+        }
+
+        .categories-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 280px;
+            background: var(--panel);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            padding: 12px;
+            margin-top: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .categories-dropdown:hover .categories-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .categories-menu .cat-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .categories-menu .cat-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .categories-menu .cat-item a:hover {
+            background: rgba(255,122,18,.15);
+        }
+
+        .categories-menu .cat-ico {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background: linear-gradient(135deg, var(--orange-600), var(--orange-500));
+            font-size: 12px;
+        }
+
+        .categories-menu .cat-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .marketplace-switcher {
+            display: flex;
+            background: #f5f5f5;
+            border-radius: 25px;
+            padding: 4px;
+            position: relative;
+            border: 1px solid #ddd;
+            gap: 2px;
+        }
+        
+        .switcher-option {
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            z-index: 2;
+            position: relative;
+            text-align: center;
+            min-width: 100px;
+            color: #666;
+            white-space: nowrap;
+        }
+        
+        .switcher-option.active {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .switcher-option.retail.active {
+            background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+        }
+        
+        .switcher-option.opt.active {
+            background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+        }
+        
+        .switcher-option.ads.active {
+            background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+        }
+        
         .header-actions {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-
+        
         .header-action {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
             text-decoration: none;
             color: #333;
-            font-size: 14px;
+            transition: color 0.3s;
+            font-size: 12px;
             padding: 8px 12px;
-            border-radius: 6px;
-            transition: background-color 0.3s;
+            border-radius: 8px;
         }
-
+        
         .header-action:hover {
-            background-color: #f5f5f5;
+            background: #f8f9fa;
+            color: var(--orange-600);
         }
-
-        .header-action i {
-            font-size: 18px;
-        }
-
+        
         .auth-buttons {
             display: flex;
             gap: 10px;
-            margin-left: 15px;
         }
-
-        .login-btn, .register-btn {
-            padding: 8px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .login-btn {
-            border: 1px solid #e0e0e0;
-            color: #333;
-        }
-
-        .register-btn {
-            background: #007bff;
-            color: white;
-        }
-
-        .login-btn:hover {
-            border-color: #007bff;
-            color: #007bff;
-        }
-
-        .register-btn:hover {
-            background: #0056b3;
-            color: white;
-        }
-
-        .header-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 0;
-        }
-
-        .categories {
-            display: flex;
-            gap: 30px;
-        }
-
-        .category-link {
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 0;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .category-link:hover {
-            color: #007bff;
-        }
-
-        .category-link.active {
-            color: #007bff;
-        }
-
-        .category-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #007bff;
-        }
-
-        .search-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 8px 15px;
-            gap: 10px;
-            width: 400px;
-        }
-
-        .search-box i {
-            color: #666;
-        }
-
-        .search-box input {
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
             border: none;
-            background: none;
-            outline: none;
-            width: 100%;
             font-size: 14px;
         }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--blue-600);
+            color: var(--blue-600);
+        }
+        
+        .btn-primary {
+            background-color: var(--orange-600);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-1);
+        }
 
-        /* Основной контент */
-        .container {
-            max-width: 1200px;
+        .mobile-marketplace-switcher {
+            display: none;
+            width: 100%;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 6px;
+            margin-top: 8px;
+        }
+        
+        .mobile-switcher-options {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .mobile-switcher-option {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #666;
+            font-size: 11px;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .mobile-switcher-option.active {
+            background: white;
+            color: var(--blue-600);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+        
+        .mobile-switcher-option.retail.active {
+            background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+            color: white;
+        }
+        
+        .mobile-switcher-option.opt.active {
+            background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+            color: white;
+        }
+        
+        .mobile-switcher-option.ads.active {
+            background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+            color: white;
+        }
+        
+        .mobile-switcher-option .icon {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .main-search-section {
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .main-search-bar {
+            display: flex;
+            width: 100%;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            border: 2px solid var(--orange-600);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow-1);
+        }
+        
+        .main-search-bar input {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: white;
+        }
+        
+        .main-search-bar button {
+            background-color: var(--orange-600);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .main-search-bar button:hover {
+            background-color: #e55a00;
+        }
+
+        /* ======= СТИЛИ СТРАНИЦЫ ИЗБРАННОГО ======= */
+        .main-content {
+            padding: 40px 0;
         }
 
         .page-title {
             text-align: center;
             margin-bottom: 40px;
-            color: #333;
+            color: var(--text);
             font-size: 2.5rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        /* Сетка товаров */
-        .products-grid {
+        .favorites-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
 
-        .product-card {
-            background: white;
-            border-radius: 12px;
+        .favorite-card {
+            background: var(--panel);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-1);
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #f0f0f0;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        .favorite-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--blue-400);
         }
 
         .product-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 3rem;
+            font-size: 48px;
+            border-bottom: 1px solid var(--border);
         }
 
         .product-info {
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
         }
 
         .product-category {
-            color: #666;
+            color: var(--blue-600);
             font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 8px;
         }
 
         .product-title {
-            color: #333;
+            color: var(--text);
             font-size: 1.1rem;
-            margin-bottom: 10px;
+            font-weight: 600;
             line-height: 1.4;
         }
 
         .product-description {
-            color: #666;
+            color: var(--muted);
             font-size: 0.9rem;
-            margin-bottom: 15px;
             line-height: 1.5;
         }
 
         .product-price {
-            color: #333;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .product-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .product-rating {
-            color: #ffc107;
-            font-size: 0.9rem;
+            color: var(--text);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-top: auto;
         }
 
         .product-actions {
             display: flex;
             gap: 10px;
-        }
-
-        .action-icon {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #666;
-            font-size: 1.1rem;
-            padding: 8px;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
-
-        .action-icon:hover {
-            background: #f8f9fa;
-            color: #007bff;
-        }
-
-        .remove-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .remove-btn:hover {
-            background: #c82333;
+            margin-top: 15px;
         }
 
         .add-to-cart {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.3s;
-            width: 100%;
-            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            background: var(--blue-600);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
         }
 
         .add-to-cart:hover {
-            background: #218838;
+            background: var(--blue-700);
+            transform: translateY(-1px);
         }
 
-        /* Состояние пустого избранного */
+        .remove-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--red-500);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 120px;
+        }
+
+        .remove-btn:hover {
+            background: var(--red-600);
+            transform: translateY(-1px);
+        }
+
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 80px 20px;
+            background: var(--panel);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-1);
             margin-top: 30px;
         }
 
@@ -350,13 +536,14 @@
         }
 
         .empty-state h3 {
-            color: #333;
+            color: var(--text);
             margin-bottom: 15px;
             font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .empty-state p {
-            color: #666;
+            color: var(--muted);
             margin-bottom: 30px;
             max-width: 400px;
             margin-left: auto;
@@ -364,126 +551,205 @@
         }
 
         .browse-btn {
-            background: #007bff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: var(--blue-600);
             color: white;
-            padding: 12px 30px;
-            border-radius: 6px;
+            border-radius: 12px;
+            font-weight: 700;
             text-decoration: none;
-            font-weight: 500;
-            display: inline-block;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
         }
 
         .browse-btn:hover {
-            background: #0056b3;
+            background: var(--blue-700);
+            transform: translateY(-2px);
             color: white;
-        }
-
-        /* Подвал */
-        .footer {
-            background: #333;
-            color: white;
-            padding: 40px 0;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            text-align: center;
         }
 
         /* Адаптивность */
         @media (max-width: 768px) {
-            .header-top {
+            .top-header .container {
                 flex-direction: column;
-                gap: 15px;
+                gap: 8px;
+                text-align: center;
             }
-
-            .header-actions {
-                gap: 10px;
-            }
-
-            .header-bottom {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .categories {
+            
+            .header-main-row {
                 flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
+                gap: 10px;
+                padding: 10px 0;
             }
-
-            .search-box {
+            
+            .logo-section {
+                order: 1;
                 width: 100%;
+                justify-content: space-between;
             }
-
-            .products-grid {
-                grid-template-columns: 1fr;
+            
+            .categories-dropdown {
+                order: 1;
+                flex: 1;
+                margin-left: 10px;
             }
-
+            
+            .categories-btn {
+                width: 100%;
+                justify-content: center;
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+            
+            .marketplace-switcher {
+                display: none;
+            }
+            
+            .header-actions {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 12px;
+                margin-top: 5px;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-marketplace-switcher {
+                display: block;
+                order: 2;
+            }
+            
+            .favorites-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 16px;
+            }
+            
             .page-title {
                 font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .favorites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .header-actions {
+                gap: 8px;
+            }
+            
+            .header-action {
+                min-width: 50px;
+                padding: 6px 8px;
+                font-size: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Шапка - ТОЧНАЯ КОПИЯ С ГЛАВНОЙ -->
-    <header class="header">
-        <div class="header-container">
-            <div class="header-top">
-                <div class="logo">
-                    <img src="https://nyaganmaksimov-sys.github.io/cuim/images/logo.svg" alt="CUIM" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <span style="font-size: 24px; font-weight: bold; color: #333; display: none;">CUIM</span>
+    <!-- Верхняя плашка с адресом -->
+    <div class="top-header">
+        <div class="container">
+            <span class="city-selector" id="locationPicker">
+                📍 <span id="selectedCity">Барнаул</span>
+            </span>
+            <span class="delivery-info">Доставка: от 45 мин · Самовывоз из <strong>12 ПВЗ</strong></span>
+        </div>
+    </div>
+
+    <!-- Основная шапка - ТОЧНАЯ КОПИЯ -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-main-row">
+                <div class="logo-section">
+                    <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo">
+                        <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" alt="ЦУИМ">
+                    </a>
+                    
+                    <!-- Кнопка категорий -->
+                    <div class="categories-dropdown">
+                        <button class="categories-btn">
+                            📋 Категории
+                            <span>▼</span>
+                        </button>
+                        <div class="categories-menu">
+                            <ul class="cat-list">
+                                <li class="cat-item"><a href="#"><span class="cat-ico">🥦</span><span class="cat-name">Продукты питания</span></a></li>
+                                <li class="cat-item"><a href="#"><span class="cat-ico">🍱</span><span class="cat-name">Готовая еда</span></a></li>
+                                <li class="cat-item"><a href="#"><span class="cat-ico">👕</span><span class="cat-name">Одежда</span></a></li>
+                                <li class="cat-item"><a href="#"><span class="cat-ico">💄</span><span class="cat-name">Красота и здоровье</span></a></li>
+                                <li class="cat-item"><a href="#"><span class="cat-ico">🧸</span><span class="cat-name">Детские товары</span></a></li>
+                                <li class="cat-item"><a href="#"><span class="cat-ico">🏡</span><span class="cat-name">Дом и сад</span></a></li>
+                                <li class="cat-item"><a href="#"><span class="cat-ico">🛋️</span><span class="cat-name">Мебель</span></a></li>
+                                <li class="cat-item"><a href="#"><span class="cat-ico">🎣</span><span class="cat-name">Рыбалка и охота</span></a></li>
+                                <li class="cat-item"><a href="#"><span class="cat-ico">✏️</span><span class="cat-name">Канцелярия</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="marketplace-switcher">
+                        <div class="switcher-option retail active">Обычный</div>
+                        <div class="switcher-option opt">Оптовый</div>
+                        <div class="switcher-option ads">Объявления</div>
+                    </div>
                 </div>
+                
                 <div class="header-actions">
-                    <a href="#" class="header-action">
-                        <i class="far fa-heart"></i>
-                        <span>Избранное</span>
-                    </a>
-                    <a href="#" class="header-action">
-                        <i class="far fa-bell"></i>
-                        <span>Уведомления</span>
-                    </a>
-                    <a href="#" class="header-action">
-                        <i class="far fa-user"></i>
-                        <span>Профиль</span>
-                    </a>
-                    <a href="#" class="header-action">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Корзина</span>
-                    </a>
+                    <a href="#" class="header-action">❤️ <span>Избранное</span></a>
+                    <a href="#" class="header-action">🔔 <span>Уведомления</span></a>
+                    <a href="#" class="header-action">👤 <span>Профиль</span></a>
+                    <a href="#" class="header-action">🛒 <span>Корзина</span></a>
                     <div class="auth-buttons">
-                        <a href="#" class="login-btn">Вход</a>
-                        <a href="#" class="register-btn">Регистрация</a>
+                        <button class="btn btn-outline">Вход</button>
+                        <button class="btn btn-primary">Регистрация</button>
                     </div>
                 </div>
             </div>
-            <div class="header-bottom">
-                <div class="categories">
-                    <a href="#" class="category-link">Все товары</a>
-                    <a href="#" class="category-link">Электроника</a>
-                    <a href="#" class="category-link">Одежда</a>
-                    <a href="#" class="category-link">Для дома</a>
-                    <a href="#" class="category-link">Красота</a>
-                    <a href="#" class="category-link">Спорт</a>
-                </div>
-                <div class="search-section">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Поиск товаров...">
-                    </div>
+            
+            <!-- Мобильный переключатель маркетплейсов -->
+            <div class="mobile-marketplace-switcher">
+                <div class="mobile-switcher-options">
+                    <a href="#" class="mobile-switcher-option retail active">
+                        <span class="icon">🛍️</span>
+                        <span>Маркетплейс</span>
+                    </a>
+                    <a href="#" class="mobile-switcher-option opt">
+                        <span class="icon">📦</span>
+                        <span>Оптовый</span>
+                    </a>
+                    <a href="#" class="mobile-switcher-option ads">
+                        <span class="icon">📋</span>
+                        <span>Объявления</span>
+                    </a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Основной контент -->
-    <div class="container">
-        <h1 class="page-title">Избранное</h1>
+    <!-- Поисковая строка -->
+    <section class="main-search-section">
+        <div class="container">
+            <div class="main-search-bar">
+                <input type="text" placeholder="Поиск товаров для дома, электроники, одежды и многого другого...">
+                <button>🔍 Найти</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной контент страницы Избранное -->
+    <div class="container main-content">
+        <h1 class="page-title">❤️ Избранное</h1>
         
-        <!-- Сетка товаров -->
-        <div class="products-grid" id="productsGrid">
+        <!-- Сетка избранных товаров -->
+        <div class="favorites-grid" id="favoritesGrid">
             <!-- Товары будут добавляться через JavaScript -->
         </div>
 
@@ -492,74 +758,79 @@
             <i class="far fa-heart"></i>
             <h3>В избранном пока пусто</h3>
             <p>Добавляйте понравившиеся товары в избранное, чтобы не потерять</p>
-            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="browse-btn">Перейти к покупкам</a>
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="browse-btn">
+                <i class="fas fa-shopping-bag"></i> Перейти к покупкам
+            </a>
         </div>
     </div>
 
-    <!-- Подвал -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2024 CUIM. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Данные товаров в избранном
+        // Данные избранных товаров
         const favoriteProducts = [
             {
                 id: 1,
                 title: "Смартфон Samsung Galaxy S23",
                 description: "Флагманский смартфон с мощным процессором и отличной камерой",
-                price: "₽79 999",
+                price: "79 999 ₽",
                 category: "Электроника",
-                rating: "★★★★★",
                 image: "📱"
             },
             {
                 id: 2,
                 title: "Беспроводные наушники Sony",
                 description: "Наушники с шумоподавлением и длительной работой от батареи",
-                price: "₽24 999",
+                price: "24 999 ₽",
                 category: "Электроника",
-                rating: "★★★★☆",
                 image: "🎧"
             },
             {
                 id: 3,
                 title: "Кроссовки Nike Air Max",
                 description: "Спортивные кроссовки для бега и повседневной носки",
-                price: "₽12 499",
+                price: "12 499 ₽",
                 category: "Одежда",
-                rating: "★★★★★",
                 image: "👟"
             },
             {
                 id: 4,
                 title: "Умные часы Apple Watch",
                 description: "Смарт-часы с функциями фитнес-трекера и уведомлениями",
-                price: "₽34 999",
+                price: "34 999 ₽",
                 category: "Электроника",
-                rating: "★★★★☆",
                 image: "⌚"
+            },
+            {
+                id: 5,
+                title: "Кофемашина DeLonghi",
+                description: "Автоматическая кофемашина для приготовления эспрессо и капучино",
+                price: "45 999 ₽",
+                category: "Для дома",
+                image: "☕"
+            },
+            {
+                id: 6,
+                title: "Фитнес-браслет Xiaomi",
+                description: "Трекер активности с мониторингом сна и пульса",
+                price: "3 499 ₽",
+                category: "Спорт",
+                image: "💪"
             }
         ];
 
-        // Функция для отображения товаров
-        function renderFavoriteProducts() {
-            const productsGrid = document.getElementById('productsGrid');
+        // Функция для отображения избранных товаров
+        function renderFavorites() {
+            const favoritesGrid = document.getElementById('favoritesGrid');
             const emptyState = document.getElementById('emptyState');
 
             if (favoriteProducts.length === 0) {
-                productsGrid.style.display = 'none';
+                favoritesGrid.style.display = 'none';
                 emptyState.style.display = 'block';
             } else {
-                productsGrid.style.display = 'grid';
+                favoritesGrid.style.display = 'grid';
                 emptyState.style.display = 'none';
                 
-                productsGrid.innerHTML = favoriteProducts.map(product => `
-                    <div class="product-card">
+                favoritesGrid.innerHTML = favoriteProducts.map(product => `
+                    <div class="favorite-card">
                         <div class="product-image">
                             ${product.image}
                         </div>
@@ -568,19 +839,13 @@
                             <h3 class="product-title">${product.title}</h3>
                             <p class="product-description">${product.description}</p>
                             <div class="product-price">${product.price}</div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i> В корзину
-                            </button>
-                            <div class="product-meta">
-                                <div class="product-rating">${product.rating}</div>
-                                <div class="product-actions">
-                                    <button class="action-icon" title="Поделиться">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
-                                    <button class="remove-btn" onclick="removeFromFavorites(${product.id})">
-                                        <i class="fas fa-trash"></i> Удалить
-                                    </button>
-                                </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart">
+                                    <i class="fas fa-shopping-cart"></i> В корзину
+                                </button>
+                                <button class="remove-btn" onclick="removeFromFavorites(${product.id})">
+                                    <i class="fas fa-trash"></i> Удалить
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -593,12 +858,29 @@
             const index = favoriteProducts.findIndex(product => product.id === id);
             if (index !== -1) {
                 favoriteProducts.splice(index, 1);
-                renderFavoriteProducts();
+                renderFavorites();
             }
         }
 
         // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', renderFavoriteProducts);
+        document.addEventListener('DOMContentLoaded', renderFavorites);
+
+        // Переключение маркетплейсов
+        document.querySelectorAll('.switcher-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.switcher-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Переключение мобильного маркетплейса
+        document.querySelectorAll('.mobile-switcher-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.mobile-switcher-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
