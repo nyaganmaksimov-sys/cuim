@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Избранное - CUIM</title>
+    <title>Избранное - CUIM Маркетплейс</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Общие стили */
@@ -20,7 +20,7 @@
             line-height: 1.6;
         }
 
-        /* Шапка - точная копия с главной */
+        /* Шапка - ТОЧНАЯ КОПИЯ С ГЛАВНОЙ */
         .header {
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -50,11 +50,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
         }
 
         .logo-text {
@@ -161,27 +156,31 @@
             background: #667eea;
         }
 
-        .page-switcher {
+        .search-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
             display: flex;
             background: #f8f9fa;
             border-radius: 8px;
-            padding: 4px;
+            padding: 8px 15px;
+            gap: 10px;
+            align-items: center;
         }
 
-        .page-btn {
-            padding: 8px 20px;
+        .search-box input {
             border: none;
             background: none;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s;
-            font-weight: 500;
+            outline: none;
+            width: 300px;
+            font-size: 14px;
         }
 
-        .page-btn.active {
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            color: #667eea;
+        .search-box i {
+            color: #666;
         }
 
         /* Основной контент */
@@ -196,72 +195,87 @@
             font-size: 2.5rem;
         }
 
-        /* Сетка избранного */
-        .favorites-grid {
+        /* Сетка товаров */
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
             margin-top: 30px;
         }
 
-        .favorite-card {
+        .product-card {
             background: white;
             border-radius: 12px;
-            padding: 25px;
+            overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 1px solid #f0f0f0;
         }
 
-        .favorite-card:hover {
+        .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
 
-        .card-header {
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
         }
 
-        .favorite-card h3 {
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            color: #667eea;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .product-title {
             color: #2c3e50;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 10px;
             line-height: 1.4;
         }
 
-        .favorite-card p {
+        .product-description {
             color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
         }
 
-        .card-category {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
+        .product-price {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
-        .card-meta {
+        .product-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid #f0f0f0;
         }
 
-        .card-date {
-            color: #999;
+        .product-rating {
+            color: #ffc107;
             font-size: 0.9rem;
         }
 
-        .card-actions {
+        .product-actions {
             display: flex;
             gap: 10px;
         }
@@ -291,10 +305,30 @@
             cursor: pointer;
             font-weight: 500;
             transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .remove-btn:hover {
             background: #ff5252;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .add-to-cart:hover {
+            opacity: 0.9;
         }
 
         /* Состояние пустого избранного */
@@ -377,7 +411,11 @@
                 gap: 15px;
             }
 
-            .favorites-grid {
+            .search-box input {
+                width: 200px;
+            }
+
+            .products-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -388,13 +426,12 @@
     </style>
 </head>
 <body>
-    <!-- Шапка - точная копия с главной -->
+    <!-- Шапка - ТОЧНАЯ КОПИЯ С ГЛАВНОЙ -->
     <header class="header">
         <div class="header-top">
             <div class="container">
                 <div class="header-top-content">
                     <div class="logo">
-                        <!-- Замените на ваш логотип -->
                         <div class="logo-text">CUIM</div>
                     </div>
                     <div class="header-actions">
@@ -426,16 +463,18 @@
             <div class="container">
                 <div class="nav-menu">
                     <div class="categories">
-                        <a href="#" class="category-link">Все категории</a>
-                        <a href="#" class="category-link">Программирование</a>
-                        <a href="#" class="category-link">Дизайн</a>
-                        <a href="#" class="category-link">Маркетинг</a>
-                        <a href="#" class="category-link">Бизнес</a>
-                        <a href="#" class="category-link">Фотография</a>
+                        <a href="#" class="category-link">Все товары</a>
+                        <a href="#" class="category-link">Электроника</a>
+                        <a href="#" class="category-link">Одежда</a>
+                        <a href="#" class="category-link">Для дома</a>
+                        <a href="#" class="category-link">Красота</a>
+                        <a href="#" class="category-link">Спорт</a>
                     </div>
-                    <div class="page-switcher">
-                        <button class="page-btn active">Для учебы</button>
-                        <button class="page-btn">Для работы</button>
+                    <div class="search-section">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Поиск товаров...">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -444,19 +483,19 @@
 
     <!-- Основной контент -->
     <div class="container main-content">
-        <h1 class="page-title">Избранное</h1>
+        <h1 class="page-title">Избранные товары</h1>
         
-        <!-- Сетка избранных элементов -->
-        <div class="favorites-grid" id="favoritesGrid">
-            <!-- Избранные элементы будут добавляться через JavaScript -->
+        <!-- Сетка товаров -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Товары будут добавляться через JavaScript -->
         </div>
 
         <!-- Состояние пустого избранного -->
         <div class="empty-state" id="emptyState" style="display: none;">
             <i class="far fa-heart"></i>
             <h3>В избранном пока пусто</h3>
-            <p>Сохраняйте интересные материалы, курсы и товары, чтобы вернуться к ним позже</p>
-            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="browse-btn">Начать просмотр</a>
+            <p>Добавляйте понравившиеся товары в избранное, чтобы не потерять</p>
+            <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="browse-btn">Перейти к покупкам</a>
         </div>
     </div>
 
@@ -464,80 +503,105 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2024 CUIM. Все права защищены.</p>
+                <p>&copy; 2024 CUIM Маркетплейс. Все права защищены.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Данные избранного
-        const favoritesData = [
+        // Данные товаров в избранном
+        const favoriteProducts = [
             {
                 id: 1,
-                title: "Курс по веб-разработке",
-                description: "Полный курс по современной веб-разработке с нуля до профессионала. Изучите HTML, CSS, JavaScript и фреймворки.",
-                date: "15.12.2023",
-                category: "Программирование",
-                price: "₽4 990"
+                title: "Смартфон Samsung Galaxy S23",
+                description: "Флагманский смартфон с мощным процессором и отличной камерой",
+                price: "₽79 999",
+                category: "Электроника",
+                rating: "★★★★★",
+                image: "📱"
             },
             {
                 id: 2,
-                title: "UI/UX дизайн для начинающих",
-                description: "Освойте основы пользовательского интерфейса и опыта. Создавайте интуитивно понятные и красивые дизайны.",
-                date: "12.12.2023",
-                category: "Дизайн",
-                price: "₽3 490"
+                title: "Беспроводные наушники Sony",
+                description: "Наушники с шумоподавлением и длительной работой от батареи",
+                price: "₽24 999",
+                category: "Электроника",
+                rating: "★★★★☆",
+                image: "🎧"
             },
             {
                 id: 3,
-                title: "Маркетинг в социальных сетях",
-                description: "Эффективные стратегии продвижения в социальных сетях. Привлекайте клиентов и увеличивайте продажи.",
-                date: "10.12.2023",
-                category: "Маркетинг",
-                price: "₽2 990"
+                title: "Кроссовки Nike Air Max",
+                description: "Спортивные кроссовки для бега и повседневной носки",
+                price: "₽12 499",
+                category: "Одежда",
+                rating: "★★★★★",
+                image: "👟"
             },
             {
                 id: 4,
-                title: "Python для анализа данных",
-                description: "Используйте Python для обработки и анализа больших данных. Библиотеки Pandas, NumPy и Matplotlib.",
-                date: "08.12.2023",
-                category: "Программирование",
-                price: "₽5 490"
+                title: "Умные часы Apple Watch",
+                description: "Смарт-часы с функциями фитнес-трекера и уведомлениями",
+                price: "₽34 999",
+                category: "Электроника",
+                rating: "★★★★☆",
+                image: "⌚"
+            },
+            {
+                id: 5,
+                title: "Кофемашина DeLonghi",
+                description: "Автоматическая кофемашина для приготовления эспрессо и капучино",
+                price: "₽45 999",
+                category: "Для дома",
+                rating: "★★★★★",
+                image: "☕"
+            },
+            {
+                id: 6,
+                title: "Фитнес-браслет Xiaomi",
+                description: "Трекер активности с мониторингом сна и пульса",
+                price: "₽3 499",
+                category: "Спорт",
+                rating: "★★★★☆",
+                image: "💪"
             }
         ];
 
-        // Функция для отображения избранного
-        function renderFavorites() {
-            const favoritesGrid = document.getElementById('favoritesGrid');
+        // Функция для отображения товаров
+        function renderFavoriteProducts() {
+            const productsGrid = document.getElementById('productsGrid');
             const emptyState = document.getElementById('emptyState');
 
-            if (favoritesData.length === 0) {
-                favoritesGrid.style.display = 'none';
+            if (favoriteProducts.length === 0) {
+                productsGrid.style.display = 'none';
                 emptyState.style.display = 'block';
             } else {
-                favoritesGrid.style.display = 'grid';
+                productsGrid.style.display = 'grid';
                 emptyState.style.display = 'none';
                 
-                favoritesGrid.innerHTML = favoritesData.map(item => `
-                    <div class="favorite-card">
-                        <div class="card-header">
-                            <span class="card-category">${item.category}</span>
-                            <span class="card-price">${item.price}</span>
+                productsGrid.innerHTML = favoriteProducts.map(product => `
+                    <div class="product-card">
+                        <div class="product-image">
+                            ${product.image}
                         </div>
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
-                        <div class="card-meta">
-                            <span class="card-date">Добавлено: ${item.date}</span>
-                            <div class="card-actions">
-                                <button class="action-icon" title="В корзину">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                                <button class="action-icon" title="Поделиться">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <button class="remove-btn" onclick="removeFromFavorites(${item.id})">
-                                    <i class="fas fa-trash"></i> Удалить
-                                </button>
+                        <div class="product-info">
+                            <div class="product-category">${product.category}</div>
+                            <h3 class="product-title">${product.title}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-price">${product.price}</div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-shopping-cart"></i> В корзину
+                            </button>
+                            <div class="product-meta">
+                                <div class="product-rating">${product.rating}</div>
+                                <div class="product-actions">
+                                    <button class="action-icon" title="Поделиться">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="remove-btn" onclick="removeFromFavorites(${product.id})">
+                                        <i class="fas fa-trash"></i> Удалить
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -547,18 +611,18 @@
 
         // Функция для удаления из избранного
         function removeFromFavorites(id) {
-            const index = favoritesData.findIndex(item => item.id === id);
+            const index = favoriteProducts.findIndex(product => product.id === id);
             if (index !== -1) {
-                favoritesData.splice(index, 1);
-                renderFavorites();
+                favoriteProducts.splice(index, 1);
+                renderFavoriteProducts();
                 
                 // В реальном приложении здесь бы обновлялись данные в localStorage/API
-                console.log(`Элемент ${id} удален из избранного`);
+                console.log(`Товар ${id} удален из избранного`);
             }
         }
 
         // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', renderFavorites);
+        document.addEventListener('DOMContentLoaded', renderFavoriteProducts);
     </script>
 </body>
 </html>
