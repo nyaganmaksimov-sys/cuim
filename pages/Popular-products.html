@@ -356,63 +356,132 @@
       margin: 0;
     }
 
-    /* Filters */
-    .filters-section {
+    /* Main Content Layout */
+    .main-content {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    /* Sidebar Filters */
+    .sidebar-filters {
       background: var(--panel);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-1);
-      padding: 20px;
-      margin-bottom: 30px;
+      padding: 0;
+      position: sticky;
+      top: 120px;
+      height: fit-content;
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
     }
     
     .filters-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
+      padding: 20px 20px 15px;
+      border-bottom: 1px solid var(--border);
     }
     
     .filters-title {
       font-size: 18px;
       font-weight: 700;
       color: #163a69;
+      margin: 0 0 5px;
+    }
+    
+    .filters-subtitle {
+      color: var(--muted);
+      font-size: 14px;
       margin: 0;
     }
     
-    .filter-group {
-      margin-bottom: 20px;
+    .filter-section {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .filter-section:last-child {
+      border-bottom: none;
+    }
+    
+    .filter-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      cursor: pointer;
     }
     
     .filter-label {
-      display: block;
       font-weight: 600;
-      margin-bottom: 10px;
       color: var(--text);
+      font-size: 15px;
+    }
+    
+    .filter-toggle {
+      color: var(--muted);
+      font-size: 12px;
+      transition: var(--transition);
+    }
+    
+    .filter-content {
+      display: block;
+    }
+    
+    .filter-content.collapsed {
+      display: none;
     }
     
     .filter-options {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      flex-direction: column;
+      gap: 8px;
     }
     
     .filter-option {
-      padding: 8px 16px;
-      background: #f5f7fa;
-      border-radius: 20px;
-      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
       cursor: pointer;
       transition: var(--transition);
-      border: 1px solid transparent;
     }
     
     .filter-option:hover {
-      background: #e9f1ff;
+      color: var(--blue-600);
     }
     
-    .filter-option.active {
+    .filter-checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    
+    .filter-option.active .filter-checkbox {
       background: var(--blue-600);
+      border-color: var(--blue-600);
+    }
+    
+    .filter-option.active .filter-checkbox::after {
+      content: "✓";
       color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .filter-option-text {
+      font-size: 14px;
+      flex: 1;
+    }
+    
+    .filter-count {
+      color: var(--muted);
+      font-size: 12px;
     }
     
     .price-range {
@@ -433,21 +502,64 @@
       color: var(--muted);
     }
     
+    .range-slider {
+      width: 100%;
+      margin: 15px 0 10px;
+    }
+    
     .filter-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-      margin-top: 20px;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     }
     
     .btn-secondary {
       background: #f5f7fa;
       color: var(--text);
       border: 1px solid var(--border);
+      width: 100%;
+      margin-bottom: 10px;
     }
     
     .btn-secondary:hover {
       background: #e9f1ff;
+    }
+
+    /* Products Section */
+    .products-section {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .products-count {
+      font-size: 16px;
+      color: var(--muted);
+    }
+    
+    .sort-options {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .sort-label {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    
+    .sort-select {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      font-size: 14px;
     }
 
     /* Product Grid */
@@ -613,6 +725,24 @@
       color: var(--muted);
     }
 
+    /* Mobile Filter Button */
+    .mobile-filter-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--blue-600);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      width: 100%;
+      justify-content: center;
+    }
+
     /* Footer */
     .site-footer{
       background: var(--panel);
@@ -689,6 +819,11 @@
         gap: 16px;
       }
       
+      .main-content {
+        grid-template-columns: 250px 1fr;
+        gap: 20px;
+      }
+      
       .footer-content {
         grid-template-columns: 1fr 1fr;
       }
@@ -730,30 +865,44 @@
         font-size: 24px;
       }
       
-      .filters-section {
-        padding: 15px;
+      .main-content {
+        grid-template-columns: 1fr;
       }
       
-      .filter-options {
-        gap: 8px;
-      }
-      
-      .filter-option {
-        padding: 6px 12px;
-        font-size: 13px;
-      }
-      
-      .price-range {
-        flex-direction: column;
-        gap: 8px;
-      }
-      
-      .price-separator {
+      .sidebar-filters {
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        border-radius: 0;
+        max-height: 100%;
       }
       
-      .filter-actions {
+      .sidebar-filters.active {
+        display: block;
+      }
+      
+      .mobile-filter-btn {
+        display: flex;
+      }
+      
+      .products-header {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .sort-options {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .sort-select {
+        flex: 1;
+        max-width: 200px;
       }
     }
 
@@ -801,7 +950,7 @@
     /* Большие экраны */
     @media (min-width: 1440px) {
       .product-grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
   </style>
@@ -886,76 +1035,203 @@
     </div>
   </section>
 
-  <main>
-    <div class="container">
-      <!-- Фильтры -->
-      <section class="filters-section">
+  <main class="container">
+    <!-- Кнопка фильтров для мобильных -->
+    <button class="mobile-filter-btn" id="mobileFilterBtn">
+      🔍 Показать фильтры
+    </button>
+
+    <div class="main-content">
+      <!-- Боковой фильтр -->
+      <aside class="sidebar-filters" id="sidebarFilters">
         <div class="filters-header">
           <h2 class="filters-title">Фильтры</h2>
-          <button class="btn btn-secondary">Сбросить фильтры</button>
+          <p class="filters-subtitle">Уточните параметры поиска</p>
         </div>
         
-        <div class="filter-group">
-          <label class="filter-label">Категория</label>
-          <div class="filter-options">
-            <div class="filter-option active">Все</div>
-            <div class="filter-option">Продукты</div>
-            <div class="filter-option">Электроника</div>
-            <div class="filter-option">Одежда</div>
-            <div class="filter-option">Дом и сад</div>
-            <div class="filter-option">Красота</div>
-            <div class="filter-option">Детские товары</div>
+        <div class="filter-section">
+          <div class="filter-title" data-toggle="category">
+            <span class="filter-label">Категория</span>
+            <span class="filter-toggle">▼</span>
+          </div>
+          <div class="filter-content">
+            <div class="filter-options">
+              <div class="filter-option active">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Электроника</span>
+                <span class="filter-count">(142)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Одежда и обувь</span>
+                <span class="filter-count">(89)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Дом и сад</span>
+                <span class="filter-count">(76)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Красота и здоровье</span>
+                <span class="filter-count">(54)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Детские товары</span>
+                <span class="filter-count">(43)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Спорт и отдых</span>
+                <span class="filter-count">(38)</span>
+              </div>
+            </div>
           </div>
         </div>
         
-        <div class="filter-group">
-          <label class="filter-label">Цена</label>
-          <div class="price-range">
-            <input type="text" class="price-input" placeholder="0">
-            <span class="price-separator">—</span>
-            <input type="text" class="price-input" placeholder="5000">
+        <div class="filter-section">
+          <div class="filter-title" data-toggle="price">
+            <span class="filter-label">Цена, ₽</span>
+            <span class="filter-toggle">▼</span>
+          </div>
+          <div class="filter-content">
+            <div class="price-range">
+              <input type="text" class="price-input" placeholder="0" id="minPrice">
+              <span class="price-separator">—</span>
+              <input type="text" class="price-input" placeholder="50000" id="maxPrice">
+            </div>
+            <input type="range" class="range-slider" min="0" max="50000" value="25000">
           </div>
         </div>
         
-        <div class="filter-group">
-          <label class="filter-label">Рейтинг</label>
-          <div class="filter-options">
-            <div class="filter-option">Любой</div>
-            <div class="filter-option active">4+ ⭐</div>
-            <div class="filter-option">4.5+ ⭐</div>
-            <div class="filter-option">5 ⭐</div>
+        <div class="filter-section">
+          <div class="filter-title" data-toggle="brand">
+            <span class="filter-label">Бренд</span>
+            <span class="filter-toggle">▼</span>
+          </div>
+          <div class="filter-content">
+            <div class="filter-options">
+              <div class="filter-option active">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Xiaomi</span>
+                <span class="filter-count">(32)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Apple</span>
+                <span class="filter-count">(28)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Samsung</span>
+                <span class="filter-count">(24)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Sony</span>
+                <span class="filter-count">(18)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Philips</span>
+                <span class="filter-count">(15)</span>
+              </div>
+            </div>
           </div>
         </div>
         
-        <div class="filter-group">
-          <label class="filter-label">Наличие</label>
-          <div class="filter-options">
-            <div class="filter-option active">В наличии</div>
-            <div class="filter-option">Под заказ</div>
+        <div class="filter-section">
+          <div class="filter-title" data-toggle="rating">
+            <span class="filter-label">Рейтинг</span>
+            <span class="filter-toggle">▼</span>
+          </div>
+          <div class="filter-content">
+            <div class="filter-options">
+              <div class="filter-option active">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">
+                  <span class="stars">★★★★★</span> 5 звезд
+                </span>
+                <span class="filter-count">(42)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">
+                  <span class="stars">★★★★☆</span> 4 и выше
+                </span>
+                <span class="filter-count">(128)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">
+                  <span class="stars">★★★☆☆</span> 3 и выше
+                </span>
+                <span class="filter-count">(56)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="filter-section">
+          <div class="filter-title" data-toggle="availability">
+            <span class="filter-label">Наличие</span>
+            <span class="filter-toggle">▼</span>
+          </div>
+          <div class="filter-content">
+            <div class="filter-options">
+              <div class="filter-option active">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">В наличии</span>
+                <span class="filter-count">(198)</span>
+              </div>
+              <div class="filter-option">
+                <div class="filter-checkbox"></div>
+                <span class="filter-option-text">Под заказ</span>
+                <span class="filter-count">(24)</span>
+              </div>
+            </div>
           </div>
         </div>
         
         <div class="filter-actions">
-          <button class="btn btn-secondary">Сбросить</button>
-          <button class="btn btn-primary">Применить фильтры</button>
+          <button class="btn btn-secondary" id="resetFilters">Сбросить фильтры</button>
+          <button class="btn btn-primary" id="applyFilters">Применить</button>
+        </div>
+      </aside>
+
+      <!-- Основной контент с товарами -->
+      <section class="products-section">
+        <div class="products-header">
+          <div class="products-count">Найдено 234 товара</div>
+          <div class="sort-options">
+            <span class="sort-label">Сортировка:</span>
+            <select class="sort-select">
+              <option>По популярности</option>
+              <option>По возрастанию цены</option>
+              <option>По убыванию цены</option>
+              <option>По рейтингу</option>
+              <option>По новизне</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Сетка товаров -->
+        <div class="product-grid" id="popularProducts">
+          <!-- Заполнится JavaScript -->
+        </div>
+
+        <!-- Пагинация -->
+        <div class="pagination">
+          <button class="pagination-btn">«</button>
+          <button class="pagination-btn active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="pagination-ellipsis">...</span>
+          <button class="pagination-btn">10</button>
+          <button class="pagination-btn">»</button>
         </div>
       </section>
-
-      <!-- Сетка товаров -->
-      <section class="product-grid" id="popularProducts">
-        <!-- Заполнится JavaScript -->
-      </section>
-
-      <!-- Пагинация -->
-      <div class="pagination">
-        <button class="pagination-btn">«</button>
-        <button class="pagination-btn active">1</button>
-        <button class="pagination-btn">2</button>
-        <button class="pagination-btn">3</button>
-        <span class="pagination-ellipsis">...</span>
-        <button class="pagination-btn">10</button>
-        <button class="pagination-btn">»</button>
-      </div>
     </div>
   </main>
 
@@ -1041,11 +1317,7 @@
         {title: "Фен Dyson Supersonic", price: "39 990 ₽", oldPrice: "", discount: "", rating: 4.9, reviews: 45, image: "💇", badge: "Премиум"},
         {title: "Робот-пылесос iRobot Roomba i3", price: "24 990 ₽", oldPrice: "27 990 ₽", discount: "-11%", rating: 4.7, reviews: 63, image: "🤖", badge: ""},
         {title: "Электрочайник Philips HD9359", price: "4 299 ₽", oldPrice: "4 799 ₽", discount: "-10%", rating: 4.5, reviews: 124, image: "🍵", badge: ""},
-        {title: "Монитор Samsung 27\" Curved", price: "21 990 ₽", oldPrice: "", discount: "", rating: 4.8, reviews: 38, image: "🖥️", badge: ""},
-        {title: "Игровая мышь Logitech G Pro", price: "7 499 ₽", oldPrice: "8 499 ₽", discount: "-12%", rating: 4.9, reviews: 76, image: "🖱️", badge: ""},
-        {title: "Блендер Braun Multiquick 7", price: "6 990 ₽", oldPrice: "", discount: "", rating: 4.6, reviews: 95, image: "🥤", badge: ""},
-        {title: "Электронная зубная щетка Oral-B iO", price: "15 990 ₽", oldPrice: "17 990 ₽", discount: "-11%", rating: 4.7, reviews: 52, image: "🦷", badge: ""},
-        {title: "Умный термос Ember Mug 2", price: "12 990 ₽", oldPrice: "", discount: "", rating: 4.4, reviews: 41, image: "☕", badge: "Новинка"}
+        {title: "Монитор Samsung 27\" Curved", price: "21 990 ₽", oldPrice: "", discount: "", rating: 4.8, reviews: 38, image: "🖥️", badge: ""}
       ];
       
       document.getElementById('popularProducts').innerHTML = popularProducts.map(product => `
@@ -1073,14 +1345,37 @@
       // Фильтры
       document.querySelectorAll('.filter-option').forEach(option => {
         option.addEventListener('click', function() {
-          if (this.parentElement.querySelector('.filter-option.active')) {
-            this.parentElement.querySelector('.filter-option.active').classList.remove('active');
-          }
-          this.classList.add('active');
+          this.classList.toggle('active');
         });
       });
       
-      console.log('Страница "Популярные товары" загружена!');
+      // Сворачивание/разворачивание секций фильтров
+      document.querySelectorAll('.filter-title').forEach(title => {
+        title.addEventListener('click', function() {
+          const content = this.nextElementSibling;
+          content.classList.toggle('collapsed');
+          const toggle = this.querySelector('.filter-toggle');
+          toggle.textContent = content.classList.contains('collapsed') ? '►' : '▼';
+        });
+      });
+      
+      // Кнопка сброса фильтров
+      document.getElementById('resetFilters').addEventListener('click', function() {
+        document.querySelectorAll('.filter-option').forEach(option => {
+          option.classList.remove('active');
+        });
+        document.getElementById('minPrice').value = '';
+        document.getElementById('maxPrice').value = '';
+      });
+      
+      // Мобильное отображение фильтров
+      document.getElementById('mobileFilterBtn').addEventListener('click', function() {
+        const filters = document.getElementById('sidebarFilters');
+        filters.classList.toggle('active');
+        this.textContent = filters.classList.contains('active') ? '✕ Закрыть фильтры' : '🔍 Показать фильтры';
+      });
+      
+      console.log('Страница "Популярные товары" с боковым фильтром загружена!');
     });
   </script>
 </body>
