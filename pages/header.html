@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ЦУИМ — Местный маркетплейс Барнаула</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-600:#0D47A1;
+      --blue-500:#1565C0;
+      --blue-400:#1E88E5;
+      --orange-600:#FF6F00;
+      --orange-500:#FF7A12;
+      --red-600:#E53935;
+      --red-500:#FF5252;
+      --yellow-600:#FFB300;
+      --green-500:#4CAF50;
+      --purple-500:#9C27B0;
+      --bg:#F6F8FB;
+      --panel:#FFFFFF;
+      --text:#1F2937;
+      --muted:#667085;
+      --border:#E5E9F0;
+      --radius:12px;
+      --radius-lg:16px;
+      --shadow-1:0 2px 12px rgba(13,71,161,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow-2:0 8px 24px rgba(13,71,161,.12), 0 2px 6px rgba(0,0,0,.06);
+      --shadow-hover:0 12px 32px rgba(13,71,161,.16), 0 4px 12px rgba(0,0,0,.08);
+      --ring:0 0 0 3px rgba(21,101,192,.12);
+      --container: 1280px;
+      --transition:all .2s cubic-bezier(.4,.0,.2,1);
+    }
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;
+      line-height: 1.5;
+    }
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit; cursor: pointer;}
+    .container{
+      width:min(100% - 32px, var(--container)); margin-inline:auto;
+    }
+
+    /* ======= ОБНОВЛЕННАЯ ШАПКА ======= */
+    .top-header {
+      background: linear-gradient(90deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    
+    .top-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .city-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    
+    .delivery-info {
+      font-size: 14px;
+    }
+
+    /* Main Header */
+    .main-header {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-main-row {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      gap: 20px;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+    
+    /* Categories Dropdown */
+    .categories-dropdown {
+      position: relative;
+    }
+
+    .categories-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--blue-600);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .categories-btn:hover {
+      background: var(--orange-600);
+      transform: translateY(-1px);
+    }
+
+    .categories-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 280px;
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      padding: 12px;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .categories-dropdown:hover .categories-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .categories-menu .cat-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .categories-menu .cat-item a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .categories-menu .cat-item a:hover {
+      background: rgba(255,122,18,.15);
+    }
+
+    .categories-menu .cat-ico {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange-600), var(--orange-500));
+      font-size: 12px;
+    }
+
+    .categories-menu .cat-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    /* Marketplace Switcher */
+    .marketplace-switcher {
+      display: flex;
+      background: #f5f5f5;
+      border-radius: 25px;
+      padding: 4px;
+      position: relative;
+      border: 1px solid #ddd;
+      gap: 2px;
+    }
+    
+    .switcher-option {
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      z-index: 2;
+      position: relative;
+      text-align: center;
+      min-width: 100px;
+      color: #666;
+      white-space: nowrap;
+    }
+    
+    .switcher-option.active {
+      color: white;
+      font-weight: 600;
+    }
+    
+    .switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+    }
+    
+    .switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+    }
+    
+    .switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+    }
+    
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .header-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      transition: color 0.3s;
+      font-size: 12px;
+    }
+    
+    .header-action:hover {
+      color: var(--orange-600);
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 14px;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--blue-600);
+      color: var(--blue-600);
+    }
+    
+    .btn-primary {
+      background-color: var(--orange-600);
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-1);
+    }
+
+    /* Mobile Marketplace Switcher */
+    .mobile-marketplace-switcher {
+      display: none;
+      width: 100%;
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 6px;
+      margin-top: 8px;
+    }
+    
+    .mobile-switcher-options {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    
+    .mobile-switcher-option {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #666;
+      font-size: 11px;
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .mobile-switcher-option.active {
+      background: white;
+      color: var(--blue-600);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-weight: 600;
+    }
+    
+    .mobile-switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option .icon {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    /* Main Search Bar - под шапкой */
+    .main-search-section {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .main-search-bar {
+      display: flex;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border: 2px solid var(--orange-600);
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+    }
+    
+    .main-search-bar input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: white;
+    }
+    
+    .main-search-bar button {
+      background-color: var(--orange-600);
+      color: white;
+      border: none;
+      padding: 0 30px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    
+    .main-search-bar button:hover {
+      background-color: #e55a00;
+    }
+
+    /* АДАПТИВНЫЕ СТИЛИ */
+    @media (max-width: 768px) {
+      /* АДАПТИВНАЯ ШАПКА ДЛЯ МОБИЛЬНЫХ */
+      .top-header .container {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      
+      .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .header-main-row {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 0;
+        align-items: center;
+      }
+      
+      .logo-section {
+        order: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .logo {
+        flex-shrink: 0;
+      }
+      
+      .categories-dropdown {
+        order: 1;
+        flex: 1;
+        margin-left: 10px;
+      }
+      
+      .categories-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+      
+      /* Переключатель страниц - скрываем на мобильных */
+      .marketplace-switcher {
+        display: none;
+      }
+      
+      .header-actions {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 5px;
+      }
+      
+      .auth-buttons {
+        display: none;
+      }
+      
+      /* Мобильный переключатель маркетплейсов */
+      .mobile-marketplace-switcher {
+        display: block;
+        order: 2;
+      }
+      
+      .main-search-section {
+        order: 4;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Шапка для маленьких мобильных */
+      .header-main-row {
+        gap: 8px;
+      }
+      
+      .logo img {
+        height: 32px;
+      }
+      
+      .categories-btn {
+        font-size: 12px;
+        padding: 7px 10px;
+      }
+      
+      .switcher-option {
+        min-width: 80px;
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+      
+      .header-actions {
+        gap: 8px;
+      }
+      
+      .header-action {
+        min-width: 50px;
+        padding: 4px 4px;
+        font-size: 10px;
+      }
+      
+      .categories-menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+      }
+      
+      .main-search-bar button {
+        padding: 0 15px;
+        font-size: 14px;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 10px;
+        padding: 6px 2px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .header-actions {
+        gap: 6px;
+      }
+      
+      .header-action {
+        min-width: 45px;
+        font-size: 9px;
+      }
+      
+      .switcher-option {
+        min-width: 70px;
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+      
+      .main-search-bar button {
+        padding: 0 12px;
+        font-size: 12px;
+      }
+      
+      .logo img {
+        height: 28px;
+      }
+      
+      .categories-btn {
+        font-size: 11px;
+        padding: 6px 8px;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 9px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Верхняя плашка с адресом -->
+  <div class="top-header">
+    <div class="container">
+      <span class="city-selector" id="locationPicker">
+        📍 <span id="selectedCity">Барнаул</span>
+      </span>
+      <span class="delivery-info">Доставка: от 45 мин · Самовывоз из <strong>12 ПВЗ</strong></span>
+    </div>
+  </div>
+
+  <!-- Основная шапка -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-main-row">
+        <div class="logo-section">
+          <a href="#" class="logo">
+            <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" alt="ЦУИМ">
+          </a>
+          
+          <!-- Кнопка категорий -->
+          <div class="categories-dropdown">
+            <button class="categories-btn">
+              📋 Категории
+              <span>▼</span>
+            </button>
+            <div class="categories-menu">
+              <ul class="cat-list">
+                <li class="cat-item"><a href="#"><span class="cat-ico">🥦</span><span class="cat-name">Продукты питания</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🍱</span><span class="cat-name">Готовая еда</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">👕</span><span class="cat-name">Одежда</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">💄</span><span class="cat-name">Красота и здоровье</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🧸</span><span class="cat-name">Детские товары</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🏡</span><span class="cat-name">Дом и сад</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🛋️</span><span class="cat-name">Мебель</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🎣</span><span class="cat-name">Рыбалка и охота</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">✏️</span><span class="cat-name">Канцелярия</span></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="marketplace-switcher">
+            <div class="switcher-option retail active">Обычный</div>
+            <div class="switcher-option opt">Оптовый</div>
+            <div class="switcher-option ads">Объявления</div>
+          </div>
+        </div>
+        
+        <div class="header-actions">
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/pages/favourites.html" class="header-action">❤️ <span>Избранное</span></a>
+          <a href="#" class="header-action">🔔 <span>Уведомления</span></a>
+          <a href="#" class="header-action">👤 <span>Профиль</span></a>
+          <a href="#" class="header-action">🛒 <span>Корзина</span></a> 
+          <div class="auth-buttons">
+            <a href="/cuim/pages/login.html" class="btn btn-outline">Вход</a>
+            <a href="/cuim/pages/registration.html" class="btn btn-primary">Регистрация</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Мобильный переключатель маркетплейсов -->
+      <div class="mobile-marketplace-switcher">
+        <div class="mobile-switcher-options">
+          <a href="#" class="mobile-switcher-option retail active">
+            <span class="icon">🛍️</span>
+            <span>Маркетплейс</span>
+          </a>
+          <a href="#" class="mobile-switcher-option opt">
+            <span class="icon">📦</span>
+            <span>Оптовый</span>
+          </a>
+          <a href="#" class="mobile-switcher-option ads">
+            <span class="icon">📋</span>
+            <span>Объявления</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Поисковая строка под шапкой -->
+  <section class="main-search-section">
+    <div class="container">
+      <div class="main-search-bar">
+        <input type="text" placeholder="Поиск товаров для дома, электроники, одежды и многого другого...">
+        <button>🔍 Найти</button>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
