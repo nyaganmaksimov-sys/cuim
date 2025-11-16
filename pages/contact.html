@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <style>
+  .logo, .header-logo, .logo-container {
+    background: none !important;
+  }
+</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Контакты — ЦУИМ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-600:#0D47A1;
+      --blue-500:#1565C0;
+      --blue-400:#1E88E5;
+      --orange-600:#FF6F00;
+      --orange-500:#FF7A12;
+      --red-600:#E53935;
+      --red-500:#FF5252;
+      --yellow-600:#FFB300;
+      --green-500:#4CAF50;
+      --purple-500:#9C27B0;
+      --bg:#F6F8FB;
+      --panel:#FFFFFF;
+      --text:#1F2937;
+      --muted:#667085;
+      --border:#E5E9F0;
+      --radius:12px;
+      --radius-lg:16px;
+      --shadow-1:0 2px 12px rgba(13,71,161,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow-2:0 8px 24px rgba(13,71,161,.12), 0 2px 6px rgba(0,0,0,.06);
+      --shadow-hover:0 12px 32px rgba(13,71,161,.16), 0 4px 12px rgba(0,0,0,.08);
+      --ring:0 0 0 3px rgba(21,101,192,.12);
+      --container: 1280px;
+      --transition:all .2s cubic-bezier(.4,.0,.2,1);
+    }
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;
+      line-height: 1.5;
+    }
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit; cursor: pointer;}
+    .container{
+      width:min(100% - 32px, var(--container)); margin-inline:auto;
+    }
+
+    /* ======= ОБНОВЛЕННАЯ ШАПКА ======= */
+    .top-header {
+      background: linear-gradient(90deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    
+    .top-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .city-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    
+    .delivery-info {
+      font-size: 14px;
+    }
+
+    /* Main Header */
+    .main-header {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-main-row {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      gap: 20px;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+    
+    /* Categories Dropdown */
+    .categories-dropdown {
+      position: relative;
+    }
+
+    .categories-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--blue-600);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .categories-btn:hover {
+      background: var(--orange-600);
+      transform: translateY(-1px);
+    }
+
+    .categories-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 280px;
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      padding: 12px;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .categories-dropdown:hover .categories-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .categories-menu .cat-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .categories-menu .cat-item a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .categories-menu .cat-item a:hover {
+      background: rgba(255,122,18,.15);
+    }
+
+    .categories-menu .cat-ico {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange-600), var(--orange-500));
+      font-size: 12px;
+    }
+
+    .categories-menu .cat-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    /* Marketplace Switcher */
+    .marketplace-switcher {
+      display: flex;
+      background: #f5f5f5;
+      border-radius: 25px;
+      padding: 4px;
+      position: relative;
+      border: 1px solid #ddd;
+      gap: 2px;
+    }
+    
+    .switcher-option {
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      z-index: 2;
+      position: relative;
+      text-align: center;
+      min-width: 100px;
+      color: #666;
+      white-space: nowrap;
+    }
+    
+    .switcher-option.active {
+      color: white;
+      font-weight: 600;
+    }
+    
+    .switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+    }
+    
+    .switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+    }
+    
+    .switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+    }
+    
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .header-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      transition: color 0.3s;
+      font-size: 12px;
+    }
+    
+    .header-action:hover {
+      color: var(--orange-600);
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 14px;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--blue-600);
+      color: var(--blue-600);
+    }
+    
+    .btn-primary {
+      background-color: var(--orange-600);
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-1);
+    }
+
+    /* Mobile Marketplace Switcher */
+    .mobile-marketplace-switcher {
+      display: none;
+      width: 100%;
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 6px;
+      margin-top: 8px;
+    }
+    
+    .mobile-switcher-options {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    
+    .mobile-switcher-option {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #666;
+      font-size: 11px;
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .mobile-switcher-option.active {
+      background: white;
+      color: var(--blue-600);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-weight: 600;
+    }
+    
+    .mobile-switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option .icon {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    /* Контакты стили */
+    .contacts-hero {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .contacts-hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin: 0 0 16px 0;
+    }
+    
+    .contacts-hero p {
+      font-size: 20px;
+      margin: 0;
+      opacity: 0.9;
+    }
+    
+    .contacts-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    
+    .contact-info {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-1);
+    }
+    
+    .contact-info h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--blue-600);
+      margin: 0 0 30px 0;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 16px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    
+    .contact-item:hover {
+      background: rgba(21,101,192,.05);
+    }
+    
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    
+    .contact-details {
+      flex: 1;
+    }
+    
+    .contact-title {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    
+    .contact-value {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    
+    .contact-value a {
+      color: var(--blue-600);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .contact-value a:hover {
+      color: var(--orange-600);
+    }
+    
+    .contact-form {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-1);
+    }
+    
+    .contact-form h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--blue-600);
+      margin: 0 0 30px 0;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      font-size: 16px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--blue-400);
+      box-shadow: var(--ring);
+    }
+    
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .btn-submit {
+      background: var(--orange-600);
+      color: white;
+      padding: 14px 32px;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+    }
+    
+    .btn-submit:hover {
+      background: var(--orange-500);
+      transform: translateY(-2px);
+    }
+    
+    .pickup-points {
+      margin-top: 60px;
+    }
+    
+    .pickup-points h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--blue-600);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .points-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
+    }
+    
+    .point-card {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-1);
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+    
+    .point-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--blue-400);
+    }
+    
+    .point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    
+    .point-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-600);
+      margin: 0;
+    }
+    
+    .point-status {
+      background: var(--green-500);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .point-address {
+      color: var(--muted);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    
+    .point-hours {
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    
+    .point-hours strong {
+      color: var(--blue-600);
+    }
+    
+    .point-phone {
+      color: var(--blue-600);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .point-phone:hover {
+      color: var(--orange-600);
+    }
+
+    /* Footer */
+    .site-footer{
+      background: var(--panel);
+      border-top: 1px solid rgba(13,71,161,.08);
+      padding: 40px 0 20px;
+      margin-top: 50px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-column h3 {
+      color: #163a69;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #667085;
+      font-size: 14px;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue-600);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(13,71,161,.08);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      color: #667085;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--blue-600);
+    }
+
+    /* ======= АДАПТИВНЫЕ СТИЛИ ======= */
+
+    @media (max-width: 1024px) {
+      .header-main-row {
+        gap: 15px;
+      }
+      
+      .header-actions {
+        gap: 15px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .contacts-grid {
+        gap: 30px;
+      }
+      
+      .points-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* АДАПТИВНАЯ ШАПКА ДЛЯ МОБИЛЬНЫХ */
+      .top-header .container {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      
+      .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .header-main-row {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 0;
+        align-items: center;
+      }
+      
+      .logo-section {
+        order: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .logo {
+        flex-shrink: 0;
+      }
+      
+      .categories-dropdown {
+        order: 1;
+        flex: 1;
+        margin-left: 10px;
+      }
+      
+      .categories-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+      
+      /* Переключатель страниц - скрываем на мобильных */
+      .marketplace-switcher {
+        display: none;
+      }
+      
+      .header-actions {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 5px;
+      }
+      
+      .auth-buttons {
+        display: none;
+      }
+      
+      /* Мобильный переключатель маркетплейсов */
+      .mobile-marketplace-switcher {
+        display: block;
+        order: 2;
+      }
+      
+      .contacts-hero h1 {
+        font-size: 36px;
+      }
+      
+      .contacts-hero p {
+        font-size: 18px;
+      }
+      
+      .contacts-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .contact-info, .contact-form {
+        padding: 30px;
+      }
+      
+      .contact-info h2, .contact-form h2 {
+        font-size: 24px;
+      }
+      
+      .points-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Шапка для маленьких мобильных */
+      .header-main-row {
+        gap: 8px;
+      }
+      
+      .logo img {
+        height: 32px;
+      }
+      
+      .categories-btn {
+        font-size: 12px;
+        padding: 7px 10px;
+      }
+      
+      .switcher-option {
+        min-width: 80px;
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+      
+      .header-actions {
+        gap: 8px;
+      }
+      
+      .header-action {
+        min-width: 50px;
+        padding: 4px 4px;
+        font-size: 10px;
+      }
+      
+      .categories-menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 10px;
+        padding: 6px 2px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 14px;
+      }
+      
+      .contacts-hero {
+        padding: 40px 0;
+      }
+      
+      .contacts-hero h1 {
+        font-size: 28px;
+      }
+      
+      .contacts-hero p {
+        font-size: 16px;
+      }
+      
+      .contact-info, .contact-form {
+        padding: 20px;
+      }
+      
+      .contact-item {
+        padding: 12px;
+      }
+      
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .header-actions {
+        gap: 6px;
+      }
+      
+      .header-action {
+        min-width: 45px;
+        font-size: 9px;
+      }
+      
+      .switcher-option {
+        min-width: 70px;
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+      
+      .logo img {
+        height: 28px;
+      }
+      
+      .categories-btn {
+        font-size: 11px;
+        padding: 6px 8px;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 9px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 12px;
+      }
+      
+      .points-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Верхняя плашка с адресом -->
+  <div class="top-header">
+    <div class="container">
+      <span class="city-selector" id="locationPicker">
+        📍 <span id="selectedCity">Барнаул</span>
+      </span>
+      <span class="delivery-info">Доставка: от 45 мин · Самовывоз из <strong>12 ПВЗ</strong></span>
+    </div>
+  </div>
+
+  <!-- Основная шапка -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-main-row">
+        <div class="logo-section">
+          <a href="/" class="logo">
+            <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" alt="ЦУИМ">
+          </a>
+          
+          <!-- Кнопка категорий -->
+          <div class="categories-dropdown">
+            <button class="categories-btn">
+              📋 Категории
+              <span>▼</span>
+            </button>
+            <div class="categories-menu">
+              <ul class="cat-list">
+                <li class="cat-item"><a href="#"><span class="cat-ico">🥦</span><span class="cat-name">Продукты питания</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🍱</span><span class="cat-name">Готовая еда</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">👕</span><span class="cat-name">Одежда</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">💄</span><span class="cat-name">Красота и здоровье</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🧸</span><span class="cat-name">Детские товары</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🏡</span><span class="cat-name">Дом и сад</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🛋️</span><span class="cat-name">Мебель</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🎣</span><span class="cat-name">Рыбалка и охота</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">✏️</span><span class="cat-name">Канцелярия</span></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="marketplace-switcher">
+            <div class="switcher-option retail active">Обычный</div>
+            <div class="switcher-option opt">Оптовый</div>
+            <div class="switcher-option ads">Объявления</div>
+          </div>
+        </div>
+        
+        <div class="header-actions">
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/pages/favourites.html" class="header-action">❤️ <span>Избранное</span></a>
+          <a href="#" class="header-action">🔔 <span>Уведомления</span></a>
+          <a href="#" class="header-action">👤 <span>Профиль</span></a>
+          <a href="#" class="header-action">🛒 <span>Корзина</span></a> 
+          <div class="auth-buttons">
+            <a href="/cuim/pages/login.html" class="btn btn-outline">Вход</a>
+            <a href="/cuim/pages/registration.html" class="btn btn-primary">Регистрация</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Мобильный переключатель маркетплейсов -->
+      <div class="mobile-marketplace-switcher">
+        <div class="mobile-switcher-options">
+          <a href="/" class="mobile-switcher-option retail active">
+            <span class="icon">🛍️</span>
+            <span>Маркетплейс</span>
+          </a>
+          <a href="https://nyaganmaksimov-sys.github.io/ciuim-opt/" class="mobile-switcher-option opt">
+            <span class="icon">📦</span>
+            <span>Оптовый</span>
+          </a>
+          <a href="/cuim/pages/ads-board.html" class="mobile-switcher-option ads">
+            <span class="icon">📋</span>
+            <span>Объявления</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Герой-секция контактов -->
+    <section class="contacts-hero">
+      <div class="container">
+        <h1>📞 Свяжитесь с нами</h1>
+        <p>Мы всегда рады помочь и ответить на ваши вопросы</p>
+      </div>
+    </section>
+
+    <div class="contacts-container">
+      <!-- Основная информация и форма -->
+      <div class="contacts-grid">
+        <!-- Контактная информация -->
+        <div class="contact-info">
+          <h2>Контактная информация</h2>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-details">
+              <div class="contact-title">Телефон поддержки</div>
+              <div class="contact-value">
+                <a href="tel:88005553535">8 (800) 555-35-35</a><br>
+                <small>Бесплатно по России</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-details">
+              <div class="contact-title">Электронная почта</div>
+              <div class="contact-value">
+                <a href="mailto:support@cuim.ru">support@cuim.ru</a><br>
+                <a href="mailto:partners@cuim.ru">partners@cuim.ru</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🏢</div>
+            <div class="contact-details">
+              <div class="contact-title">Адрес офиса</div>
+              <div class="contact-value">
+                г. Барнаул, пр-т Ленина, 123<br>
+                Бизнес-центр "Центральный", 5 этаж
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🕒</div>
+            <div class="contact-details">
+              <div class="contact-title">Время работы</div>
+              <div class="contact-value">
+                Пн-Пт: 9:00 - 18:00<br>
+                Сб-Вс: 10:00 - 16:00
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div class="contact-details">
+              <div class="contact-title">Онлайн-чат</div>
+              <div class="contact-value">
+                Доступен 24/7 на сайте<br>
+                Быстрые ответы на вопросы
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Форма обратной связи -->
+        <div class="contact-form">
+          <h2>Обратная связь</h2>
+          <form id="feedbackForm">
+            <div class="form-group">
+              <label for="name" class="form-label">Ваше имя</label>
+              <input type="text" id="name" class="form-input" placeholder="Иван Иванов" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">Электронная почта</label>
+              <input type="email" id="email" class="form-input" placeholder="ivan@example.com" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone" class="form-label">Телефон</label>
+              <input type="tel" id="phone" class="form-input" placeholder="+7 (999) 999-99-99">
+            </div>
+            
+            <div class="form-group">
+              <label for="subject" class="form-label">Тема обращения</label>
+              <select id="subject" class="form-input" required>
+                <option value="">Выберите тему</option>
+                <option value="support">Техническая поддержка</option>
+                <option value="partnership">Сотрудничество</option>
+                <option value="complaint">Жалоба</option>
+                <option value="suggestion">Предложение</option>
+                <option value="other">Другое</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message" class="form-label">Сообщение</label>
+              <textarea id="message" class="form-textarea" placeholder="Опишите ваш вопрос или проблему..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn-submit">Отправить сообщение</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Пункты самовывоза -->
+      <section class="pickup-points">
+        <h2>📍 Пункты самовывоза в Барнауле</h2>
+        <div class="points-grid">
+          
+          <div class="point-card">
+            <div class="point-header">
+              <h3 class="point-title">Центральный пункт</h3>
+              <span class="point-status">Открыто</span>
+            </div>
+            <div class="point-address">
+              пр-т Ленина, 123, ТЦ "Центральный", 1 этаж
+            </div>
+            <div class="point-hours">
+              <strong>Часы работы:</strong> ежедневно 9:00 - 21:00
+            </div>
+            <div class="point-phone">
+              📞 <a href="tel:+73852555555">+7 (3852) 55-55-55</a>
+            </div>
+          </div>
+          
+          <div class="point-card">
+            <div class="point-header">
+              <h3 class="point-title">Северный район</h3>
+              <span class="point-status">Открыто</span>
+            </div>
+            <div class="point-address">
+              ул. Матросова, 45, ТРК "Северный", 2 этаж
+            </div>
+            <div class="point-hours">
+              <strong>Часы работы:</strong> ежедневно 10:00 - 22:00
+            </div>
+            <div class="point-phone">
+              📞 <a href="tel:+73852555556">+7 (3852) 55-55-56</a>
+            </div>
+          </div>
+          
+          <div class="point-card">
+            <div class="point-header">
+              <h3 class="point-title">Южный микрорайон</h3>
+              <span class="point-status">Открыто</span>
+            </div>
+            <div class="point-address">
+              ул. Юрина, 78, ТЦ "Юбилейный", цокольный этаж
+            </div>
+            <div class="point-hours">
+              <strong>Часы работы:</strong> Пн-Сб 9:00 - 20:00, Вс 10:00 - 18:00
+            </div>
+            <div class="point-phone">
+              📞 <a href="tel:+73852555557">+7 (3852) 55-55-57</a>
+            </div>
+          </div>
+          
+          <div class="point-card">
+            <div class="point-header">
+              <h3 class="point-title">Западный район</h3>
+              <span class="point-status">Открыто</span>
+            </div>
+            <div class="point-address">
+              пр-т Космонавтов, 15, ТРК "Галактика", 3 этаж
+            </div>
+            <div class="point-hours">
+              <strong>Часы работы:</strong> ежедневно 10:00 - 22:00
+            </div>
+            <div class="point-phone">
+              📞 <a href="tel:+73852555558">+7 (3852) 55-55-58</a>
+            </div>
+          </div>
+          
+          <div class="point-card">
+            <div class="point-header">
+              <h3 class="point-title">Восточный район</h3>
+              <span class="point-status">Открыто</span>
+            </div>
+            <div class="point-address">
+              ул. Власихинская, 34, ТЦ "Восток", 1 этаж
+            </div>
+            <div class="point-hours">
+              <strong>Часы работы:</strong> Пн-Пт 9:00 - 20:00, Сб-Вс 10:00 - 18:00
+            </div>
+            <div class="point-phone">
+              📞 <a href="tel:+73852555559">+7 (3852) 55-55-59</a>
+            </div>
+          </div>
+          
+          <div class="point-card">
+            <div class="point-header">
+              <h3 class="point-title">ЦУМ</h3>
+              <span class="point-status">Открыто</span>
+            </div>
+            <div class="point-address">
+              ул. Ползунова, 36, ЦУМ, 4 этаж, секция 12
+            </div>
+            <div class="point-hours">
+              <strong>Часы работы:</strong> ежедневно 10:00 - 21:00
+            </div>
+            <div class="point-phone">
+              📞 <a href="tel:+73852555560">+7 (3852) 55-55-60</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Футер -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>О ЦУИМ</h3>
+          <p style="color: #667085; font-size: 14px; line-height: 1.5; margin-bottom: 15px;">
+            Местный маркетплейс Барнаула. Свежие продукты, готовые блюда, товары для дома и многое другое с быстрой доставкой и самовывозом.
+          </p>
+          <div style="background: rgba(21,101,192,.05); padding: 15px; border-radius: var(--radius); margin-top: 10px;">
+            <p style="margin: 5px 0; font-size: 13px;"><strong>Техническая поддержка:</strong></p>
+            <p style="margin: 5px 0; font-size: 13px;">📞 8 (800) 555-35-35</p>
+            <p style="margin: 5px 0; font-size: 13px;">✉️ support@cuim.ru</p>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Покупателям</h3>
+          <ul class="footer-links">
+            <li><a href="/cuim/pages/delivery-pay.html">Доставка и оплата</a></li>
+            <li><a href="/cuim/pages/vozvrat.html">Возврат и обмен</a></li>
+            <li><a href="/cuim/pages/akcii.html">Акции и скидки</a></li>
+            <li><a href="/cuim/pages/bonus-program.html">Бонусная программа</a></li>
+            <li><a href="/cuim/pages/gift-cards.html">Подарочные карты</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Продавцам</h3>
+          <ul class="footer-links">
+            <li><a href="/cuim/pages/become-seller.html">Стать продавцом</a></li>
+            <li><a href="#">Личный кабинет</a></li>
+            <li><a href="/cuim/pages/cooperation-terms.html">Условия сотрудничества</a></li>
+            <li><a href="/cuim/pages/commissions-tariffs.html">Комиссии и тарифы</a></li>
+            <li><a href="/cuim/pages/affiliate-program.html">Партнёрская программа</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Информация</h3>
+          <ul class="footer-links">
+            <li><a href="/cuim/pages/about.html">О компании</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="/cuim/pages/vacancies.html">Вакансии</a></li>
+            <li><a href="/cuim/docs/cuim-legal.html">Юридическая информация</a></li>
+            <li><a href="#">Политика конфиденциальности</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2025 ЦУИМ — Местный маркетплейс Барнаула. Все права защищены.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#">Пользовательское соглашение</a>
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Карта сайта</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Переключение маркетплейсов (десктоп)
+      document.querySelectorAll('.switcher-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.switcher-option').forEach(opt => opt.classList.remove('active'));
+          this.classList.add('active');
+          
+          if (this.classList.contains('opt')) {
+            window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/';
+          } else if (this.classList.contains('ads')) {
+            window.location.href = '/cuim/pages/ads-board.html';
+          }
+        });
+      });
+      
+      // Переключение мобильного маркетплейса
+      document.querySelectorAll('.mobile-switcher-option').forEach(option => {
+        option.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelectorAll('.mobile-switcher-option').forEach(opt => opt.classList.remove('active'));
+          this.classList.add('active');
+          
+          if (this.classList.contains('opt')) {
+            window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/';
+          } else if (this.classList.contains('ads')) {
+            window.location.href = '/cuim/pages/ads-board.html';
+          }
+        });
+      });
+      
+      // Обработка формы обратной связи
+      document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          subject: document.getElementById('subject').value,
+          message: document.getElementById('message').value
+        };
+        
+        // Здесь обычно отправка данных на сервер
+        console.log('Данные формы:', formData);
+        
+        alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+        this.reset();
+      });
+      
+      // Маска для телефона
+      document.getElementById('phone').addEventListener('input', function(e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+        e.target.value = !x[2] ? x[1] : '+7 (' + x[2] + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+      });
+      
+      console.log('Страница контактов загружена!');
+    });
+  </script>
+</body>
+</html>
