@@ -657,9 +657,9 @@
     .product-image{
       width:100%; 
       height:180px; 
-      object-fit:contain;
-      padding: 16px;
-      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      object-fit:cover;
+      padding: 0;
+      background: white;
       border-bottom: 1px solid var(--border);
     }
     
@@ -739,9 +739,9 @@
     .product-list-image {
       width: 180px;
       height: 150px;
-      object-fit: contain;
-      padding: 15px;
-      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      object-fit: cover;
+      padding: 0;
+      background: white;
       border-right: 1px solid var(--border);
     }
     
@@ -1508,20 +1508,20 @@
   </footer>
 
   <script>
-    // Данные продуктов для категории "Продукты питания"
+    // Данные продуктов для категории "Продукты питания" с реальными изображениями
     const foodProducts = [
-      {title: "Свежие огурцы (1 кг)", price: "150 ₽", image: "🥒", category: "Овощи и фрукты", rating: 4.8},
-      {title: "Молоко 3,2% 1л", price: "89 ₽", image: "🥛", category: "Молочные продукты", rating: 4.7},
-      {title: "Хлеб нарезной", price: "45 ₽", image: "🍞", category: "Хлеб и выпечка", rating: 4.9},
-      {title: "Яблоки Голден (1 кг)", price: "120 ₽", image: "🍎", category: "Овощи и фрукты", rating: 4.6},
-      {title: "Сыр Российский 500г", price: "450 ₽", image: "🧀", category: "Молочные продукты", rating: 4.8},
-      {title: "Яйца куриные 10шт", price: "95 ₽", image: "🥚", category: "Молочные продукты", rating: 4.7},
-      {title: "Колбаса Докторская", price: "320 ₽", image: "🌭", category: "Мясо и птица", rating: 4.5},
-      {title: "Лосось свежий 500г", price: "890 ₽", image: "🐟", category: "Рыба и морепродукты", rating: 4.9},
-      {title: "Рис круглозерный 1кг", price: "85 ₽", image: "🍚", category: "Бакалея", rating: 4.4},
-      {title: "Сок апельсиновый 1л", price: "120 ₽", image: "🧃", category: "Напитки", rating: 4.6},
-      {title: "Помидоры черри 250г", price: "180 ₽", image: "🍅", category: "Овощи и фрукты", rating: 4.7},
-      {title: "Курица охлажденная 1кг", price: "350 ₽", image: "🍗", category: "Мясо и птица", rating: 4.8}
+      {title: "Свежие огурцы (1 кг)", price: "150 ₽", image: "https://images.unsplash.com/photo-1546498067-6c7b6c2d6a1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Овощи и фрукты", rating: 4.8},
+      {title: "Молоко 3,2% 1л", price: "89 ₽", image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Молочные продукты", rating: 4.7},
+      {title: "Хлеб нарезной", price: "45 ₽", image: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Хлеб и выпечка", rating: 4.9},
+      {title: "Яблоки Голден (1 кг)", price: "120 ₽", image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Овощи и фрукты", rating: 4.6},
+      {title: "Сыр Российский 500г", price: "450 ₽", image: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Молочные продукты", rating: 4.8},
+      {title: "Яйца куриные 10шт", price: "95 ₽", image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Молочные продукты", rating: 4.7},
+      {title: "Колбаса Докторская", price: "320 ₽", image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Мясо и птица", rating: 4.5},
+      {title: "Лосось свежий 500г", price: "890 ₽", image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Рыба и морепродукты", rating: 4.9},
+      {title: "Рис круглозерный 1кг", price: "85 ₽", image: "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Бакалея", rating: 4.4},
+      {title: "Сок апельсиновый 1л", price: "120 ₽", image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Напитки", rating: 4.6},
+      {title: "Помидоры черри 250г", price: "180 ₽", image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Овощи и фрукты", rating: 4.7},
+      {title: "Курица охлажденная 1кг", price: "350 ₽", image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Мясо и птица", rating: 4.8}
     ];
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -1534,9 +1534,7 @@
         productContainer.className = 'product-grid';
         productContainer.innerHTML = foodProducts.map(product => `
           <div class="product-card">
-            <div class="product-image" style="display: flex; align-items: center; justify-content: center; font-size: 48px;">
-              ${product.image}
-            </div>
+            <img src="${product.image}" alt="${product.title}" class="product-image">
             <div class="product-body">
               <div class="product-title">${product.title}</div>
               <div class="product-price">${product.price}</div>
@@ -1556,9 +1554,7 @@
         productContainer.className = 'product-list';
         productContainer.innerHTML = foodProducts.map(product => `
           <div class="product-list-item">
-            <div class="product-list-image" style="display: flex; align-items: center; justify-content: center; font-size: 48px;">
-              ${product.image}
-            </div>
+            <img src="${product.image}" alt="${product.title}" class="product-list-image">
             <div class="product-list-body">
               <div class="product-list-title">${product.title}</div>
               <div class="product-list-price">${product.price}</div>
