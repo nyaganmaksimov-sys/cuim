@@ -238,35 +238,14 @@
       margin: 10px 0 0;
     }
 
-    /* Floating Filters */
-    .floating-filters {
+    /* Horizontal Filters */
+    .horizontal-filters {
       background: var(--panel);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-2);
       margin-bottom: 20px;
       transition: var(--transition);
       overflow: hidden;
-    }
-    
-    .floating-filters.fixed {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 999;
-      margin: 0;
-      border-radius: 0;
-      border-bottom: 1px solid var(--border);
-      animation: slideDown 0.3s ease;
-    }
-    
-    @keyframes slideDown {
-      from {
-        transform: translateY(-100%);
-      }
-      to {
-        transform: translateY(0);
-      }
     }
     
     .filters-header {
@@ -324,7 +303,7 @@
     .filters-content {
       padding: 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 24px;
     }
     
@@ -741,7 +720,7 @@
       }
       
       .filters-content {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 
@@ -776,7 +755,7 @@
       }
       
       .filters-content {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
       
       .footer-content {
@@ -828,7 +807,7 @@
       }
       
       .filters-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
       }
       
@@ -953,6 +932,7 @@
       
       .filters-content {
         padding: 16px;
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1100,8 +1080,8 @@
 
   <main>
     <div class="container">
-      <!-- Плавающий фильтр -->
-      <div class="floating-filters" id="floatingFilters">
+      <!-- Горизонтальный фильтр -->
+      <div class="horizontal-filters" id="horizontalFilters">
         <div class="filters-header" id="filtersToggle">
           <div class="filters-title">
             <span>🔍 Фильтры</span>
@@ -1352,7 +1332,6 @@
 
     // Состояние фильтров
     let filtersCollapsed = false;
-    let filtersFixed = false;
 
     document.addEventListener('DOMContentLoaded', function() {
       const productContainer = document.getElementById('productContainer');
@@ -1362,7 +1341,6 @@
       const filtersToggle = document.getElementById('filtersToggle');
       const filtersContent = document.getElementById('filtersContent');
       const filtersCollapseBtn = document.getElementById('filtersCollapseBtn');
-      const floatingFilters = document.getElementById('floatingFilters');
       const activeFilters = document.getElementById('activeFilters');
       const activeFiltersCount = document.getElementById('activeFiltersCount');
       const minPriceInput = document.getElementById('minPrice');
@@ -1659,24 +1637,6 @@
         filtersContent.classList.toggle('collapsed', filtersCollapsed);
         filtersCollapseBtn.textContent = filtersCollapsed ? '▼' : '▲';
       });
-      
-      // Фиксация фильтров при прокрутке
-      function handleScroll() {
-        const filtersRect = floatingFilters.getBoundingClientRect();
-        const shouldBeFixed = filtersRect.top <= 0;
-        
-        if (shouldBeFixed && !filtersFixed) {
-          floatingFilters.classList.add('fixed');
-          document.body.style.paddingTop = floatingFilters.offsetHeight + 'px';
-          filtersFixed = true;
-        } else if (!shouldBeFixed && filtersFixed) {
-          floatingFilters.classList.remove('fixed');
-          document.body.style.paddingTop = '';
-          filtersFixed = false;
-        }
-      }
-      
-      window.addEventListener('scroll', handleScroll);
       
       // Изначально отображаем товары
       renderProducts();
