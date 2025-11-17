@@ -107,6 +107,7 @@
       width: auto;
     }
 
+    /* Categories Dropdown */
     .categories-dropdown {
       position: relative;
     }
@@ -125,6 +126,65 @@
     
     .categories-btn:hover {
       background: var(--blue-500);
+    }
+    
+    .categories-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 280px;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-2);
+      padding: 8px;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      z-index: 1001;
+    }
+    
+    .categories-dropdown:hover .categories-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .category-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    
+    .category-item:hover {
+      background: var(--bg);
+    }
+    
+    .category-item.active {
+      background: rgba(13,71,161,.05);
+      color: var(--blue-600);
+      font-weight: 600;
+    }
+    
+    .category-icon {
+      font-size: 20px;
+      width: 24px;
+      text-align: center;
+    }
+    
+    .category-name {
+      flex: 1;
+      font-size: 14px;
+    }
+    
+    .category-arrow {
+      color: var(--muted);
+      font-size: 12px;
     }
     
     .marketplace-switcher {
@@ -203,7 +263,7 @@
 
     /* Category header */
     .category-header {
-      background: linear-gradient(135deg, #FF6F00, #FF8E53);
+      background: linear-gradient(135deg, #FF6F00, #FF8C42);
       color: white;
       padding: 30px 0;
       margin-bottom: 20px;
@@ -215,7 +275,7 @@
       gap: 15px;
     }
     
-    .category-icon {
+    .category-icon-large {
       font-size: 40px;
       background: rgba(255,255,255,0.2);
       border-radius: 50%;
@@ -382,18 +442,6 @@
       border-radius: var(--radius);
       font-size: 14px;
       width: 80px;
-    }
-    
-    .rating-stars {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    
-    .rating-value {
-      margin-left: 8px;
-      font-size: 14px;
-      color: var(--muted);
     }
     
     .active-filters {
@@ -841,6 +889,10 @@
         gap: 15px;
         text-align: center;
       }
+      
+      .categories-menu {
+        width: 250px;
+      }
     }
 
     /* Большие телефоны */
@@ -934,6 +986,11 @@
         padding: 16px;
         grid-template-columns: 1fr;
       }
+      
+      .categories-menu {
+        width: 220px;
+        left: -50px;
+      }
     }
 
     /* Маленькие телефоны */
@@ -983,6 +1040,11 @@
         flex-direction: column;
         gap: 10px;
       }
+      
+      .categories-menu {
+        width: 200px;
+        left: -80px;
+      }
     }
 
     /* Очень маленькие телефоны */
@@ -1030,12 +1092,64 @@
             <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" alt="ЦУИМ">
           </a>
           
-          <!-- Кнопка категорий -->
+          <!-- Выпадающее меню категорий -->
           <div class="categories-dropdown">
             <button class="categories-btn">
               📋 Категории
               <span>▼</span>
             </button>
+            <div class="categories-menu">
+              <a href="https://nyaganmaksimov-sys.github.io/cuim/pages/grocery.html" class="category-item">
+                <span class="category-icon">🛒</span>
+                <span class="category-name">Продукты питания</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="https://nyaganmaksimov-sys.github.io/cuim/pages/ready-meals.html" class="category-item active">
+                <span class="category-icon">🍱</span>
+                <span class="category-name">Готовая еда</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="#" class="category-item">
+                <span class="category-icon">🥛</span>
+                <span class="category-name">Молочные продукты</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="#" class="category-item">
+                <span class="category-icon">🍞</span>
+                <span class="category-name">Хлеб и выпечка</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="#" class="category-item">
+                <span class="category-icon">🥩</span>
+                <span class="category-name">Мясо и птица</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="#" class="category-item">
+                <span class="category-icon">🐟</span>
+                <span class="category-name">Рыба и морепродукты</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="#" class="category-item">
+                <span class="category-icon">🥬</span>
+                <span class="category-name">Овощи и фрукты</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="#" class="category-item">
+                <span class="category-icon">🍫</span>
+                <span class="category-name">Сладости и снеки</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="#" class="category-item">
+                <span class="category-icon">🥤</span>
+                <span class="category-name">Напитки</span>
+                <span class="category-arrow">→</span>
+              </a>
+              <a href="#" class="category-item">
+                <span class="category-icon">🍷</span>
+                <span class="category-name">Алкоголь</span>
+                <span class="category-arrow">→</span>
+              </a>
+            </div>
           </div>
 
           <div class="marketplace-switcher">
@@ -1059,7 +1173,7 @@
   <section class="main-search-section">
     <div class="container">
       <div class="main-search-bar">
-        <input type="text" placeholder="Поиск готовых блюд, кулинарии, полуфабрикатов...">
+        <input type="text" placeholder="Поиск готовых блюд, ресторанов, кухонь...">
         <button>🔍 Найти</button>
       </div>
     </div>
@@ -1069,10 +1183,10 @@
   <section class="category-header">
     <div class="container">
       <div class="category-header-content">
-        <div class="category-icon">🍱</div>
+        <div class="category-icon-large">🍱</div>
         <div>
           <h1 class="category-title">Готовая еда</h1>
-          <p class="category-description">Свежие блюда от местных ресторанов и кулинарий с доставкой по Барнаулу</p>
+          <p class="category-description">Рестораны, кафе и домашняя кухня с доставкой по Барнаулу</p>
         </div>
       </div>
     </div>
@@ -1095,33 +1209,7 @@
         
         <div class="filters-content" id="filtersContent">
           <div class="filter-group">
-            <div class="filter-group-title">Категория</div>
-            <div class="filter-options">
-              <div class="filter-option active" data-filter="category" data-value="all">
-                <div class="filter-checkbox"></div>
-                <span>Все категории</span>
-              </div>
-              <div class="filter-option" data-filter="category" data-value="Основные блюда">
-                <div class="filter-checkbox"></div>
-                <span>Основные блюда</span>
-              </div>
-              <div class="filter-option" data-filter="category" data-value="Салаты">
-                <div class="filter-checkbox"></div>
-                <span>Салаты</span>
-              </div>
-              <div class="filter-option" data-filter="category" data-value="Супы">
-                <div class="filter-checkbox"></div>
-                <span>Супы</span>
-              </div>
-              <div class="filter-option" data-filter="category" data-value="Десерты">
-                <div class="filter-checkbox"></div>
-                <span>Десерты</span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="filter-group">
-            <div class="filter-group-title">Кухня</div>
+            <div class="filter-group-title">Тип кухни</div>
             <div class="filter-options">
               <div class="filter-option active" data-filter="cuisine" data-value="all">
                 <div class="filter-checkbox"></div>
@@ -1131,10 +1219,6 @@
                 <div class="filter-checkbox"></div>
                 <span>Русская</span>
               </div>
-              <div class="filter-option" data-filter="cuisine" data-value="Европейская">
-                <div class="filter-checkbox"></div>
-                <span>Европейская</span>
-              </div>
               <div class="filter-option" data-filter="cuisine" data-value="Итальянская">
                 <div class="filter-checkbox"></div>
                 <span>Итальянская</span>
@@ -1142,6 +1226,44 @@
               <div class="filter-option" data-filter="cuisine" data-value="Азиатская">
                 <div class="filter-checkbox"></div>
                 <span>Азиатская</span>
+              </div>
+              <div class="filter-option" data-filter="cuisine" data-value="Кавказская">
+                <div class="filter-checkbox"></div>
+                <span>Кавказская</span>
+              </div>
+              <div class="filter-option" data-filter="cuisine" data-value="Фастфуд">
+                <div class="filter-checkbox"></div>
+                <span>Фастфуд</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="filter-group">
+            <div class="filter-group-title">Ресторан/Кухня</div>
+            <div class="filter-options">
+              <div class="filter-option active" data-filter="restaurant" data-value="all">
+                <div class="filter-checkbox"></div>
+                <span>Все заведения</span>
+              </div>
+              <div class="filter-option" data-filter="restaurant" data-value="Домашняя кухня">
+                <div class="filter-checkbox"></div>
+                <span>Домашняя кухня</span>
+              </div>
+              <div class="filter-option" data-filter="restaurant" data-value="Ресторан Сибирь">
+                <div class="filter-checkbox"></div>
+                <span>Ресторан Сибирь</span>
+              </div>
+              <div class="filter-option" data-filter="restaurant" data-value="Пицца Мария">
+                <div class="filter-checkbox"></div>
+                <span>Пицца Мария</span>
+              </div>
+              <div class="filter-option" data-filter="restaurant" data-value="Суши Wok">
+                <div class="filter-checkbox"></div>
+                <span>Суши Wok</span>
+              </div>
+              <div class="filter-option" data-filter="restaurant" data-value="Бургер Кинг">
+                <div class="filter-checkbox"></div>
+                <span>Бургер Кинг</span>
               </div>
             </div>
           </div>
@@ -1156,28 +1278,23 @@
           </div>
           
           <div class="filter-group">
-            <div class="filter-group-title">Рейтинг</div>
+            <div class="filter-group-title">Время приготовления</div>
             <div class="filter-options">
-              <div class="filter-option active" data-filter="rating" data-value="0">
+              <div class="filter-option active" data-filter="time" data-value="all">
                 <div class="filter-checkbox"></div>
-                <div class="rating-stars">
-                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                  <span class="rating-value">Любой</span>
-                </div>
+                <span>Любое</span>
               </div>
-              <div class="filter-option" data-filter="rating" data-value="4.5">
+              <div class="filter-option" data-filter="time" data-value="до 15 мин">
                 <div class="filter-checkbox"></div>
-                <div class="rating-stars">
-                  <span style="color: var(--orange-600);">★</span><span style="color: var(--orange-600);">★</span><span style="color: var(--orange-600);">★</span><span style="color: var(--orange-600);">★</span><span>★</span>
-                  <span class="rating-value">4.5+</span>
-                </div>
+                <span>До 15 мин</span>
               </div>
-              <div class="filter-option" data-filter="rating" data-value="4.0">
+              <div class="filter-option" data-filter="time" data-value="15-30 мин">
                 <div class="filter-checkbox"></div>
-                <div class="rating-stars">
-                  <span style="color: var(--orange-600);">★</span><span style="color: var(--orange-600);">★</span><span style="color: var(--orange-600);">★</span><span style="color: var(--orange-600);">★</span><span>★</span>
-                  <span class="rating-value">4.0+</span>
-                </div>
+                <span>15-30 мин</span>
+              </div>
+              <div class="filter-option" data-filter="time" data-value="30+ мин">
+                <div class="filter-checkbox"></div>
+                <span>От 30 мин</span>
               </div>
             </div>
           </div>
@@ -1187,7 +1304,7 @@
             <div class="filter-options">
               <div class="filter-option" data-filter="feature" data-value="vegetarian">
                 <div class="filter-checkbox"></div>
-                <span>🍃 Вегетарианское</span>
+                <span>🌿 Вегетарианское</span>
               </div>
               <div class="filter-option" data-filter="feature" data-value="spicy">
                 <div class="filter-checkbox"></div>
@@ -1196,6 +1313,10 @@
               <div class="filter-option" data-filter="feature" data-value="new">
                 <div class="filter-checkbox"></div>
                 <span>🆕 Новинка</span>
+              </div>
+              <div class="filter-option" data-filter="feature" data-value="discount">
+                <div class="filter-checkbox"></div>
+                <span>💰 Со скидкой</span>
               </div>
               <div class="filter-option" data-filter="feature" data-value="popular">
                 <div class="filter-checkbox"></div>
@@ -1213,15 +1334,15 @@
       <!-- Товары -->
       <section class="products-section">
         <div class="products-header">
-          <div class="products-count" id="productsCount">Найдено 89 блюд</div>
+          <div class="products-count" id="productsCount">Найдено 98 блюд</div>
           <div class="sort-options">
             <span>Сортировка:</span>
             <select class="sort-select" id="sortSelect">
               <option value="popular">По популярности</option>
               <option value="price_asc">По цене (сначала дешевые)</option>
               <option value="price_desc">По цене (сначала дорогие)</option>
-              <option value="rating">По рейтингу</option>
-              <option value="new">Сначала новинки</option>
+              <option value="name">По названию</option>
+              <option value="time">По времени приготовления</option>
             </select>
           </div>
         </div>
@@ -1237,7 +1358,7 @@
           <button class="pagination-btn">2</button>
           <button class="pagination-btn">3</button>
           <span>...</span>
-          <button class="pagination-btn">8</button>
+          <button class="pagination-btn">5</button>
           <button class="pagination-btn">Вперед →</button>
         </div>
       </section>
@@ -1305,28 +1426,28 @@
   </footer>
 
   <script>
-    // Данные готовых блюд с реальными изображениями
+    // Данные готовой еды
     const readyMeals = [
-      {title: "Борщ с говядиной", price: "280 ₽", weight: "400 г", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Супы", cuisine: "Русская", rating: 4.8, features: ["new"]},
-      {title: "Салат Цезарь с курицей", price: "320 ₽", weight: "250 г", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Салаты", cuisine: "Европейская", rating: 4.7, features: ["popular"]},
-      {title: "Пицца Маргарита", price: "450 ₽", weight: "500 г", image: "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Основные блюда", cuisine: "Итальянская", rating: 4.9, features: ["vegetarian", "popular"]},
-      {title: "Пельмени сибирские", price: "380 ₽", weight: "400 г", image: "https://images.unsplash.com/photo-1589225521590-4de0a9d6f8e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Основные блюда", cuisine: "Русская", rating: 4.6, features: []},
-      {title: "Суши сет Калифорния", price: "890 ₽", weight: "600 г", image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Основные блюда", cuisine: "Азиатская", rating: 4.8, features: ["new"]},
-      {title: "Шашлык из свинины", price: "520 ₽", weight: "300 г", image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Основные блюда", cuisine: "Кавказская", rating: 4.9, features: ["spicy", "popular"]},
-      {title: "Тирамису", price: "280 ₽", weight: "150 г", image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Десерты", cuisine: "Итальянская", rating: 4.7, features: ["vegetarian"]},
-      {title: "Блины с мясом", price: "220 ₽", weight: "250 г", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Основные блюда", cuisine: "Русская", rating: 4.5, features: []},
-      {title: "Греческий салат", price: "290 ₽", weight: "300 г", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Салаты", cuisine: "Европейская", rating: 4.6, features: ["vegetarian"]},
-      {title: "Куриные крылышки", price: "380 ₽", weight: "350 г", image: "https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Закуски", cuisine: "Европейская", rating: 4.4, features: ["spicy"]},
-      {title: "Лазанья с мясом", price: "420 ₽", weight: "400 г", image: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Основные блюда", cuisine: "Итальянская", rating: 4.8, features: []},
-      {title: "Чизкек Нью-Йорк", price: "320 ₽", weight: "200 г", image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", category: "Десерты", cuisine: "Европейская", rating: 4.9, features: ["vegetarian", "new"]}
+      {title: "Пицца Маргарита", price: "450 ₽", weight: "30 см", image: "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Итальянская", restaurant: "Пицца Мария", features: ["popular"], time: "25 мин"},
+      {title: "Борщ с говядиной", price: "280 ₽", weight: "400 мл", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Русская", restaurant: "Домашняя кухня", features: ["popular"], time: "15 мин"},
+      {title: "Ролл Филадельфия", price: "320 ₽", weight: "230 г", image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Азиатская", restaurant: "Суши Wok", features: ["new"], time: "20 мин"},
+      {title: "Бургер Чизбургер", price: "190 ₽", weight: "280 г", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Фастфуд", restaurant: "Бургер Кинг", features: ["discount"], time: "10 мин"},
+      {title: "Шашлык из свинины", price: "520 ₽", weight: "350 г", image: "https://images.unsplash.com/photo-1598514982195-71b8f902a2e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Кавказская", restaurant: "Ресторан Сибирь", features: [], time: "35 мин"},
+      {title: "Салат Цезарь", price: "320 ₽", weight: "250 г", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Итальянская", restaurant: "Ресторан Сибирь", features: ["vegetarian"], time: "15 мин"},
+      {title: "Пельмени сибирские", price: "280 ₽", weight: "350 г", image: "https://images.unsplash.com/photo-1589225521590-4d0c5c57d5b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Русская", restaurant: "Домашняя кухня", features: ["popular"], time: "20 мин"},
+      {title: "Паста Карбонара", price: "380 ₽", weight: "300 г", image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Итальянская", restaurant: "Пицца Мария", features: [], time: "25 мин"},
+      {title: "Куриные крылышки", price: "290 ₽", weight: "400 г", image: "https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Фастфуд", restaurant: "Бургер Кинг", features: ["spicy"], time: "18 мин"},
+      {title: "Овощное рагу", price: "240 ₽", weight: "350 г", image: "https://images.unsplash.com/photo-1594489573857-44d31bac05e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Русская", restaurant: "Домашняя кухня", features: ["vegetarian"], time: "20 мин"},
+      {title: "Лапша Удон с курицей", price: "320 ₽", weight: "400 г", image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Азиатская", restaurant: "Суши Wok", features: ["spicy"], time: "22 мин"},
+      {title: "Хачапури по-аджарски", price: "350 ₽", weight: "280 г", image: "https://images.unsplash.com/photo-1608039755407-5006f74d0f73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80", cuisine: "Кавказская", restaurant: "Ресторан Сибирь", features: ["new"], time: "30 мин"}
     ];
 
     // Текущие фильтры
     let currentFilters = {
-      category: 'all',
       cuisine: 'all',
+      restaurant: 'all',
       price: { min: 0, max: 5000 },
-      rating: 0,
+      time: 'all',
       features: []
     };
 
@@ -1348,35 +1469,44 @@
 
       // Функция для отображения товаров
       function renderProducts() {
-        let filteredMeals = [...readyMeals];
+        let filteredProducts = [...readyMeals];
         
         // Применяем фильтры
-        filteredMeals = filteredMeals.filter(meal => {
-          // Фильтр по категории
-          if (currentFilters.category !== 'all' && meal.category !== currentFilters.category) {
+        filteredProducts = filteredProducts.filter(product => {
+          // Фильтр по кухне
+          if (currentFilters.cuisine !== 'all' && product.cuisine !== currentFilters.cuisine) {
             return false;
           }
           
-          // Фильтр по кухне
-          if (currentFilters.cuisine !== 'all' && meal.cuisine !== currentFilters.cuisine) {
+          // Фильтр по ресторану
+          if (currentFilters.restaurant !== 'all' && product.restaurant !== currentFilters.restaurant) {
             return false;
           }
           
           // Фильтр по цене
-          const price = parseInt(meal.price);
+          const price = parseInt(product.price);
           if (price < currentFilters.price.min || price > currentFilters.price.max) {
             return false;
           }
           
-          // Фильтр по рейтингу
-          if (meal.rating < currentFilters.rating) {
-            return false;
+          // Фильтр по времени приготовления
+          if (currentFilters.time !== 'all') {
+            const time = product.time;
+            if (currentFilters.time === 'до 15 мин' && !time.includes('10') && !time.includes('15')) {
+              return false;
+            }
+            if (currentFilters.time === '15-30 мин' && (time.includes('35') || time.includes('10'))) {
+              return false;
+            }
+            if (currentFilters.time === '30+ мин' && !time.includes('35')) {
+              return false;
+            }
           }
           
           // Фильтр по особенностям
           if (currentFilters.features.length > 0) {
             const hasFeature = currentFilters.features.some(feature => 
-              meal.features.includes(feature)
+              product.features.includes(feature)
             );
             if (!hasFeature) return false;
           }
@@ -1388,52 +1518,49 @@
         const sortValue = sortSelect.value;
         switch(sortValue) {
           case 'price_asc':
-            filteredMeals.sort((a, b) => parseInt(a.price) - parseInt(b.price));
+            filteredProducts.sort((a, b) => parseInt(a.price) - parseInt(b.price));
             break;
           case 'price_desc':
-            filteredMeals.sort((a, b) => parseInt(b.price) - parseInt(a.price));
+            filteredProducts.sort((a, b) => parseInt(b.price) - parseInt(a.price));
             break;
-          case 'rating':
-            filteredMeals.sort((a, b) => b.rating - a.rating);
+          case 'name':
+            filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
             break;
-          case 'new':
-            // Для демонстрации считаем новинками первые 4 товара
-            filteredMeals.sort((a, b) => {
-              const aIsNew = a.features.includes('new') ? 1 : 0;
-              const bIsNew = b.features.includes('new') ? 1 : 0;
-              return bIsNew - aIsNew;
+          case 'time':
+            // Сортировка по времени приготовления (по возрастанию)
+            filteredProducts.sort((a, b) => {
+              const aTime = parseInt(a.time);
+              const bTime = parseInt(b.time);
+              return aTime - bTime;
             });
             break;
           default:
             // По популярности (по умолчанию)
-            filteredMeals.sort((a, b) => {
+            filteredProducts.sort((a, b) => {
               const aIsPopular = a.features.includes('popular') ? 1 : 0;
               const bIsPopular = b.features.includes('popular') ? 1 : 0;
-              return bIsPopular - aIsPopular || b.rating - a.rating;
+              return bIsPopular - aIsPopular;
             });
         }
         
         // Обновляем счетчик товаров
-        productsCount.textContent = `Найдено ${filteredMeals.length} блюд`;
+        productsCount.textContent = `Найдено ${filteredProducts.length} блюд`;
         
         // Отображаем товары
-        productContainer.innerHTML = filteredMeals.map(meal => `
+        productContainer.innerHTML = filteredProducts.map(product => `
           <div class="product-card">
             <div class="product-image-container">
-              <img src="${meal.image}" alt="${meal.title}" class="product-image">
-              ${meal.features.includes('new') ? '<div style="position: absolute; top: 8px; left: 8px; background: var(--green-500); color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;">NEW</div>' : ''}
-              ${meal.features.includes('popular') ? '<div style="position: absolute; top: 8px; right: 8px; background: var(--orange-600); color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;">POPULAR</div>' : ''}
+              <img src="${product.image}" alt="${product.title}" class="product-image">
+              ${product.features.includes('new') ? '<div style="position: absolute; top: 8px; left: 8px; background: var(--green-500); color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;">NEW</div>' : ''}
+              ${product.features.includes('discount') ? '<div style="position: absolute; top: 8px; right: 8px; background: var(--red-500); color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;">-20%</div>' : ''}
             </div>
             <div class="product-body">
-              <h3 class="product-title">${meal.title}</h3>
-              <div class="product-price">${meal.price}</div>
-              <div class="product-weight">${meal.weight}</div>
+              <h3 class="product-title">${product.title}</h3>
+              <div class="product-price">${product.price}</div>
+              <div class="product-weight">${product.weight} · ${product.time}</div>
               <div class="product-info">
-                <span>${meal.category}</span>
-                <div class="product-rating">
-                  <span style="color: var(--orange-600);">${'★'.repeat(Math.floor(meal.rating))}</span>
-                  <span>${meal.rating}</span>
-                </div>
+                <span>${product.restaurant}</span>
+                <span>${product.cuisine}</span>
               </div>
               <button class="add-to-cart">🛒 В корзину</button>
             </div>
@@ -1449,18 +1576,6 @@
         activeFilters.innerHTML = '';
         let activeCount = 0;
         
-        // Категория
-        if (currentFilters.category !== 'all') {
-          activeCount++;
-          const tag = document.createElement('div');
-          tag.className = 'filter-tag';
-          tag.innerHTML = `
-            Категория: ${currentFilters.category}
-            <button class="filter-tag-remove" data-filter="category">×</button>
-          `;
-          activeFilters.appendChild(tag);
-        }
-        
         // Кухня
         if (currentFilters.cuisine !== 'all') {
           activeCount++;
@@ -1469,6 +1584,18 @@
           tag.innerHTML = `
             Кухня: ${currentFilters.cuisine}
             <button class="filter-tag-remove" data-filter="cuisine">×</button>
+          `;
+          activeFilters.appendChild(tag);
+        }
+        
+        // Ресторан
+        if (currentFilters.restaurant !== 'all') {
+          activeCount++;
+          const tag = document.createElement('div');
+          tag.className = 'filter-tag';
+          tag.innerHTML = `
+            Ресторан: ${currentFilters.restaurant}
+            <button class="filter-tag-remove" data-filter="restaurant">×</button>
           `;
           activeFilters.appendChild(tag);
         }
@@ -1485,14 +1612,14 @@
           activeFilters.appendChild(tag);
         }
         
-        // Рейтинг
-        if (currentFilters.rating > 0) {
+        // Время приготовления
+        if (currentFilters.time !== 'all') {
           activeCount++;
           const tag = document.createElement('div');
           tag.className = 'filter-tag';
           tag.innerHTML = `
-            Рейтинг: ${currentFilters.rating}+
-            <button class="filter-tag-remove" data-filter="rating">×</button>
+            Время: ${currentFilters.time}
+            <button class="filter-tag-remove" data-filter="time">×</button>
           `;
           activeFilters.appendChild(tag);
         }
@@ -1504,6 +1631,7 @@
             vegetarian: 'Вегетарианское',
             spicy: 'Острое',
             new: 'Новинка',
+            discount: 'Со скидкой',
             popular: 'Популярное'
           };
           
@@ -1544,19 +1672,19 @@
       
       // Функция для обновления UI фильтров
       function updateFilterUI() {
-        // Обновляем чекбоксы категорий
-        document.querySelectorAll('[data-filter="category"]').forEach(option => {
-          option.classList.toggle('active', option.dataset.value === currentFilters.category);
-        });
-        
-        // Обновляем чекбоксы кухни
+        // Обновляем чекбоксы кухонь
         document.querySelectorAll('[data-filter="cuisine"]').forEach(option => {
           option.classList.toggle('active', option.dataset.value === currentFilters.cuisine);
         });
         
-        // Обновляем чекбоксы рейтинга
-        document.querySelectorAll('[data-filter="rating"]').forEach(option => {
-          option.classList.toggle('active', parseFloat(option.dataset.value) === currentFilters.rating);
+        // Обновляем чекбоксы ресторанов
+        document.querySelectorAll('[data-filter="restaurant"]').forEach(option => {
+          option.classList.toggle('active', option.dataset.value === currentFilters.restaurant);
+        });
+        
+        // Обновляем чекбоксы времени
+        document.querySelectorAll('[data-filter="time"]').forEach(option => {
+          option.classList.toggle('active', option.dataset.value === currentFilters.time);
         });
         
         // Обновляем чекбоксы особенностей
@@ -1584,11 +1712,7 @@
             }
           } else {
             // Для остальных фильтров только один вариант
-            if (filterType === 'rating') {
-              currentFilters[filterType] = parseFloat(value);
-            } else {
-              currentFilters[filterType] = value;
-            }
+            currentFilters[filterType] = value;
             
             // Деактивируем другие опции в этой группе
             const parent = this.closest('.filter-options');
@@ -1618,10 +1742,10 @@
       // Сброс фильтров
       resetFilters.addEventListener('click', function() {
         currentFilters = {
-          category: 'all',
           cuisine: 'all',
+          restaurant: 'all',
           price: { min: 0, max: 5000 },
-          rating: 0,
+          time: 'all',
           features: []
         };
         updateFilterUI();
