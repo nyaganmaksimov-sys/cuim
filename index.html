@@ -668,8 +668,7 @@
     .product-image{
       width:100%; 
       height:180px; 
-      object-fit:contain;
-      padding: 16px;
+      object-fit:cover;
       background: linear-gradient(135deg, #f8fafc, #f1f5f9);
       border-bottom: 1px solid var(--border);
     }
@@ -1356,23 +1355,67 @@
         </div>
       `).join('');
       
-      // Товары
+      // Товары с реальными фотографиями
       const products = [
-        {title: "Свежие огурцы (1 кг)", price: "150 ₽", image: "🥒"},
-        {title: "Молоко 3,2% 1л", price: "89 ₽", image: "🥛"},
-        {title: "Хлеб нарезной", price: "45 ₽", image: "🍞"},
-        {title: "Яблоки Голден (1 кг)", price: "120 ₽", image: "🍎"},
-        {title: "Сыр Российский 500г", price: "450 ₽", image: "🧀"},
-        {title: "Яйца куриные 10шт", price: "95 ₽", image: "🥚"},
-        {title: "Колбаса Докторская", price: "320 ₽", image: "🌭"},
-        {title: "Готовый обед Борщ", price: "180 ₽", image: "🍲"}
+        {title: "Свежие огурцы (1 кг)", price: "150 ₽", image: "https://images.unsplash.com/photo-1546498173-4181d0e1a7af?w=400&h=300&fit=crop"},
+        {title: "Молоко 3,2% 1л", price: "89 ₽", image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&h=300&fit=crop"},
+        {title: "Хлеб нарезной", price: "45 ₽", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop"},
+        {title: "Яблоки Голден (1 кг)", price: "120 ₽", image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=300&fit=crop"},
+        {title: "Сыр Российский 500г", price: "450 ₽", image: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&h=300&fit=crop"},
+        {title: "Яйца куриные 10шт", price: "95 ₽", image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=300&fit=crop"},
+        {title: "Колбаса Докторская", price: "320 ₽", image: "https://images.unsplash.com/photo-1553444836-bc6c8d340ba7?w=400&h=300&fit=crop"},
+        {title: "Готовый обед Борщ", price: "180 ₽", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop"}
+      ];
+
+      // Хит сезона - разные товары
+      const seasonProducts = [
+        {title: "Смартфон Xiaomi", price: "15 990 ₽", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop"},
+        {title: "Наушники беспроводные", price: "2 490 ₽", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop"},
+        {title: "Футболка хлопковая", price: "890 ₽", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop"},
+        {title: "Кроссовки спортивные", price: "3 200 ₽", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop"},
+        {title: "Кофе в зернах 1кг", price: "1 250 ₽", image: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=400&h=300&fit=crop"},
+        {title: "Чай зеленый 100г", price: "340 ₽", image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop"},
+        {title: "Шоколад горький", price: "180 ₽", image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&h=300&fit=crop"},
+        {title: "Йогурт натуральный", price: "85 ₽", image: "https://images.unsplash.com/photo-1562095241-8c6c0a7874d2?w=400&h=300&fit=crop"}
+      ];
+
+      // Акционные товары
+      const saleProducts = [
+        {title: "Кофеварка автоматическая", price: "8 990 ₽", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop"},
+        {title: "Блендер погружной", price: "2 190 ₽", image: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=400&h=300&fit=crop"},
+        {title: "Набор кастрюль 5шт", price: "4 500 ₽", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop"},
+        {title: "Сковорода гриль", price: "1 890 ₽", image: "https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?w=400&h=300&fit=crop"},
+        {title: "Чайник электрический", price: "1 290 ₽", image: "https://images.unsplash.com/photo-1595341888016-a392ef81b7de?w=400&h=300&fit=crop"},
+        {title: "Тостер 2-секционный", price: "1 590 ₽", image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=400&h=300&fit=crop"},
+        {title: "Миксер кухонный", price: "3 290 ₽", image: "https://images.unsplash.com/photo-1597848212624-e6d4bd0e8d32?w=400&h=300&fit=crop"},
+        {title: "Весы кухонные", price: "890 ₽", image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=300&fit=crop"}
       ];
       
       const productHTML = products.map(product => `
         <div class="product-card">
-          <div class="product-image" style="display: flex; align-items: center; justify-content: center; font-size: 48px;">
-            ${product.image}
+          <img src="${product.image}" alt="${product.title}" class="product-image">
+          <div class="product-body">
+            <div class="product-title">${product.title}</div>
+            <div class="product-price">${product.price}</div>
+            <button class="add-to-cart">🛒 В корзину</button>
           </div>
+        </div>
+      `).join('');
+
+      const seasonHTML = seasonProducts.map(product => `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.title}" class="product-image">
+          <div class="product-body">
+            <div class="product-title">${product.title}</div>
+            <div class="product-price">${product.price}</div>
+            <button class="add-to-cart">🛒 В корзину</button>
+          </div>
+        </div>
+      `).join('');
+
+      const saleHTML = saleProducts.map(product => `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.title}" class="product-image">
           <div class="product-body">
             <div class="product-title">${product.title}</div>
             <div class="product-price">${product.price}</div>
@@ -1382,8 +1425,8 @@
       `).join('');
       
       document.getElementById('productGrid').innerHTML = productHTML;
-      document.getElementById('seasonGrid').innerHTML = productHTML;
-      document.getElementById('saleGrid').innerHTML = productHTML;
+      document.getElementById('seasonGrid').innerHTML = seasonHTML;
+      document.getElementById('saleGrid').innerHTML = saleHTML;
       
       // Переключение маркетплейсов (десктоп)
       document.querySelectorAll('.switcher-option').forEach(option => {
