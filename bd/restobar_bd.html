@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База данных кафе, ресторанов и баров Барнаула</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        .search-container {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        #searchInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        #searchInput:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        #searchButton {
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        #searchButton:hover {
+            background-color: #2980b9;
+        }
+        
+        .establishments-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .establishment-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eaeaea;
+        }
+        
+        .establishment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .establishment-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #f1f1f1;
+            padding-bottom: 8px;
+        }
+        
+        .establishment-info {
+            margin-bottom: 15px;
+        }
+        
+        .establishment-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            min-width: 120px;
+            color: #7f8c8d;
+        }
+        
+        .rating {
+            display: inline-block;
+            background-color: #27ae60;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .phone {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .phone:hover {
+            text-decoration: underline;
+        }
+        
+        .notes-section {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .notes-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #7f8c8d;
+        }
+        
+        .notes-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 80px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .save-notes {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .save-notes:hover {
+            background-color: #27ae60;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            grid-column: 1 / -1;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .establishments-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>База данных кафе, ресторанов и баров Барнаула</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Поиск по названию, адресу или типу заведения...">
+            <button id="searchButton">Поиск</button>
+        </div>
+        
+        <div class="establishments-container" id="establishmentsList">
+            <!-- Заведения будут загружены с помощью JavaScript -->
+        </div>
+        
+        <div class="footer">
+            <p>База данных заведений Барнаула | Данные обновлены</p>
+        </div>
+    </div>
+
+    <script>
+        // Данные заведений (извлечены из предоставленного PDF)
+        const establishmentsData = [
+            {
+                name: "Бирдок",
+                type: "Бар",
+                address: "Максима Горького, 8, 1 этаж",
+                phone: "+7 (983) 331-1420",
+                rating: "4.9",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Кинза и мата",
+                type: "Бар",
+                address: "Социалистический проспект, 11б, 1 этаж",
+                phone: "+7 (9832) 50-94-77",
+                rating: "4.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Пили-швили",
+                type: "Бар",
+                address: "проспект Ленина, 44а, 2 этаж",
+                phone: "+7 (9832) 20-29-20",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "ZOON",
+                type: "Рестораны - Бар",
+                address: "проспект Ленина, 56, 1 этаж",
+                phone: "+7 (3852) 59-69-99",
+                rating: "4.2",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "22",
+                type: "Рестораны - Бар",
+                address: "Правобережный тракт, 39, левое крыло",
+                phone: "+7 (963) 521-20-15",
+                rating: "5.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Шашлыкoff",
+                type: "Рестораны - Бар",
+                address: "Балтийская улица, 16, 1 этаж",
+                phone: "+7 (800) 250-11-00",
+                rating: "4.7",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Живые Души",
+                type: "Рестораны - Бар",
+                address: "улица Песня, 46а, 1 этаж",
+                phone: "+7 (913) 210-00-46",
+                rating: "3.3",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Золотая подкова",
+                type: "Рестораны - Бар",
+                address: "",
+                phone: "",
+                rating: "4.8",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Вертикул",
+                type: "Рестораны - Бар",
+                address: "площадь Победы, 3, 1 этаж",
+                phone: "+7 (3835) 30-16-01",
+                rating: "4.9",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Европа-Боулинг",
+                type: "Рестораны - Бар",
+                address: "Плазковский тракт, 25h, 2 этаж",
+                phone: "+7 (3835) 27-10-00",
+                rating: "4.9",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Ламажор",
+                type: "Рестораны - Бар",
+                address: "улица Энтузиастов, 14s, 3 этаж",
+                phone: "+7 (3835) 548-59-99",
+                rating: "3.8",
+                hours: "Закрыто до 20:00"
+            },
+            {
+                name: "Иероглиф",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 100, 1 этаж",
+                phone: "+7 (3835) 52-87-77",
+                rating: "4.9",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Кинза и мата",
+                type: "Рестораны - Бар",
+                address: "Лазурная улица, 13, 1 этаж",
+                phone: "",
+                rating: "4.7",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "ANALIZA",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 100, 1 этаж",
+                phone: "+7 (0.852) 25-00-39",
+                rating: "3.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Кинза и мата",
+                type: "Рестораны - Бар",
+                address: "проспект Строкиной, 117, 3 этаж",
+                phone: "+7 (0.852) 58-09-77",
+                rating: "4.6",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Damiani",
+                type: "Рестораны - Бар",
+                address: "проспект Строкиной, 52, 1 этаж",
+                phone: "+7 (0.852) 53-04-33",
+                rating: "4.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Gold of Packard",
+                type: "Рестораны - Бар",
+                address: "",
+                phone: "",
+                rating: "3.9",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Сыровария",
+                type: "Рестораны - Бар",
+                address: "проспект Ленина, 14",
+                phone: "+7 (3826) 25-0570",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "13",
+                type: "Рестораны - Бар",
+                address: "площадь Победы, 1, 1 этаж",
+                phone: "+7 (913) 246-6142",
+                rating: "3.8",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Ноев ковчег",
+                type: "Рестораны - Бар",
+                address: "Ленточный Бор масса, 2, 1 этаж",
+                phone: "+7 (3826) 71-7679",
+                rating: "4.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Гжель",
+                type: "Рестораны - Бар",
+                address: "Лазурная улица, 29, 1 этаж",
+                phone: "+7 (0852) 55-44-82",
+                rating: "4.9",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Горная Аптека",
+                type: "Рестораны - Бар",
+                address: "улица Песнунова, 42",
+                phone: "+7 (082) 739-10-07",
+                rating: "4.9",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Puff Us",
+                type: "Рестораны - Бар",
+                address: "Молодёжная, 258, цекольный этаж",
+                phone: "",
+                rating: "4.6",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Кинза и мата",
+                type: "Рестораны - Бар",
+                address: "проспект Ленина, 102а, 4 этаж",
+                phone: "+7 (3852) 49-77-37",
+                rating: "4.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "In vino",
+                type: "Рестораны - Бар",
+                address: "Пальминцев, 111, цокольный этаж",
+                phone: "+7 (3852) 49-00-90",
+                rating: "4.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Джем",
+                type: "Рестораны - Бар",
+                address: "Шумакова, 59",
+                phone: "+7 (3852) 49-57-39",
+                rating: "4.4",
+                hours: "Закрыто до 20:00"
+            },
+            {
+                name: "Русь",
+                type: "Рестораны - Бар",
+                address: "проспект Ленина, 142а, 1 этаж",
+                phone: "+7 (3852) 77-27-17",
+                rating: "4.3",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Ясная поляна",
+                type: "Рестораны - Бар",
+                address: "улица Лива Толстого, 30, 1-2 этаж",
+                phone: "+7 (0852) 35-60-12",
+                rating: "3.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Ганс",
+                type: "Рестораны - Бар",
+                address: "Договором, 22, 6 этаж, ТРЦ РАЖК, Новоавтайск",
+                phone: "+7 (085) 324-27-72",
+                rating: "5.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Lesnoy Village",
+                type: "Рестораны - Бар",
+                address: "пос. Лесной (Бобровский сельсовет), Лесная улица, 14а, 1 этаж",
+                phone: "+7 (085) 380-65-56",
+                rating: "4.6",
+                hours: "Закрыто до четверга"
+            },
+            {
+                name: "Маяк",
+                type: "Рестораны - Бар",
+                address: "Дорожная улица, 60, Новоавтайск",
+                phone: "",
+                rating: "4.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Чердак",
+                type: "Бар",
+                address: "Краснодарческий проспект, 72, 4, 5 этаж",
+                phone: "",
+                rating: "4.3",
+                hours: "Открыто до 03:00"
+            },
+            {
+                name: "Байк-бар",
+                type: "Бар",
+                address: "Краснодарческий проспект, 61, школьный этаж",
+                phone: "+7 (0852) 55-61-29",
+                rating: "5.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Арт",
+                type: "Бар",
+                address: "Законноторский тракт, 134, 1 этаж",
+                phone: "+7 (0852) 55-07-71",
+                rating: "3.4",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Traveler's coffee",
+                type: "Бар",
+                address: "проспект Ленина, 575",
+                phone: "+7 (064) 403-28-85",
+                rating: "3.3",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Русь",
+                type: "Бар",
+                address: "улица Чкалова, 57а, 2 этаж",
+                phone: "+7 (080) 775-00-21",
+                rating: "4.9",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Romero Steak House",
+                type: "Бар",
+                address: "Песчаная улица, 83, 1 этаж",
+                phone: "+7 (0825) 55-50-05",
+                rating: "4.4",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Эрмитаж",
+                type: "Бар",
+                address: "переулок Гейнера, 325",
+                phone: "+7 (0825) 58-03-00",
+                rating: "4.5",
+                hours: "Открыто до 04:00"
+            },
+            {
+                name: "Вобла",
+                type: "Ресторан - Бар",
+                address: "Власклическая улица, 154а, 1 этаж",
+                phone: "+7 (0825) 36-00-36",
+                rating: "4.9",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "ТопYumBar",
+                type: "Ресторан - Бар",
+                address: "Балтийская улица, 116, 1 этаж",
+                phone: "+7 (062) 798-64-12",
+                rating: "4.8",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Spichka",
+                type: "Ресторан - Бар",
+                address: "улица Льва Толстого, 38",
+                phone: "+7 (013) 010-87-47",
+                rating: "4.9",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Бочкари",
+                type: "Рестораны - Бар",
+                address: "площадь Победы, 1, 2 этаж",
+                phone: "+7 (0852) 23-64-65",
+                rating: "3.1",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Serebro",
+                type: "Рестораны - Бар",
+                address: "пос. Пригородный, Раздельная улица, 22",
+                phone: "+7 (082) 547-72-39",
+                rating: "5.0",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Steak&Burg",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 46, 1 этаж",
+                phone: "+7 (083) 570-79-21",
+                rating: "4.5",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "ATLAS",
+                type: "Ресторан - Бар",
+                address: "Социалистический проспект, 27а, 1 этаж",
+                phone: "+7 (0.852) 25-10-00",
+                rating: "4.3",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Биршоп ДНК",
+                type: "Ресторан - Бар",
+                address: "улица Димитрова, 81, 1 этаж",
+                phone: "+7 (0.852) 55-64-65",
+                rating: "5.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Баклажан",
+                type: "Ресторан - Бар",
+                address: "Палковский тракт, 2, 1 этаж",
+                phone: "+7 (0.852) 99-80-09",
+                rating: "3.1",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Hairy lemon",
+                type: "Ресторан - Бар",
+                address: "",
+                phone: "",
+                rating: "3.2",
+                hours: "Закрыто"
+            },
+            {
+                name: "Крафт Бургер",
+                type: "Ресторан - Бар",
+                address: "Сухо Баторец, 3 этаж",
+                phone: "+7 (800) 966-3322 (доб. 1)",
+                rating: "4.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Шашлыкoff",
+                type: "Ресторан - Бар",
+                address: "Практическая улица, 13,4 этаж",
+                phone: "+7 (800) 239-11-00",
+                rating: "4.0",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Крыша",
+                type: "Ресторан - Бар",
+                address: "Мысль Ополосная улица, 28,4 этаж",
+                phone: "+7 (800) 717-75-50",
+                rating: "3.0",
+                hours: "Открыто до 03:00"
+            },
+            {
+                name: "Шашлыкoff",
+                type: "Ресторан - Бар",
+                address: "Антона Петрова, 1964, 2 этаж",
+                phone: "+7 (800) 239-11-00",
+                rating: "2.7",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Beer-logovo",
+                type: "Бар",
+                address: "Переездная улица, 35, Новоолтайск",
+                phone: "+7 (964) 030-79-79",
+                rating: "4.2",
+                hours: "Закрыто до четверга"
+            },
+            {
+                name: "Люрасса",
+                type: "Бар",
+                address: "улица Лика Толстого, 21",
+                phone: "+7 (922) 161-40-02",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Опера",
+                type: "Бар",
+                address: "Краснодарчайский проспект, 36, 1 этаж",
+                phone: "+7 (983) 009-20-34",
+                rating: "2.4",
+                hours: "Закрыто до пятницы"
+            },
+            {
+                name: "Bufette",
+                type: "Бар",
+                address: "Серенивая улица, 33, 1 этаж",
+                phone: "+7 (9852) 57-15-11",
+                rating: "4.3",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Хмелебфф",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 59, школьный этаж",
+                phone: "",
+                rating: "5.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Loft",
+                type: "Рестораны - Бар",
+                address: "Краснодарческий проспект, 51а, 13 этаж",
+                phone: "+7 (3852) 69-39-13",
+                rating: "2.3",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Kosmos",
+                type: "Рестораны - Бар",
+                address: "улица Шумакова, 28",
+                phone: "+7 (3852) 58-00-08",
+                rating: "2.4",
+                hours: "Закрыто до 20:00"
+            },
+            {
+                name: "Вкус Дружбы",
+                type: "Рестораны - Бар",
+                address: "Властная улица, 87",
+                phone: "+7 (064) 886-39-39",
+                rating: "5.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Чайка",
+                type: "Рестораны - Бар",
+                address: "плс. Борзовая Заимка, улица Пионерская Долина, 4, 1 этаж",
+                phone: "+7 (0852) 582-6-80",
+                rating: "2.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Улитка",
+                type: "Рестораны - Бар",
+                address: "улица Королевска, 60, 1 этаж",
+                phone: "+7 (063) 882-8-36",
+                rating: "5.0",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Malibu hot bar",
+                type: "Рестораны - Бар",
+                address: "Первоохватчика улицы, 1 кУ, Ярково",
+                phone: "+7 (080) 700-49-30",
+                rating: "3.2",
+                hours: ""
+            },
+            {
+                name: "Династия",
+                type: "Рестораны - Бар",
+                address: "Неплощадская, 26а, 1,2 этаж",
+                phone: "+7 (964) 056-14-40",
+                rating: "4.3",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Арена-TV",
+                type: "Рестораны - Бар",
+                address: "Краснодарческий проспект, 36, 1 этаж",
+                phone: "+7 (9820) 59-19-92",
+                rating: "3.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Сар-Герел Алтая",
+                type: "Рестораны - Бар",
+                address: "с. Ав. Ключевая улица, 34, 3 этаж",
+                phone: "+7 (000) 991-11-18",
+                rating: "4.8",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Evilzana",
+                type: "Рестораны - Бар",
+                address: "",
+                phone: "",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Дионис",
+                type: "Ресторан - Бар",
+                address: "рл. Таламонка, Октябрьская улица, 63",
+                phone: "+7 (913) 235-62-34",
+                rating: "2.0",
+                hours: "Закрыто до пятницы"
+            },
+            {
+                name: "Золото скифов",
+                type: "Рестораны - Бар",
+                address: "с. Нижнекампиа, Айский тракт, 42/1, 1 этаж",
+                phone: "+7 (961) 234-69-57",
+                rating: "4.3",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Заречье",
+                type: "Рестораны - Бар",
+                address: "Правобережный тракт, 18",
+                phone: "+7 (882) 581-17-77",
+                rating: "5.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Новая Высота 4509",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 11б, 1 этаж",
+                phone: "+7 (905) 509-88-81",
+                rating: "3.2",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Deutsch Pub",
+                type: "Ресторан - Бар",
+                address: "Сухо-Батура 3",
+                phone: "",
+                rating: "5.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Культура пива",
+                type: "Ресторан - Бар",
+                address: "Прудоска улица, 4б, цокольный этаж, Новоалтайск",
+                phone: "+7 (922) 169-99-98",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Смокер",
+                type: "Рестораны - Бар",
+                address: "65 лет Победы, 20, крайняя дверь",
+                phone: "+7 (913) 216-75-56",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Штольня",
+                type: "Рестораны - Бар",
+                address: "Орена, 2458",
+                phone: "+7 (3832) 54-46-98",
+                rating: "5.0",
+                hours: "Закрыто до 20:00"
+            },
+            {
+                name: "Крапива",
+                type: "Рестораны - Бар",
+                address: "Заметная улица, 81,2 этаж",
+                phone: "+7 (3832) 58-07-07",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Altaycraft&Forshtadt",
+                type: "Рестораны - Бар",
+                address: "Деповская улица, 13, магазин Altaycraft & Forshtadt brewery, Нек",
+                phone: "+7 (992) 131-43-42",
+                rating: "4.5",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Регата",
+                type: "Бар",
+                address: "Улица Пушкина, 46",
+                phone: "+7 (903) 950-02-28",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Флюгер",
+                type: "Бар",
+                address: "Антона Петрова, 24А, 2 этаж",
+                phone: "",
+                rating: "5.0",
+                hours: "Закрыто до четверга"
+            },
+            {
+                name: "Сытойакрыто",
+                type: "Бар",
+                address: "Красноармейский проспект, 79, 1 этаж",
+                phone: "+7 (903) 23-53-03",
+                rating: "4.0",
+                hours: "Открыто до 20:00"
+            },
+            {
+                name: "Шампаж",
+                type: "Бар",
+                address: "проспект Ленина, 80, цокольный этаж",
+                phone: "+7 (903) 922-60-86",
+                rating: "5.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Укроп&грепка",
+                type: "Рестораны - Бар",
+                address: "с. Алтайское, Советская улица, 123, 1 этаж",
+                phone: "+7 (495) 575-59-74",
+                rating: "4.4",
+                hours: "Открыто до 20:00"
+            },
+            {
+                name: "Gorka 78",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 78, 1 этаж",
+                phone: "+7 (913) 930-22-77",
+                rating: "3.8",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Синяя борода",
+                type: "Рестораны - Бар",
+                address: "улица Сергея Семёнова, 23",
+                phone: "+7 (923) 161-42-71",
+                rating: "4.7",
+                hours: "Открыто до 04:00"
+            },
+            {
+                name: "Магия вкуса",
+                type: "Рестораны - Бар",
+                address: "пос. Катунь, Советская, 7а",
+                phone: "+7 (963) 532-09-04",
+                rating: "4.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Люси Готовит",
+                type: "Рестораны - Бар",
+                address: "проспект Строителей, 45, 1 этаж",
+                phone: "+7 (092) 215-77-17",
+                rating: "4.9",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Ресторан Гарика Мкртчина",
+                type: "Рестораны - Бар",
+                address: "рп. Татьяновна, Садович улица, 24s",
+                phone: "+7 (092) 161-33-33",
+                rating: "1.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Крафтер",
+                type: "Рестораны - Бар",
+                address: "улица Сергея Уснова, 13",
+                phone: "+7 (092) 346-69-20",
+                rating: "3.2",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Муха",
+                type: "Рестораны - Бар",
+                address: "Анатолия, 58, Цыкольный этаж",
+                phone: "+7 (090) 965-22-29",
+                rating: "3.6",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Молоко",
+                type: "Ресторан - Бар",
+                address: "Взлетная улица, 23, 1 этаж",
+                phone: "+7 (3852) 55-54-05",
+                rating: "3.3",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "То meets",
+                type: "Ресторан - Бар",
+                address: "улица Махакова, 138а, цокольный этаж",
+                phone: "+7 (082) 347-79-24",
+                rating: "4.3",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Рельеф",
+                type: "Ресторан - Бар",
+                address: "Красноармейский проспект, 72/1, 2 этаж",
+                phone: "+7 (3852) 99-10-40",
+                rating: "3.3",
+                hours: "Открыто до 20:00"
+            },
+            {
+                name: "Предбайник",
+                type: "Ресторан - Бар",
+                address: "Антона Петрова, 238а",
+                phone: "+7 (3852) 58-89-95",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Urban Pub",
+                type: "Рестораны - Бар",
+                address: "65 лет Победы, 20, 1 этаж",
+                phone: "+7 (013) 216-30-36",
+                rating: "2.8",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Русский чай",
+                type: "Рестораны - Бар",
+                address: "Краснодарческий проспект, 8, 2 этаж",
+                phone: "+7 (023) 933-04-30",
+                rating: "2.4",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Аджикинежаль",
+                type: "Рестораны - Бар",
+                address: "Балтийская улица, 11/6, 1 этаж",
+                phone: "",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Роботы",
+                type: "Ресторан - Бар",
+                address: "проспект Энергетиков, 11, 1 этаж",
+                phone: "+7 (3832) 75-01-50",
+                rating: "2.6",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Time PUBLIC",
+                type: "Ресторан - Бар",
+                address: "Корона, S1a, цокольный этаж",
+                phone: "",
+                rating: "2.0",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Масс&Рыба",
+                type: "Ресторан - Бар",
+                address: "улица Попола, 130",
+                phone: "+7 (3832) 69-42-77",
+                rating: "5.0",
+                hours: ""
+            },
+            {
+                name: "Легенда номер 13",
+                type: "Ресторан - Бар",
+                address: "Балтийская улица, 65",
+                phone: "+7 (3832) 38-89-88",
+                rating: "5.0",
+                hours: "Открыто до 06:00"
+            },
+            {
+                name: "Doma",
+                type: "Рестораны - Бар",
+                address: "проспект Ленина, 1а, 1 этаж",
+                phone: "+7 (964) 039-77-11",
+                rating: "3.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Дача",
+                type: "Рестораны - Бар",
+                address: "улица Пушкина, 8, Ярское",
+                phone: "+7 (962) 307-55-54",
+                rating: "3.8",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Каравелла",
+                type: "Рестораны - Бар",
+                address: "Северо-Западная улица, 17, 1 этаж",
+                phone: "+7 (983) 385-13-07",
+                rating: "3.3",
+                hours: "Закрыто до пятницы"
+            },
+            {
+                name: "Art A",
+                type: "Рестораны - Бар",
+                address: "улица Королевна, 75, 1 этаж",
+                phone: "",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Символ птица",
+                type: "Ресторан - Бар",
+                address: "Взлетная улица, 42h, центральный этаж",
+                phone: "+7 (913) 230-37-72",
+                rating: "4.3",
+                hours: "Закрыто до 22:00"
+            },
+            {
+                name: "Кимза и мата",
+                type: "Ресторан - Бар",
+                address: "Павловский тракт, 2518, 2 этаж",
+                phone: "+7 (3852) 58 09-77",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Ласточки",
+                type: "Ресторан - Бар",
+                address: "",
+                phone: "",
+                rating: "4.7",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Dvor",
+                type: "Бар",
+                address: "улица Лива Толстого, 24",
+                phone: "+7 (863) 607-88-77",
+                rating: "5.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Смородина",
+                type: "Бар",
+                address: "8-й микрорайон, 53, цокольный этаж, Новосильбос",
+                phone: "+7 (960) 542-25-65",
+                rating: "3.7",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Хмельной союз",
+                type: "Бар",
+                address: "Телефонная, 28а",
+                phone: "+7 (8852) 69-59-23",
+                rating: "4.5",
+                hours: "Открыто до 03:00"
+            },
+            {
+                name: "Савапоуа",
+                type: "Бар",
+                address: "улица Махакова, 86Б, 1 этаж",
+                phone: "+7 (8852) 557-72-55",
+                rating: "2.6",
+                hours: "Открыто до 06:00"
+            },
+            {
+                name: "Крафтер",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 71,1 этаж",
+                phone: "+7 (033) 939-69-20",
+                rating: "4.9",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Иверия",
+                type: "Рестораны - Бар",
+                address: "Айский тракт, 15,1 этаж",
+                phone: "+7 (033) 973-10-66",
+                rating: "2.8",
+                hours: "Открыто до 04:00"
+            },
+            {
+                name: "Lakomka",
+                type: "Рестораны - Бар",
+                address: "проспект Ленина, 54,1 этаж",
+                phone: "+7 (0332) 35-29-62",
+                rating: "3.8",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Михаил Светлов",
+                type: "Бар",
+                address: "093 ТРТ Евросоюза Катуна территория, 2,1 этаж",
+                phone: "+7 (961) 345-64-02",
+                rating: "4.8",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "MY FRIENDS",
+                type: "Бар",
+                address: "Залётная, 42а",
+                phone: "",
+                rating: "4.8",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Эпоха",
+                type: "Бар",
+                address: "Залётная улица, 57,2 этаж",
+                phone: "+7 (913) 230-37-72",
+                rating: "4.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Monkey",
+                type: "Бар",
+                address: "Комсомольский проспект, 128а",
+                phone: "+7 (903) 347-78-68",
+                rating: "4.9",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Пивной простор",
+                type: "Бар",
+                address: "улица Сергея Уснова, 32, 1 этаж",
+                phone: "+7 (913) 230-80-96",
+                rating: "4.5",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Трепет и томаты",
+                type: "Бар",
+                address: "проспект Ленина, 24, 1 этаж",
+                phone: "+7 (3852) 99-24-24",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Топор",
+                type: "Рестораны - Бар",
+                address: "Балтийская улица, 16, 1 этаж",
+                phone: "+7 (8852) 59-23-93",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Тонна",
+                type: "Рестораны - Бар",
+                address: "Высоковольтная улица, 1а, 1 этаж, Новоантайск",
+                phone: "+7 (922) 544-43-41",
+                rating: "3.0",
+                hours: "Открыто до 04:00"
+            },
+            {
+                name: "Pho Yum",
+                type: "Рестораны - Бар",
+                address: "Павловский тракт, 25/и, 2 этаж",
+                phone: "+7 (8852) 58-30-09",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Вобла",
+                type: "Рестораны - Бар",
+                address: "Балтийская улица, 44б, 1 этаж",
+                phone: "+7 (8852) 36-09-36",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Лев Яков",
+                type: "Бар",
+                address: "65 лет Победы, 29, 1 этаж",
+                phone: "+7 (083) 171-28-39",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "ТопVumBar",
+                type: "Бар",
+                address: "65 лет Победы, 29 ст., 1 этаж",
+                phone: "+7 (083) 547-70-85",
+                rating: "4.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Шашлыкoff",
+                type: "Бар",
+                address: "улица Энтузиастов, 6/4, 1 этаж",
+                phone: "+7 (083) 250-11-00",
+                rating: "4.0",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Новая Высота 4509",
+                type: "Бар",
+                address: "улица Солнечная Папана, 8/1, 1 этаж",
+                phone: "+7 (083) 330-13-00",
+                rating: "4.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Вкусный север",
+                type: "Рестораны - Бар",
+                address: "ОЭЗ ТРТ Евросоюза Катуна территория, 10",
+                phone: "",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Баламут",
+                type: "Рестораны - Бар",
+                address: "улица Лива Толстого, 28, 1 этаж",
+                phone: "",
+                rating: "1.5",
+                hours: "Открыто до 04:00"
+            },
+            {
+                name: "Соль",
+                type: "Рестораны - Бар",
+                address: "площадь Победы, 1, 2 этаж",
+                phone: "",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Ты моя Птичка",
+                type: "Рестораны - Бар",
+                address: "65 лет Победы, 20",
+                phone: "+7 (900) 597-22-81",
+                rating: "3.0",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Копытов",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 60, цокольный этаж",
+                phone: "+7 (903) 910-51-94",
+                rating: "5.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Рыба.Рис",
+                type: "Рестораны - Бар",
+                address: "Павловский тракт, 188, 4 этаж",
+                phone: "+7 (902) 009-69-34",
+                rating: "5.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Олимп",
+                type: "Рестораны - Бар",
+                address: "пос. Катунь, Катунская улица, 12",
+                phone: "",
+                rating: "3.8",
+                hours: ""
+            },
+            {
+                name: "Семь морей",
+                type: "Бар",
+                address: "Каплинка проспект, 8",
+                phone: "+7 (013) 011-02-06",
+                rating: "5.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Spicy No Spicy",
+                type: "Бар",
+                address: "проспект Ленина, 63, 1 этаж",
+                phone: "+7 (3822) 58-36-36",
+                rating: "1.5",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Бутлегер",
+                type: "Бар",
+                address: "280-летия Барнаула, 15, 1 этаж",
+                phone: "+7 (064) 809-9-27",
+                rating: "4.0",
+                hours: ""
+            },
+            {
+                name: "Пивной дом",
+                type: "Бар",
+                address: "с. Алтайское, Кузганская улица, 13 га",
+                phone: "+7 (913) 038-50-56",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Пивной дом на Советской улице",
+                type: "Бар",
+                address: "с. Алтайское, Советская улица, 88а",
+                phone: "+7 (983) 388-87-77",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Louis Thusroff",
+                type: "Бар",
+                address: "переулок Ардинарша, 120, 1 этаж",
+                phone: "",
+                rating: "5.0",
+                hours: "Открыто до 00:01"
+            },
+            {
+                name: "Дон Корлеоне",
+                type: "Бар",
+                address: "Балтийская улица, 2, 1 этаж",
+                phone: "",
+                rating: "1.3",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "808",
+                type: "Бар",
+                address: "проспект Строителей, 16, 1 этаж",
+                phone: "+7 (0833) 354-09-11",
+                rating: "5.0",
+                hours: "Закрыто до четверга"
+            },
+            {
+                name: "Uno caffe",
+                type: "Бар",
+                address: "Социалистический проспект, 78, 1 этаж",
+                phone: "+7 (0833) 5011-15-15",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "TomYumBar",
+                type: "Бар",
+                address: "Взлётная улица, 33 к1, 1 этаж",
+                phone: "+7 (0833) 544-00-88",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "La",
+                type: "Бар",
+                address: "Краснодарчайский проспект, 727, 4 этаж",
+                phone: "+7 (913) 056-92-89",
+                rating: "5.0",
+                hours: "Закрыто до 22:00"
+            },
+            {
+                name: "Smoke brisket",
+                type: "Бар",
+                address: "Малю-Тобольская, 34",
+                phone: "+7 (903) 931-78-88",
+                rating: "5.0",
+                hours: ""
+            },
+            {
+                name: "Опера",
+                type: "Бар",
+                address: "Малю-Олимская улица, 28, 2 этаж",
+                phone: "+7 (963) 108-23-34",
+                rating: "5.0",
+                hours: "Закрыто до четверга"
+            },
+            {
+                name: "АлтайКрафт",
+                type: "Бар",
+                address: "Власковичская улица, 69, 1 этаж",
+                phone: "+7 (923) 157-80-60",
+                rating: "4.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Sутор",
+                type: "Рестораны - Бар",
+                address: "Окрелевая улица, 33, 1 этаж",
+                phone: "+7 (882) 971-711",
+                rating: "3.8",
+                hours: "Открыто до 20:00"
+            },
+            {
+                name: "Probar",
+                type: "Рестораны - Бар",
+                address: "Юрика, 1985",
+                phone: "+7 (963) 299-70-68",
+                rating: "3.8",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Valhalla",
+                type: "Рестораны - Бар",
+                address: "проспект Ленина, 47, цокольный этаж",
+                phone: "",
+                rating: "2.0",
+                hours: "Открыто до 03:00"
+            },
+            {
+                name: "Лукошко",
+                type: "Рестораны - Бар",
+                address: "Залейшая улица, 23, 1 этаж",
+                phone: "+7 (964) 030-77-99",
+                rating: "2.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Бровар",
+                type: "Бар",
+                address: "Увеличевая переулок: 7/1, 1 этаж, Рубцовск",
+                phone: "+7 (013) 083-79-24",
+                rating: "2.6",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Вобла",
+                type: "Бар",
+                address: "улица Попова, 105а, 1 этаж",
+                phone: "+7 (0852) 36-03-86",
+                rating: "1.8",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Smoke brisket",
+                type: "Бар",
+                address: "улица 251 партсъезда, 42/2, Зерниск",
+                phone: "+7 (003) 931-78-88",
+                rating: "3.3",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Причал 42",
+                type: "Бар",
+                address: "Прибрежная зона отдыха территории, 2,1 этаж, Яровое",
+                phone: "+7 (050) 700-49-30",
+                rating: "4.0",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Сибирь",
+                type: "Рестораны - Бар",
+                address: "Социалистический проспект, 116, 2 этаж",
+                phone: "+7 (002) 998-23-93",
+                rating: "3.9",
+                hours: "Открыто до 21:00"
+            },
+            {
+                name: "Rabbit",
+                type: "Рестораны - Бар",
+                address: "Антона Петрова, 210, 1 этаж",
+                phone: "+7 (062) 534-41-85",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Трибуна",
+                type: "Рестораны - Бар",
+                address: "Энтузиастка, 80, 2 этаж",
+                phone: "+7 (029) 325-66-56",
+                rating: "1.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Телек",
+                type: "Рестораны - Бар",
+                address: "улица Союза Республик, 3, Заринск",
+                phone: "",
+                rating: "4.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Хмельной Дом",
+                type: "Рестораны - Бар",
+                address: "80 лет СССР, 51а",
+                phone: "",
+                rating: "5.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Мятный карась",
+                type: "Ресторан - Бар",
+                address: "Партизанская улица, 92, 1 этаж",
+                phone: "",
+                rating: "2.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Bank beer",
+                type: "Ресторан - Бар",
+                address: "улица Профантерия, 36а, 1 этаж",
+                phone: "",
+                rating: "4.0",
+                hours: "Открыто до 03:00"
+            },
+            {
+                name: "LION",
+                type: "Ресторан - Бар",
+                address: "Шумаково, 25, 2,3 этаж",
+                phone: "",
+                rating: "5.0",
+                hours: "Закрыто до 20:00"
+            },
+            {
+                name: "Джексон",
+                type: "Бар",
+                address: "проспект Ленина, 44а, цокольный этаж",
+                phone: "+7 (0825) 22-33-01",
+                rating: "2.2",
+                hours: "Открыто до 04:00"
+            },
+            {
+                name: "Золотой Карл",
+                type: "Бар",
+                address: "улица Пекина, 190, 1 этаж",
+                phone: "+7 (0923) 799-58-19",
+                rating: "5.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Атлант",
+                type: "Бар",
+                address: "Партизанская, 176а",
+                phone: "+7 (0923) 143-61-33",
+                rating: "4.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Бочкари",
+                type: "Бар",
+                address: "Георгия Иванова, 234, 1 этаж",
+                phone: "+7 (0133) 235-72-70",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Хмельная застава",
+                type: "Ресторан - Бар",
+                address: "улица Шумакова, 15Б, 1 этаж",
+                phone: "+7 (963) 517-19-93",
+                rating: "5.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Ипоники",
+                type: "Ресторан - Бар",
+                address: "Антона Петрова, 21%, 2 этаж",
+                phone: "+7 (9832) 59-09-99",
+                rating: "3.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Детиль",
+                type: "Ресторан - Бар",
+                address: "Заметная улица, 33 кл., 1 этаж",
+                phone: "+7 (983) 170-27-20",
+                rating: "2.5",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Жигули",
+                type: "Бар",
+                address: "Кавалерийская улица, 1, церковный этаж",
+                phone: "+7 (952) 008-13-16",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Питейный домъ Распутинъ",
+                type: "Бар",
+                address: "улица Лиза Токсетко, 30",
+                phone: "+7 (9852) 57-00-88",
+                rating: "4.0",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Дикий Ангел",
+                type: "Бар",
+                address: "улица Лиза Токсетко, 26",
+                phone: "+7 (913) 351-02-28",
+                rating: "4.0",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Коробок",
+                type: "Бар",
+                address: "Социалистический проспект, 12",
+                phone: "",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "King street",
+                type: "Бар",
+                address: "улица Метрасова, 12ББ, 1 этаж",
+                phone: "+7 (963) 355-50-88",
+                rating: "4.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Искра",
+                type: "Бар",
+                address: "Сибировая улица, 17, Новизятяйск",
+                phone: "+7 (963) 104-19-91",
+                rating: "5.0",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Вокруг света",
+                type: "Бар",
+                address: "Айский тракт, 21, 2 этаж",
+                phone: "+7 (961) 990-44-80",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Чевали",
+                type: "Рестораны - Бар",
+                address: "ОЭЗ ТРГ Бирюзовая Катунь территория, 4",
+                phone: "+7 (923) 431-59-15",
+                rating: "3.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Uno bistro",
+                type: "Рестораны - Бар",
+                address: "Малог-Побольская, 23, 1 этаж",
+                phone: "+7 (913) 271-51-51",
+                rating: "2.5",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Taboo",
+                type: "Рестораны - Бар",
+                address: "Северо-Западная улица, 48г., школьный этаж",
+                phone: "+7 (949) 531-73-06",
+                rating: "4.0",
+                hours: "Закрыто до 21:00"
+            },
+            {
+                name: "Лайм",
+                type: "Рестораны - Бар",
+                address: "Санинское (Переломбский район), Ефремов, 35",
+                phone: "+7 (3852) 58-20-13",
+                rating: "5.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Real",
+                type: "Бар",
+                address: "улица Космонавтов, 16а, Новоалтайск",
+                phone: "+7 (402) 599-90-00",
+                rating: "2.3",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Вернисаж",
+                type: "Бар",
+                address: "с. Михайловское, улица Карла Маркса, 35, 1 этаж",
+                phone: "",
+                rating: "3.0",
+                hours: ""
+            },
+            {
+                name: "Пермини",
+                type: "Ресторан - Бар",
+                address: "проспект Строителей, 117,3 этаж; из лифта малого",
+                phone: "+7 (922) 555-55-31",
+                rating: "3.9",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Garage Forb",
+                type: "Ресторан - Бар",
+                address: "проспект Космонавтов, 8/2",
+                phone: "+7 (922) 032-77-02",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Moro",
+                type: "Ресторан - Бар",
+                address: "Правобережный тракт, 39/1,1 этаж",
+                phone: "+7 (922) 712-26-74",
+                rating: "4.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Forshtadt brewery",
+                type: "Ресторан - Бар",
+                address: "Юрика, 184",
+                phone: "+7 (909) 503-42-60",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Русский Shanghai",
+                type: "Ресторан - Бар",
+                address: "проспект Ленина, 20, школьный этаж",
+                phone: "+7 (8825) 60-23-11",
+                rating: "3.9",
+                hours: "Открыто до 10:00"
+            },
+            {
+                name: "#Кавер",
+                type: "Ресторан - Бар",
+                address: "Юрика, 2438",
+                phone: "+7 (864) 031-69-88",
+                rating: "4.9",
+                hours: "Закрыто до 21:00"
+            },
+            {
+                name: "Сова",
+                type: "Ресторан - Бар",
+                address: "Торопливная улица, 8, Заревес",
+                phone: "",
+                rating: "2.7",
+                hours: "Открыто до 05:00"
+            },
+            {
+                name: "Луна",
+                type: "Бар",
+                address: "пос. Катунь, Нагорная улица, 3/1",
+                phone: "+7 (0)13 692-68-23",
+                rating: "2.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Песец",
+                type: "Бар",
+                address: "пгт Благовещения, Советская улица, 42",
+                phone: "",
+                rating: "3.5",
+                hours: ""
+            },
+            {
+                name: "Сытый кит",
+                type: "Бар",
+                address: "улица Солнечная Поляна, 88 сл., 1 этаж",
+                phone: "",
+                rating: "2.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Крепость",
+                type: "Бар",
+                address: "улица Победы, 124, 1 этаж, Горник",
+                phone: "+7 (0)03 992-62-91",
+                rating: "2.7",
+                hours: "Закрыто до пятницы"
+            },
+            {
+                name: "Терраса",
+                type: "Бар",
+                address: "улица Ленина, 9а, Ярович",
+                phone: "+7 (023) 724-15-05",
+                rating: "2.7",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "АлтайКрафт",
+                type: "Бар",
+                address: "Балтийская улица, 105, 1 этаж",
+                phone: "+7 (013) 210-55-90",
+                rating: "4.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Алтай",
+                type: "Бар",
+                address: "проспект Ленина, 24, 1 этаж",
+                phone: "+7 (040) 310-59-98",
+                rating: "2.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Горные пороги",
+                type: "Рестораны - Бар",
+                address: "093 ТРТ Евросоюза Катунь территория, 99",
+                phone: "+7 (902) 796-62-06",
+                rating: "2.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Санкција",
+                type: "Рестораны - Бар",
+                address: "Партизанская улица, 92, 1 этаж",
+                phone: "+7 (8052) 60-73-33",
+                rating: "2.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "Дом 69",
+                type: "Рестораны - Бар",
+                address: "с. Бабровка, улица Ленина, 65, 1 этаж",
+                phone: "+7 (904) 403-42-44",
+                rating: "4.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "ДикојВкусно",
+                type: "Рестораны - Бар",
+                address: "093 ТРТ Евросоюза Катунь территория, 100, 1 этаж",
+                phone: "+7 (900) 957-11-99",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Сансара",
+                type: "Ресторан - Бар",
+                address: "Тератиновая улица, 10, Заринох",
+                phone: "",
+                rating: "4.0",
+                hours: "Закрыто до 20:00"
+            },
+            {
+                name: "Магазин различного пива на улице Победы в Новоалтайске",
+                type: "Ресторан - Бар",
+                address: "улица Победы, 24а, Новоалтайск",
+                phone: "",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Глобус",
+                type: "Ресторан - Бар",
+                address: "Широкий проспект, 17 к1",
+                phone: "+7 (3832) 39-97-29",
+                rating: "3.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Кафе в Алейске",
+                type: "Ресторан - Бар",
+                address: "Банковский переулок, 23, Алейск",
+                phone: "",
+                rating: "4.0",
+                hours: ""
+            },
+            {
+                name: "Брют",
+                type: "Ресторан - Бар",
+                address: "Макс-Побольская, 23, 1 этаж",
+                phone: "+7 (863) 337-13-57",
+                rating: "2.0",
+                hours: "Открыто до 10:00"
+            },
+            {
+                name: "Биршоп ДНК",
+                type: "Ресторан - Бар",
+                address: "проспект Строкиевой, 16, 1 этаж",
+                phone: "",
+                rating: "2.0",
+                hours: "Открыто до 10:00"
+            },
+            {
+                name: "Кафе на Центральной улице",
+                type: "Ресторан - Бар",
+                address: "с. Старый Тогул, Центральная улица, 4",
+                phone: "",
+                rating: "5.0",
+                hours: ""
+            },
+            {
+                name: "Fest",
+                type: "Рестораны - Бар",
+                address: "с. Сростки, Чуйская улица, 9/8, 1 этаж",
+                phone: "+7 (495) 534-4527",
+                rating: "4.0",
+                hours: "Открыто до 20:00"
+            },
+            {
+                name: "Молгое",
+                type: "Рестораны - Бар",
+                address: "пос. Линекский, Школьная улица, 12, 1 этаж",
+                phone: "+7 (495) 342-8429",
+                rating: "2.8",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Норв",
+                type: "Бар",
+                address: "с. Красногорское, Юбилейная улица, 14, 1 этаж",
+                phone: "",
+                rating: "4.0",
+                hours: "Закрыто до завтра"
+            },
+            {
+                name: "Силагор",
+                type: "Бар",
+                address: "пос. Катуна, Сибирская улица, 8, 2 этаж",
+                phone: "+7 (812) 999-45-50",
+                rating: "4.0",
+                hours: "Открыто до 10:00"
+            },
+            {
+                name: "Еппса",
+                type: "Бар",
+                address: "Айский тракт, 19",
+                phone: "+7 (963) 589-29-28",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Veranda",
+                type: "Бар",
+                address: "093 ТРТ Бирюзовка Катуна территория, 2/3, 1 этаж",
+                phone: "+7 (962) 808-07-89",
+                rating: "4.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Уинстон",
+                type: "Ресторан - Бар",
+                address: "улица Малахова, 81, 1 этаж",
+                phone: "+7 (3832) 44-19-98",
+                rating: "2.0",
+                hours: "Круглосуточно"
+            },
+            {
+                name: "ВЕЕГ bar",
+                type: "Ресторан - Бар",
+                address: "Компсиюльская, 188, 1 этаж, Рубцовск",
+                phone: "+7 (383) 572-29-83",
+                rating: "5.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Союз",
+                type: "Ресторан - Бар",
+                address: "Малахова, 120а с2",
+                phone: "",
+                rating: "2.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Баza",
+                type: "Ресторан - Бар",
+                address: "пгт Благосещения, улица Пушкина, 99, 1 этаж",
+                phone: "+7 (923) 055-65-80",
+                rating: "5.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Бар на улице Правды",
+                type: "Ресторан - Бар",
+                address: "с. Техника, улица Правды, 11",
+                phone: "",
+                rating: "4.0",
+                hours: ""
+            },
+            {
+                name: "Хмельное",
+                type: "Ресторан - Бар",
+                address: "с. Техника, Привоспальная улица, 40а",
+                phone: "",
+                rating: "4.0",
+                hours: ""
+            },
+            {
+                name: "Chin-Chin",
+                type: "Ресторан - Бар",
+                address: "Периодическая улица, 1 к 1, 1 этаж; территория Приказа 22 в год",
+                phone: "+7 (960) 949-9444",
+                rating: "2.0",
+                hours: "Открыто до 01:00"
+            },
+            {
+                name: "Этир",
+                type: "Ресторан - Бар",
+                address: "с. Шехоболква, улица Лермонтова, 21, 1 этаж",
+                phone: "+7 (961) 946-7151",
+                rating: "4.0",
+                hours: "Открыто до 04:00"
+            },
+            {
+                name: "Beerland",
+                type: "Рестораны - Бар",
+                address: "Балтийская улица, 13,2 этаж",
+                phone: "+7 (3832) 69-69-22",
+                rating: "2.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Пивная кружка кафе-бар",
+                type: "Рестораны - Бар",
+                address: "с. Киевой, улица Кирова, 125а, 1 этаж",
+                phone: "+7 (861) 933-69-79",
+                rating: "5.0",
+                hours: "Открыто до 02:00"
+            },
+            {
+                name: "Кафе на Коммунарской улице",
+                type: "Рестораны - Бар",
+                address: "с. Северка, Коммунарская улица, 12а",
+                phone: "",
+                rating: "5.0",
+                hours: "Открыто до 21:00"
+            },
+            {
+                name: "Чердак",
+                type: "Рестораны - Бар",
+                address: "Легионный Бар шасси, 31,2 этаж",
+                phone: "+7 (3832) 55-45-76",
+                rating: "2.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Легионер",
+                type: "Ресторан - Бар",
+                address: "с. Соколово Ценнина улица, 21 к1",
+                phone: "+7 (961) 233-1014",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "На Пожарной",
+                type: "Ресторан - Бар",
+                address: "пос. Верх-Обоий, Пожарная улица, 1к",
+                phone: "",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Рассвет",
+                type: "Ресторан - Бар",
+                address: "с. Усть-Калинина, улица Кирина, 24а",
+                phone: "",
+                rating: "4.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Шайба",
+                type: "Ресторан - Бар",
+                address: "с. Советское, Животенск, 37а, 1 этаж",
+                phone: "",
+                rating: "4.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Пивная гавань",
+                type: "Бар",
+                address: "с. Гименка, Центральная улица, 2/3а",
+                phone: "+7 (093) 909-84-41",
+                rating: "4.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Сова",
+                type: "Бар",
+                address: "с. улица Толстого, 22, 1 этаж, Павловск",
+                phone: "+7 (083) 388-22-12",
+                rating: "3.0",
+                hours: "Открыто до 00:00"
+            },
+            {
+                name: "Фортуна",
+                type: "Бар",
+                address: "с. Каменский тракт, 2, 1 этаж, Павловск",
+                phone: "+7 (083) 104-99-97",
+                rating: "3.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Пивное Логово",
+                type: "Бар",
+                address: "с. Замывков, улица Яковлева, 2а, 1 этаж",
+                phone: "+7 (060) 942-91-76",
+                rating: "4.0",
+                hours: "Открыто до 23:00"
+            },
+            {
+                name: "Император",
+                type: "Бар",
+                address: "с. Поспешка, Западная улица, 1а",
+                phone: "",
+                rating: "4.0",
+                hours: ""
+            },
+            {
+                name: "В седле",
+                type: "Бар",
+                address: "пос. Катунь, Катунская улица, 15к",
+                phone: "+7 (903) 346-69-00",
+                rating: "4.0",
+                hours: "Открыто до 04:00"
+            },
+            {
+                name: "Трактир",
+                type: "Бар",
+                address: "Айский тракт, 1/1, 2 этаж",
+                phone: "+7 (903) 912-09-22",
+                rating: "4.0",
+                hours: "Открыто до 22:00"
+            },
+            {
+                name: "Red-Fox",
+                type: "Бар",
+                address: "с. Леонард, улица Ленина, 5а",
+                phone: "",
+                rating: "4.0",
+                hours: ""
+            }
+        ];
+
+        // Фильтруем заведения, у которых есть номер телефона
+        const establishmentsWithPhone = establishmentsData.filter(establishment => 
+            establishment.phone && establishment.phone.trim() !== ""
+        );
+
+        // Функция для отображения заведений
+        function displayEstablishments(establishments) {
+            const container = document.getElementById('establishmentsList');
+            container.innerHTML = '';
+
+            if (establishments.length === 0) {
+                container.innerHTML = '<div class="no-results">По вашему запросу ничего не найдено</div>';
+                return;
+            }
+
+            establishments.forEach(establishment => {
+                const card = document.createElement('div');
+                card.className = 'establishment-card';
+                
+                // Получаем сохраненные примечания из localStorage
+                const savedNotes = localStorage.getItem(`notes-${establishment.name}`) || '';
+                
+                card.innerHTML = `
+                    <div class="establishment-name">${establishment.name}</div>
+                    <div class="establishment-info">
+                        <p><span class="info-label">Тип:</span> ${establishment.type}</p>
+                        <p><span class="info-label">Адрес:</span> ${establishment.address || 'Не указан'}</p>
+                        <p><span class="info-label">Телефон:</span> <a href="tel:${establishment.phone}" class="phone">${establishment.phone}</a></p>
+                        <p><span class="info-label">Рейтинг:</span> <span class="rating">${establishment.rating}</span></p>
+                        <p><span class="info-label">Часы работы:</span> ${establishment.hours || 'Не указаны'}</p>
+                    </div>
+                    <div class="notes-section">
+                        <div class="notes-label">Примечания:</div>
+                        <textarea class="notes-input" placeholder="Добавьте свои примечания здесь...">${savedNotes}</textarea>
+                        <button class="save-notes" data-establishment="${establishment.name}">Сохранить примечания</button>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+
+            // Добавляем обработчики событий для кнопок сохранения примечаний
+            document.querySelectorAll('.save-notes').forEach(button => {
+                button.addEventListener('click', function() {
+                    const establishmentName = this.getAttribute('data-establishment');
+                    const notesInput = this.previousElementSibling;
+                    const notes = notesInput.value;
+                    
+                    // Сохраняем примечания в localStorage
+                    localStorage.setItem(`notes-${establishmentName}`, notes);
+                    
+                    // Показываем подтверждение
+                    const originalText = this.textContent;
+                    this.textContent = 'Сохранено!';
+                    this.style.backgroundColor = '#27ae60';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = '#2ecc71';
+                    }, 2000);
+                });
+            });
+        }
+
+        // Функция для поиска заведений
+        function searchEstablishments(query) {
+            const normalizedQuery = query.toLowerCase().trim();
+            
+            if (!normalizedQuery) {
+                return establishmentsWithPhone;
+            }
+            
+            return establishmentsWithPhone.filter(establishment => 
+                establishment.name.toLowerCase().includes(normalizedQuery) ||
+                establishment.type.toLowerCase().includes(normalizedQuery) ||
+                (establishment.address && establishment.address.toLowerCase().includes(normalizedQuery))
+            );
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Отображаем все заведения с телефонами при загрузке
+            displayEstablishments(establishmentsWithPhone);
+            
+            // Обработчик для поиска
+            document.getElementById('searchButton').addEventListener('click', function() {
+                const query = document.getElementById('searchInput').value;
+                const results = searchEstablishments(query);
+                displayEstablishments(results);
+            });
+            
+            // Поиск при нажатии Enter
+            document.getElementById('searchInput').addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    const query = document.getElementById('searchInput').value;
+                    const results = searchEstablishments(query);
+                    displayEstablishments(results);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
